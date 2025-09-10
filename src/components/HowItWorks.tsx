@@ -76,7 +76,7 @@ export default function HowItWorks() {
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-card rounded-full border border-neon-green/30">
             <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
             <span className="text-sm text-muted-foreground">
-              Average analysis time: <span className="text-neon-green font-semibold">4.2 seconds</span>
+              Average analysis time: <span className="text-neon-green font-semibold">4 minutes</span>
             </span>
           </div>
         </div>
