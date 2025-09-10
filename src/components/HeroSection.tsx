@@ -28,7 +28,17 @@ export default function HeroSection() {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Logo/Brand */}
-          <div className="mb-8">
+          <div className="mb-8 relative">
+            {/* Decorative neon dots around Klux */}
+            <div className="absolute -top-4 -left-12 w-1.5 h-1.5 bg-neon-green rounded-full animate-pulse shadow-neon-green"></div>
+            <div className="absolute -top-8 left-8 w-1 h-1 bg-neon-cyan rounded-full animate-pulse shadow-neon-cyan"></div>
+            <div className="absolute -top-6 right-4 w-2 h-2 bg-neon-purple rounded-full animate-pulse shadow-neon-purple"></div>
+            <div className="absolute -top-2 -right-8 w-1 h-1 bg-neon-green rounded-full animate-pulse shadow-neon-green"></div>
+            <div className="absolute top-4 -left-16 w-1 h-1 bg-neon-cyan rounded-full animate-pulse shadow-neon-cyan"></div>
+            <div className="absolute top-8 right-12 w-1.5 h-1.5 bg-neon-purple rounded-full animate-pulse shadow-neon-purple"></div>
+            <div className="absolute -bottom-4 -left-8 w-1 h-1 bg-neon-green rounded-full animate-pulse shadow-neon-green"></div>
+            <div className="absolute -bottom-2 right-16 w-2 h-2 bg-neon-cyan rounded-full animate-pulse shadow-neon-cyan"></div>
+            
             <h1 className="text-6xl md:text-8xl font-bold mb-4">
               <span className="text-neon-green">K</span>
               <span className="text-foreground">LU</span>
