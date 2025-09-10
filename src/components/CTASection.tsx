@@ -30,16 +30,16 @@ export default function CTASection() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 mb-12 max-w-2xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl font-bold text-neon-green mb-2">500K+</div>
+              <div className="text-3xl font-bold text-neon-green mb-2">5,000</div>
               <div className="text-sm text-muted-foreground">Coins Analyzed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-neon-cyan mb-2">99.2%</div>
+              <div className="text-3xl font-bold text-neon-cyan mb-2">65%</div>
               <div className="text-sm text-muted-foreground">Accuracy Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-neon-purple mb-2">25K+</div>
-              <div className="text-sm text-muted-foreground">Active Users</div>
+              <div className="text-3xl font-bold text-neon-purple mb-2">4min</div>
+              <div className="text-sm text-muted-foreground">Analysis Time</div>
             </div>
           </div>
 
