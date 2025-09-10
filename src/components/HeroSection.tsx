@@ -75,15 +75,15 @@ export default function HeroSection() {
           {/* Quick stats */}
           <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
             <div className="text-center">
-              <div className="text-2xl font-bold text-neon-green">99.2%</div>
+              <div className="text-2xl font-bold text-neon-green">65%</div>
               <div className="text-sm text-muted-foreground">Accuracy</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-neon-cyan">&lt; 5s</div>
+              <div className="text-2xl font-bold text-neon-cyan">4m</div>
               <div className="text-sm text-muted-foreground">Analysis</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-neon-purple">500K+</div>
+              <div className="text-2xl font-bold text-neon-purple">5,000</div>
               <div className="text-sm text-muted-foreground">Coins Tracked</div>
             </div>
           </div>
