@@ -64,8 +64,11 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" className="border-neon-green/50 text-neon-green hover:bg-neon-green/20">
-              Connect Wallet
+            <Button asChild variant="outline" className="border-neon-green/50 text-neon-green hover:bg-neon-green/20">
+              <Link to="/auth">Login</Link>
+            </Button>
+            <Button asChild variant="neon" className="text-black">
+              <Link to="/auth">Sign Up</Link>
             </Button>
           </div>
 
@@ -102,9 +105,12 @@ const Header = () => {
                   </Link>
                 );
               })}
-              <div className="pt-4 border-t border-neon-green/20 mt-4">
-                <Button className="w-full" variant="outline">
-                  Connect Wallet
+              <div className="pt-4 border-t border-neon-green/20 mt-4 space-y-2">
+                <Button asChild className="w-full" variant="outline">
+                  <Link to="/auth">Login</Link>
+                </Button>
+                <Button asChild className="w-full" variant="neon">
+                  <Link to="/auth">Sign Up</Link>
                 </Button>
               </div>
             </nav>
