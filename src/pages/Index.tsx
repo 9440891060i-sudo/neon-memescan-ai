@@ -1,4 +1,5 @@
 import MemeCoinTicker from "@/components/MemeCoinTicker";
+import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import DashboardPreview from "@/components/DashboardPreview";
 import HowItWorks from "@/components/HowItWorks";
@@ -10,7 +11,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <MemeCoinTicker />
-      <main className="pt-16">
+      <Header />
+      <main className="pt-32">
         <HeroSection />
         <DashboardPreview />
         <HowItWorks />

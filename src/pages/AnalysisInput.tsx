@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Search, Zap, TrendingUp, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import MemeCoinTicker from "@/components/MemeCoinTicker";
+import Header from "@/components/Header";
 
 const trendingCoins = [
   { name: "DOGE", address: "0x74b23882a30290451A17c44f4F05243b6b58C76d", logo: "🐕", change: "+12.5%" },
@@ -64,6 +66,9 @@ export default function AnalysisInput() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-black/50 to-background">
+      <MemeCoinTicker />
+      <Header />
+      <div className="pt-32">
       {/* Header */}
       <div className="container mx-auto px-6 pt-20 pb-12">
         <div className="text-center mb-16">
@@ -207,6 +212,7 @@ export default function AnalysisInput() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

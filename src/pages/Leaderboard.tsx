@@ -14,6 +14,8 @@ import {
   Zap,
   Target
 } from "lucide-react";
+import MemeCoinTicker from "@/components/MemeCoinTicker";
+import Header from "@/components/Header";
 
 interface LeaderboardEntry {
   rank: number;
@@ -280,6 +282,9 @@ export default function Leaderboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-black/30 to-background">
+      <MemeCoinTicker />
+      <Header />
+      <div className="pt-32">
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -413,6 +418,7 @@ export default function Leaderboard() {
             </div>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

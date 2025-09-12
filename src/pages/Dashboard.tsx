@@ -14,6 +14,8 @@ import {
   Eye,
   RefreshCw
 } from "lucide-react";
+import MemeCoinTicker from "@/components/MemeCoinTicker";
+import Header from "@/components/Header";
 
 interface AnalysisData {
   id: string;
@@ -150,6 +152,9 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-black/30 to-background">
+      <MemeCoinTicker />
+      <Header />
+      <div className="pt-32">
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -386,6 +391,7 @@ export default function Dashboard() {
             </Card>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
