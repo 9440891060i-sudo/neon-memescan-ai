@@ -17,7 +17,9 @@ const Index = () => {
         <DashboardPreview />
         <HowItWorks />
         <MemeCoinDisplay />
-        <PricingSection />
+        <div id="pricing">
+          <PricingSection />
+        </div>
         <CTASection />
       </main>
     </div>

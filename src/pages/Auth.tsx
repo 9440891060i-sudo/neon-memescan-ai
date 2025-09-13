@@ -8,26 +8,86 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Zap, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useAuthStore } from "@/store/authStore";
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { login } = useAuthStore();
+  
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const [signupData, setSignupData] = useState({
+    email: "",
+    username: "",
+    password: "",
+  });
 
-  const handleAuth = async (type: 'login' | 'signup') => {
+  const handleLogin = async () => {
+    if (!loginData.email || !loginData.password) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in all fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const success = await login(loginData.email, loginData.password);
+      if (success) {
+        toast({
+          title: "Welcome back!",
+          description: "You have been successfully logged in.",
+        });
+        navigate("/user-dashboard");
+      }
+    } catch (error) {
       toast({
-        title: type === 'login' ? "Welcome back!" : "Account created!",
-        description: type === 'login' ? "You've been logged in successfully." : "Your account has been created and you're now logged in.",
+        title: "Login failed",
+        description: "Please check your credentials and try again.",
+        variant: "destructive",
       });
-      
-      // Redirect to personal dashboard
-      navigate('/user-dashboard');
-    }, 1500);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignup = async () => {
+    if (!signupData.email || !signupData.password || !signupData.username) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in all fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    try {
+      const success = await login(signupData.email, signupData.password, signupData.username);
+      if (success) {
+        toast({
+          title: "Account created!",
+          description: "Welcome to KLUX. You're now logged in.",
+        });
+        navigate("/user-dashboard");
+      }
+    } catch (error) {
+      toast({
+        title: "Signup failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -70,6 +130,8 @@ const Auth = () => {
                     type="email"
                     placeholder="Enter your email"
                     className="border-neon-green/20 focus:border-neon-green"
+                    value={loginData.email}
+                    onChange={(e) => setLoginData(prev => ({ ...prev, email: e.target.value }))}
                   />
                 </div>
                 <div className="space-y-2">
@@ -79,12 +141,14 @@ const Auth = () => {
                     type="password"
                     placeholder="Enter your password"
                     className="border-neon-green/20 focus:border-neon-green"
+                    value={loginData.password}
+                    onChange={(e) => setLoginData(prev => ({ ...prev, password: e.target.value }))}
                   />
                 </div>
                 <Button 
                   className="w-full" 
                   variant="neon"
-                  onClick={() => handleAuth('login')}
+                  onClick={handleLogin}
                   disabled={isLoading}
                 >
                   {isLoading ? "Signing in..." : "Sign In"}
@@ -99,6 +163,8 @@ const Auth = () => {
                     type="text"
                     placeholder="Choose a username"
                     className="border-neon-green/20 focus:border-neon-green"
+                    value={signupData.username}
+                    onChange={(e) => setSignupData(prev => ({ ...prev, username: e.target.value }))}
                   />
                 </div>
                 <div className="space-y-2">
@@ -108,6 +174,8 @@ const Auth = () => {
                     type="email"
                     placeholder="Enter your email"
                     className="border-neon-green/20 focus:border-neon-green"
+                    value={signupData.email}
+                    onChange={(e) => setSignupData(prev => ({ ...prev, email: e.target.value }))}
                   />
                 </div>
                 <div className="space-y-2">
@@ -117,12 +185,14 @@ const Auth = () => {
                     type="password"
                     placeholder="Create a password"
                     className="border-neon-green/20 focus:border-neon-green"
+                    value={signupData.password}
+                    onChange={(e) => setSignupData(prev => ({ ...prev, password: e.target.value }))}
                   />
                 </div>
                 <Button 
                   className="w-full" 
                   variant="neon"
-                  onClick={() => handleAuth('signup')}
+                  onClick={handleSignup}
                   disabled={isLoading}
                 >
                   {isLoading ? "Creating account..." : "Create Account"}

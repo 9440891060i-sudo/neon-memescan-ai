@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap, BarChart3, Trophy, Search } from "lucide-react";
+import { Menu, X, Zap, Trophy, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -10,19 +10,35 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useAuthStore } from "@/store/authStore";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAuthStore();
+
+  // Only show header on public pages (when not authenticated)
+  if (isAuthenticated) {
+    return null;
+  }
 
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
-    { href: "/analyze", label: "Analyze", icon: Search },
-    { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
+    { href: "/#pricing", label: "Pricing", icon: DollarSign, isScroll: true },
     { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
   ];
 
   const isActive = (href: string) => location.pathname === href;
+
+  const handleNavClick = (href: string, isScroll?: boolean) => {
+    if (isScroll && href === "/#pricing") {
+      const pricingSection = document.getElementById("pricing");
+      if (pricingSection) {
+        pricingSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-12 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-neon-green/20">
@@ -44,17 +60,27 @@ const Header = () => {
                 return (
                   <NavigationMenuItem key={item.href}>
                     <NavigationMenuLink asChild>
-                      <Link
-                        to={item.href}
-                        className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 ${
-                          isActive(item.href)
-                            ? "bg-neon-green/20 text-neon-green border border-neon-green/50"
-                            : "text-foreground"
-                        }`}
-                      >
-                        <Icon className="w-4 h-4 mr-2" />
-                        {item.label}
-                      </Link>
+                      {item.isScroll ? (
+                        <button
+                          onClick={() => handleNavClick(item.href, item.isScroll)}
+                          className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 text-foreground`}
+                        >
+                          <Icon className="w-4 h-4 mr-2" />
+                          {item.label}
+                        </button>
+                      ) : (
+                        <Link
+                          to={item.href}
+                          className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 ${
+                            isActive(item.href)
+                              ? "bg-neon-green/20 text-neon-green border border-neon-green/50"
+                              : "text-foreground"
+                          }`}
+                        >
+                          <Icon className="w-4 h-4 mr-2" />
+                          {item.label}
+                        </Link>
+                      )}
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 );
@@ -89,7 +115,16 @@ const Header = () => {
             <nav className="flex flex-col space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                return (
+                return item.isScroll ? (
+                  <button
+                    key={item.href}
+                    onClick={() => handleNavClick(item.href, item.isScroll)}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-md transition-colors text-foreground hover:bg-accent w-full text-left"
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span className="font-medium">{item.label}</span>
+                  </button>
+                ) : (
                   <Link
                     key={item.href}
                     to={item.href}
@@ -98,7 +133,7 @@ const Header = () => {
                         ? "bg-neon-green/20 text-neon-green border border-neon-green/50"
                         : "text-foreground hover:bg-accent"
                     }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => handleNavClick(item.href)}
                   >
                     <Icon className="w-5 h-5" />
                     <span className="font-medium">{item.label}</span>
