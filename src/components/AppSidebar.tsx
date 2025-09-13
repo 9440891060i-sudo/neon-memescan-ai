@@ -36,7 +36,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar className="w-64 border-r border-neon-green/20 bg-gradient-card backdrop-blur-sm">
-      <SidebarHeader className="p-4 border-b border-neon-green/20">
+      <SidebarHeader className="pt-6 pb-4 px-4 border-b border-neon-green/20">
         <Link to="/user-dashboard" className="flex items-center space-x-3 group">
           <div className="w-10 h-10 rounded-full bg-gradient-neon flex items-center justify-center neon-glow-green transition-all duration-300 group-hover:scale-110">
             <Zap className="w-6 h-6 text-black" />
