@@ -35,19 +35,19 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="w-64 border-r border-border bg-card">
-      <SidebarHeader className="p-6">
-        <Link to="/user-dashboard" className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-neon flex items-center justify-center">
-            <Zap className="w-5 h-5 text-black" />
+    <Sidebar className="w-64 border-r border-neon-green/20 bg-gradient-card backdrop-blur-sm">
+      <SidebarHeader className="p-4 border-b border-neon-green/20">
+        <Link to="/user-dashboard" className="flex items-center space-x-3 group">
+          <div className="w-10 h-10 rounded-full bg-gradient-neon flex items-center justify-center neon-glow-green transition-all duration-300 group-hover:scale-110">
+            <Zap className="w-6 h-6 text-black" />
           </div>
-          <span className="font-bold text-xl text-neon-green">KLUX</span>
+          <span className="font-bold text-2xl text-neon-green group-hover:text-neon-cyan transition-colors duration-300">KLUX</span>
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground text-xs uppercase tracking-wider">
+      <SidebarContent className="px-2">
+        <SidebarGroup className="py-4">
+          <SidebarGroupLabel className="text-muted-foreground text-xs uppercase tracking-wider mb-4 px-3 font-medium">
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -59,14 +59,24 @@ export function AppSidebar() {
                     <SidebarMenuButton asChild>
                       <Link
                         to={item.url}
-                        className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-colors ${
+                        className={`flex items-center space-x-3 px-4 py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden ${
                           isActive(item.url)
-                            ? "bg-neon-green/20 text-neon-green border border-neon-green/50"
-                            : "text-foreground hover:bg-accent"
+                            ? "bg-neon-green/20 text-neon-green border border-neon-green/50 shadow-neon-green"
+                            : "text-foreground hover:bg-neon-green/10 hover:text-neon-green hover:border-neon-green/30 border border-transparent"
                         }`}
                       >
-                        <Icon className="w-5 h-5" />
-                        <span className="font-medium">{item.title}</span>
+                        <div className={`absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-cyan/5 opacity-0 transition-opacity duration-300 ${
+                          isActive(item.url) ? "opacity-100" : "group-hover:opacity-50"
+                        }`} />
+                        <Icon className={`w-5 h-5 relative z-10 transition-transform duration-300 ${
+                          isActive(item.url) ? "scale-110" : "group-hover:scale-110"
+                        }`} />
+                        <span className={`font-medium relative z-10 transition-all duration-300 ${
+                          isActive(item.url) ? "font-semibold" : ""
+                        }`}>{item.title}</span>
+                        {isActive(item.url) && (
+                          <div className="absolute right-2 w-2 h-2 bg-neon-green rounded-full animate-pulse" />
+                        )}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -77,14 +87,15 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-4 border-t border-neon-green/20">
         <Button
           onClick={handleLogout}
           variant="outline"
-          className="w-full justify-start border-destructive/50 text-destructive hover:bg-destructive/20"
+          className="w-full justify-start border-destructive/50 text-destructive hover:bg-destructive/20 hover:border-destructive transition-all duration-300 group relative overflow-hidden"
         >
-          <LogOut className="w-4 h-4 mr-2" />
-          Logout
+          <div className="absolute inset-0 bg-gradient-to-r from-destructive/10 to-destructive/5 opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
+          <LogOut className="w-4 h-4 mr-3 relative z-10 transition-transform duration-300 group-hover:scale-110" />
+          <span className="relative z-10">Logout</span>
         </Button>
       </SidebarFooter>
     </Sidebar>
