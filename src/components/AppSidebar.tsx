@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Coins } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -13,6 +13,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuthStore } from "@/store/authStore";
 
 const sidebarItems = [
@@ -25,7 +26,7 @@ const sidebarItems = [
 export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuthStore();
+  const { logout, user } = useAuthStore();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -34,15 +35,35 @@ export function AppSidebar() {
     navigate("/");
   };
 
+  // Get user initials for avatar fallback
+  const getUserInitials = () => {
+    if (user?.username) {
+      return user.username.substring(0, 2).toUpperCase();
+    }
+    return "U";
+  };
+
   return (
     <Sidebar className="w-64 border-r border-neon-green/20 bg-gradient-card backdrop-blur-sm">
       <SidebarHeader className="pt-6 pb-4 px-4 border-b border-neon-green/20">
-        <Link to="/user-dashboard" className="flex items-center space-x-3 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-neon flex items-center justify-center neon-glow-green transition-all duration-300 group-hover:scale-110">
-            <Zap className="w-6 h-6 text-black" />
+        {/* User Profile Section */}
+        <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-neon-green/10 to-transparent rounded-lg border border-neon-green/20">
+          <Avatar className="h-10 w-10 border-2 border-neon-green/30">
+            <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
+            <AvatarFallback className="bg-gradient-neon text-black font-bold">
+              {getUserInitials()}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-foreground truncate">
+              {user?.username || "User"}
+            </p>
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Coins className="w-3 h-3 text-neon-green" />
+              <span>1,250 credits</span>
+            </div>
           </div>
-          <span className="font-bold text-2xl text-neon-green group-hover:text-neon-cyan transition-colors duration-300">KLUX</span>
-        </Link>
+        </div>
       </SidebarHeader>
 
       <SidebarContent className="px-2">

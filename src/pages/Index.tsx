@@ -14,8 +14,8 @@ const Index = () => {
       <Header />
       <main className="pt-28">
         <HeroSection />
-        <DashboardPreview />
         <HowItWorks />
+        <DashboardPreview />
         <MemeCoinDisplay />
         <div id="pricing">
           <PricingSection />
