@@ -14,7 +14,6 @@ import {
   ChevronDown,
   ChevronUp
 } from "lucide-react";
-import MemeCoinTicker from "@/components/MemeCoinTicker";
 import Header from "@/components/Header";
 import { useToast } from "@/hooks/use-toast";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -131,10 +130,8 @@ const UserDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <MemeCoinTicker />
-      <Header />
       
-      <main className="pt-28 container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8">
         {/* User Stats Panel */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="border-neon-green/20 bg-black/50">

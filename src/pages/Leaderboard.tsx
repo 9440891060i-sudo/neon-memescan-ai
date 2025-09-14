@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import MemeCoinTicker from "@/components/MemeCoinTicker";
 import Header from "@/components/Header";
+import { useAuthStore } from "@/store/authStore";
 
 interface LeaderboardEntry {
   rank: number;
@@ -280,11 +281,13 @@ export default function Leaderboard() {
     </div>
   );
 
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-black/30 to-background">
-      <MemeCoinTicker />
-      <Header />
-      <div className="pt-32">
+      {!isAuthenticated && <MemeCoinTicker />}
+      {!isAuthenticated && <Header />}
+      <div className={isAuthenticated ? "" : "pt-32"}>
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-12">
