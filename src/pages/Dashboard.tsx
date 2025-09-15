@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { TrendingUp, TrendingDown, Zap, Target, Award, Calendar, Users, CreditCard, Activity } from "lucide-react";
+import { TrendingUp, TrendingDown, Zap, Target, Award, Calendar, Users, CreditCard, Activity, DollarSign } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 
 export default function Dashboard() {
@@ -25,6 +25,21 @@ export default function Dashboard() {
       { date: "Dec 13", used: 200, type: "Premium Analysis" },
     ]
   };
+
+  // Mock financial performance data
+  const financialData = [
+    { month: 'Jan', spent: 450, lost: 200, saved: 680 },
+    { month: 'Feb', spent: 380, lost: 150, saved: 920 },
+    { month: 'Mar', spent: 520, lost: 180, saved: 1200 },
+    { month: 'Apr', spent: 400, lost: 120, saved: 980 },
+    { month: 'May', spent: 610, lost: 250, saved: 1400 },
+    { month: 'Jun', spent: 480, lost: 160, saved: 1100 },
+  ];
+
+  const totalSpent = financialData.reduce((acc, curr) => acc + curr.spent, 0);
+  const totalLost = financialData.reduce((acc, curr) => acc + curr.lost, 0);
+  const totalSaved = financialData.reduce((acc, curr) => acc + curr.saved, 0);
+  const netProfit = totalSaved - totalSpent - totalLost;
 
   const getUserInitials = () => {
     if (!user?.username) return "U";
@@ -123,8 +138,73 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      {/* Performance Metrics */}
+      {/* Financial Performance & Performance Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="bg-gradient-card border-border">
+          <CardHeader>
+            <CardTitle className="text-lg text-foreground flex items-center gap-2">
+              <DollarSign className="w-5 h-5 text-neon-green" />
+              Financial Performance
+            </CardTitle>
+            <CardDescription>Your money spent vs lost vs saved</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Summary Stats */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-3 bg-black/20 rounded-lg">
+                <div className="text-sm text-muted-foreground">Net Profit</div>
+                <div className={`text-lg font-bold ${netProfit >= 0 ? 'text-neon-green' : 'text-red-400'}`}>
+                  {netProfit >= 0 ? '+' : ''}${netProfit.toLocaleString()}
+                </div>
+              </div>
+              <div className="p-3 bg-black/20 rounded-lg">
+                <div className="text-sm text-muted-foreground">ROI</div>
+                <div className="text-lg font-bold text-neon-cyan">
+                  +{((netProfit / totalSpent) * 100).toFixed(1)}%
+                </div>
+              </div>
+            </div>
+
+            {/* Chart */}
+            <div className="h-48 w-full bg-black/20 rounded-lg p-4 flex items-end justify-between">
+              {financialData.map((month, i) => (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <div className="flex flex-col justify-end h-32 gap-1">
+                    <div 
+                      className="w-8 bg-neon-green rounded-t" 
+                      style={{ height: `${(month.saved / 1500) * 100}%` }}
+                    />
+                    <div 
+                      className="w-8 bg-neon-cyan rounded" 
+                      style={{ height: `${(month.spent / 1500) * 80}%` }}
+                    />
+                    <div 
+                      className="w-8 bg-red-400 rounded-b" 
+                      style={{ height: `${(month.lost / 1500) * 60}%` }}
+                    />
+                  </div>
+                  <span className="text-xs text-muted-foreground">{month.month}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-neon-green rounded-full" />
+                <span>Saved: ${totalSaved.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-neon-cyan rounded-full" />
+                <span>Spent: ${totalSpent.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-red-400 rounded-full" />
+                <span>Lost: ${totalLost.toLocaleString()}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <Card className="bg-gradient-card border-border">
           <CardHeader>
             <CardTitle className="text-lg text-foreground">Performance Breakdown</CardTitle>

@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap, Coins } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Coins, Crown } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -19,6 +19,7 @@ import { useAuthStore } from "@/store/authStore";
 const sidebarItems = [
   { title: "Dashboard", url: "/user-dashboard", icon: BarChart3 },
   { title: "Analyse", url: "/analyze", icon: Search },
+  { title: "KLUXIFY", url: "/kluxify", icon: Crown },
   { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
 ];
 
@@ -46,15 +47,18 @@ export function AppSidebar() {
     <Sidebar className="w-64 border-r border-neon-green/20 bg-gradient-card backdrop-blur-sm">
       <SidebarHeader className="pt-6 pb-4 px-4 border-b border-neon-green/20">
         {/* User Profile Section */}
-        <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-neon-green/10 to-transparent rounded-lg border border-neon-green/20">
-          <Avatar className="h-10 w-10 border-2 border-neon-green/30">
+        <Link 
+          to="/profile-settings" 
+          className="flex items-center gap-3 p-3 bg-gradient-to-r from-neon-green/10 to-transparent rounded-lg border border-neon-green/20 hover:border-neon-green/40 transition-all duration-300 group"
+        >
+          <Avatar className="h-10 w-10 border-2 border-neon-green/30 group-hover:border-neon-green/50 transition-all">
             <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
             <AvatarFallback className="bg-gradient-neon text-black font-bold">
               {getUserInitials()}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-foreground truncate">
+            <p className="font-semibold text-foreground truncate group-hover:text-neon-green transition-colors">
               {user?.username || "User"}
             </p>
             <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -62,7 +66,7 @@ export function AppSidebar() {
               <span>1,250 credits</span>
             </div>
           </div>
-        </div>
+        </Link>
       </SidebarHeader>
 
       <SidebarContent className="px-2">

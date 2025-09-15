@@ -12,7 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import Leaderboard from "./pages/Leaderboard";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
-import UserDashboard from "./pages/UserDashboard";
+import ProfileSettings from "./pages/ProfileSettings";
+import Kluxify from "./pages/Kluxify";
 
 const queryClient = new QueryClient();
 
@@ -27,13 +28,14 @@ const AppContent = () => {
             <AppSidebar />
             <main className="flex-1">
               <Routes>
-                <Route path="/user-dashboard" element={<UserDashboard />} />
+                <Route path="/user-dashboard" element={<Dashboard />} />
                 <Route path="/analyze" element={<AnalysisInput />} />
+                <Route path="/kluxify" element={<Kluxify />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile-settings" element={<ProfileSettings />} />
                 {/* Redirect to dashboard if authenticated and on public routes */}
-                <Route path="/" element={<UserDashboard />} />
-                <Route path="/auth" element={<UserDashboard />} />
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/auth" element={<Dashboard />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
@@ -46,8 +48,9 @@ const AppContent = () => {
           <Route path="/auth" element={<Auth />} />
           {/* Redirect to auth for protected routes */}
           <Route path="/analyze" element={<Auth />} />
-          <Route path="/dashboard" element={<Auth />} />
+          <Route path="/kluxify" element={<Auth />} />
           <Route path="/user-dashboard" element={<Auth />} />
+          <Route path="/profile-settings" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}

@@ -115,8 +115,8 @@ const ChartTooltipContent = React.forwardRef<
       color,
       nameKey,
       labelKey,
-    },
-    ref,
+    }: any,
+    ref: any,
   ) => {
     const { config } = useChart();
 
@@ -234,7 +234,7 @@ const ChartLegendContent = React.forwardRef<
       hideIcon?: boolean;
       nameKey?: string;
     }
->(({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
+>(({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }: any, ref: any) => {
   const { config } = useChart();
 
   if (!payload?.length) {
