@@ -13,7 +13,6 @@ import Leaderboard from "./pages/Leaderboard";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import UserDashboard from "./pages/UserDashboard";
-import MyStats from "./pages/MyStats";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +30,6 @@ const AppContent = () => {
                 <Route path="/user-dashboard" element={<UserDashboard />} />
                 <Route path="/analyze" element={<AnalysisInput />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
-                <Route path="/my-stats" element={<MyStats />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 {/* Redirect to dashboard if authenticated and on public routes */}
                 <Route path="/" element={<UserDashboard />} />
@@ -50,7 +48,6 @@ const AppContent = () => {
           <Route path="/analyze" element={<Auth />} />
           <Route path="/dashboard" element={<Auth />} />
           <Route path="/user-dashboard" element={<Auth />} />
-          <Route path="/my-stats" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}

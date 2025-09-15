@@ -20,7 +20,6 @@ const sidebarItems = [
   { title: "Dashboard", url: "/user-dashboard", icon: BarChart3 },
   { title: "Analyse", url: "/analyze", icon: Search },
   { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
-  { title: "My Stats", url: "/my-stats", icon: User },
 ];
 
 export function AppSidebar() {

@@ -24,17 +24,17 @@ export default function CTASection() {
           </div>
 
           {/* Social Media Links */}
-          <div className="flex justify-center gap-8 mb-12">
+          <div className="flex justify-center gap-6 mb-12">
             {/* Discord */}
             <a 
               href="#" 
               className="group relative"
               aria-label="Join our Discord"
             >
-              <div className="w-20 h-20 bg-gradient-card rounded-2xl border border-neon-purple/30 flex items-center justify-center group-hover:border-neon-purple/60 transition-all duration-300 group-hover:scale-110 neon-glow-purple">
-                <MessageCircle className="w-10 h-10 text-neon-purple group-hover:scale-110 transition-transform duration-300" />
+              <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-purple/20 flex items-center justify-center group-hover:border-neon-purple/40 transition-all duration-300 group-hover:scale-105">
+                <MessageCircle className="w-5 h-5 text-neon-purple/60 group-hover:text-neon-purple group-hover:scale-105 transition-all duration-300" />
               </div>
-              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-muted-foreground group-hover:text-neon-purple transition-colors duration-300">
+              <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-purple transition-colors duration-300">
                 Discord
               </span>
             </a>
@@ -45,10 +45,10 @@ export default function CTASection() {
               className="group relative"
               aria-label="Join our Telegram"
             >
-              <div className="w-20 h-20 bg-gradient-card rounded-2xl border border-neon-cyan/30 flex items-center justify-center group-hover:border-neon-cyan/60 transition-all duration-300 group-hover:scale-110 neon-glow-cyan">
-                <Send className="w-10 h-10 text-neon-cyan group-hover:scale-110 transition-transform duration-300" />
+              <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-cyan/20 flex items-center justify-center group-hover:border-neon-cyan/40 transition-all duration-300 group-hover:scale-105">
+                <Send className="w-5 h-5 text-neon-cyan/60 group-hover:text-neon-cyan group-hover:scale-105 transition-all duration-300" />
               </div>
-              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-muted-foreground group-hover:text-neon-cyan transition-colors duration-300">
+              <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-cyan transition-colors duration-300">
                 Telegram
               </span>
             </a>
@@ -59,10 +59,10 @@ export default function CTASection() {
               className="group relative"
               aria-label="Follow us on X"
             >
-              <div className="w-20 h-20 bg-gradient-card rounded-2xl border border-neon-green/30 flex items-center justify-center group-hover:border-neon-green/60 transition-all duration-300 group-hover:scale-110 neon-glow-green">
-                <Twitter className="w-10 h-10 text-neon-green group-hover:scale-110 transition-transform duration-300" />
+              <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-green/20 flex items-center justify-center group-hover:border-neon-green/40 transition-all duration-300 group-hover:scale-105">
+                <Twitter className="w-5 h-5 text-neon-green/60 group-hover:text-neon-green group-hover:scale-105 transition-all duration-300" />
               </div>
-              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-muted-foreground group-hover:text-neon-green transition-colors duration-300">
+              <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-green transition-colors duration-300">
                 X (Twitter)
               </span>
             </a>

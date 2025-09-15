@@ -55,7 +55,7 @@ export default function MemeCoinDisplay() {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Top <span className="text-neon-cyan">Meme Coins</span> Live
+            Top <span className="text-neon-cyan">AI Picks</span> Today
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Real-time sentiment analysis for the most popular meme coins
@@ -64,7 +64,7 @@ export default function MemeCoinDisplay() {
 
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topMemeCoins.map((coin, index) => (
+            {topMemeCoins.slice(0, 3).map((coin, index) => (
               <Card 
                 key={index}
                 className={`p-6 bg-gradient-card border-${coin.color === 'red-500' ? 'red-500' : coin.color}/30 hover:border-${coin.color === 'red-500' ? 'red-500' : coin.color} transition-all duration-300 group relative overflow-hidden`}
