@@ -11,7 +11,7 @@ export default function HeroSection() {
         <img 
           src={heroImage} 
           alt="AI Dashboard" 
-          className="w-full h-full object-contain opacity-20"
+          className="w-full h-full object-fill opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-dark opacity-80"></div>
       </div>
