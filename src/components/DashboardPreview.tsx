@@ -53,193 +53,253 @@ export default function DashboardPreview() {
               </div>
             </div>
 
-            {/* Interactive Charts */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
-              {/* Social Media Signals Chart */}
-              <Card className="p-6 bg-black/30 border border-neon-green/20">
-                <h4 className="text-lg font-semibold text-neon-green mb-6 flex items-center gap-2">
-                  <Eye className="w-5 h-5" />
-                  Social Media Signals
-                </h4>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={socialData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--neon-green) / 0.1)" />
-                      <XAxis 
-                        dataKey="time" 
-                        stroke="hsl(var(--muted-foreground))"
-                        fontSize={12}
-                      />
-                      <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                      <Tooltip 
-                        contentStyle={{
-                          background: 'hsl(var(--card))',
-                          border: '1px solid hsl(var(--border))',
-                          borderRadius: '8px',
-                          fontSize: '12px'
-                        }}
-                        formatter={(value, name) => {
-                          const formatValue = (val) => {
-                            if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
-                            return val.toString();
-                          };
-                          const labels = {
-                            views: '📈 Views',
-                            likes: '❤️ Likes', 
-                            reposts: '🔁 Reposts',
-                            members: '👥 Members'
-                          };
-                          return [formatValue(value), labels[name] || name];
-                        }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="views" 
-                        stroke="hsl(var(--neon-cyan))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-cyan))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-cyan))', strokeWidth: 2, fill: 'hsl(var(--neon-cyan))' }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="likes" 
-                        stroke="hsl(var(--neon-pink))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-pink))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-pink))', strokeWidth: 2, fill: 'hsl(var(--neon-pink))' }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="reposts" 
-                        stroke="hsl(var(--neon-purple))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-purple))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-purple))', strokeWidth: 2, fill: 'hsl(var(--neon-purple))' }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="members" 
-                        stroke="hsl(var(--neon-green))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-green))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-green))', strokeWidth: 2, fill: 'hsl(var(--neon-green))' }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="flex flex-wrap gap-4 mt-4 text-xs">
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
-                    <span className="text-muted-foreground">Views 📈</span>
+            {/* Interactive Charts and Metrics */}
+            <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 mb-8">
+              {/* Charts Container */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Social Media Signals Chart */}
+                <Card className="p-6 bg-black/30 border border-neon-green/20">
+                  <h4 className="text-lg font-semibold text-neon-green mb-6 flex items-center gap-2">
+                    <Eye className="w-5 h-5" />
+                    Social Media Signals
+                  </h4>
+                  <div className="h-64">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={socialData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--neon-green) / 0.1)" />
+                        <XAxis 
+                          dataKey="time" 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={12}
+                        />
+                        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                        <Tooltip 
+                          contentStyle={{
+                            background: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px',
+                            fontSize: '12px'
+                          }}
+                          formatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              views: '📈 Views',
+                              likes: '❤️ Likes', 
+                              reposts: '🔁 Reposts',
+                              members: '👥 Members'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="views" 
+                          stroke="hsl(var(--neon-cyan))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-cyan))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-cyan))', strokeWidth: 2, fill: 'hsl(var(--neon-cyan))' }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="likes" 
+                          stroke="hsl(var(--neon-pink))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-pink))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-pink))', strokeWidth: 2, fill: 'hsl(var(--neon-pink))' }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="reposts" 
+                          stroke="hsl(var(--neon-purple))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-purple))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-purple))', strokeWidth: 2, fill: 'hsl(var(--neon-purple))' }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="members" 
+                          stroke="hsl(var(--neon-green))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-green))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-green))', strokeWidth: 2, fill: 'hsl(var(--neon-green))' }}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
-                    <span className="text-muted-foreground">Likes ❤️</span>
+                  <div className="flex flex-wrap gap-4 mt-4 text-xs">
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
+                      <span className="text-muted-foreground">Views 📈</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
+                      <span className="text-muted-foreground">Likes ❤️</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
+                      <span className="text-muted-foreground">Reposts 🔁</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-green"></div>
+                      <span className="text-muted-foreground">Members 👥</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                    <span className="text-muted-foreground">Reposts 🔁</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-green"></div>
-                    <span className="text-muted-foreground">Members 👥</span>
-                  </div>
-                </div>
-              </Card>
+                </Card>
 
-              {/* Technical Market Factors Chart */}
-              <Card className="p-6 bg-black/30 border border-neon-cyan/20">
-                <h4 className="text-lg font-semibold text-neon-cyan mb-6 flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5" />
-                  Technical Market Factors
-                </h4>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={technicalData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--neon-cyan) / 0.1)" />
-                      <XAxis 
-                        dataKey="time" 
-                        stroke="hsl(var(--muted-foreground))"
-                        fontSize={12}
-                      />
-                      <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                      <Tooltip 
-                        contentStyle={{
-                          background: 'hsl(var(--card))',
-                          border: '1px solid hsl(var(--border))',
-                          borderRadius: '8px',
-                          fontSize: '12px'
-                        }}
-                        formatter={(value, name) => {
-                          const formatValue = (val) => {
-                            if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}k`;
-                            if (name === 'volume') return `${val}M`;
-                            if (name === 'marketCap') return `$${val}M`;
-                            return val.toString();
-                          };
-                          const labels = {
-                            holders: '👛 Holders',
-                            volume: '📊 Volume', 
-                            bundles: '📦 Bundles',
-                            marketCap: '💵 Market Cap'
-                          };
-                          return [formatValue(value), labels[name] || name];
-                        }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="holders" 
-                        stroke="hsl(var(--neon-green))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-green))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-green))', strokeWidth: 2, fill: 'hsl(var(--neon-green))' }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="volume" 
-                        stroke="hsl(var(--neon-cyan))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-cyan))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-cyan))', strokeWidth: 2, fill: 'hsl(var(--neon-cyan))' }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="bundles" 
-                        stroke="hsl(var(--neon-purple))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-purple))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-purple))', strokeWidth: 2, fill: 'hsl(var(--neon-purple))' }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="marketCap" 
-                        stroke="hsl(var(--neon-pink))" 
-                        strokeWidth={2}
-                        dot={{ fill: 'hsl(var(--neon-pink))', strokeWidth: 0, r: 4 }}
-                        activeDot={{ r: 6, stroke: 'hsl(var(--neon-pink))', strokeWidth: 2, fill: 'hsl(var(--neon-pink))' }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                {/* Technical Market Factors Chart */}
+                <Card className="p-6 bg-black/30 border border-neon-cyan/20">
+                  <h4 className="text-lg font-semibold text-neon-cyan mb-6 flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5" />
+                    Technical Market Factors
+                  </h4>
+                  <div className="h-64">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={technicalData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--neon-cyan) / 0.1)" />
+                        <XAxis 
+                          dataKey="time" 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={12}
+                        />
+                        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                        <Tooltip 
+                          contentStyle={{
+                            background: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px',
+                            fontSize: '12px'
+                          }}
+                          formatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+                              if (name === 'volume') return `${val}M`;
+                              if (name === 'marketCap') return `$${val}M`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              holders: '👛 Holders',
+                              volume: '📊 Volume', 
+                              bundles: '📦 Bundles',
+                              marketCap: '💵 Market Cap'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="holders" 
+                          stroke="hsl(var(--neon-green))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-green))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-green))', strokeWidth: 2, fill: 'hsl(var(--neon-green))' }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="volume" 
+                          stroke="hsl(var(--neon-cyan))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-cyan))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-cyan))', strokeWidth: 2, fill: 'hsl(var(--neon-cyan))' }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="bundles" 
+                          stroke="hsl(var(--neon-purple))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-purple))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-purple))', strokeWidth: 2, fill: 'hsl(var(--neon-purple))' }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="marketCap" 
+                          stroke="hsl(var(--neon-pink))" 
+                          strokeWidth={2}
+                          dot={{ fill: 'hsl(var(--neon-pink))', strokeWidth: 0, r: 4 }}
+                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-pink))', strokeWidth: 2, fill: 'hsl(var(--neon-pink))' }}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className="flex flex-wrap gap-4 mt-4 text-xs">
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-green"></div>
+                      <span className="text-muted-foreground">Holders 👛</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
+                      <span className="text-muted-foreground">Volume 📊</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
+                      <span className="text-muted-foreground">Bundles 📦</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
+                      <span className="text-muted-foreground">Market Cap 💵</span>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Additional Metrics Panel */}
+              <div className="xl:block hidden">
+                <Card className="p-6 bg-black/30 border border-neon-purple/20 h-fit">
+                  <h4 className="text-lg font-semibold text-neon-purple mb-6 flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    Key Metrics
+                  </h4>
+                  <div className="space-y-4">
+                    {/* Avg Wallet Age */}
+                    <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-full px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
+                      <span className="text-neon-cyan font-semibold">60 days</span>
+                    </div>
+
+                    {/* Dev Paid */}
+                    <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-full px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Dev Paid</span>
+                      <span className="text-neon-green font-semibold">✓ Yes</span>
+                    </div>
+
+                    {/* Dev Credibility Score */}
+                    <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-full px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Dev Credibility</span>
+                      <span className="text-neon-pink font-semibold">87/100</span>
+                    </div>
+
+                    {/* Admin Followers */}
+                    <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-full px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Admin Followers</span>
+                      <span className="text-neon-purple font-semibold">67K</span>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            {/* Mobile Metrics Strip */}
+            <div className="xl:hidden mb-8 overflow-x-auto">
+              <div className="flex gap-4 min-w-max pb-2">
+                <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
+                  <span className="text-xs text-muted-foreground">Avg Wallet Age:</span>
+                  <span className="text-neon-cyan font-semibold text-sm">60 days</span>
                 </div>
-                <div className="flex flex-wrap gap-4 mt-4 text-xs">
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-green"></div>
-                    <span className="text-muted-foreground">Holders 👛</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
-                    <span className="text-muted-foreground">Volume 📊</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                    <span className="text-muted-foreground">Bundles 📦</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
-                    <span className="text-muted-foreground">Market Cap 💵</span>
-                  </div>
+                <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
+                  <span className="text-xs text-muted-foreground">Dev Paid:</span>
+                  <span className="text-neon-green font-semibold text-sm">✓ Yes</span>
                 </div>
-              </Card>
+                <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
+                  <span className="text-xs text-muted-foreground">Dev Credibility:</span>
+                  <span className="text-neon-pink font-semibold text-sm">87/100</span>
+                </div>
+                <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
+                  <span className="text-xs text-muted-foreground">Admin Followers:</span>
+                  <span className="text-neon-purple font-semibold text-sm">67K</span>
+                </div>
+              </div>
             </div>
 
             {/* AI Verdict Section */}
