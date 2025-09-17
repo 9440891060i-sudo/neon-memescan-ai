@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { useAuthStore } from "@/store/authStore";
+import MemeCoinTicker from "@/components/MemeCoinTicker";
 import Index from "./pages/Index";
 import AnalysisInput from "./pages/AnalysisInput";
 import Dashboard from "./pages/Dashboard";
@@ -46,18 +47,21 @@ const AppContent = () => {
           </div>
         </SidebarProvider>
       ) : (
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/auth" element={<Auth />} />
-          {/* Redirect to auth for protected routes */}
-          <Route path="/analyze" element={<Auth />} />
-          <Route path="/kluxify" element={<Auth />} />
-          <Route path="/user-dashboard" element={<Auth />} />
-          <Route path="/profile-settings" element={<Auth />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="min-h-screen bg-background">
+          <MemeCoinTicker />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/auth" element={<Auth />} />
+            {/* Redirect to auth for protected routes */}
+            <Route path="/analyze" element={<Auth />} />
+            <Route path="/kluxify" element={<Auth />} />
+            <Route path="/user-dashboard" element={<Auth />} />
+            <Route path="/profile-settings" element={<Auth />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       )}
     </div>
   );

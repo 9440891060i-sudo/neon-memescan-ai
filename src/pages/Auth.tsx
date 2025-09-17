@@ -9,7 +9,6 @@ import { Zap, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthStore } from "@/store/authStore";
-import MemeCoinTicker from "@/components/MemeCoinTicker";
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -93,7 +92,6 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <MemeCoinTicker />
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link to="/" className="inline-flex items-center space-x-2 mb-4">

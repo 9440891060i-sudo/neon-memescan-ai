@@ -1,4 +1,3 @@
-import MemeCoinTicker from "@/components/MemeCoinTicker";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import DashboardPreview from "@/components/DashboardPreview";
@@ -10,7 +9,6 @@ import CTASection from "@/components/CTASection";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <MemeCoinTicker />
       <Header />
       <main className="pt-16">
         <HeroSection />
