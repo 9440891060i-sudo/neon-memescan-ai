@@ -119,8 +119,20 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    background: hsl(var(--background));
+    overscroll-behavior: none;
+  }
+
   body {
     @apply bg-background text-foreground font-mono;
+    background: var(--gradient-dark);
+    min-height: 100vh;
+    overscroll-behavior: none;
+  }
+
+  #root {
+    min-height: 100vh;
     background: var(--gradient-dark);
   }
 }
