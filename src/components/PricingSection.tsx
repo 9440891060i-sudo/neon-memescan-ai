@@ -1,56 +1,56 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check, Zap, Crown, Infinity } from "lucide-react";
+import { Check, Coins, TrendingUp, Infinity, Rocket } from "lucide-react";
 
 const plans = [
   {
-    name: "Free Trial",
-    icon: Zap,
-    price: "0",
-    credits: "10",
-    description: "Perfect for testing our AI",
+    name: "Starter",
+    icon: Coins,
+    price: "9",
+    period: "month",
+    description: "Pay-as-you-go credits model",
     features: [
-      "10 Free Analysis Credits",
-      "Basic Social Sentiment",
-      "Technical Indicators",
-      "24h Support"
+      "100 credits included per month",
+      "Analyse 1 coin at a time",
+      "Manual contract address input (CA paste & analyse)",
+      "Full AI analysis: graphs, Twitter metrics, holders, entries & exits",
+      "Perfect for explorers testing meme coins"
     ],
-    buttonText: "Start Free",
+    buttonText: "Get Started",
     buttonVariant: "neon-outline" as const,
     popular: false
   },
   {
-    name: "Pay Per Analysis",
-    icon: Crown,
-    price: "2.99",
-    credits: "30",
-    description: "Ideal for occasional traders",
+    name: "Pro",
+    icon: TrendingUp,
+    price: "29",
+    period: "month",
+    description: "Unlimited manual access",
     features: [
-      "30 Analysis Credits",
-      "Advanced AI Insights",
-      "Social + Technical Combo",
-      "Priority Support",
-      "Detailed Reports"
+      "Unlimited analyses — no credits needed",
+      "Analyse up to 3 coins at once",
+      "Deeper AI insights with real-time graphs & metrics",
+      "Includes entry & exit signals for every coin",
+      "Designed for active meme coin traders"
     ],
-    buttonText: "Buy Credits",
+    buttonText: "Go Pro",
     buttonVariant: "analyze" as const,
     popular: true
   },
   {
-    name: "Monthly Unlimited",
-    icon: Infinity,
-    price: "49.99",
-    credits: "∞",
-    description: "For serious meme coin traders",
+    name: "God Mode",
+    icon: Rocket,
+    price: "49",
+    period: "month",
+    description: "24/7 AI Auto-Scanner",
     features: [
-      "Unlimited Analysis",
-      "Real-time Alerts",
-      "Advanced Metrics",
-      "Portfolio Tracking",
-      "Premium Support",
-      "API Access"
+      "Everything in Pro",
+      "AI continuously scans meme coins around the clock",
+      "Showcases top coins auto-detected by AI",
+      "Entry & exit signals delivered instantly",
+      "Stay ahead of every moonshot — without lifting a finger"
     ],
-    buttonText: "Go Unlimited",
+    buttonText: "Activate God Mode",
     buttonVariant: "neon" as const,
     popular: false
   }
@@ -62,7 +62,7 @@ export default function PricingSection() {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-neon-purple">Credit</span> System
+            Simple plans. <span className="text-neon-purple">Same powerful AI.</span> Just choose your level of access.
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Choose the perfect plan for your meme coin analysis needs
@@ -108,14 +108,7 @@ export default function PricingSection() {
                   <div className="mb-6">
                     <div className="flex items-center justify-center gap-2">
                       <span className="text-4xl font-bold text-foreground">${plan.price}</span>
-                      {plan.name !== "Free Trial" && (
-                        <span className="text-muted-foreground">/ {plan.credits} credits</span>
-                      )}
-                    </div>
-                    <div className={`text-lg font-semibold mt-2 ${
-                      plan.popular ? 'text-neon-green' : 'text-neon-cyan'
-                    }`}>
-                      {plan.credits} Analysis Credits
+                      <span className="text-muted-foreground">/ {plan.period}</span>
                     </div>
                   </div>
 
@@ -148,7 +141,7 @@ export default function PricingSection() {
         {/* Bottom note */}
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
-            All plans include access to our advanced AI algorithms and real-time data feeds
+            All plans include the same powerful AI engine. The difference is how much you want it working for you.
           </p>
         </div>
       </div>
