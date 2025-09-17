@@ -3,10 +3,10 @@ import { MessageCircle, Send, ArrowRight } from "lucide-react";
 
 export default function CTASection() {
   return (
-    <section className="py-20 px-6 relative overflow-hidden">
+    <section className="py-20 px-6 relative">
       {/* Background effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-neon-green/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-32 h-32 bg-neon-green/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-40 h-40 bg-neon-cyan/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-neon-purple/5 rounded-full blur-3xl"></div>
       </div>
