@@ -24,9 +24,9 @@ const AppContent = () => {
     <div className="min-h-screen w-full">
       {isAuthenticated ? (
         <SidebarProvider>
-          <div className="flex min-h-screen w-full">
+          <div className="min-h-screen w-full">
             <AppSidebar />
-            <main className="flex-1">
+            <main className="ml-64 min-h-screen overflow-y-auto">
               <Routes>
                 <Route path="/user-dashboard" element={<Dashboard />} />
                 <Route path="/analyze" element={<AnalysisInput />} />
