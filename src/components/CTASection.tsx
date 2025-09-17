@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Send, Twitter, ArrowRight } from "lucide-react";
+import { MessageCircle, Send, ArrowRight } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -53,17 +53,19 @@ export default function CTASection() {
               </span>
             </a>
 
-            {/* X (Twitter) */}
+            {/* X */}
             <a 
               href="#" 
               className="group relative"
               aria-label="Follow us on X"
             >
               <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-green/20 flex items-center justify-center group-hover:border-neon-green/40 transition-all duration-300 group-hover:scale-105">
-                <Twitter className="w-5 h-5 text-neon-green/60 group-hover:text-neon-green group-hover:scale-105 transition-all duration-300" />
+                <svg className="w-5 h-5 text-neon-green/60 group-hover:text-neon-green group-hover:scale-105 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
               </div>
               <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-green transition-colors duration-300">
-                X (Twitter)
+                X
               </span>
             </a>
           </div>
@@ -83,19 +85,25 @@ export default function CTASection() {
             </Button>
           </div>
 
-          {/* Community Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-neon-green mb-2">2.4K</div>
-              <div className="text-sm text-muted-foreground">Discord Members</div>
+          {/* Recent Wins Ticker */}
+          <div className="mt-16 overflow-hidden">
+            <div className="flex animate-[scroll_20s_linear_infinite] whitespace-nowrap">
+              <div className="flex items-center space-x-8 text-sm">
+                <span className="text-neon-green">🚀 PEPE +247% in 3 days</span>
+                <span className="text-neon-cyan">⚡ DOGE +89% in 24h</span>
+                <span className="text-neon-purple">🔥 SHIB +156% in 2 days</span>
+                <span className="text-neon-green">💎 BONK +312% in 5 days</span>
+                <span className="text-neon-cyan">🌙 FLOKI +78% in 12h</span>
+                <span className="text-neon-purple">⭐ WIF +234% in 4 days</span>
+                <span className="text-neon-green">🚀 PEPE +247% in 3 days</span>
+                <span className="text-neon-cyan">⚡ DOGE +89% in 24h</span>
+                <span className="text-neon-purple">🔥 SHIB +156% in 2 days</span>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-neon-cyan mb-2">5.1K</div>
-              <div className="text-sm text-muted-foreground">Telegram Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-neon-purple mb-2">8.3K</div>
-              <div className="text-sm text-muted-foreground">X Followers</div>
+            <div className="text-center mt-6">
+              <p className="text-lg text-muted-foreground animate-pulse">
+                Where meme coins meet AI — <span className="text-neon-green">Join the movement</span>
+              </p>
             </div>
           </div>
         </div>

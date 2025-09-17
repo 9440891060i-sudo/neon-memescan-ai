@@ -5,7 +5,7 @@ import heroImage from "@/assets/ai-dashboard-hero.jpg";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-start pt-24 overflow-hidden">
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -67,7 +67,7 @@ export default function HeroSection() {
               />
               <Button variant="analyze" size="lg" className="px-8">
                 <Search className="w-5 h-5 mr-2" />
-                Analyze (30 Credits)
+                Analyze (Free)
               </Button>
             </div>
           </div>

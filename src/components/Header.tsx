@@ -24,7 +24,7 @@ const Header = () => {
 
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
-    { href: "/#pricing", label: "Pricing", icon: DollarSign, isScroll: true },
+    { href: "/#pricing", label: "Pricing", icon: Zap, isScroll: true },
     { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
   ];
 
@@ -63,7 +63,7 @@ const Header = () => {
                       {item.isScroll ? (
                         <button
                           onClick={() => handleNavClick(item.href, item.isScroll)}
-                          className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 text-foreground`}
+                          className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-neon-green/20 hover:text-neon-green focus:bg-neon-green/20 focus:text-neon-green focus:outline-none disabled:pointer-events-none disabled:opacity-50 text-foreground`}
                         >
                           <Icon className="w-4 h-4 mr-2" />
                           {item.label}
