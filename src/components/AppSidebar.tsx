@@ -38,12 +38,8 @@ export function AppSidebar() {
   };
 
   const handleSupport = () => {
-    toast({
-      title: "Support Center",
-      description: "Opening support chat...",
-    });
-    // In a real app, this would open a support chat widget or redirect to support email
-    window.open("mailto:support@klux.ai?subject=KLUX Support Request", "_blank");
+    // Navigate to internal support page instead of external email
+    navigate("/support");
   };
 
   // Get user initials for avatar fallback
