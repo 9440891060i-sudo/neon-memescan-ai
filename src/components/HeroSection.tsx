@@ -5,7 +5,7 @@ import heroImage from "@/assets/ai-dashboard-hero.jpg";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-start pt-24 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-start pt-8 overflow-hidden">
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <img 

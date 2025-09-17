@@ -85,27 +85,6 @@ export default function CTASection() {
             </Button>
           </div>
 
-          {/* Recent Wins Ticker */}
-          <div className="mt-16 overflow-hidden">
-            <div className="flex animate-[scroll_20s_linear_infinite] whitespace-nowrap">
-              <div className="flex items-center space-x-8 text-sm">
-                <span className="text-neon-green">🚀 PEPE +247% in 3 days</span>
-                <span className="text-neon-cyan">⚡ DOGE +89% in 24h</span>
-                <span className="text-neon-purple">🔥 SHIB +156% in 2 days</span>
-                <span className="text-neon-green">💎 BONK +312% in 5 days</span>
-                <span className="text-neon-cyan">🌙 FLOKI +78% in 12h</span>
-                <span className="text-neon-purple">⭐ WIF +234% in 4 days</span>
-                <span className="text-neon-green">🚀 PEPE +247% in 3 days</span>
-                <span className="text-neon-cyan">⚡ DOGE +89% in 24h</span>
-                <span className="text-neon-purple">🔥 SHIB +156% in 2 days</span>
-              </div>
-            </div>
-            <div className="text-center mt-6">
-              <p className="text-lg text-muted-foreground animate-pulse">
-                Where meme coins meet AI — <span className="text-neon-green">Join the movement</span>
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

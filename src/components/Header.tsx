@@ -71,7 +71,7 @@ const Header = () => {
                       ) : (
                         <Link
                           to={item.href}
-                          className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 ${
+                          className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-neon-green/20 hover:text-neon-green focus:bg-neon-green/20 focus:text-neon-green focus:outline-none disabled:pointer-events-none disabled:opacity-50 ${
                             isActive(item.href)
                               ? "bg-neon-green/20 text-neon-green border border-neon-green/50"
                               : "text-foreground"
