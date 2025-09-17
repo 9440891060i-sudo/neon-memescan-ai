@@ -15,25 +15,35 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuthStore } from "@/store/authStore";
+import { useToast } from "@/hooks/use-toast";
 
 const sidebarItems = [
   { title: "Dashboard", url: "/user-dashboard", icon: BarChart3 },
   { title: "Analyse", url: "/analyze", icon: Search },
   { title: "KLUXIFY", url: "/kluxify", icon: Crown },
   { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
-  { title: "FAQ", url: "/faq", icon: HelpCircle },
 ];
 
 export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout, user } = useAuthStore();
+  const { toast } = useToast();
 
   const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = () => {
     logout();
     navigate("/");
+  };
+
+  const handleSupport = () => {
+    toast({
+      title: "Support Center",
+      description: "Opening support chat...",
+    });
+    // In a real app, this would open a support chat widget or redirect to support email
+    window.open("mailto:support@klux.ai?subject=KLUX Support Request", "_blank");
   };
 
   // Get user initials for avatar fallback
@@ -107,6 +117,20 @@ export function AppSidebar() {
                   </SidebarMenuItem>
                 );
               })}
+              
+              {/* Support Button */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <button
+                    onClick={handleSupport}
+                    className="flex items-center space-x-3 px-4 py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden text-foreground hover:bg-neon-green/10 hover:text-neon-green hover:border-neon-green/30 border border-transparent w-full text-left"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-cyan/5 opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
+                    <HelpCircle className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                    <span className="font-medium relative z-10 transition-all duration-300">Support</span>
+                  </button>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
