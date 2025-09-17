@@ -34,9 +34,6 @@ export default function CTASection() {
               <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-purple/20 flex items-center justify-center group-hover:border-neon-purple/40 transition-all duration-300 group-hover:scale-105">
                 <MessageCircle className="w-5 h-5 text-neon-purple/60 group-hover:text-neon-purple group-hover:scale-105 transition-all duration-300" />
               </div>
-              <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-purple transition-colors duration-300">
-                Discord
-              </span>
             </a>
 
             {/* Telegram */}
@@ -48,9 +45,6 @@ export default function CTASection() {
               <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-cyan/20 flex items-center justify-center group-hover:border-neon-cyan/40 transition-all duration-300 group-hover:scale-105">
                 <Send className="w-5 h-5 text-neon-cyan/60 group-hover:text-neon-cyan group-hover:scale-105 transition-all duration-300" />
               </div>
-              <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-cyan transition-colors duration-300">
-                Telegram
-              </span>
             </a>
 
             {/* X */}
@@ -64,26 +58,9 @@ export default function CTASection() {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </div>
-              <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground group-hover:text-neon-green transition-colors duration-300">
-                X
-              </span>
             </a>
           </div>
 
-          {/* Main CTA Button */}
-          <div className="mt-16">
-            <Button 
-              variant="neon-outline" 
-              size="lg" 
-              className="px-12 py-4 text-lg group relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-neon-cyan/10 to-neon-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10 flex items-center gap-3">
-                Join the Community
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </span>
-            </Button>
-          </div>
 
         </div>
       </div>
