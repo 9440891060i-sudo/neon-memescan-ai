@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Header from "@/components/Header";
+import MemeCoinTicker from "@/components/MemeCoinTicker";
 
 const faqData = [
   {
@@ -61,6 +62,7 @@ const faqData = [
 export default function FAQ() {
   return (
     <div className="min-h-screen bg-background">
+      <MemeCoinTicker />
       <Header />
       <main className="pt-32">
         {/* Hero Section */}
