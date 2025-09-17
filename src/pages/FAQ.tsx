@@ -1,10 +1,11 @@
-import { HelpCircle, MessageCircle, CreditCard, Shield, Database, RefreshCw, TrendingUp, Users } from "lucide-react";
+import { HelpCircle, MessageCircle, CreditCard, Shield, Database, RefreshCw, TrendingUp, Users, Zap } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Header from "@/components/Header";
 
 const faqData = [
   {
@@ -59,86 +60,90 @@ const faqData = [
 
 export default function FAQ() {
   return (
-    <div className="min-h-screen bg-gradient-dark">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-cyan/5" />
-        <div className="relative container mx-auto px-4 py-20">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-3 bg-gradient-card border border-neon-green/20 rounded-full px-6 py-3 mb-8">
-              <HelpCircle className="w-5 h-5 text-neon-green" />
-              <span className="text-sm font-medium text-neon-green">Frequently Asked Questions</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-neon bg-clip-text text-transparent">
-              Get Answers to Your Questions
-            </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Everything you need to know about our AI-powered meme coin analysis platform, 
-              pricing, features, and how to get the most out of your trading insights.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              {faqData.map((faq) => {
-                const Icon = faq.icon;
-                return (
-                  <AccordionItem 
-                    key={faq.id} 
-                    value={faq.id}
-                    className="bg-gradient-card border border-neon-green/10 rounded-lg overflow-hidden hover:border-neon-green/20 transition-all duration-300"
-                  >
-                    <AccordionTrigger className="px-6 py-6 text-left hover:no-underline group">
-                      <div className="flex items-center gap-4 w-full">
-                        <div className="flex-shrink-0 w-12 h-12 bg-neon-green/10 rounded-lg flex items-center justify-center group-hover:bg-neon-green/20 transition-colors duration-300">
-                          <Icon className="w-6 h-6 text-neon-green" />
-                        </div>
-                        <span className="text-lg font-semibold text-foreground group-hover:text-neon-green transition-colors duration-300">
-                          {faq.question}
-                        </span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-6">
-                      <div className="pl-16">
-                        <p className="text-muted-foreground leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                );
-              })}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Support Section */}
-      <section className="py-16 border-t border-neon-green/10">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
-            <p className="text-muted-foreground mb-8">
-              Our support team is here to help you get the most out of our platform.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-6 py-3 bg-gradient-neon text-black font-semibold rounded-lg hover:scale-105 transition-all duration-300 shadow-neon-green">
-                Contact Support
-              </button>
-              <button className="px-6 py-3 border border-neon-green/20 text-neon-green rounded-lg hover:bg-neon-green/10 transition-all duration-300">
-                Join Community
-              </button>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="pt-32">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-cyan/5" />
+          <div className="relative container mx-auto px-4 py-16">
+            <div className="text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-3 border border-neon-green/20 rounded-full px-6 py-3 mb-8 bg-background/50 backdrop-blur-sm">
+                <HelpCircle className="w-5 h-5 text-neon-green" />
+                <span className="text-sm font-medium text-neon-green">Frequently Asked Questions</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-neon bg-clip-text text-transparent">
+                Get Your Answers
+              </h1>
+              
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Everything you need to know about our AI-powered meme coin analysis platform.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Accordion type="single" collapsible className="space-y-0">
+                {faqData.map((faq, index) => {
+                  const Icon = faq.icon;
+                  return (
+                    <div key={faq.id}>
+                      <AccordionItem 
+                        value={faq.id}
+                        className="border-none"
+                      >
+                        <AccordionTrigger className="py-8 text-left hover:no-underline group [&[data-state=open]>.chevron]:rotate-180">
+                          <div className="flex items-center gap-4 w-full">
+                            <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
+                              <Icon className="w-5 h-5 text-neon-green" />
+                            </div>
+                            <span className="text-lg font-medium text-foreground group-hover:text-neon-green transition-colors duration-300">
+                              {faq.question}
+                            </span>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="pb-8 pl-14 animate-accordion-down">
+                          <p className="text-muted-foreground leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </AccordionContent>
+                      </AccordionItem>
+                      {index < faqData.length - 1 && (
+                        <div className="h-px bg-gradient-to-r from-transparent via-neon-green/20 to-transparent" />
+                      )}
+                    </div>
+                  );
+                })}
+              </Accordion>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Support Section */}
+        <section className="py-16 border-t border-neon-green/10">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Still have questions?</h3>
+              <p className="text-muted-foreground mb-8">
+                Our support team is here to help you get the most out of our platform.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="px-6 py-3 bg-gradient-neon text-black font-semibold rounded-lg hover:scale-105 transition-all duration-300 neon-glow-green">
+                  Contact Support
+                </button>
+                <button className="px-6 py-3 border border-neon-green/20 text-neon-green rounded-lg hover:bg-neon-green/10 transition-all duration-300">
+                  Join Community
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
