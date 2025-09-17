@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import ProfileSettings from "./pages/ProfileSettings";
 import Kluxify from "./pages/Kluxify";
+import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const AppContent = () => {
                 <Route path="/kluxify" element={<Kluxify />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile-settings" element={<ProfileSettings />} />
+                <Route path="/faq" element={<FAQ />} />
                 {/* Redirect to dashboard if authenticated and on public routes */}
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/auth" element={<Dashboard />} />
@@ -45,6 +47,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/auth" element={<Auth />} />
           {/* Redirect to auth for protected routes */}
           <Route path="/analyze" element={<Auth />} />

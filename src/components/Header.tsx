@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap, Trophy, DollarSign } from "lucide-react";
+import { Menu, X, Zap, Trophy, DollarSign, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -26,6 +26,7 @@ const Header = () => {
     { href: "/", label: "Home", icon: Zap },
     { href: "/#pricing", label: "Pricing", icon: Zap, isScroll: true },
     { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
+    { href: "/faq", label: "FAQ", icon: HelpCircle },
   ];
 
   const isActive = (href: string) => location.pathname === href;
