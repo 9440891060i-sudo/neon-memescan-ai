@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import ProfileSettings from "./pages/ProfileSettings";
 import Kluxify from "./pages/Kluxify";
+import Rewards from "./pages/Rewards";
 import FAQ from "./pages/FAQ";
 import Support from "./pages/Support";
 
@@ -34,6 +35,7 @@ const AppContent = () => {
                 <Route path="/user-dashboard" element={<Dashboard />} />
                 <Route path="/analyze" element={<AnalysisInput />} />
                 <Route path="/kluxify" element={<Kluxify />} />
+                <Route path="/rewards" element={<Rewards />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile-settings" element={<ProfileSettings />} />
                 <Route path="/support" element={<Support />} />
@@ -57,6 +59,7 @@ const AppContent = () => {
             {/* Redirect to auth for protected routes */}
             <Route path="/analyze" element={<Auth />} />
             <Route path="/kluxify" element={<Auth />} />
+            <Route path="/rewards" element={<Auth />} />
             <Route path="/user-dashboard" element={<Auth />} />
             <Route path="/profile-settings" element={<Auth />} />
             <Route path="*" element={<NotFound />} />
