@@ -21,39 +21,29 @@ export const AnimatedChart = ({
   tooltipFormatter,
   children
 }: AnimatedChartProps) => {
-  const [animatedData, setAnimatedData] = useState(data.map(() => ({})));
+  const [visiblePoints, setVisiblePoints] = useState(0);
 
   useEffect(() => {
     if (!isVisible) return;
 
     const duration = 2000;
-    const steps = 60;
-    const stepDuration = duration / steps;
-    let currentStep = 0;
+    const totalPoints = data.length;
+    const stepDuration = duration / totalPoints;
+    let currentPoint = 0;
 
-    const animateData = () => {
-      if (currentStep <= steps) {
-        const progress = currentStep / steps;
-        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-        
-        const newData = data.map((item, index) => {
-          const animatedItem: any = { time: item.time };
-          
-          lines.forEach(({ dataKey }) => {
-            animatedItem[dataKey] = Math.floor(item[dataKey] * easeOutCubic);
-          });
-          
-          return animatedItem;
-        });
-        
-        setAnimatedData(newData);
-        currentStep++;
-        setTimeout(animateData, stepDuration);
+    const animateChart = () => {
+      if (currentPoint <= totalPoints) {
+        setVisiblePoints(currentPoint);
+        currentPoint++;
+        setTimeout(animateChart, stepDuration);
       }
     };
 
-    animateData();
-  }, [data, lines, isVisible]);
+    animateChart();
+  }, [data.length, isVisible]);
+
+  // Show only the visible portion of data
+  const animatedData = data.slice(0, visiblePoints);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

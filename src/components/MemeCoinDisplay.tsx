@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { TrendingUp, TrendingDown } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 const topMemeCoins = [
   {
@@ -50,8 +52,10 @@ const topMemeCoins = [
 ];
 
 export default function MemeCoinDisplay() {
+  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
+  
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black/50 to-background">
+    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black/50 to-background">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
@@ -102,7 +106,13 @@ export default function MemeCoinDisplay() {
                   {/* Market cap */}
                   <div className="mb-3 sm:mb-4">
                     <div className="text-xs sm:text-sm text-muted-foreground mb-1">Market Cap</div>
-                    <div className="text-lg sm:text-xl font-bold text-foreground">{coin.marketCap}</div>
+                    <div className="text-lg sm:text-xl font-bold text-foreground">
+                      <AnimatedNumber 
+                        value={parseFloat(coin.marketCap.replace(/[$BM]/g, ''))} 
+                        isVisible={isIntersecting}
+                        formatter={(val) => coin.marketCap.includes('B') ? `$${val.toFixed(1)}B` : `$${val}M`}
+                      />
+                    </div>
                   </div>
 
                   {/* Sentiment score */}
@@ -114,17 +124,24 @@ export default function MemeCoinDisplay() {
                         coin.sentiment >= 6 ? 'text-neon-cyan' :
                         'text-red-500'
                       }`}>
-                        {coin.sentiment}/10
+                        <AnimatedNumber 
+                          value={coin.sentiment} 
+                          isVisible={isIntersecting}
+                          formatter={(val) => `${val.toFixed(1)}/10`}
+                        />
                       </span>
                     </div>
                     <div className="w-full bg-black/30 rounded-full h-2">
                       <div 
-                        className={`h-2 rounded-full ${
+                        className={`h-2 rounded-full transition-all duration-1000 ease-out ${
                           coin.sentiment >= 8 ? 'bg-neon-green' :
                           coin.sentiment >= 6 ? 'bg-neon-cyan' :
                           'bg-red-500'
                         }`}
-                        style={{ width: `${coin.sentiment * 10}%` }}
+                        style={{ 
+                          width: isIntersecting ? `${coin.sentiment * 10}%` : '0%',
+                          transitionDelay: `${index * 200}ms`
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -152,7 +169,12 @@ export default function MemeCoinDisplay() {
             <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-card rounded-full border border-neon-green/30">
               <div className="w-2 h-2 sm:w-3 sm:h-3 bg-neon-green rounded-full animate-pulse"></div>
               <span className="text-xs sm:text-sm text-muted-foreground">
-                Live data • Updated every <span className="text-neon-green font-semibold">30 seconds</span>
+                Live data • Updated every <span className="text-neon-green font-semibold">
+                  <AnimatedNumber 
+                    value={30} 
+                    isVisible={isIntersecting}
+                  /> seconds
+                </span>
               </span>
             </div>
           </div>
