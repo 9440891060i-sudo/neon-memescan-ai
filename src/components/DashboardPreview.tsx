@@ -34,7 +34,7 @@ export default function DashboardPreview() {
             Your <span className="text-neon-cyan">Bloomberg</span> Terminal
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-            Professional-grade financial data and analytics for institutional crypto trading
+            Real-time social sentiment analysis, insider transaction tracking, and advanced market intelligence for institutional crypto trading
           </p>
         </div>
 
