@@ -31,10 +31,10 @@ export default function DashboardPreview() {
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Your <span className="text-neon-cyan">AI Trading</span> Command Center
+            Professional <span className="text-neon-cyan">AI Analytics</span> Platform
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-            Real-time social sentiment meets technical analysis for precise meme coin insights
+            Advanced algorithmic analysis combining social sentiment and technical indicators for institutional-grade market intelligence
           </p>
         </div>
 
@@ -48,8 +48,11 @@ export default function DashboardPreview() {
                 <p className="text-sm text-muted-foreground break-all sm:break-normal">Contract: 0x6982508145454ce325ddbe47a25d4ec3d2311933</p>
               </div>
               <div className="text-left sm:text-right">
-                <div className="text-2xl sm:text-3xl font-bold text-neon-green">BULLISH</div>
-                <div className="text-sm text-muted-foreground">Confidence: 94.2%</div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-neon-green/20 border border-neon-green/30 rounded-lg">
+                  <div className="w-2 h-2 bg-neon-green rounded-full"></div>
+                  <span className="text-xl sm:text-2xl font-bold text-neon-green">BULLISH</span>
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">Confidence Score: 94.2%</div>
               </div>
             </div>
 
@@ -57,11 +60,11 @@ export default function DashboardPreview() {
             <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 mb-8">
               {/* Charts Container */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Social Media Signals Chart */}
+                {/* Social Sentiment Analysis */}
                 <Card className="p-6 bg-black/30 border border-neon-green/20">
                   <h4 className="text-lg font-semibold text-neon-green mb-6 flex items-center gap-2">
                     <Eye className="w-5 h-5" />
-                    Social Media Signals
+                    Social Sentiment Analysis
                   </h4>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
@@ -86,10 +89,10 @@ export default function DashboardPreview() {
                               return val.toString();
                             };
                             const labels = {
-                              views: '📈 Views',
-                              likes: '❤️ Likes', 
-                              reposts: '🔁 Reposts',
-                              members: '👥 Members'
+                              views: 'Views',
+                              likes: 'Engagements', 
+                              reposts: 'Shares',
+                              members: 'Community Size'
                             };
                             return [formatValue(value), labels[name] || name];
                           }}
@@ -130,30 +133,30 @@ export default function DashboardPreview() {
                     </ResponsiveContainer>
                   </div>
                   <div className="flex flex-wrap gap-4 mt-4 text-xs">
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
-                      <span className="text-muted-foreground">Views 📈</span>
+                      <span className="text-muted-foreground">Views</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
-                      <span className="text-muted-foreground">Likes ❤️</span>
+                      <span className="text-muted-foreground">Engagements</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                      <span className="text-muted-foreground">Reposts 🔁</span>
+                      <span className="text-muted-foreground">Shares</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-green"></div>
-                      <span className="text-muted-foreground">Members 👥</span>
+                      <span className="text-muted-foreground">Community Size</span>
                     </div>
                   </div>
                 </Card>
 
-                {/* Technical Market Factors Chart */}
+                {/* Market Analytics */}
                 <Card className="p-6 bg-black/30 border border-neon-cyan/20">
                   <h4 className="text-lg font-semibold text-neon-cyan mb-6 flex items-center gap-2">
                     <BarChart3 className="w-5 h-5" />
-                    Technical Market Factors
+                    Market Analytics
                   </h4>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
@@ -180,10 +183,10 @@ export default function DashboardPreview() {
                               return val.toString();
                             };
                             const labels = {
-                              holders: '👛 Holders',
-                              volume: '📊 Volume', 
-                              bundles: '📦 Bundles',
-                              marketCap: '💵 Market Cap'
+                              holders: 'Token Holders',
+                              volume: 'Trading Volume', 
+                              bundles: 'Transaction Bundles',
+                              marketCap: 'Market Capitalization'
                             };
                             return [formatValue(value), labels[name] || name];
                           }}
@@ -224,21 +227,21 @@ export default function DashboardPreview() {
                     </ResponsiveContainer>
                   </div>
                   <div className="flex flex-wrap gap-4 mt-4 text-xs">
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-green"></div>
-                      <span className="text-muted-foreground">Holders 👛</span>
+                      <span className="text-muted-foreground">Token Holders</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
-                      <span className="text-muted-foreground">Volume 📊</span>
+                      <span className="text-muted-foreground">Trading Volume</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                      <span className="text-muted-foreground">Bundles 📦</span>
+                      <span className="text-muted-foreground">Transaction Bundles</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
-                      <span className="text-muted-foreground">Market Cap 💵</span>
+                      <span className="text-muted-foreground">Market Cap</span>
                     </div>
                   </div>
                 </Card>
@@ -249,7 +252,7 @@ export default function DashboardPreview() {
                 <Card className="p-6 bg-black/30 border border-neon-purple/20 h-fit">
                   <h4 className="text-lg font-semibold text-neon-purple mb-6 flex items-center gap-2">
                     <Shield className="w-5 h-5" />
-                    Key Metrics
+                    Risk Assessment
                   </h4>
                   <div className="space-y-4">
                     {/* Avg Wallet Age */}
@@ -259,21 +262,21 @@ export default function DashboardPreview() {
                     </div>
 
                     {/* Dev Paid */}
-                    <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-full px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Dev Paid</span>
-                      <span className="text-neon-green font-semibold">✓ Yes</span>
+                    <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Developer Verification</span>
+                      <span className="text-neon-green font-semibold">Verified</span>
                     </div>
 
                     {/* Dev Credibility Score */}
-                    <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-full px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Dev Credibility</span>
+                    <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Credibility Score</span>
                       <span className="text-neon-pink font-semibold">87/100</span>
                     </div>
 
                     {/* Admin Followers */}
-                    <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-full px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Admin Followers</span>
-                      <span className="text-neon-purple font-semibold">67K</span>
+                    <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Community Reach</span>
+                      <span className="text-neon-purple font-semibold">67K Followers</span>
                     </div>
                   </div>
                 </Card>
