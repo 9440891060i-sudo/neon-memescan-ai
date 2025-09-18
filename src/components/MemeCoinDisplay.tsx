@@ -51,37 +51,37 @@ const topMemeCoins = [
 
 export default function MemeCoinDisplay() {
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-black/50 to-background">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black/50 to-background">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
             Top <span className="text-neon-cyan">AI Picks</span> Today
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Real-time sentiment analysis for the most popular meme coins
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {topMemeCoins.slice(0, 3).map((coin, index) => (
               <Card 
                 key={index}
-                className={`p-6 bg-gradient-card border-${coin.color === 'red-500' ? 'red-500' : coin.color}/30 hover:border-${coin.color === 'red-500' ? 'red-500' : coin.color} transition-all duration-300 group relative overflow-hidden`}
+                className={`p-4 sm:p-6 bg-gradient-card border-${coin.color === 'red-500' ? 'red-500' : coin.color}/30 hover:border-${coin.color === 'red-500' ? 'red-500' : coin.color} transition-all duration-300 group relative overflow-hidden`}
               >
                 {/* Background glow */}
                 <div className={`absolute inset-0 bg-${coin.color === 'red-500' ? 'red-500' : coin.color}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                 
                 <div className="relative z-10">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full bg-${coin.color === 'red-500' ? 'red-500' : coin.color}/20 flex items-center justify-center`}>
-                        <span className="font-bold text-sm">{coin.symbol.slice(0, 2)}</span>
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-${coin.color === 'red-500' ? 'red-500' : coin.color}/20 flex items-center justify-center`}>
+                        <span className="font-bold text-xs sm:text-sm">{coin.symbol.slice(0, 2)}</span>
                       </div>
                       <div>
-                        <h3 className="font-bold text-foreground">{coin.name}</h3>
-                        <p className="text-sm text-muted-foreground">{coin.symbol}</p>
+                        <h3 className="font-bold text-sm sm:text-base text-foreground">{coin.name}</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{coin.symbol}</p>
                       </div>
                     </div>
                     
@@ -90,26 +90,26 @@ export default function MemeCoinDisplay() {
                         coin.trend === 'up' ? 'text-neon-green' : 'text-red-500'
                       }`}>
                         {coin.trend === 'up' ? (
-                          <TrendingUp className="w-4 h-4" />
+                          <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
                         ) : (
-                          <TrendingDown className="w-4 h-4" />
+                          <TrendingDown className="w-3 h-3 sm:w-4 sm:h-4" />
                         )}
-                        <span className="font-semibold">{coin.change}</span>
+                        <span className="font-semibold text-sm sm:text-base">{coin.change}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Market cap */}
-                  <div className="mb-4">
-                    <div className="text-sm text-muted-foreground mb-1">Market Cap</div>
-                    <div className="text-xl font-bold text-foreground">{coin.marketCap}</div>
+                  <div className="mb-3 sm:mb-4">
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Market Cap</div>
+                    <div className="text-lg sm:text-xl font-bold text-foreground">{coin.marketCap}</div>
                   </div>
 
                   {/* Sentiment score */}
-                  <div className="mb-4">
+                  <div className="mb-3 sm:mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-muted-foreground">AI Sentiment</span>
-                      <span className={`text-sm font-bold ${
+                      <span className="text-xs sm:text-sm text-muted-foreground">AI Sentiment</span>
+                      <span className={`text-xs sm:text-sm font-bold ${
                         coin.sentiment >= 8 ? 'text-neon-green' :
                         coin.sentiment >= 6 ? 'text-neon-cyan' :
                         'text-red-500'
@@ -148,10 +148,10 @@ export default function MemeCoinDisplay() {
           </div>
 
           {/* Live indicator */}
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-card rounded-full border border-neon-green/30">
-              <div className="w-3 h-3 bg-neon-green rounded-full animate-pulse"></div>
-              <span className="text-sm text-muted-foreground">
+          <div className="text-center mt-8 sm:mt-12">
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-card rounded-full border border-neon-green/30">
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-neon-green rounded-full animate-pulse"></div>
+              <span className="text-xs sm:text-sm text-muted-foreground">
                 Live data • Updated every <span className="text-neon-green font-semibold">30 seconds</span>
               </span>
             </div>

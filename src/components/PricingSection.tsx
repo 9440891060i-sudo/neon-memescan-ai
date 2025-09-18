@@ -58,31 +58,28 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="py-20 px-6">
+    <section className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
             Simple plans. <span className="text-neon-purple">Same powerful AI.</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Choose the perfect plan for your meme coin analysis needs
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
               <Card 
                 key={index}
-                className={`relative p-8 border transition-all duration-300 hover:scale-105 ${
+                className={`relative p-6 sm:p-8 border transition-all duration-300 hover:scale-[1.02] sm:hover:scale-105 ${
                   plan.popular 
-                    ? 'border-neon-green neon-glow-green bg-gradient-to-br from-card to-neon-green/5' 
+                    ? 'border-neon-green neon-glow-green bg-gradient-to-br from-card to-neon-green/5 scale-[1.02] sm:scale-105' 
                     : 'border-border hover:border-neon-cyan/50 bg-gradient-to-br from-card to-neon-cyan/5'
                 }`}
-                style={{
-                  transform: plan.popular ? 'scale(1.05)' : 'scale(1)'
-                }}
               >
                 {/* Popular badge */}
                 {plan.popular && (
@@ -95,34 +92,34 @@ export default function PricingSection() {
 
                 <div className="text-center">
                   {/* Icon */}
-                  <div className={`w-16 h-16 mx-auto mb-6 rounded-full ${
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full ${
                     plan.popular ? 'bg-neon-green/20' : 'bg-neon-cyan/20'
                   } flex items-center justify-center`}>
-                    <Icon className={`w-8 h-8 ${
+                    <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${
                       plan.popular ? 'text-neon-green' : 'text-neon-cyan'
                     }`} />
                   </div>
 
                   {/* Plan name */}
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">{plan.name}</h3>
-                  <p className="text-muted-foreground mb-6">{plan.description}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground">{plan.name}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">{plan.description}</p>
 
                   {/* Price */}
-                  <div className="mb-6">
+                  <div className="mb-4 sm:mb-6">
                     <div className="flex items-center justify-center gap-2">
-                      <span className="text-4xl font-bold text-foreground">${plan.price}</span>
-                      <span className="text-muted-foreground">/ {plan.period}</span>
+                      <span className="text-3xl sm:text-4xl font-bold text-foreground">${plan.price}</span>
+                      <span className="text-sm sm:text-base text-muted-foreground">/ {plan.period}</span>
                     </div>
                   </div>
 
                   {/* Features */}
-                  <ul className="space-y-3 mb-8 text-left">
+                  <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 text-left">
                     {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-3">
-                        <Check className={`w-5 h-5 ${
+                      <li key={featureIndex} className="flex items-start gap-2 sm:gap-3">
+                        <Check className={`w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0 ${
                           plan.popular ? 'text-neon-green' : 'text-neon-cyan'
                         }`} />
-                        <span className="text-muted-foreground">{feature}</span>
+                        <span className="text-sm sm:text-base text-muted-foreground leading-tight">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -131,7 +128,7 @@ export default function PricingSection() {
                   <Button 
                     variant={plan.buttonVariant} 
                     size="lg" 
-                    className="w-full"
+                    className="w-full min-h-[44px] text-sm sm:text-base"
                   >
                     {plan.buttonText}
                   </Button>

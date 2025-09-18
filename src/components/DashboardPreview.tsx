@@ -27,28 +27,28 @@ const technicalData = [
 
 export default function DashboardPreview() {
   return (
-    <section className="py-20 px-6">
+    <section className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
             Your <span className="text-neon-cyan">AI Trading</span> Command Center
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Real-time social sentiment meets technical analysis for precise meme coin insights
           </p>
         </div>
 
         <div className="max-w-7xl mx-auto">
           {/* Dashboard mockup */}
-          <div className="bg-gradient-card rounded-3xl p-8 border border-border neon-glow-cyan shadow-card">
+          <div className="bg-gradient-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-border neon-glow-cyan shadow-card">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
               <div>
-                <h3 className="text-2xl font-bold text-foreground">PEPE Analysis</h3>
-                <p className="text-muted-foreground">Contract: 0x6982508145454ce325ddbe47a25d4ec3d2311933</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">PEPE Analysis</h3>
+                <p className="text-sm text-muted-foreground break-all sm:break-normal">Contract: 0x6982508145454ce325ddbe47a25d4ec3d2311933</p>
               </div>
-              <div className="text-right">
-                <div className="text-3xl font-bold text-neon-green">BULLISH</div>
+              <div className="text-left sm:text-right">
+                <div className="text-2xl sm:text-3xl font-bold text-neon-green">BULLISH</div>
                 <div className="text-sm text-muted-foreground">Confidence: 94.2%</div>
               </div>
             </div>
