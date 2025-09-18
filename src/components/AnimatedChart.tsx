@@ -21,33 +21,29 @@ export const AnimatedChart = ({
   tooltipFormatter,
   children
 }: AnimatedChartProps) => {
-  const [visiblePoints, setVisiblePoints] = useState(0);
+  const [showLines, setShowLines] = useState<boolean[]>(lines.map(() => false));
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible) {
+      setShowLines(lines.map(() => false));
+      return;
+    }
 
-    const duration = 2000;
-    const totalPoints = data.length;
-    const stepDuration = duration / totalPoints;
-    let currentPoint = 0;
-
-    const animateChart = () => {
-      if (currentPoint <= totalPoints) {
-        setVisiblePoints(currentPoint);
-        currentPoint++;
-        setTimeout(animateChart, stepDuration);
-      }
-    };
-
-    animateChart();
-  }, [data.length, isVisible]);
-
-  // Show only the visible portion of data
-  const animatedData = data.slice(0, visiblePoints);
+    // Stagger the appearance of each line
+    lines.forEach((_, index) => {
+      setTimeout(() => {
+        setShowLines(prev => {
+          const newState = [...prev];
+          newState[index] = true;
+          return newState;
+        });
+      }, index * 300);
+    });
+  }, [isVisible, lines.length]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={animatedData}>
+      <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
         <XAxis 
           dataKey="time" 
@@ -64,7 +60,7 @@ export const AnimatedChart = ({
           }}
           formatter={tooltipFormatter}
         />
-        {lines.map(({ dataKey, stroke }) => (
+        {lines.map(({ dataKey, stroke }, index) => (
           <Line 
             key={dataKey}
             type="monotone" 
@@ -73,6 +69,10 @@ export const AnimatedChart = ({
             strokeWidth={2}
             dot={{ fill: stroke, strokeWidth: 0, r: 4 }}
             activeDot={{ r: 6, stroke, strokeWidth: 2, fill: stroke }}
+            style={{
+              opacity: showLines[index] ? 1 : 0,
+              transition: 'opacity 0.8s ease-out'
+            }}
           />
         ))}
         {children}
