@@ -21,62 +21,50 @@ export const AnimatedChart = ({
   tooltipFormatter,
   children
 }: AnimatedChartProps) => {
-  const [showLines, setShowLines] = useState<boolean[]>(lines.map(() => false));
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    if (!isVisible) {
-      setShowLines(lines.map(() => false));
-      return;
-    }
-
-    // Stagger the appearance of each line
-    lines.forEach((_, index) => {
-      setTimeout(() => {
-        setShowLines(prev => {
-          const newState = [...prev];
-          newState[index] = true;
-          return newState;
-        });
-      }, index * 300);
-    });
-  }, [isVisible, lines.length]);
+    if (isVisible) setShouldRender(true);
+  }, [isVisible]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-        <XAxis 
-          dataKey="time" 
-          stroke="hsl(var(--muted-foreground))"
-          fontSize={12}
-        />
-        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-        <Tooltip 
-          contentStyle={{
-            background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
-            borderRadius: '8px',
-            fontSize: '12px'
-          }}
-          formatter={tooltipFormatter}
-        />
-        {lines.map(({ dataKey, stroke }, index) => (
-          <Line 
-            key={dataKey}
-            type="monotone" 
-            dataKey={dataKey} 
-            stroke={stroke} 
-            strokeWidth={2}
-            dot={{ fill: stroke, strokeWidth: 0, r: 4 }}
-            activeDot={{ r: 6, stroke, strokeWidth: 2, fill: stroke }}
-            style={{
-              opacity: showLines[index] ? 1 : 0,
-              transition: 'opacity 0.8s ease-out'
-            }}
+      {shouldRender ? (
+        <LineChart data={data} key="animated">
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+          <XAxis 
+            dataKey="time" 
+            stroke="hsl(var(--muted-foreground))"
+            fontSize={12}
           />
-        ))}
-        {children}
-      </LineChart>
+          <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+          <Tooltip 
+            contentStyle={{
+              background: 'hsl(var(--card))',
+              border: '1px solid hsl(var(--border))',
+              borderRadius: '8px',
+              fontSize: '12px'
+            }}
+            formatter={tooltipFormatter}
+          />
+          {lines.map(({ dataKey, stroke }) => (
+            <Line 
+              key={dataKey}
+              type="monotone" 
+              dataKey={dataKey} 
+              stroke={stroke} 
+              strokeWidth={2}
+              dot={{ r: 0 }}
+              activeDot={{ r: 4, stroke, strokeWidth: 2, fill: stroke }}
+              isAnimationActive={true}
+              animationBegin={0}
+              animationDuration={1200}
+              animationEasing="ease-out"
+            />
+          ))}
+          {children}
+        </LineChart>
+      ) : null}
     </ResponsiveContainer>
   );
 };
