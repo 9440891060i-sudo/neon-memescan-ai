@@ -3,14 +3,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { 
   Trophy, 
   Users, 
   DollarSign, 
   Copy, 
   Wallet, 
-  Crown,
-  Medal,
   Share,
   TrendingUp,
   CheckCircle,
@@ -24,16 +24,16 @@ const Rewards = () => {
   const [referralCode] = useState("KLUX-REF-X7K9M2");
   
   const leaderboard = [
-    { username: "user#4721", points: 15420, referrals: 127, rank: 1 },
-    { username: "user#8392", points: 12890, referrals: 98, rank: 2 },
-    { username: "user#1256", points: 11340, referrals: 85, rank: 3 },
-    { username: "user#7653", points: 9875, referrals: 72, rank: 4 },
-    { username: "user#2489", points: 8650, referrals: 63, rank: 5 },
-    { username: "user#9127", points: 7420, referrals: 51, rank: 6 },
-    { username: "user#3564", points: 6890, referrals: 47, rank: 7 },
-    { username: "user#5832", points: 6234, referrals: 42, rank: 8 },
-    { username: "user#7419", points: 5675, referrals: 38, rank: 9 },
-    { username: "user#8901", points: 4987, referrals: 34, rank: 10 },
+    { username: "user#4721", points: 15420, referrals: 127, earnings: "$2,890", rank: 1 },
+    { username: "user#8392", points: 12890, referrals: 98, earnings: "$2,340", rank: 2 },
+    { username: "user#1256", points: 11340, referrals: 85, earnings: "$2,120", rank: 3 },
+    { username: "user#7653", points: 9875, referrals: 72, earnings: "$1,850", rank: 4 },
+    { username: "user#2489", points: 8650, referrals: 63, earnings: "$1,620", rank: 5 },
+    { username: "user#9127", points: 7420, referrals: 51, earnings: "$1,380", rank: 6 },
+    { username: "user#3564", points: 6890, referrals: 47, earnings: "$1,250", rank: 7 },
+    { username: "user#5832", points: 6234, referrals: 42, earnings: "$1,120", rank: 8 },
+    { username: "user#7419", points: 5675, referrals: 38, earnings: "$980", rank: 9 },
+    { username: "user#8901", points: 4987, referrals: 34, earnings: "$850", rank: 10 },
   ];
 
   const userReferrals = [
@@ -52,15 +52,6 @@ const Rewards = () => {
     });
   };
 
-  const getRankIcon = (rank: number) => {
-    switch (rank) {
-      case 1: return <Crown className="w-5 h-5 text-yellow-400" />;
-      case 2: return <Medal className="w-5 h-5 text-gray-300" />;
-      case 3: return <Medal className="w-5 h-5 text-amber-600" />;
-      default: return <Trophy className="w-5 h-5 text-muted-foreground" />;
-    }
-  };
-
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active': return <CheckCircle className="w-4 h-4 text-green-400" />;
@@ -70,210 +61,233 @@ const Rewards = () => {
     }
   };
 
+  const getStatusBadgeVariant = (status: string) => {
+    switch (status) {
+      case 'active': return 'default';
+      case 'pending': return 'secondary';
+      case 'expired': return 'destructive';
+      default: return 'secondary';
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-neon-green/5 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Header Section */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-neon-green to-neon-cyan bg-clip-text text-transparent">
-            Rewards Hub
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Earn with KLUX. Refer, grow, and climb the leaderboard.
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold">Rewards</h1>
+          <p className="text-muted-foreground">
+            Track your referral earnings, payouts, and performance.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Main Content - Leaderboard & Your Stats */}
-          <div className="lg:col-span-2 space-y-8">
-            
-            {/* Leaderboard */}
-            <Card className="bg-gradient-card border-neon-green/20">
+        {/* Tabs */}
+        <Tabs defaultValue="my-rewards" className="space-y-6">
+          <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="my-rewards">My Rewards</TabsTrigger>
+            <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+          </TabsList>
+
+          {/* My Rewards Tab */}
+          <TabsContent value="my-rewards" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-6">
+                
+                {/* Your Stats */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <TrendingUp className="w-5 h-5" />
+                      Your Performance
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-primary">2,450</p>
+                        <p className="text-sm text-muted-foreground">Points</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold">12</p>
+                        <p className="text-sm text-muted-foreground">Referrals</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-green-600">$186</p>
+                        <p className="text-sm text-muted-foreground">Earned</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-primary">$24</p>
+                        <p className="text-sm text-muted-foreground">Pending</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6 space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Progress to next tier</span>
+                        <span>68%</span>
+                      </div>
+                      <Progress value={68} className="h-2" />
+                      <p className="text-xs text-muted-foreground">550 more points needed for Premium Tier</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Current Referrals */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Users className="w-5 h-5" />
+                      Current Referrals
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {userReferrals.map((referral, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3 rounded-lg border"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
+                              {getStatusIcon(referral.status)}
+                              <span className="font-mono text-sm">{referral.username}</span>
+                            </div>
+                            <Badge variant="outline" className="text-xs">
+                              {referral.plan}
+                            </Badge>
+                          </div>
+                          <Badge 
+                            variant={getStatusBadgeVariant(referral.status)}
+                            className="capitalize"
+                          >
+                            {referral.status}
+                          </Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Side Panel */}
+              <div className="space-y-6">
+                
+                {/* Referral Code Section */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Share className="w-5 h-5" />
+                      Referral Code
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="p-3 rounded-lg bg-muted/50 border">
+                      <p className="font-mono text-center font-bold text-primary">
+                        {referralCode}
+                      </p>
+                    </div>
+                    <Button 
+                      onClick={copyReferralLink}
+                      className="w-full"
+                    >
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copy Referral Link
+                    </Button>
+                    <p className="text-xs text-muted-foreground text-center">
+                      Share your link. Earn <span className="font-semibold">30% commission</span> on every subscription.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Payouts */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Wallet className="w-5 h-5" />
+                      Payouts
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-4">
+                      <div className="text-center p-4 rounded-lg border">
+                        <p className="text-xl font-bold text-green-600">$186.00</p>
+                        <p className="text-sm text-muted-foreground">Total Earned</p>
+                      </div>
+                      
+                      <div className="text-center p-4 rounded-lg border">
+                        <p className="font-semibold">Jan 15, 2025</p>
+                        <p className="text-sm text-muted-foreground">Next Payout Date</p>
+                      </div>
+                    </div>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                    >
+                      <DollarSign className="w-4 h-4 mr-2" />
+                      Request Payout
+                    </Button>
+                    
+                    <p className="text-xs text-muted-foreground text-center">
+                      Minimum payout: $50. Next payout in 12 days.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Leaderboard Tab */}
+          <TabsContent value="leaderboard" className="space-y-6">
+            <Card>
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6 text-neon-green" />
+                  <Trophy className="w-6 h-6" />
                   <div>
-                    <CardTitle className="text-2xl">Top Klux Earners</CardTitle>
-                    <CardDescription>Leaderboard champions earning the most rewards</CardDescription>
+                    <CardTitle className="text-xl">Top Performers</CardTitle>
+                    <CardDescription>Leading users by referrals and earnings</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-3">
-                  {leaderboard.map((user) => (
-                    <div
-                      key={user.username}
-                      className="flex items-center justify-between p-4 rounded-lg bg-background/50 border border-neon-green/10 hover:border-neon-green/30 transition-all duration-300 group"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          {getRankIcon(user.rank)}
-                          <span className="font-mono text-sm text-muted-foreground">#{user.rank}</span>
-                        </div>
-                        <div>
-                          <p className="font-medium">{user.username}</p>
-                          <p className="text-sm text-muted-foreground">{user.referrals} referrals</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold bg-gradient-to-r from-neon-green to-neon-cyan bg-clip-text text-transparent">
-                          {user.points.toLocaleString()}
-                        </p>
-                        <p className="text-xs text-muted-foreground">KLUX points</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-16">Rank</TableHead>
+                      <TableHead>User</TableHead>
+                      <TableHead className="text-right">Referrals</TableHead>
+                      <TableHead className="text-right">Earnings</TableHead>
+                      <TableHead className="text-right">Points</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {leaderboard.map((user) => (
+                      <TableRow key={user.username}>
+                        <TableCell className="font-medium">#{user.rank}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            {user.rank <= 3 && <Trophy className="w-4 h-4 text-primary" />}
+                            <span className="font-mono">{user.username}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right font-medium">{user.referrals}</TableCell>
+                        <TableCell className="text-right font-medium text-green-600">{user.earnings}</TableCell>
+                        <TableCell className="text-right">
+                          <span className="font-bold text-primary">
+                            {user.points.toLocaleString()}
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
-
-            {/* Your Stats */}
-            <Card className="bg-gradient-card border-neon-green/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-neon-green" />
-                  Your Stats
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="text-center">
-                    <p className="text-3xl font-bold bg-gradient-to-r from-neon-green to-neon-cyan bg-clip-text text-transparent">
-                      2,450
-                    </p>
-                    <p className="text-sm text-muted-foreground">Your Points</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-foreground">12</p>
-                    <p className="text-sm text-muted-foreground">Referrals</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-neon-green">$186</p>
-                    <p className="text-sm text-muted-foreground">Earned</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-neon-cyan">$24</p>
-                    <p className="text-sm text-muted-foreground">Pending</p>
-                  </div>
-                </div>
-                
-                <div className="mt-6 space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Progress to next tier</span>
-                    <span className="text-neon-green">68%</span>
-                  </div>
-                  <Progress value={68} className="h-3" />
-                  <p className="text-xs text-muted-foreground">550 more points needed for Premium Tier</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Current Referrals */}
-            <Card className="bg-gradient-card border-neon-green/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-neon-green" />
-                  Current Referrals
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {userReferrals.map((referral, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between p-3 rounded-lg bg-background/30 border border-neon-green/10"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-2">
-                          {getStatusIcon(referral.status)}
-                          <span className="font-mono text-sm">{referral.username}</span>
-                        </div>
-                        <Badge variant="secondary" className="text-xs">
-                          {referral.plan}
-                        </Badge>
-                      </div>
-                      <Badge 
-                        variant={referral.status === 'active' ? 'default' : 
-                                referral.status === 'pending' ? 'secondary' : 'destructive'}
-                        className="capitalize"
-                      >
-                        {referral.status}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Side Panel - Referral & Payouts */}
-          <div className="space-y-6">
-            
-            {/* Referral Code Section */}
-            <Card className="bg-gradient-card border-neon-green/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Share className="w-5 h-5 text-neon-green" />
-                  Referral Code
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-4 rounded-lg bg-background/50 border border-neon-green/20">
-                  <p className="font-mono text-center text-lg font-bold text-neon-green">
-                    {referralCode}
-                  </p>
-                </div>
-                <Button 
-                  onClick={copyReferralLink}
-                  className="w-full bg-gradient-to-r from-neon-green to-neon-cyan hover:from-neon-green/80 hover:to-neon-cyan/80 text-black font-semibold"
-                >
-                  <Copy className="w-4 h-4 mr-2" />
-                  Copy Referral Link
-                </Button>
-                <p className="text-xs text-muted-foreground text-center">
-                  Share your link. Earn <span className="text-neon-green font-semibold">30% commission</span> on every subscription.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Payouts */}
-            <Card className="bg-gradient-card border-neon-green/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Wallet className="w-5 h-5 text-neon-green" />
-                  Payouts
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-4">
-                  <div className="text-center p-4 rounded-lg bg-background/30 border border-neon-green/10">
-                    <p className="text-2xl font-bold text-neon-green">$186.00</p>
-                    <p className="text-sm text-muted-foreground">Total Earned</p>
-                  </div>
-                  
-                  <div className="text-center p-4 rounded-lg bg-background/30 border border-neon-cyan/10">
-                    <p className="text-lg font-semibold text-neon-cyan">Jan 15, 2025</p>
-                    <p className="text-sm text-muted-foreground">Next Payout Date</p>
-                  </div>
-                </div>
-                
-                <Button 
-                  variant="outline" 
-                  className="w-full border-neon-green/50 text-neon-green hover:bg-neon-green/10 hover:border-neon-green"
-                >
-                  <DollarSign className="w-4 h-4 mr-2" />
-                  Request Payout
-                </Button>
-                
-                <p className="text-xs text-muted-foreground text-center">
-                  Minimum payout: $50. Next payout in 12 days.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
