@@ -31,8 +31,8 @@ const AppContent = () => {
           <div className="flex min-h-screen w-full">
             <AppSidebar />
             <main className="flex-1">
-              {/* Always visible sidebar trigger */}
-              <header className="sticky top-0 z-50 flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
+              {/* Mobile-only sidebar trigger */}
+              <header className="sticky top-0 z-50 flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:hidden">
                 <SidebarTrigger className="-ml-1" />
                 <div className="flex-1" />
               </header>
