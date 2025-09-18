@@ -54,7 +54,22 @@ export const AnimatedChart = ({
               dataKey={dataKey} 
               stroke={stroke} 
               strokeWidth={2}
-              dot={{ r: 0 }}
+              dot={(props) => {
+                const isLast = props.index === data.length - 1;
+                return isLast ? (
+                  <circle 
+                    cx={props.cx} 
+                    cy={props.cy} 
+                    r={5} 
+                    fill={stroke} 
+                    stroke={stroke} 
+                    strokeWidth={2}
+                    style={{
+                      animation: 'pulse 2s infinite'
+                    }}
+                  />
+                ) : null;
+              }}
               activeDot={{ r: 4, stroke, strokeWidth: 2, fill: stroke }}
               isAnimationActive={true}
               animationBegin={0}

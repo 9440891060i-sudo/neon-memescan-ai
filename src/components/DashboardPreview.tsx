@@ -20,12 +20,12 @@ const socialData = [
 // Mock data for technical signals
 const technicalData = [
   { time: '9AM', holders: 142300, volume: 2.8, bundles: 150, marketCap: 890 },
-  { time: '10AM', holders: 142800, volume: 3.2, bundles: 165, marketCap: 920 },
-  { time: '11AM', holders: 143200, volume: 2.9, bundles: 155, marketCap: 905 },
-  { time: '12PM', holders: 144100, volume: 4.1, bundles: 180, marketCap: 970 },
-  { time: '1PM', holders: 145200, volume: 4.8, bundles: 195, marketCap: 1050 },
-  { time: '2PM', holders: 144800, volume: 4.2, bundles: 185, marketCap: 1020 },
-  { time: '3PM', holders: 146500, volume: 5.5, bundles: 210, marketCap: 1120 },
+  { time: '10AM', holders: 143200, volume: 3.4, bundles: 165, marketCap: 940 },
+  { time: '11AM', holders: 144800, volume: 4.1, bundles: 180, marketCap: 995 },
+  { time: '12PM', holders: 146500, volume: 5.2, bundles: 195, marketCap: 1080 },
+  { time: '1PM', holders: 148900, volume: 6.8, bundles: 220, marketCap: 1180 },
+  { time: '2PM', holders: 150200, volume: 7.4, bundles: 235, marketCap: 1250 },
+  { time: '3PM', holders: 152800, volume: 8.9, bundles: 260, marketCap: 1420 },
 ];
 
 export default function DashboardPreview() {
