@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { useAuthStore } from "@/store/authStore";
 import MemeCoinTicker from "@/components/MemeCoinTicker";
@@ -31,7 +31,13 @@ const AppContent = () => {
           <div className="flex min-h-screen w-full">
             <AppSidebar />
             <main className="flex-1">
-              <Routes>
+              {/* Always visible sidebar trigger */}
+              <header className="sticky top-0 z-50 flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
+                <SidebarTrigger className="-ml-1" />
+                <div className="flex-1" />
+              </header>
+              <div className="p-4 sm:p-6">
+                <Routes>
                 <Route path="/user-dashboard" element={<Dashboard />} />
                 <Route path="/analyze" element={<AnalysisInput />} />
                 <Route path="/kluxify" element={<Kluxify />} />
@@ -45,6 +51,7 @@ const AppContent = () => {
                 <Route path="/auth" element={<Dashboard />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              </div>
             </main>
           </div>
         </SidebarProvider>
