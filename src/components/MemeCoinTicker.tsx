@@ -1,11 +1,15 @@
-import memeCoinsImage from "@/assets/meme-coins-collection.png";
+import pepeIcon from "@/assets/coins/pepe.png";
+import dogeIcon from "@/assets/coins/doge.png";
+import shibaIcon from "@/assets/coins/shiba.png";
+import flokiIcon from "@/assets/coins/floki.png";
+import bonkIcon from "@/assets/coins/bonk.png";
 
 const memeCoins = [
-  { name: "PEPE", price: "$0.00001234", change: "+15.4%", sentiment: "bullish" },
-  { name: "DOGE", price: "$0.074", change: "+8.2%", sentiment: "bullish" },
-  { name: "SHIBA", price: "$0.00000845", change: "-2.1%", sentiment: "bearish" },
-  { name: "FLOKI", price: "$0.000234", change: "+22.8%", sentiment: "bullish" },
-  { name: "BONK", price: "$0.00003421", change: "+12.5%", sentiment: "bullish" },
+  { name: "PEPE", price: "$0.00001234", change: "+15.4%", sentiment: "bullish", icon: pepeIcon },
+  { name: "DOGE", price: "$0.074", change: "+8.2%", sentiment: "bullish", icon: dogeIcon },
+  { name: "SHIBA", price: "$0.00000845", change: "-2.1%", sentiment: "bearish", icon: shibaIcon },
+  { name: "FLOKI", price: "$0.000234", change: "+22.8%", sentiment: "bullish", icon: flokiIcon },
+  { name: "BONK", price: "$0.00003421", change: "+12.5%", sentiment: "bullish", icon: bonkIcon },
 ];
 
 export default function MemeCoinTicker() {
@@ -18,7 +22,11 @@ export default function MemeCoinTicker() {
             <div key={groupIndex} className="flex items-center gap-8">
               {memeCoins.map((coin) => (
                 <div key={`${groupIndex}-${coin.name}`} className="flex items-center gap-3 px-4">
-                  <div className="w-6 h-6 rounded-full bg-gradient-neon"></div>
+                  <img 
+                    src={coin.icon} 
+                    alt={`${coin.name} logo`} 
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
                   <span className="font-bold text-foreground">{coin.name}</span>
                   <span className="text-muted-foreground">{coin.price}</span>
                   <span 
