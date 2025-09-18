@@ -21,76 +21,80 @@ export const AnimatedChart = ({
   tooltipFormatter,
   children
 }: AnimatedChartProps) => {
-  const [shouldRender, setShouldRender] = useState(false);
-  const [showEndDots, setShowEndDots] = useState(false);
+  const [visibleDataLength, setVisibleDataLength] = useState(0);
 
   useEffect(() => {
-    if (isVisible) {
-      setShouldRender(true);
-      // Show end dots after line animation completes
-      setTimeout(() => {
-        setShowEndDots(true);
-      }, 1200);
-    } else {
-      setShowEndDots(false);
+    if (!isVisible) {
+      setVisibleDataLength(0);
+      return;
     }
-  }, [isVisible]);
+
+    const animationDuration = 1200;
+    const totalPoints = data.length;
+    const step = animationDuration / totalPoints;
+    
+    let currentPoint = 0;
+    const animate = () => {
+      if (currentPoint <= totalPoints) {
+        setVisibleDataLength(currentPoint);
+        currentPoint += 0.1; // Smoother animation
+        setTimeout(animate, step / 10);
+      }
+    };
+
+    animate();
+  }, [isVisible, data.length]);
+
+  const visibleData = data.slice(0, Math.ceil(visibleDataLength));
+  const currentIndex = Math.floor(visibleDataLength);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      {shouldRender ? (
-        <LineChart data={data} key="animated">
-          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-          <XAxis 
-            dataKey="time" 
-            stroke="hsl(var(--muted-foreground))"
-            fontSize={12}
-          />
-          <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-          <Tooltip 
-            contentStyle={{
-              background: 'hsl(var(--card))',
-              border: '1px solid hsl(var(--border))',
-              borderRadius: '8px',
-              fontSize: '12px'
+      <LineChart data={visibleData} key="animated">
+        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+        <XAxis 
+          dataKey="time" 
+          stroke="hsl(var(--muted-foreground))"
+          fontSize={12}
+          domain={['dataMin', 'dataMax']}
+        />
+        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+        <Tooltip 
+          contentStyle={{
+            background: 'hsl(var(--card))',
+            border: '1px solid hsl(var(--border))',
+            borderRadius: '8px',
+            fontSize: '12px'
+          }}
+          formatter={tooltipFormatter}
+        />
+        {lines.map(({ dataKey, stroke }) => (
+          <Line 
+            key={dataKey}
+            type="monotone" 
+            dataKey={dataKey} 
+            stroke={stroke} 
+            strokeWidth={2}
+            dot={(props) => {
+              const isCurrentEnd = props.index === currentIndex && currentIndex > 0;
+              return isCurrentEnd ? (
+                <circle 
+                  cx={props.cx} 
+                  cy={props.cy} 
+                  r={5} 
+                  fill={stroke} 
+                  stroke={stroke} 
+                  strokeWidth={2}
+                  opacity={1}
+                />
+              ) : null;
             }}
-            formatter={tooltipFormatter}
+            activeDot={{ r: 4, stroke, strokeWidth: 2, fill: stroke }}
+            isAnimationActive={false}
           />
-          {lines.map(({ dataKey, stroke }) => (
-            <Line 
-              key={dataKey}
-              type="monotone" 
-              dataKey={dataKey} 
-              stroke={stroke} 
-              strokeWidth={2}
-              dot={(props) => {
-                const isLast = props.index === data.length - 1;
-                return isLast && showEndDots ? (
-                  <circle 
-                    cx={props.cx} 
-                    cy={props.cy} 
-                    r={5} 
-                    fill={stroke} 
-                    stroke={stroke} 
-                    strokeWidth={2}
-                    style={{
-                      animation: 'pulse 2s infinite',
-                      opacity: showEndDots ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in'
-                    }}
-                  />
-                ) : null;
-              }}
-              activeDot={{ r: 4, stroke, strokeWidth: 2, fill: stroke }}
-              isAnimationActive={true}
-              animationBegin={0}
-              animationDuration={1200}
-              animationEasing="ease-out"
-            />
-          ))}
-          {children}
-        </LineChart>
-      ) : null}
+        ))}
+        {children}
+      </LineChart>
     </ResponsiveContainer>
   );
 };
