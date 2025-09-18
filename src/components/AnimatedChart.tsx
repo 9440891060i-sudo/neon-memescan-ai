@@ -22,9 +22,18 @@ export const AnimatedChart = ({
   children
 }: AnimatedChartProps) => {
   const [shouldRender, setShouldRender] = useState(false);
+  const [showEndDots, setShowEndDots] = useState(false);
 
   useEffect(() => {
-    if (isVisible) setShouldRender(true);
+    if (isVisible) {
+      setShouldRender(true);
+      // Show end dots after line animation completes
+      setTimeout(() => {
+        setShowEndDots(true);
+      }, 1200);
+    } else {
+      setShowEndDots(false);
+    }
   }, [isVisible]);
 
   return (
@@ -56,7 +65,7 @@ export const AnimatedChart = ({
               strokeWidth={2}
               dot={(props) => {
                 const isLast = props.index === data.length - 1;
-                return isLast ? (
+                return isLast && showEndDots ? (
                   <circle 
                     cx={props.cx} 
                     cy={props.cy} 
@@ -65,7 +74,9 @@ export const AnimatedChart = ({
                     stroke={stroke} 
                     strokeWidth={2}
                     style={{
-                      animation: 'pulse 2s infinite'
+                      animation: 'pulse 2s infinite',
+                      opacity: showEndDots ? 1 : 0,
+                      transition: 'opacity 0.3s ease-in'
                     }}
                   />
                 ) : null;
