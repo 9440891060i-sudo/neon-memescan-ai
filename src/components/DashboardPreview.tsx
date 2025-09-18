@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { TrendingUp, Users, Eye, Heart, Repeat, Wallet, BarChart3, Package, DollarSign, Shield } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
+import { AnimatedChart } from "@/components/AnimatedChart";
 
 // Mock data for social signals
 const socialData = [
@@ -26,8 +29,10 @@ const technicalData = [
 ];
 
 export default function DashboardPreview() {
+  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
+  
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6">
+    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
@@ -52,7 +57,14 @@ export default function DashboardPreview() {
                   <div className="w-2 h-2 bg-neon-green rounded-full"></div>
                   <span className="text-xl sm:text-2xl font-bold text-neon-green">BULLISH</span>
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">Confidence Score: 94.2%</div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  Confidence Score: <AnimatedNumber 
+                    value={94.2} 
+                    isVisible={isIntersecting} 
+                    formatter={(val) => `${val.toFixed(1)}%`}
+                    className="text-neon-green font-semibold"
+                  />
+                </div>
               </div>
             </div>
 
@@ -67,70 +79,30 @@ export default function DashboardPreview() {
                     Social Sentiment Analysis
                   </h4>
                   <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={socialData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--neon-green) / 0.1)" />
-                        <XAxis 
-                          dataKey="time" 
-                          stroke="hsl(var(--muted-foreground))"
-                          fontSize={12}
-                        />
-                        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                        <Tooltip 
-                          contentStyle={{
-                            background: 'hsl(var(--card))',
-                            border: '1px solid hsl(var(--border))',
-                            borderRadius: '8px',
-                            fontSize: '12px'
-                          }}
-                          formatter={(value, name) => {
-                            const formatValue = (val) => {
-                              if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
-                              return val.toString();
-                            };
-                            const labels = {
-                              views: 'Views',
-                              likes: 'Engagements', 
-                              reposts: 'Shares',
-                              members: 'Community Size'
-                            };
-                            return [formatValue(value), labels[name] || name];
-                          }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="views" 
-                          stroke="hsl(var(--neon-cyan))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-cyan))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-cyan))', strokeWidth: 2, fill: 'hsl(var(--neon-cyan))' }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="likes" 
-                          stroke="hsl(var(--neon-pink))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-pink))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-pink))', strokeWidth: 2, fill: 'hsl(var(--neon-pink))' }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="reposts" 
-                          stroke="hsl(var(--neon-purple))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-purple))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-purple))', strokeWidth: 2, fill: 'hsl(var(--neon-purple))' }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="members" 
-                          stroke="hsl(var(--neon-green))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-green))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-green))', strokeWidth: 2, fill: 'hsl(var(--neon-green))' }}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    <AnimatedChart
+                      data={socialData}
+                      isVisible={isIntersecting}
+                      gridColor="hsl(var(--neon-green) / 0.1)"
+                      lines={[
+                        { dataKey: 'views', stroke: 'hsl(var(--neon-cyan))' },
+                        { dataKey: 'likes', stroke: 'hsl(var(--neon-pink))' },
+                        { dataKey: 'reposts', stroke: 'hsl(var(--neon-purple))' },
+                        { dataKey: 'members', stroke: 'hsl(var(--neon-green))' }
+                      ]}
+                      tooltipFormatter={(value, name) => {
+                        const formatValue = (val) => {
+                          if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+                          return val.toString();
+                        };
+                        const labels = {
+                          views: 'Views',
+                          likes: 'Engagements', 
+                          reposts: 'Shares',
+                          members: 'Community Size'
+                        };
+                        return [formatValue(value), labels[name] || name];
+                      }}
+                    />
                   </div>
                   <div className="flex flex-wrap gap-4 mt-4 text-xs">
                     <div className="flex items-center gap-2">
@@ -159,72 +131,32 @@ export default function DashboardPreview() {
                     Market Analytics
                   </h4>
                   <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={technicalData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--neon-cyan) / 0.1)" />
-                        <XAxis 
-                          dataKey="time" 
-                          stroke="hsl(var(--muted-foreground))"
-                          fontSize={12}
-                        />
-                        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                        <Tooltip 
-                          contentStyle={{
-                            background: 'hsl(var(--card))',
-                            border: '1px solid hsl(var(--border))',
-                            borderRadius: '8px',
-                            fontSize: '12px'
-                          }}
-                          formatter={(value, name) => {
-                            const formatValue = (val) => {
-                              if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}k`;
-                              if (name === 'volume') return `${val}M`;
-                              if (name === 'marketCap') return `$${val}M`;
-                              return val.toString();
-                            };
-                            const labels = {
-                              holders: 'Token Holders',
-                              volume: 'Trading Volume', 
-                              bundles: 'Transaction Bundles',
-                              marketCap: 'Market Capitalization'
-                            };
-                            return [formatValue(value), labels[name] || name];
-                          }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="holders" 
-                          stroke="hsl(var(--neon-green))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-green))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-green))', strokeWidth: 2, fill: 'hsl(var(--neon-green))' }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="volume" 
-                          stroke="hsl(var(--neon-cyan))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-cyan))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-cyan))', strokeWidth: 2, fill: 'hsl(var(--neon-cyan))' }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="bundles" 
-                          stroke="hsl(var(--neon-purple))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-purple))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-purple))', strokeWidth: 2, fill: 'hsl(var(--neon-purple))' }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="marketCap" 
-                          stroke="hsl(var(--neon-pink))" 
-                          strokeWidth={2}
-                          dot={{ fill: 'hsl(var(--neon-pink))', strokeWidth: 0, r: 4 }}
-                          activeDot={{ r: 6, stroke: 'hsl(var(--neon-pink))', strokeWidth: 2, fill: 'hsl(var(--neon-pink))' }}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    <AnimatedChart
+                      data={technicalData}
+                      isVisible={isIntersecting}
+                      gridColor="hsl(var(--neon-cyan) / 0.1)"
+                      lines={[
+                        { dataKey: 'holders', stroke: 'hsl(var(--neon-green))' },
+                        { dataKey: 'volume', stroke: 'hsl(var(--neon-cyan))' },
+                        { dataKey: 'bundles', stroke: 'hsl(var(--neon-purple))' },
+                        { dataKey: 'marketCap', stroke: 'hsl(var(--neon-pink))' }
+                      ]}
+                      tooltipFormatter={(value, name) => {
+                        const formatValue = (val) => {
+                          if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+                          if (name === 'volume') return `${val}M`;
+                          if (name === 'marketCap') return `$${val}M`;
+                          return val.toString();
+                        };
+                        const labels = {
+                          holders: 'Token Holders',
+                          volume: 'Trading Volume', 
+                          bundles: 'Transaction Bundles',
+                          marketCap: 'Market Capitalization'
+                        };
+                        return [formatValue(value), labels[name] || name];
+                      }}
+                    />
                   </div>
                   <div className="flex flex-wrap gap-4 mt-4 text-xs">
                     <div className="flex items-center gap-2">
@@ -258,7 +190,13 @@ export default function DashboardPreview() {
                     {/* Avg Wallet Age */}
                     <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-lg px-4 py-3 flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
-                      <span className="text-neon-cyan font-semibold">60 days</span>
+                      <span className="text-neon-cyan font-semibold">
+                        <AnimatedNumber 
+                          value={60} 
+                          isVisible={isIntersecting} 
+                          formatter={(val) => `${val} days`}
+                        />
+                      </span>
                     </div>
 
                     {/* Dev Paid */}
@@ -276,13 +214,25 @@ export default function DashboardPreview() {
                     {/* Dev Credibility Score */}
                     <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-lg px-4 py-3 flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Credibility Score</span>
-                      <span className="text-neon-pink font-semibold">87/100</span>
+                      <span className="text-neon-pink font-semibold">
+                        <AnimatedNumber 
+                          value={87} 
+                          isVisible={isIntersecting} 
+                          formatter={(val) => `${val}/100`}
+                        />
+                      </span>
                     </div>
 
                     {/* Admin Followers */}
                     <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-lg px-4 py-3 flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Community Reach</span>
-                      <span className="text-neon-purple font-semibold">67K Followers</span>
+                      <span className="text-neon-purple font-semibold">
+                        <AnimatedNumber 
+                          value={67} 
+                          isVisible={isIntersecting} 
+                          formatter={(val) => `${val}K Followers`}
+                        />
+                      </span>
                     </div>
                   </div>
                 </Card>
@@ -294,7 +244,13 @@ export default function DashboardPreview() {
               <div className="flex gap-4 min-w-max pb-2">
                 <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
                   <span className="text-xs text-muted-foreground">Avg Wallet Age:</span>
-                  <span className="text-neon-cyan font-semibold text-sm">60 days</span>
+                  <span className="text-neon-cyan font-semibold text-sm">
+                    <AnimatedNumber 
+                      value={60} 
+                      isVisible={isIntersecting} 
+                      formatter={(val) => `${val} days`}
+                    />
+                  </span>
                 </div>
                 <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
                   <span className="text-xs text-muted-foreground">Dev Paid:</span>
@@ -302,11 +258,23 @@ export default function DashboardPreview() {
                 </div>
                 <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
                   <span className="text-xs text-muted-foreground">Dev Credibility:</span>
-                  <span className="text-neon-pink font-semibold text-sm">87/100</span>
+                  <span className="text-neon-pink font-semibold text-sm">
+                    <AnimatedNumber 
+                      value={87} 
+                      isVisible={isIntersecting} 
+                      formatter={(val) => `${val}/100`}
+                    />
+                  </span>
                 </div>
                 <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
                   <span className="text-xs text-muted-foreground">Admin Followers:</span>
-                  <span className="text-neon-purple font-semibold text-sm">67K</span>
+                  <span className="text-neon-purple font-semibold text-sm">
+                    <AnimatedNumber 
+                      value={67} 
+                      isVisible={isIntersecting} 
+                      formatter={(val) => `${val}K`}
+                    />
+                  </span>
                 </div>
               </div>
             </div>
@@ -336,7 +304,15 @@ export default function DashboardPreview() {
                     </div>
                     <div className="bg-black/20 rounded-lg p-4">
                       <div className="text-xs text-muted-foreground mb-1">Target Timeframe</div>
-                      <div className="text-neon-cyan font-semibold">24-48 Hours</div>
+                      <div className="text-neon-cyan font-semibold">
+                        <AnimatedNumber 
+                          value={24} 
+                          isVisible={isIntersecting} 
+                        />-<AnimatedNumber 
+                          value={48} 
+                          isVisible={isIntersecting} 
+                        /> Hours
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -346,7 +322,10 @@ export default function DashboardPreview() {
             {/* Action button */}
             <div className="text-center">
               <Button variant="analyze" size="lg" className="px-12">
-                Analyze Your Coin (30 Credits)
+                Analyze Your Coin (<AnimatedNumber 
+                  value={30} 
+                  isVisible={isIntersecting} 
+                /> Credits)
               </Button>
             </div>
           </div>
