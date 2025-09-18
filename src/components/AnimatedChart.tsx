@@ -21,42 +21,14 @@ export const AnimatedChart = ({
   tooltipFormatter,
   children
 }: AnimatedChartProps) => {
-  const [visibleDataLength, setVisibleDataLength] = useState(0);
-
-  useEffect(() => {
-    if (!isVisible) {
-      setVisibleDataLength(0);
-      return;
-    }
-
-    const animationDuration = 1200;
-    const totalPoints = data.length;
-    const step = animationDuration / totalPoints;
-    
-    let currentPoint = 0;
-    const animate = () => {
-      if (currentPoint <= totalPoints) {
-        setVisibleDataLength(currentPoint);
-        currentPoint += 0.1; // Smoother animation
-        setTimeout(animate, step / 10);
-      }
-    };
-
-    animate();
-  }, [isVisible, data.length]);
-
-  const visibleData = data.slice(0, Math.ceil(visibleDataLength));
-  const currentIndex = Math.floor(visibleDataLength);
-
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={visibleData} key="animated">
+      <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
         <XAxis 
           dataKey="time" 
           stroke="hsl(var(--muted-foreground))"
           fontSize={12}
-          domain={['dataMin', 'dataMax']}
         />
         <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
         <Tooltip 
@@ -76,8 +48,8 @@ export const AnimatedChart = ({
             stroke={stroke} 
             strokeWidth={2}
             dot={(props) => {
-              const isCurrentEnd = props.index === currentIndex && currentIndex > 0;
-              return isCurrentEnd ? (
+              const isLast = props.index === data.length - 1;
+              return isLast ? (
                 <circle 
                   cx={props.cx} 
                   cy={props.cy} 
@@ -85,7 +57,6 @@ export const AnimatedChart = ({
                   fill={stroke} 
                   stroke={stroke} 
                   strokeWidth={2}
-                  opacity={1}
                 />
               ) : null;
             }}
