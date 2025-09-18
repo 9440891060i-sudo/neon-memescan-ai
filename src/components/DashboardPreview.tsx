@@ -31,10 +31,10 @@ export default function DashboardPreview() {
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Professional <span className="text-neon-cyan">AI Analytics</span> Platform
+            Your <span className="text-neon-cyan">Bloomberg</span> Terminal
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-            Advanced algorithmic analysis combining social sentiment and technical indicators for institutional-grade market intelligence
+            Professional-grade financial data and analytics for institutional crypto trading
           </p>
         </div>
 
@@ -256,12 +256,18 @@ export default function DashboardPreview() {
                   </h4>
                   <div className="space-y-4">
                     {/* Avg Wallet Age */}
-                    <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-full px-4 py-3 flex items-center justify-between">
+                    <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-lg px-4 py-3 flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
                       <span className="text-neon-cyan font-semibold">60 days</span>
                     </div>
 
                     {/* Dev Paid */}
+                    <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Dev Paid</span>
+                      <span className="text-neon-green font-semibold">Yes</span>
+                    </div>
+
+                    {/* Developer Verification */}
                     <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-lg px-4 py-3 flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Developer Verification</span>
                       <span className="text-neon-green font-semibold">Verified</span>
