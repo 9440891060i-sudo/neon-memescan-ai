@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import PricingSection from "@/components/PricingSection";
 import MemeCoinDisplay from "@/components/MemeCoinDisplay";
 import CTASection from "@/components/CTASection";
+import RoboDogMascot from "@/components/RoboDogMascot";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
         </div>
         <CTASection />
       </main>
+      <RoboDogMascot />
     </div>
   );
 };
