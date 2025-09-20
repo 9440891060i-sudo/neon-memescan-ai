@@ -35,49 +35,48 @@ export default function DashboardPreview() {
     <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2 text-foreground">
-            Professional <span className="text-primary">Trading</span> Terminal
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
+            Your <span className="text-neon-cyan">Bloomberg</span> Terminal
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2 leading-relaxed">
-            Advanced cryptocurrency intelligence platform providing institutional-grade market analysis, 
-            social sentiment tracking, and risk assessment for professional traders and fund managers
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
+            Real-time social sentiment analysis, insider transaction tracking, and advanced market intelligence for institutional crypto trading
           </p>
         </div>
 
         <div className="max-w-7xl mx-auto">
           {/* Dashboard mockup */}
-          <div className="bg-card/80 backdrop-blur-sm rounded-lg border border-border/50 shadow-2xl">
+          <div className="bg-gradient-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-border neon-glow-cyan shadow-card">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 p-6 bg-muted/20 border-b border-border/50">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-wide">PEPE/USD</h3>
-                <p className="text-xs text-muted-foreground font-mono break-all sm:break-normal mt-1">0x6982508145454ce325ddbe47a25d4ec3d2311933</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">PEPE Analysis</h3>
+                <p className="text-sm text-muted-foreground break-all sm:break-normal">Contract: 0x6982508145454ce325ddbe47a25d4ec3d2311933</p>
               </div>
               <div className="text-left sm:text-right">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-lg font-semibold text-green-500 tracking-wide">BUY</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-neon-green/20 border border-neon-green/30 rounded-lg">
+                  <div className="w-2 h-2 bg-neon-green rounded-full"></div>
+                  <span className="text-xl sm:text-2xl font-bold text-neon-green">BULLISH</span>
                 </div>
-                <div className="text-xs text-muted-foreground mt-2 font-mono">
-                  Confidence: <AnimatedNumber 
+                <div className="text-sm text-muted-foreground mt-1">
+                  Confidence Score: <AnimatedNumber 
                     value={94.2} 
                     isVisible={isIntersecting} 
                     formatter={(val) => `${val.toFixed(1)}%`}
-                    className="text-green-500 font-semibold"
+                    className="text-neon-green font-semibold"
                   />
                 </div>
               </div>
             </div>
 
             {/* Interactive Charts and Metrics */}
-            <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-6 mb-8 p-6">
+            <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 mb-8">
               {/* Charts Container */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Social Sentiment Analysis */}
-                <Card className="p-6 bg-background/50 border border-border/50">
-                  <h4 className="text-sm font-medium text-muted-foreground mb-6 flex items-center gap-2 uppercase tracking-wider">
-                    <Eye className="w-4 h-4" />
-                    Social Sentiment
+                <Card className="p-6 bg-black/30 border border-neon-green/20">
+                  <h4 className="text-lg font-semibold text-neon-green mb-6 flex items-center gap-2">
+                    <Eye className="w-5 h-5" />
+                    Social Sentiment Analysis
                   </h4>
                   <div className="h-64">
                     <AnimatedChart
@@ -126,10 +125,10 @@ export default function DashboardPreview() {
                 </Card>
 
                 {/* Market Analytics */}
-                <Card className="p-6 bg-background/50 border border-border/50">
-                  <h4 className="text-sm font-medium text-muted-foreground mb-6 flex items-center gap-2 uppercase tracking-wider">
-                    <BarChart3 className="w-4 h-4" />
-                    Market Data
+                <Card className="p-6 bg-black/30 border border-neon-cyan/20">
+                  <h4 className="text-lg font-semibold text-neon-cyan mb-6 flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5" />
+                    Market Analytics
                   </h4>
                   <div className="h-64">
                     <AnimatedChart
@@ -182,10 +181,10 @@ export default function DashboardPreview() {
 
               {/* Additional Metrics Panel */}
               <div className="xl:block hidden">
-                <Card className="p-6 bg-background/50 border border-border/50 h-fit">
-                  <h4 className="text-sm font-medium text-muted-foreground mb-6 flex items-center gap-2 uppercase tracking-wider">
-                    <Shield className="w-4 h-4" />
-                    Risk Metrics
+                <Card className="p-6 bg-black/30 border border-neon-purple/20 h-fit">
+                  <h4 className="text-lg font-semibold text-neon-purple mb-6 flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    Risk Assessment
                   </h4>
                   <div className="space-y-4">
                     {/* Avg Wallet Age */}
@@ -281,15 +280,15 @@ export default function DashboardPreview() {
             </div>
 
             {/* AI Verdict Section */}
-            <Card className="p-6 bg-background/30 border border-border/50 mb-8">
+            <Card className="p-6 bg-gradient-to-r from-neon-green/5 to-neon-cyan/5 border border-neon-green/30 mb-8">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-primary" />
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/20 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-neon-green" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Executive Summary</h4>
-                  <p className="text-foreground mb-4 text-sm leading-relaxed">
-                    Technical indicators suggest strong momentum with elevated social engagement. Risk-adjusted position sizing recommended within specified entry parameters.
+                  <h4 className="text-lg font-semibold text-neon-green mb-2">AI Verdict</h4>
+                  <p className="text-foreground mb-4 text-sm">
+                    "Strong community growth + stable holder base. Technicals align for an upward trend."
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-black/20 rounded-lg p-4">
