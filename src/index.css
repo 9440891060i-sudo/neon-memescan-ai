@@ -8,60 +8,70 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Professional dark finance theme */
-    --background: 220 20% 8%;
-    --foreground: 0 0% 95%;
+    /* Neon-heavy dark theme */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 20% 12%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 20% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 220 20% 15%;
-    --primary-foreground: 0 0% 95%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 20% 18%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 20% 16%;
+    --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 220 20% 20%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 70% 55%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 20% 25%;
-    --input: 220 20% 15%;
+    --border: 0 0% 20%;
+    --input: 0 0% 12%;
     --ring: 158 100% 50%;
 
-    /* Finance colors - strategic neon accents */
-    --neon-green: 158 100% 50%;  /* For gains/profits */
-    --neon-cyan: 190 100% 50%;   /* For highlights */
-    --neon-purple: 270 100% 70%; /* For brand accents */
+    /* Bright neon colors */
+    --neon-green: 158 100% 50%;  
+    --neon-cyan: 190 100% 50%;   
+    --neon-purple: 270 100% 70%; 
+    --neon-pink: 320 100% 70%;
+    --neon-blue: 240 100% 70%;
+    --neon-orange: 30 100% 70%;
     
-    /* Professional chart colors */
-    --chart-teal: 180 70% 50%;
-    --chart-orange: 25 85% 60%;
-    --chart-purple: 270 70% 65%;
-    --chart-cyan: 190 80% 55%;
-    --chart-yellow: 45 90% 60%;
+    /* Vibrant chart colors */
+    --chart-1: 158 100% 50%;
+    --chart-2: 190 100% 50%;
+    --chart-3: 270 100% 70%;
+    --chart-4: 320 100% 70%;
+    --chart-5: 240 100% 70%;
+    --chart-teal: 180 100% 50%;
+    --chart-orange: 30 100% 70%;
+    --chart-purple: 270 100% 70%;
+    --chart-cyan: 190 100% 50%;
+    --chart-yellow: 60 100% 70%;
     
     /* Gains/losses */
-    --gain-green: 120 60% 50%;
-    --loss-red: 0 70% 55%;
+    --gain-green: 158 100% 50%;
+    --loss-red: 0 84% 60%;
     
-    /* Professional gradients */
-    --gradient-dark: linear-gradient(180deg, hsl(220 20% 8%), hsl(220 20% 12%));
-    --gradient-card: linear-gradient(135deg, hsl(220 20% 12%), hsl(220 20% 15%));
-    --gradient-terminal: linear-gradient(135deg, hsl(220 25% 10%), hsl(220 25% 14%));
+    /* Neon gradients */
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 3%), hsl(0 0% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 8%), hsl(0 0% 12%));
+    --gradient-terminal: linear-gradient(135deg, hsl(0 0% 5%), hsl(0 0% 10%));
+    --gradient-neon: linear-gradient(135deg, hsl(158 100% 50% / 0.1), hsl(190 100% 50% / 0.1));
     
-    /* Subtle shadows */
-    --shadow-card: 0 4px 24px hsl(220 20% 0% / 0.3);
-    --shadow-terminal: 0 8px 32px hsl(220 20% 0% / 0.4);
-    --shadow-neon-subtle: 0 0 8px hsl(158 100% 50% / 0.3);
+    /* Glowing shadows */
+    --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.5);
+    --shadow-terminal: 0 8px 32px hsl(0 0% 0% / 0.8);
+    --shadow-neon-subtle: 0 0 20px hsl(158 100% 50% / 0.4);
+    --shadow-neon-strong: 0 0 40px hsl(158 100% 50% / 0.6);
 
     --radius: 0.75rem;
 
@@ -138,13 +148,14 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
     background: var(--gradient-dark);
     min-height: 100vh;
     width: 100%;
     overscroll-behavior: none;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 
   #root {
@@ -153,6 +164,7 @@ All colors MUST be HSL.
     background: var(--gradient-dark);
     margin: 0;
     padding: 0;
+    position: relative;
   }
 }
 
@@ -195,14 +207,28 @@ All colors MUST be HSL.
     background-size: 20px 20px;
   }
 
-  /* Subtle neon accent for CTAs only */
+  /* Strong neon glows */
   .cta-glow {
-    box-shadow: var(--shadow-neon-subtle);
-    transition: box-shadow 0.3s ease;
+    box-shadow: var(--shadow-neon-strong);
+    transition: all 0.3s ease;
   }
   
   .cta-glow:hover {
-    box-shadow: 0 0 16px hsl(var(--neon-green) / 0.5);
+    box-shadow: 0 0 60px hsl(var(--neon-green) / 0.8);
+    transform: translateY(-2px);
+  }
+
+  /* Neon text glows */
+  .text-glow-green {
+    text-shadow: 0 0 10px hsl(var(--neon-green));
+  }
+  
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(var(--neon-cyan));
+  }
+  
+  .text-glow-purple {
+    text-shadow: 0 0 10px hsl(var(--neon-purple));
   }
 
   /* Ticker animation - seamless loop */

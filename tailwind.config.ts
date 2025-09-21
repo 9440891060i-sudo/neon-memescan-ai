@@ -57,31 +57,45 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        neon: {
-          green: "hsl(var(--neon-green))",
-          cyan: "hsl(var(--neon-cyan))",
-          purple: "hsl(var(--neon-purple))",
+        // Bright neon colors
+        'neon-green': 'hsl(var(--neon-green))',
+        'neon-cyan': 'hsl(var(--neon-cyan))',
+        'neon-purple': 'hsl(var(--neon-purple))',
+        'neon-pink': 'hsl(var(--neon-pink))',
+        'neon-blue': 'hsl(var(--neon-blue))',
+        'neon-orange': 'hsl(var(--neon-orange))',
+        
+        // Vibrant chart colors
+        'chart-1': 'hsl(var(--chart-1))',
+        'chart-2': 'hsl(var(--chart-2))',
+        'chart-3': 'hsl(var(--chart-3))',
+        'chart-4': 'hsl(var(--chart-4))',
+        'chart-5': 'hsl(var(--chart-5))',
+        'chart-teal': 'hsl(var(--chart-teal))',
+        'chart-orange': 'hsl(var(--chart-orange))',
+        'chart-purple': 'hsl(var(--chart-purple))',
+        'chart-cyan': 'hsl(var(--chart-cyan))',
+        'chart-yellow': 'hsl(var(--chart-yellow))',
+        
+        // Gain/loss indicators
+        'gain': 'hsl(var(--gain-green))',
+        'loss': 'hsl(var(--loss-red))',
+      },
+        backgroundImage: {
+          'gradient-dark': 'var(--gradient-dark)',
+          'gradient-card': 'var(--gradient-card)',
+          'gradient-terminal': 'var(--gradient-terminal)',
+          'gradient-neon': 'var(--gradient-neon)',
         },
-        chart: {
-          teal: "hsl(var(--chart-teal))",
-          orange: "hsl(var(--chart-orange))",
-          purple: "hsl(var(--chart-purple))",
-          cyan: "hsl(var(--chart-cyan))",
-          yellow: "hsl(var(--chart-yellow))",
+        boxShadow: {
+          'card': 'var(--shadow-card)',
+          'terminal': 'var(--shadow-terminal)', 
+          'neon-subtle': 'var(--shadow-neon-subtle)',
+          'neon-strong': 'var(--shadow-neon-strong)',
+          'glow-green': '0 0 20px hsl(var(--neon-green) / 0.5)',
+          'glow-cyan': '0 0 20px hsl(var(--neon-cyan) / 0.5)',
+          'glow-purple': '0 0 20px hsl(var(--neon-purple) / 0.5)',
         },
-        gain: "hsl(var(--gain-green))",
-        loss: "hsl(var(--loss-red))",
-      },
-      backgroundImage: {
-        'gradient-dark': 'var(--gradient-dark)',
-        'gradient-card': 'var(--gradient-card)',
-        'gradient-terminal': 'var(--gradient-terminal)',
-      },
-      boxShadow: {
-        'card': 'var(--shadow-card)',
-        'terminal': 'var(--shadow-terminal)',
-        'neon-subtle': 'var(--shadow-neon-subtle)',
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

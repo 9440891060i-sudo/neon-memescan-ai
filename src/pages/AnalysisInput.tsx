@@ -192,7 +192,7 @@ export default function AnalysisInput() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Paste Contract Address.
             <br />
-            <span className="text-neon-green">Let Klux Handle the Rest.</span>
+            <span className="text-neon-green text-glow-green">Let Klux Handle the Rest.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Our AI analyzes social sentiment, technical indicators, and market dynamics 
@@ -202,7 +202,7 @@ export default function AnalysisInput() {
 
         {/* Main Input Section */}
         <div className="max-w-4xl mx-auto mb-16">
-          <Card className="p-8 bg-gradient-card shadow-card border-border hover:border-border/80 transition-all duration-300">
+          <Card className="p-8 bg-gradient-neon shadow-neon-strong border-neon-green/30 hover:border-neon-green/60 transition-all duration-300">
             <div className="space-y-6">
               {/* Input Bar */}
               <div className="relative">
@@ -221,7 +221,7 @@ export default function AnalysisInput() {
                     <Button
                       onClick={handleAnalyze}
                       disabled={isAnalyzing}
-                      className="h-14 px-8 bg-neon-green hover:bg-neon-green/90 text-black font-bold cta-glow"
+                      className="h-14 px-8 bg-neon-green hover:bg-neon-green/90 text-black font-bold cta-glow shadow-glow-green"
                     >
                       {isAnalyzing ? (
                         <>
@@ -241,17 +241,17 @@ export default function AnalysisInput() {
 
               {/* Features */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <Search className="w-4 h-4 text-chart-cyan" />
-                  <span>Social Sentiment Analysis</span>
+                <div className="flex items-center justify-center gap-2 text-sm text-neon-cyan">
+                  <Search className="w-4 h-4 text-neon-cyan" />
+                  <span className="text-glow-cyan">Social Sentiment Analysis</span>
                 </div>
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <TrendingUp className="w-4 h-4 text-chart-orange" />
-                  <span>Technical Indicators</span>
+                <div className="flex items-center justify-center gap-2 text-sm text-neon-orange">
+                  <TrendingUp className="w-4 h-4 text-neon-orange" />
+                  <span className="text-glow-orange">Technical Indicators</span>
                 </div>
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center justify-center gap-2 text-sm text-neon-green">
                   <Zap className="w-4 h-4 text-neon-green" />
-                  <span>AI Prediction Score</span>
+                  <span className="text-glow-green">AI Prediction Score</span>
                 </div>
               </div>
             </div>
@@ -288,16 +288,16 @@ export default function AnalysisInput() {
         {/* Pulse Section */}
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-center mb-8">
-            <span className="text-foreground">Market</span> <span className="text-neon-cyan">Pulse</span>
+            <span className="text-foreground">Market</span> <span className="text-neon-cyan text-glow-cyan">Pulse</span>
           </h2>
           
-          <Card className="p-6 bg-gradient-card shadow-card border-border">
+          <Card className="p-6 bg-gradient-neon shadow-neon-strong border-neon-cyan/30">
             <div className="grid grid-cols-3 gap-4">
               {trendingCoins.map((coin, index) => (
                 <div 
                   key={index}
                   onClick={() => handleQuickSelect(coin)}
-                  className="p-4 bg-card rounded-lg border border-border hover:border-border/60 cursor-pointer transition-all duration-300 group hover:shadow-card"
+                  className="p-4 bg-card rounded-lg border border-neon-purple/30 hover:border-neon-purple/60 cursor-pointer transition-all duration-300 group hover:shadow-glow-purple"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">

@@ -22,10 +22,10 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
   return (
     <div className="max-w-7xl mx-auto mb-16">
       <h2 className="text-2xl font-bold text-center mb-8">
-        <span className="text-foreground">Analysis</span> <span className="text-neon-green">Queue</span>
+        <span className="text-foreground">Analysis</span> <span className="text-neon-green text-glow-green">Queue</span>
       </h2>
       
-      <Card className="p-6 bg-gradient-card shadow-card border-border">
+      <Card className="p-6 bg-gradient-neon shadow-neon-strong border-neon-green/30">
         <div className="space-y-4">
           <div className="text-sm text-muted-foreground text-center mb-4">
             Click on any coin below to view its professional analysis terminal
@@ -38,8 +38,8 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
                 onClick={() => onCoinSelect(coin.address)}
                 className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 group ${
                   selectedCoin === coin.address
-                    ? 'bg-neon-green/10 border-neon-green shadow-neon-subtle'
-                    : 'bg-card border-border hover:border-border/60 hover:shadow-card'
+                    ? 'bg-neon-green/20 border-neon-green shadow-glow-green'
+                    : 'bg-card border-neon-cyan/30 hover:border-neon-cyan/60 hover:shadow-glow-cyan'
                 }`}
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -49,8 +49,8 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
                   <div className="flex-1">
                     <h3 className={`font-bold transition-colors ${
                       selectedCoin === coin.address 
-                        ? 'text-neon-green' 
-                        : 'text-foreground group-hover:text-neon-cyan'
+                        ? 'text-neon-green text-glow-green' 
+                        : 'text-foreground group-hover:text-neon-cyan group-hover:text-glow-cyan'
                     }`}>
                       {coin.name}
                     </h3>
