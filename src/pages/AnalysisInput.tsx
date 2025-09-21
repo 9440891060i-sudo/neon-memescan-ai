@@ -222,8 +222,8 @@ export default function AnalysisInput() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-lg blur-sm"></div>
               <div className="relative">
-                <div className="overflow-x-auto pb-2">
-                  <div className="flex gap-4 min-w-max">
+                <div className="overflow-x-auto overflow-y-hidden pb-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neon-purple/50 overscroll-x-contain">
+                  <div className="flex gap-4 w-max">
                     {trendingCoins.map((coin, index) => (
                       <div 
                         key={index}
