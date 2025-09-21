@@ -185,7 +185,7 @@ export default function AnalysisInput() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-black/50 to-background">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="w-full px-6 pt-20 pb-12">
         <div className="text-center mb-16">
@@ -202,13 +202,12 @@ export default function AnalysisInput() {
 
         {/* Main Input Section */}
         <div className="max-w-4xl mx-auto mb-16">
-          <Card className="p-8 bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300">
+          <Card className="p-8 bg-gradient-card shadow-card border-border hover:border-border/80 transition-all duration-300">
             <div className="space-y-6">
               {/* Input Bar */}
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-green/20 to-neon-cyan/20 rounded-lg blur-sm"></div>
-                <div className="relative bg-black/80 rounded-lg p-6 border border-neon-green/30">
-                  <label className="block text-sm font-medium text-neon-green mb-3">
+                <div className="bg-card rounded-lg p-6 border border-border">
+                  <label className="block text-sm font-medium text-foreground mb-3">
                     Contract Address (Solana / Ethereum)
                   </label>
                   <div className="flex gap-4">
@@ -217,12 +216,12 @@ export default function AnalysisInput() {
                       placeholder="0x1234567890abcdef... or 11111111111111111111111111111111"
                       value={contractAddress}
                       onChange={(e) => setContractAddress(e.target.value)}
-                      className="flex-1 bg-black/50 border-neon-cyan/30 text-white placeholder:text-muted-foreground font-mono text-lg h-14 transition-all duration-300"
+                      className="flex-1 bg-input border-border text-foreground placeholder:text-muted-foreground font-mono text-lg h-14 transition-all duration-300"
                     />
                     <Button
                       onClick={handleAnalyze}
                       disabled={isAnalyzing}
-                      className="h-14 px-8 bg-gradient-to-r from-neon-green to-neon-cyan hover:from-neon-green/80 hover:to-neon-cyan/80 text-black font-bold"
+                      className="h-14 px-8 bg-neon-green hover:bg-neon-green/90 text-black font-bold cta-glow"
                     >
                       {isAnalyzing ? (
                         <>
@@ -243,11 +242,11 @@ export default function AnalysisInput() {
               {/* Features */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <Search className="w-4 h-4 text-neon-cyan" />
+                  <Search className="w-4 h-4 text-chart-cyan" />
                   <span>Social Sentiment Analysis</span>
                 </div>
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <TrendingUp className="w-4 h-4 text-neon-purple" />
+                  <TrendingUp className="w-4 h-4 text-chart-orange" />
                   <span>Technical Indicators</span>
                 </div>
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -289,67 +288,62 @@ export default function AnalysisInput() {
         {/* Pulse Section */}
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-center mb-8">
-            <span className="text-neon-cyan">Pulse</span>
+            <span className="text-foreground">Market</span> <span className="text-neon-cyan">Pulse</span>
           </h2>
           
-          <Card className="p-6 bg-gradient-card border-neon-purple/30 hover:border-neon-purple/50 transition-all duration-300">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-lg blur-sm"></div>
-              <div className="relative">
-                <div className="grid grid-cols-3 gap-4">
-                  {trendingCoins.map((coin, index) => (
-                    <div 
-                      key={index}
-                      onClick={() => handleQuickSelect(coin)}
-                      className="p-4 bg-black/50 rounded-lg border border-white/20 hover:border-neon-purple/60 cursor-pointer transition-all duration-300 group hover:bg-black/70"
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-2xl">
-                            {coin.logo}
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-white group-hover:text-neon-cyan transition-colors">
-                              {coin.name}
-                            </h3>
-                            <div className="text-xs text-muted-foreground">
-                              {coin.age}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs text-muted-foreground">MC</div>
-                          <div className="text-sm font-semibold text-neon-green">{coin.marketCap}</div>
-                        </div>
+          <Card className="p-6 bg-gradient-card shadow-card border-border">
+            <div className="grid grid-cols-3 gap-4">
+              {trendingCoins.map((coin, index) => (
+                <div 
+                  key={index}
+                  onClick={() => handleQuickSelect(coin)}
+                  className="p-4 bg-card rounded-lg border border-border hover:border-border/60 cursor-pointer transition-all duration-300 group hover:shadow-card"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-lg bg-secondary border border-border flex items-center justify-center text-2xl">
+                        {coin.logo}
                       </div>
-                      
-                      <div className="grid grid-cols-3 gap-3 text-xs">
-                        <div className="text-center">
-                          <div className="text-muted-foreground mb-1">Holders</div>
-                          <div className="text-white font-medium">{coin.holders}</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-muted-foreground mb-1">Dev Score</div>
-                          <div className="text-neon-cyan font-medium">{coin.devScore}</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-muted-foreground mb-1">24h</div>
-                          <div className={`font-medium ${coin.changePositive ? 'text-neon-green' : 'text-red-400'}`}>
-                            {coin.change}
-                          </div>
+                      <div>
+                        <h3 className="font-bold text-foreground group-hover:text-neon-cyan transition-colors">
+                          {coin.name}
+                        </h3>
+                        <div className="text-xs text-muted-foreground">
+                          {coin.age}
                         </div>
                       </div>
                     </div>
-                  ))}
+                    <div className="text-right">
+                      <div className="text-xs text-muted-foreground">MC</div>
+                      <div className="text-sm font-semibold text-foreground">{coin.marketCap}</div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-3 text-xs">
+                    <div className="text-center">
+                      <div className="text-muted-foreground mb-1">Holders</div>
+                      <div className="text-foreground font-medium">{coin.holders}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-muted-foreground mb-1">Dev Score</div>
+                      <div className="text-chart-cyan font-medium">{coin.devScore}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-muted-foreground mb-1">24h</div>
+                      <div className={`font-medium ${coin.changePositive ? 'text-gain' : 'text-loss'}`}>
+                        {coin.change}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </Card>
         </div>
 
         {/* Bottom Stats */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-6 px-8 py-4 bg-gradient-card rounded-full border border-neon-green/30">
+          <div className="inline-flex items-center gap-6 px-8 py-4 bg-gradient-card rounded-full border border-border shadow-card">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
               <span className="text-sm text-muted-foreground">
@@ -358,11 +352,11 @@ export default function AnalysisInput() {
             </div>
             <div className="w-px h-4 bg-border"></div>
             <div className="text-sm text-muted-foreground">
-              <span className="text-neon-cyan font-semibold">65%</span> accuracy rate
+              <span className="text-chart-cyan font-semibold">65%</span> accuracy rate
             </div>
             <div className="w-px h-4 bg-border"></div>
             <div className="text-sm text-muted-foreground">
-              <span className="text-neon-purple font-semibold">5,000+</span> coins analyzed
+              <span className="text-chart-purple font-semibold">5,000+</span> coins analyzed
             </div>
           </div>
         </div>

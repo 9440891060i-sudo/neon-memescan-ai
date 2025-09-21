@@ -59,20 +59,20 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
   return (
     <div ref={ref as any} className="space-y-6 animate-fade-in">
       {/* Terminal Header */}
-      <div className="bg-black/90 border border-neon-green/30 rounded-lg p-4">
+      <div className="bg-gradient-terminal border border-border rounded-lg p-4 shadow-terminal">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-2xl">
+            <div className="w-12 h-12 rounded-lg bg-secondary border border-border flex items-center justify-center text-2xl">
               {coin.logo}
             </div>
             <div>
-              <h3 className="text-xl font-bold text-neon-green">{coin.name} Terminal</h3>
+              <h3 className="text-xl font-bold text-foreground">{coin.name} <span className="text-neon-green">Terminal</span></h3>
               <p className="text-sm text-muted-foreground font-mono">{coin.address.slice(0, 20)}...</p>
             </div>
           </div>
           <div className="text-right">
             <div className="text-sm text-muted-foreground">Live Analysis</div>
-            <div className="text-neon-cyan font-mono">{currentTime.toLocaleTimeString()}</div>
+            <div className="text-chart-cyan font-mono">{currentTime.toLocaleTimeString()}</div>
           </div>
         </div>
       </div>
@@ -84,22 +84,22 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
         <div className="lg:col-span-2 space-y-6">
           
           {/* Social Sentiment Chart */}
-          <Card className="bg-black/90 border-neon-cyan/30">
+          <Card className="bg-gradient-terminal border-border shadow-terminal">
             <CardHeader>
-              <CardTitle className="text-neon-cyan flex items-center gap-2">
-                <Eye className="w-5 h-5" />
+              <CardTitle className="text-foreground flex items-center gap-2">
+                <Eye className="w-5 h-5 text-chart-cyan" />
                 Social Sentiment Analysis
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-64">
+              <div className="h-64 chart-grid rounded-lg p-4">
                 <AnimatedChart
                   data={socialData}
                   lines={[
-                    { dataKey: 'views', stroke: 'hsl(var(--neon-cyan))' },
-                    { dataKey: 'likes', stroke: 'hsl(var(--neon-green))' },
-                    { dataKey: 'reposts', stroke: 'hsl(var(--neon-purple))' },
-                    { dataKey: 'members', stroke: '#ff6b6b' }
+                    { dataKey: 'views', stroke: 'hsl(var(--chart-cyan))' },
+                    { dataKey: 'likes', stroke: 'hsl(var(--chart-teal))' },
+                    { dataKey: 'reposts', stroke: 'hsl(var(--chart-purple))' },
+                    { dataKey: 'members', stroke: 'hsl(var(--chart-orange))' }
                   ]}
                   isVisible={isIntersecting}
                   tooltipFormatter={(value, name) => [
@@ -111,7 +111,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
               <div className="grid grid-cols-4 gap-4 mt-4">
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Views</div>
-                  <div className="text-neon-cyan font-bold">
+                  <div className="text-chart-cyan font-bold">
                     <AnimatedNumber 
                       value={socialData[socialData.length - 1]?.views || 0}
                       isVisible={isIntersecting}
@@ -121,7 +121,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Likes</div>
-                  <div className="text-neon-green font-bold">
+                  <div className="text-chart-teal font-bold">
                     <AnimatedNumber 
                       value={socialData[socialData.length - 1]?.likes || 0}
                       isVisible={isIntersecting}
@@ -131,7 +131,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Reposts</div>
-                  <div className="text-neon-purple font-bold">
+                  <div className="text-chart-purple font-bold">
                     <AnimatedNumber 
                       value={socialData[socialData.length - 1]?.reposts || 0}
                       isVisible={isIntersecting}
@@ -141,7 +141,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Members</div>
-                  <div className="text-red-400 font-bold">
+                  <div className="text-chart-orange font-bold">
                     <AnimatedNumber 
                       value={socialData[socialData.length - 1]?.members || 0}
                       isVisible={isIntersecting}
@@ -154,22 +154,22 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
           </Card>
 
           {/* Technical Indicators Chart */}
-          <Card className="bg-black/90 border-neon-green/30">
+          <Card className="bg-gradient-terminal border-border shadow-terminal">
             <CardHeader>
-              <CardTitle className="text-neon-green flex items-center gap-2">
-                <TrendingUp className="w-5 h-5" />
+              <CardTitle className="text-foreground flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-chart-teal" />
                 Technical Indicators
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-64">
+              <div className="h-64 chart-grid rounded-lg p-4">
                 <AnimatedChart
                   data={technicalData}
                   lines={[
-                    { dataKey: 'holders', stroke: 'hsl(var(--neon-green))' },
-                    { dataKey: 'volume', stroke: 'hsl(var(--neon-cyan))' },
-                    { dataKey: 'bundles', stroke: 'hsl(var(--neon-purple))' },
-                    { dataKey: 'marketCap', stroke: '#ffd700' }
+                    { dataKey: 'holders', stroke: 'hsl(var(--chart-teal))' },
+                    { dataKey: 'volume', stroke: 'hsl(var(--chart-cyan))' },
+                    { dataKey: 'bundles', stroke: 'hsl(var(--chart-purple))' },
+                    { dataKey: 'marketCap', stroke: 'hsl(var(--chart-yellow))' }
                   ]}
                   isVisible={isIntersecting}
                   tooltipFormatter={(value, name) => [
@@ -181,7 +181,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
               <div className="grid grid-cols-4 gap-4 mt-4">
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Holders</div>
-                  <div className="text-neon-green font-bold">
+                  <div className="text-chart-teal font-bold">
                     <AnimatedNumber 
                       value={technicalData[technicalData.length - 1]?.holders || 0}
                       isVisible={isIntersecting}
@@ -191,7 +191,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Volume</div>
-                  <div className="text-neon-cyan font-bold">
+                  <div className="text-chart-cyan font-bold">
                     <AnimatedNumber 
                       value={technicalData[technicalData.length - 1]?.volume || 0}
                       isVisible={isIntersecting}
@@ -201,7 +201,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Bundles</div>
-                  <div className="text-neon-purple font-bold">
+                  <div className="text-chart-purple font-bold">
                     <AnimatedNumber 
                       value={technicalData[technicalData.length - 1]?.bundles || 0}
                       isVisible={isIntersecting}
@@ -211,7 +211,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-muted-foreground">Market Cap</div>
-                  <div className="text-yellow-400 font-bold">
+                  <div className="text-chart-yellow font-bold">
                     <AnimatedNumber 
                       value={technicalData[technicalData.length - 1]?.marketCap || 0}
                       isVisible={isIntersecting}
@@ -228,14 +228,14 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
         <div className="space-y-6">
           
           {/* Quick Stats */}
-          <Card className="bg-black/90 border-neon-purple/30">
+          <Card className="bg-gradient-terminal border-border shadow-terminal">
             <CardHeader>
-              <CardTitle className="text-neon-purple">Quick Stats</CardTitle>
+              <CardTitle className="text-foreground">Quick Stats</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
-                <span className="text-neon-cyan font-bold">
+                <span className="text-foreground font-bold">
                   <AnimatedNumber 
                     value={127}
                     isVisible={isIntersecting}
@@ -245,13 +245,13 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Dev Paid</span>
-                <Badge className="bg-neon-green/20 text-neon-green border-neon-green/30">
+                <Badge className="bg-gain/20 text-gain border-gain/30">
                   Yes
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Dev Credibility</span>
-                <span className="text-neon-green font-bold">
+                <span className="text-gain font-bold">
                   <AnimatedNumber 
                     value={parseInt(coin.devScore)}
                     isVisible={isIntersecting}
@@ -261,7 +261,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Admin Followers</span>
-                <span className="text-neon-cyan font-bold">
+                <span className="text-chart-cyan font-bold">
                   <AnimatedNumber 
                     value={12400}
                     isVisible={isIntersecting}
@@ -273,10 +273,10 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
           </Card>
 
           {/* AI Prediction */}
-          <Card className="bg-black/90 border-neon-green/30">
+          <Card className="bg-gradient-terminal border-border shadow-terminal">
             <CardHeader>
-              <CardTitle className="text-neon-green flex items-center gap-2">
-                <Zap className="w-5 h-5" />
+              <CardTitle className="text-foreground flex items-center gap-2">
+                <Zap className="w-5 h-5 text-neon-green" />
                 AI Prediction
               </CardTitle>
             </CardHeader>
@@ -293,20 +293,20 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
               </div>
               
               <div className="space-y-3">
-                <div className="bg-gradient-to-r from-neon-green/20 to-transparent p-3 rounded-lg border border-neon-green/30">
+                <div className="bg-secondary/50 p-3 rounded-lg border border-border">
                   <div className="flex items-center gap-2 mb-1">
-                    <TrendingUp className="w-4 h-4 text-neon-green" />
-                    <span className="text-sm font-medium text-neon-green">Entry Suggestion</span>
+                    <TrendingUp className="w-4 h-4 text-gain" />
+                    <span className="text-sm font-medium text-foreground">Entry Suggestion</span>
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Consider entry on next 5-10% dip for optimal risk/reward
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-neon-cyan/20 to-transparent p-3 rounded-lg border border-neon-cyan/30">
+                <div className="bg-secondary/50 p-3 rounded-lg border border-border">
                   <div className="flex items-center gap-2 mb-1">
-                    <TrendingDown className="w-4 h-4 text-neon-cyan" />
-                    <span className="text-sm font-medium text-neon-cyan">Exit Target</span>
+                    <TrendingDown className="w-4 h-4 text-chart-orange" />
+                    <span className="text-sm font-medium text-foreground">Exit Target</span>
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Take profits at 2.5x - 4x current levels based on momentum

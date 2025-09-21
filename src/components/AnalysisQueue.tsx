@@ -22,13 +22,13 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
   return (
     <div className="max-w-7xl mx-auto mb-16">
       <h2 className="text-2xl font-bold text-center mb-8">
-        <span className="text-neon-green">Analysis Queue</span>
+        <span className="text-foreground">Analysis</span> <span className="text-neon-green">Queue</span>
       </h2>
       
-      <Card className="p-6 bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300">
+      <Card className="p-6 bg-gradient-card shadow-card border-border">
         <div className="space-y-4">
           <div className="text-sm text-muted-foreground text-center mb-4">
-            Click on any coin below to view its Bloomberg-style analysis terminal
+            Click on any coin below to view its professional analysis terminal
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -38,19 +38,19 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
                 onClick={() => onCoinSelect(coin.address)}
                 className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 group ${
                   selectedCoin === coin.address
-                    ? 'bg-neon-green/20 border-neon-green shadow-lg shadow-neon-green/20'
-                    : 'bg-black/50 border-white/20 hover:border-neon-green/60 hover:bg-black/70'
+                    ? 'bg-neon-green/10 border-neon-green shadow-neon-subtle'
+                    : 'bg-card border-border hover:border-border/60 hover:shadow-card'
                 }`}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-lg">
                     {coin.logo}
                   </div>
                   <div className="flex-1">
                     <h3 className={`font-bold transition-colors ${
                       selectedCoin === coin.address 
                         ? 'text-neon-green' 
-                        : 'text-white group-hover:text-neon-cyan'
+                        : 'text-foreground group-hover:text-neon-cyan'
                     }`}>
                       {coin.name}
                     </h3>
@@ -64,15 +64,15 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
                   <div className="flex items-center gap-2">
                     {coin.status === 'analyzing' ? (
                       <>
-                        <Clock className="w-4 h-4 text-neon-cyan animate-pulse" />
-                        <Badge className="bg-neon-cyan/20 text-neon-cyan border-neon-cyan/30">
+                        <Clock className="w-4 h-4 text-chart-cyan animate-pulse" />
+                        <Badge className="bg-chart-cyan/20 text-chart-cyan border-chart-cyan/30">
                           Analyzing...
                         </Badge>
                       </>
                     ) : (
                       <>
-                        <CheckCircle className="w-4 h-4 text-neon-green" />
-                        <Badge className="bg-neon-green/20 text-neon-green border-neon-green/30">
+                        <CheckCircle className="w-4 h-4 text-gain" />
+                        <Badge className="bg-gain/20 text-gain border-gain/30">
                           Complete
                         </Badge>
                       </>
@@ -88,7 +88,7 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
                 </div>
                 
                 {selectedCoin === coin.address && (
-                  <div className="mt-3 pt-3 border-t border-neon-green/30">
+                  <div className="mt-3 pt-3 border-t border-border">
                     <div className="flex items-center gap-2 text-xs text-neon-green">
                       <Zap className="w-3 h-3" />
                       <span>Terminal Active</span>
