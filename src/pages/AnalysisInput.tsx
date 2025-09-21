@@ -7,12 +7,72 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 
 const trendingCoins = [
-  { name: "DOGE", address: "0x74b23882a30290451A17c44f4F05243b6b58C76d", logo: "🐕", marketCap: "$16.2B" },
-  { name: "SHIB", address: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE", logo: "🐕", marketCap: "$5.8B" },
-  { name: "PEPE", address: "0x6982508145454Ce325dDbE47a25d4ec3d2311933", logo: "🐸", marketCap: "$3.1B" },
-  { name: "FLOKI", address: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E", logo: "🐕", marketCap: "$1.4B" },
-  { name: "BABYDOGE", address: "0xc748673057861a797275CD8A068AbB95A902e8de", logo: "🐶", marketCap: "$780M" },
-  { name: "MEME", address: "0xb131f4A55907B10d1F0A50d8ab8FA09EC342cd74", logo: "😂", marketCap: "$650M" }
+  { 
+    name: "DOGE", 
+    address: "0x74b23882a30290451A17c44f4F05243b6b58C76d", 
+    logo: "🐕", 
+    marketCap: "$16.2B",
+    age: "4m",
+    holders: "65",
+    devScore: "85%",
+    change: "+27%",
+    changePositive: true
+  },
+  { 
+    name: "SHIB", 
+    address: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE", 
+    logo: "🐕", 
+    marketCap: "$5.8B",
+    age: "6m",
+    holders: "58",
+    devScore: "72%",
+    change: "+23%",
+    changePositive: true
+  },
+  { 
+    name: "PEPE", 
+    address: "0x6982508145454Ce325dDbE47a25d4ec3d2311933", 
+    logo: "🐸", 
+    marketCap: "$3.1B",
+    age: "17m",
+    holders: "72",
+    devScore: "91%",
+    change: "+24%",
+    changePositive: true
+  },
+  { 
+    name: "FLOKI", 
+    address: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E",
+    logo: "🐕", 
+    marketCap: "$1.4B",
+    age: "30m",
+    holders: "73",
+    devScore: "78%",
+    change: "+22%",
+    changePositive: true
+  },
+  { 
+    name: "BABYDOGE", 
+    address: "0xc748673057861a797275CD8A068AbB95A902e8de", 
+    logo: "🐶", 
+    marketCap: "$780M",
+    age: "32m",
+    holders: "191",
+    devScore: "88%",
+    change: "+20%",
+    changePositive: true
+  },
+  { 
+    name: "MEME", 
+    address: "0xb131f4A55907B10d1F0A50d8ab8FA09EC342cd74", 
+    logo: "😂", 
+    marketCap: "$650M",
+    age: "12m",
+    holders: "134",
+    devScore: "69%",
+    change: "-15%",
+    changePositive: false
+  }
 ];
 
 export default function AnalysisInput() {
@@ -152,34 +212,63 @@ export default function AnalysisInput() {
           </Card>
         </div>
 
-        {/* Trending Meme Coins - Quick Select */}
-        <div className="max-w-6xl mx-auto">
+        {/* Pulse Section */}
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-center mb-8">
-            <span className="text-neon-cyan">Trending Meme Coins</span> — Quick Select
+            <span className="text-neon-cyan">Pulse</span>
           </h2>
           
           <Card className="p-6 bg-gradient-card border-neon-purple/30 hover:border-neon-purple/50 transition-all duration-300">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-lg blur-sm"></div>
               <div className="relative">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                  {trendingCoins.map((coin, index) => (
-                    <div 
-                      key={index}
-                      onClick={() => handleQuickSelect(coin)}
-                      className="p-4 bg-black/40 rounded-lg border border-white/10 hover:border-neon-purple/50 cursor-pointer transition-all duration-300 group hover:scale-105 hover:bg-black/60"
-                    >
-                      <div className="text-center space-y-2">
-                        <div className="text-2xl mb-2">{coin.logo}</div>
-                        <h3 className="font-bold text-sm text-white group-hover:text-neon-cyan transition-colors">
-                          {coin.name}
-                        </h3>
-                        <div className="text-xs text-muted-foreground">
-                          MC: <span className="text-neon-green font-medium">{coin.marketCap}</span>
+                <div className="overflow-x-auto pb-2">
+                  <div className="flex gap-4 min-w-max">
+                    {trendingCoins.map((coin, index) => (
+                      <div 
+                        key={index}
+                        onClick={() => handleQuickSelect(coin)}
+                        className="flex-shrink-0 w-80 p-4 bg-black/50 rounded-lg border border-white/20 hover:border-neon-purple/60 cursor-pointer transition-all duration-300 group hover:bg-black/70"
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-2xl">
+                              {coin.logo}
+                            </div>
+                            <div>
+                              <h3 className="font-bold text-white group-hover:text-neon-cyan transition-colors">
+                                {coin.name}
+                              </h3>
+                              <div className="text-xs text-muted-foreground">
+                                {coin.age}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-xs text-muted-foreground">MC</div>
+                            <div className="text-sm font-semibold text-neon-green">{coin.marketCap}</div>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-3 gap-3 text-xs">
+                          <div className="text-center">
+                            <div className="text-muted-foreground mb-1">Holders</div>
+                            <div className="text-white font-medium">{coin.holders}</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-muted-foreground mb-1">Dev Score</div>
+                            <div className="text-neon-cyan font-medium">{coin.devScore}</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-muted-foreground mb-1">24h</div>
+                            <div className={`font-medium ${coin.changePositive ? 'text-neon-green' : 'text-red-400'}`}>
+                              {coin.change}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
