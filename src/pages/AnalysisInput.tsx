@@ -5,6 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Search, Zap, TrendingUp, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
+import { AnalysisQueue } from "@/components/AnalysisQueue";
+import { BloombergTerminal } from "@/components/BloombergTerminal";
 
 const trendingCoins = [
   { 
@@ -75,10 +77,20 @@ const trendingCoins = [
   }
 ];
 
+interface QueuedCoin {
+  name: string;
+  address: string;
+  logo: string;
+  status: 'analyzing' | 'complete';
+  timestamp: Date;
+}
+
 export default function AnalysisInput() {
   const [contractAddress, setContractAddress] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
+  const [queuedCoins, setQueuedCoins] = useState<QueuedCoin[]>([]);
+  const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
   const { toast } = useToast();
 
   const handleAnalyze = () => {
@@ -91,6 +103,29 @@ export default function AnalysisInput() {
       return;
     }
 
+    // Find the coin from trending coins or create a new entry
+    const selectedTrendingCoin = trendingCoins.find(coin => coin.address === contractAddress);
+    const coinToAdd: QueuedCoin = selectedTrendingCoin 
+      ? {
+          name: selectedTrendingCoin.name,
+          address: selectedTrendingCoin.address,
+          logo: selectedTrendingCoin.logo,
+          status: 'analyzing',
+          timestamp: new Date()
+        }
+      : {
+          name: 'UNKNOWN',
+          address: contractAddress,
+          logo: '❓',
+          status: 'analyzing',
+          timestamp: new Date()
+        };
+
+    // Add to queue if not already present
+    if (!queuedCoins.find(coin => coin.address === contractAddress)) {
+      setQueuedCoins(prev => [...prev, coinToAdd]);
+    }
+
     setIsAnalyzing(true);
     toast({
       title: "Analysis Started",
@@ -100,12 +135,25 @@ export default function AnalysisInput() {
     // Simulate analysis process
     setTimeout(() => {
       setIsAnalyzing(false);
-      // In real app, redirect to dashboard
+      
+      // Update the coin status to complete
+      setQueuedCoins(prev => prev.map(coin => 
+        coin.address === contractAddress 
+          ? { ...coin, status: 'complete' as const }
+          : coin
+      ));
+      
+      // Auto-select the completed analysis
+      setSelectedCoin(contractAddress);
+      
       toast({
         title: "Analysis Complete",
-        description: "Your analysis is ready! Check the dashboard for results.",
+        description: "Your analysis is ready! Click on the coin in the queue to view the Bloomberg terminal.",
       });
     }, 3000);
+
+    // Clear the input
+    setContractAddress("");
   };
 
   const handleQuickSelect = (coin: typeof trendingCoins[0]) => {
@@ -210,6 +258,33 @@ export default function AnalysisInput() {
             </div>
           </Card>
         </div>
+
+        {/* Analysis Queue */}
+        <AnalysisQueue 
+          queuedCoins={queuedCoins}
+          selectedCoin={selectedCoin}
+          onCoinSelect={setSelectedCoin}
+        />
+
+        {/* Bloomberg Terminal */}
+        {selectedCoin && (
+          <div className="max-w-7xl mx-auto mb-16">
+            {(() => {
+              const selectedQueuedCoin = queuedCoins.find(coin => coin.address === selectedCoin);
+              const selectedTrendingCoin = trendingCoins.find(coin => coin.address === selectedCoin);
+              
+              if (selectedQueuedCoin && selectedTrendingCoin) {
+                return (
+                  <BloombergTerminal 
+                    coin={selectedTrendingCoin}
+                    isExpanded={true}
+                  />
+                );
+              }
+              return null;
+            })()}
+          </div>
+        )}
 
         {/* Pulse Section */}
         <div className="max-w-7xl mx-auto">
