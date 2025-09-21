@@ -138,9 +138,8 @@ export default function AnalysisInput() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-black/50 to-background">
-      <div>
       {/* Header */}
-      <div className="container mx-auto px-6 pt-20 pb-12">
+      <div className="w-full px-6 pt-20 pb-12">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Paste Contract Address.
@@ -292,7 +291,6 @@ export default function AnalysisInput() {
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );
