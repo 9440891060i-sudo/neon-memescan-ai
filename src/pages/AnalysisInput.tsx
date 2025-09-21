@@ -222,53 +222,51 @@ export default function AnalysisInput() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-lg blur-sm"></div>
               <div className="relative">
-                <div className="overflow-x-auto overflow-y-hidden pb-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neon-purple/50">
-                  <div className="flex gap-4" style={{ minWidth: 'max-content' }}>
-                    {trendingCoins.map((coin, index) => (
-                      <div 
-                        key={index}
-                        onClick={() => handleQuickSelect(coin)}
-                        className="flex-shrink-0 w-80 p-4 bg-black/50 rounded-lg border border-white/20 hover:border-neon-purple/60 cursor-pointer transition-all duration-300 group hover:bg-black/70"
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-2xl">
-                              {coin.logo}
-                            </div>
-                            <div>
-                              <h3 className="font-bold text-white group-hover:text-neon-cyan transition-colors">
-                                {coin.name}
-                              </h3>
-                              <div className="text-xs text-muted-foreground">
-                                {coin.age}
-                              </div>
-                            </div>
+                <div className="grid grid-cols-3 gap-4">
+                  {trendingCoins.map((coin, index) => (
+                    <div 
+                      key={index}
+                      onClick={() => handleQuickSelect(coin)}
+                      className="p-4 bg-black/50 rounded-lg border border-white/20 hover:border-neon-purple/60 cursor-pointer transition-all duration-300 group hover:bg-black/70"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-2xl">
+                            {coin.logo}
                           </div>
-                          <div className="text-right">
-                            <div className="text-xs text-muted-foreground">MC</div>
-                            <div className="text-sm font-semibold text-neon-green">{coin.marketCap}</div>
+                          <div>
+                            <h3 className="font-bold text-white group-hover:text-neon-cyan transition-colors">
+                              {coin.name}
+                            </h3>
+                            <div className="text-xs text-muted-foreground">
+                              {coin.age}
+                            </div>
                           </div>
                         </div>
-                        
-                        <div className="grid grid-cols-3 gap-3 text-xs">
-                          <div className="text-center">
-                            <div className="text-muted-foreground mb-1">Holders</div>
-                            <div className="text-white font-medium">{coin.holders}</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-muted-foreground mb-1">Dev Score</div>
-                            <div className="text-neon-cyan font-medium">{coin.devScore}</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-muted-foreground mb-1">24h</div>
-                            <div className={`font-medium ${coin.changePositive ? 'text-neon-green' : 'text-red-400'}`}>
-                              {coin.change}
-                            </div>
+                        <div className="text-right">
+                          <div className="text-xs text-muted-foreground">MC</div>
+                          <div className="text-sm font-semibold text-neon-green">{coin.marketCap}</div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-3 gap-3 text-xs">
+                        <div className="text-center">
+                          <div className="text-muted-foreground mb-1">Holders</div>
+                          <div className="text-white font-medium">{coin.holders}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-muted-foreground mb-1">Dev Score</div>
+                          <div className="text-neon-cyan font-medium">{coin.devScore}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-muted-foreground mb-1">24h</div>
+                          <div className={`font-medium ${coin.changePositive ? 'text-neon-green' : 'text-red-400'}`}>
+                            {coin.change}
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
