@@ -7,17 +7,18 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 
 const trendingCoins = [
-  { name: "DOGE", address: "0x74b23882a30290451A17c44f4F05243b6b58C76d", logo: "🐕", change: "+12.5%" },
-  { name: "SHIB", address: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE", logo: "🐕", change: "+8.3%" },
-  { name: "PEPE", address: "0x6982508145454Ce325dDbE47a25d4ec3d2311933", logo: "🐸", change: "+15.7%" },
-  { name: "FLOKI", address: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E", logo: "🐕", change: "+6.2%" },
-  { name: "BABYDOGE", address: "0xc748673057861a797275CD8A068AbB95A902e8de", logo: "🐶", change: "+9.1%" },
-  { name: "MEME", address: "0xb131f4A55907B10d1F0A50d8ab8FA09EC342cd74", logo: "😂", change: "+4.8%" }
+  { name: "DOGE", address: "0x74b23882a30290451A17c44f4F05243b6b58C76d", logo: "🐕", marketCap: "$16.2B" },
+  { name: "SHIB", address: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE", logo: "🐕", marketCap: "$5.8B" },
+  { name: "PEPE", address: "0x6982508145454Ce325dDbE47a25d4ec3d2311933", logo: "🐸", marketCap: "$3.1B" },
+  { name: "FLOKI", address: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E", logo: "🐕", marketCap: "$1.4B" },
+  { name: "BABYDOGE", address: "0xc748673057861a797275CD8A068AbB95A902e8de", logo: "🐶", marketCap: "$780M" },
+  { name: "MEME", address: "0xb131f4A55907B10d1F0A50d8ab8FA09EC342cd74", logo: "😂", marketCap: "$650M" }
 ];
 
 export default function AnalysisInput() {
   const [contractAddress, setContractAddress] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
   const { toast } = useToast();
 
   const handleAnalyze = () => {
@@ -49,6 +50,18 @@ export default function AnalysisInput() {
 
   const handleQuickSelect = (coin: typeof trendingCoins[0]) => {
     setContractAddress(coin.address);
+    
+    // Highlight input briefly
+    if (inputRef) {
+      inputRef.focus();
+      inputRef.classList.add('ring-2', 'ring-neon-green', 'ring-offset-2', 'ring-offset-background');
+      setTimeout(() => {
+        if (inputRef) {
+          inputRef.classList.remove('ring-2', 'ring-neon-green', 'ring-offset-2', 'ring-offset-background');
+        }
+      }, 1000);
+    }
+    
     toast({
       title: `${coin.name} Selected`,
       description: `Contract address loaded for ${coin.name}`,
@@ -93,10 +106,11 @@ export default function AnalysisInput() {
                   </label>
                   <div className="flex gap-4">
                     <Input
+                      ref={setInputRef}
                       placeholder="0x1234567890abcdef... or 11111111111111111111111111111111"
                       value={contractAddress}
                       onChange={(e) => setContractAddress(e.target.value)}
-                      className="flex-1 bg-black/50 border-neon-cyan/30 text-white placeholder:text-muted-foreground font-mono text-lg h-14"
+                      className="flex-1 bg-black/50 border-neon-cyan/30 text-white placeholder:text-muted-foreground font-mono text-lg h-14 transition-all duration-300"
                     />
                     <Button
                       onClick={handleAnalyze}
@@ -144,50 +158,32 @@ export default function AnalysisInput() {
             <span className="text-neon-cyan">Trending Meme Coins</span> — Quick Select
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {trendingCoins.map((coin, index) => (
-              <Card 
-                key={index}
-                onClick={() => handleQuickSelect(coin)}
-                className="p-6 bg-gradient-card border-neon-purple/30 hover:border-neon-purple/50 cursor-pointer transition-all duration-300 group hover:scale-105"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="text-2xl">{coin.logo}</div>
-                    <div>
-                      <h3 className="font-bold text-lg">{coin.name}</h3>
-                      <span className={`text-sm font-medium ${coin.change.startsWith('+') ? 'text-neon-green' : 'text-red-400'}`}>
-                        {coin.change}
-                      </span>
+          <Card className="p-6 bg-gradient-card border-neon-purple/30 hover:border-neon-purple/50 transition-all duration-300">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-lg blur-sm"></div>
+              <div className="relative">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {trendingCoins.map((coin, index) => (
+                    <div 
+                      key={index}
+                      onClick={() => handleQuickSelect(coin)}
+                      className="p-4 bg-black/40 rounded-lg border border-white/10 hover:border-neon-purple/50 cursor-pointer transition-all duration-300 group hover:scale-105 hover:bg-black/60"
+                    >
+                      <div className="text-center space-y-2">
+                        <div className="text-2xl mb-2">{coin.logo}</div>
+                        <h3 className="font-bold text-sm text-white group-hover:text-neon-cyan transition-colors">
+                          {coin.name}
+                        </h3>
+                        <div className="text-xs text-muted-foreground">
+                          MC: <span className="text-neon-green font-medium">{coin.marketCap}</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      copyAddress(coin.address);
-                    }}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <Copy className="w-4 h-4" />
-                  </Button>
+                  ))}
                 </div>
-                
-                <div className="text-xs text-muted-foreground font-mono truncate mb-3">
-                  {coin.address}
-                </div>
-                
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full border-neon-purple/30 hover:border-neon-purple text-neon-purple"
-                >
-                  Quick Analyze
-                </Button>
-              </Card>
-            ))}
-          </div>
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* Bottom Stats */}
