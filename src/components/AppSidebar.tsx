@@ -52,7 +52,7 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="w-64 bg-gradient-card backdrop-blur-sm border-r-0">
+    <Sidebar className="w-64 bg-gradient-card backdrop-blur-sm border-r-0 group-data-[side=left]:border-r-0 group-data-[side=right]:border-l-0 shadow-none">
       <SidebarHeader className="pt-6 pb-4 px-4 border-b border-neon-green/20">
         {/* User Profile Section */}
         <Link 
