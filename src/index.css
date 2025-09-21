@@ -45,16 +45,30 @@ All colors MUST be HSL.
     --neon-purple: 270 100% 70%;
     --neon-purple-glow: 270 100% 70%;
     
+    /* Professional chart colors */
+    --chart-primary: 210 100% 65%;
+    --chart-secondary: 280 100% 70%;
+    --chart-accent: 45 100% 65%;
+    --chart-success: 145 85% 55%;
+    --chart-warning: 30 100% 65%;
+    --chart-error: 0 85% 65%;
+    --chart-grid: 220 15% 25%;
+    --chart-text: 220 15% 85%;
+    
     /* Gradients */
     --gradient-neon: linear-gradient(135deg, hsl(158 100% 50%), hsl(180 100% 50%), hsl(270 100% 70%));
     --gradient-dark: linear-gradient(135deg, hsl(220 15% 3%), hsl(220 15% 8%));
     --gradient-card: linear-gradient(135deg, hsl(220 15% 6%), hsl(220 15% 10%));
+    --gradient-chart: linear-gradient(135deg, hsl(220 15% 8%), hsl(220 15% 12%));
+    --gradient-professional: linear-gradient(135deg, hsl(210 100% 65%), hsl(280 100% 70%));
     
     /* Shadows and glows */
     --shadow-neon-green: 0 0 20px hsl(158 100% 50% / 0.5);
     --shadow-neon-cyan: 0 0 20px hsl(180 100% 50% / 0.5);
     --shadow-neon-purple: 0 0 20px hsl(270 100% 70% / 0.5);
     --shadow-card: 0 8px 32px hsl(220 15% 0% / 0.3);
+    --shadow-chart: 0 4px 24px hsl(220 15% 0% / 0.4);
+    --shadow-professional: 0 2px 16px hsl(210 100% 65% / 0.2);
 
     --radius: 0.75rem;
 

@@ -17,55 +17,81 @@ export const AnimatedChart = ({
   data, 
   lines, 
   isVisible, 
-  gridColor = "hsl(var(--neon-green) / 0.1)",
+  gridColor = "hsl(var(--chart-grid))",
   tooltipFormatter,
   children
 }: AnimatedChartProps) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-        <XAxis 
-          dataKey="time" 
-          stroke="hsl(var(--muted-foreground))"
-          fontSize={12}
-        />
-        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-        <Tooltip 
-          contentStyle={{
-            background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
-            borderRadius: '8px',
-            fontSize: '12px'
-          }}
-          formatter={tooltipFormatter}
-        />
-        {lines.map(({ dataKey, stroke }) => (
-          <Line 
-            key={dataKey}
-            type="monotone" 
-            dataKey={dataKey} 
-            stroke={stroke} 
-            strokeWidth={2}
-            dot={(props) => {
-              const isLast = props.index === data.length - 1;
-              return isLast ? (
-                <circle 
-                  cx={props.cx} 
-                  cy={props.cy} 
-                  r={5} 
-                  fill={stroke} 
-                  stroke={stroke} 
-                  strokeWidth={2}
-                />
-              ) : null;
-            }}
-            activeDot={{ r: 4, stroke, strokeWidth: 2, fill: stroke }}
-            isAnimationActive={false}
+    <div className="bg-gradient-chart border border-chart-grid/30 rounded-lg p-4 shadow-chart">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart 
+          data={data}
+          margin={{ top: 5, right: 20, left: 5, bottom: 5 }}
+        >
+          <CartesianGrid 
+            strokeDasharray="2 4" 
+            stroke={gridColor}
+            strokeOpacity={0.3}
           />
-        ))}
-        {children}
-      </LineChart>
-    </ResponsiveContainer>
+          <XAxis 
+            dataKey="time" 
+            stroke="hsl(var(--chart-text))"
+            fontSize={11}
+            fontFamily="monospace"
+            tick={{ fill: 'hsl(var(--chart-text))' }}
+            axisLine={{ stroke: 'hsl(var(--chart-grid))' }}
+            tickLine={{ stroke: 'hsl(var(--chart-grid))' }}
+          />
+          <YAxis 
+            stroke="hsl(var(--chart-text))" 
+            fontSize={11}
+            fontFamily="monospace"
+            tick={{ fill: 'hsl(var(--chart-text))' }}
+            axisLine={{ stroke: 'hsl(var(--chart-grid))' }}
+            tickLine={{ stroke: 'hsl(var(--chart-grid))' }}
+            width={60}
+          />
+          <Tooltip 
+            contentStyle={{
+              background: 'rgba(34, 40, 49, 0.95)',
+              border: '1px solid hsl(var(--chart-grid))',
+              borderRadius: '8px',
+              fontSize: '12px',
+              fontFamily: 'monospace',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(8px)'
+            }}
+            labelStyle={{
+              color: 'hsl(var(--chart-text))',
+              fontWeight: '600',
+              marginBottom: '4px'
+            }}
+            formatter={tooltipFormatter}
+          />
+          {lines.map(({ dataKey, stroke }) => (
+            <Line 
+              key={dataKey}
+              type="monotone" 
+              dataKey={dataKey} 
+              stroke={stroke} 
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              dot={false}
+              activeDot={{ 
+                r: 5, 
+                stroke, 
+                strokeWidth: 2, 
+                fill: stroke
+              }}
+              isAnimationActive={isVisible}
+              animationDuration={1200}
+              animationEasing="ease-in-out"
+            />
+          ))}
+          {children}
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
