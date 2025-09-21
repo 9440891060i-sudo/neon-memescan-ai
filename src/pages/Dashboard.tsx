@@ -47,44 +47,47 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-neon-green mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">Your performance overview and account details</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-6">
+      <div className="w-full space-y-8">
+        
+        {/* Header Section */}
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-neon-green">Dashboard</h1>
+          <p className="text-muted-foreground">Your performance overview and account details</p>
+        </div>
 
-      {/* User Profile Section */}
-      <Card className="bg-gradient-card border-neon-green/20">
-        <CardHeader>
-          <CardTitle className="text-lg text-foreground">Profile Overview</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-4">
-            <Avatar className="h-16 w-16">
-              <AvatarImage src="/placeholder.svg" />
-              <AvatarFallback className="bg-neon-green/20 text-neon-green text-lg font-semibold">
-                {getUserInitials()}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold text-foreground">{user?.username}</h3>
-              <p className="text-sm text-muted-foreground">{user?.email}</p>
-              <div className="flex items-center gap-4 mt-2">
-                <div className="flex items-center gap-2">
-                  <Target className="w-4 h-4 text-neon-cyan" />
-                  <span className="text-sm text-neon-cyan font-semibold">{statsData.creditsRemaining} credits</span>
+        {/* User Profile Section */}
+        <Card className="bg-gradient-card border-neon-green/20">
+          <CardHeader>
+            <CardTitle className="text-lg text-foreground">Profile Overview</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-4">
+              <Avatar className="h-16 w-16">
+                <AvatarImage src="/placeholder.svg" />
+                <AvatarFallback className="bg-neon-green/20 text-neon-green text-lg font-semibold">
+                  {getUserInitials()}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-foreground">{user?.username}</h3>
+                <p className="text-sm text-muted-foreground">{user?.email}</p>
+                <div className="flex items-center gap-4 mt-2">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-neon-cyan" />
+                    <span className="text-sm text-neon-cyan font-semibold">{statsData.creditsRemaining} credits</span>
+                  </div>
+                  <Badge className="bg-gradient-neon text-black font-medium">
+                    Pro Trader
+                  </Badge>
                 </div>
-                <Badge className="bg-gradient-neon text-black font-medium">
-                  Pro Trader
-                </Badge>
               </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* Key Metrics Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Key Metrics Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="bg-gradient-card border-neon-green/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Analyses</CardTitle>
@@ -136,10 +139,10 @@ export default function Dashboard() {
             </p>
           </CardContent>
         </Card>
-      </div>
+        </div>
 
-      {/* Financial Performance & Performance Metrics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Financial Performance & Performance Metrics */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="bg-gradient-card border-border">
           <CardHeader>
             <CardTitle className="text-lg text-foreground flex items-center gap-2">
@@ -290,6 +293,7 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );
