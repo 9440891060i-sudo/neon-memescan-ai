@@ -72,7 +72,7 @@ const Rewards = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-6">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="w-full space-y-8">
         
         {/* Header Section */}
         <div className="space-y-2">

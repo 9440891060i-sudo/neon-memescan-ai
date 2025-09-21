@@ -218,7 +218,7 @@ export default function Kluxify() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="w-full p-6 space-y-6 min-h-screen bg-gradient-to-b from-background via-black/30 to-background">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
