@@ -139,7 +139,9 @@ export default function Kluxify() {
     return (
       <div className="relative min-h-screen overflow-hidden">
         {/* Blurred Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background to-black/50 blur-sm">
+        <div className="absolute inset-0 bg-gradient-to-b from-background to-black/50 blur-[8px]">
+          {/* Additional blur overlay */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[12px]"></div>
           {/* Animated background coins */}
           {backgroundCoins.map((coin) => (
             <div
