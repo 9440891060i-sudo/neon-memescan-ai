@@ -1,426 +1,388 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Progress } from "@/components/ui/progress";
 import { 
-  Trophy, 
-  Medal, 
-  Award, 
   TrendingUp, 
   Brain,
-  User,
-  Crown,
+  Target,
+  Activity,
+  BarChart3,
   Zap,
-  Target
+  CheckCircle,
+  Clock,
+  Calendar,
+  Sparkles
 } from "lucide-react";
 import Header from "@/components/Header";
 import { useAuthStore } from "@/store/authStore";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
+import { AnimatedChart } from "@/components/AnimatedChart";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
-interface LeaderboardEntry {
-  rank: number;
-  name: string;
-  avatar?: string;
-  score: number;
-  accuracy: number;
-  picks: number;
-  totalReturn: string;
-  bestPick: {
+interface PerformanceMetrics {
+  coinsAnalyzed: number;
+  worthyPicks: number;
+  accuracyRate: number;
+  averageReturn: number;
+  successfulPicks: {
     coin: string;
-    return: string;
+    return: number;
     logo: string;
-  };
-  badge?: string;
+    timestamp: string;
+  }[];
 }
 
-const aiLeaderboard: LeaderboardEntry[] = [
-  {
-    rank: 1,
-    name: "Klux AI Alpha",
-    score: 94,
-    accuracy: 87,
-    picks: 342,
-    totalReturn: "+2,847%",
-    bestPick: { coin: "BONK", return: "+15,420%", logo: "🐕" },
-    badge: "🥇 LEGENDARY"
+const performanceData = {
+  today: {
+    coinsAnalyzed: 47,
+    worthyPicks: 12,
+    accuracyRate: 89.3,
+    averageReturn: 124.7,
+    successfulPicks: [
+      { coin: "BONK", return: 167, logo: "🐕", timestamp: "2h ago" },
+      { coin: "WIF", return: 124, logo: "🐕", timestamp: "4h ago" },
+      { coin: "PEPE", return: 89, logo: "🐸", timestamp: "6h ago" },
+      { coin: "FLOKI", return: 63, logo: "🐕", timestamp: "8h ago" }
+    ]
   },
-  {
-    rank: 2,
-    name: "Klux AI Beta",
-    score: 91,
-    accuracy: 82,
-    picks: 298,
-    totalReturn: "+2,341%",
-    bestPick: { coin: "WIF", return: "+8,932%", logo: "🐕" }
+  week: {
+    coinsAnalyzed: 342,
+    worthyPicks: 89,
+    accuracyRate: 91.7,
+    averageReturn: 156.3,
+    successfulPicks: [
+      { coin: "POPCAT", return: 421, logo: "🐱", timestamp: "2 days ago" },
+      { coin: "BRETT", return: 298, logo: "🐸", timestamp: "3 days ago" },
+      { coin: "MOG", return: 234, logo: "🐱", timestamp: "4 days ago" },
+      { coin: "MICHI", return: 187, logo: "🐱", timestamp: "5 days ago" }
+    ]
   },
-  {
-    rank: 3,
-    name: "Klux AI Gamma",
-    score: 88,
-    accuracy: 79,
-    picks: 276,
-    totalReturn: "+1,923%",
-    bestPick: { coin: "POPCAT", return: "+6,721%", logo: "🐱" }
-  },
-  {
-    rank: 4,
-    name: "Klux AI Delta",
-    score: 85,
-    accuracy: 74,
-    picks: 234,
-    totalReturn: "+1,654%",
-    bestPick: { coin: "BRETT", return: "+4,532%", logo: "🐸" }
-  },
-  {
-    rank: 5,
-    name: "Klux AI Epsilon",
-    score: 82,
-    accuracy: 71,
-    picks: 198,
-    totalReturn: "+1,432%",
-    bestPick: { coin: "MICHI", return: "+3,891%", logo: "🐱" }
+  month: {
+    coinsAnalyzed: 1456,
+    worthyPicks: 387,
+    accuracyRate: 88.9,
+    averageReturn: 198.4,
+    successfulPicks: [
+      { coin: "WIF", return: 1247, logo: "🐕", timestamp: "12 days ago" },
+      { coin: "BONK", return: 892, logo: "🐕", timestamp: "18 days ago" },
+      { coin: "PEPE", return: 634, logo: "🐸", timestamp: "21 days ago" },
+      { coin: "SHIB", return: 456, logo: "🐕", timestamp: "25 days ago" }
+    ]
   }
-];
+};
 
-const traderLeaderboard: LeaderboardEntry[] = [
-  {
-    rank: 1,
-    name: "CryptoWhale88",
-    avatar: "CW",
-    score: 89,
-    accuracy: 76,
-    picks: 156,
-    totalReturn: "+1,923%",
-    bestPick: { coin: "PEPE", return: "+12,000%", logo: "🐸" },
-    badge: "👑 KING"
-  },
-  {
-    rank: 2,
-    name: "MemeGod2024",
-    avatar: "MG",
-    score: 84,
-    accuracy: 71,
-    picks: 203,
-    totalReturn: "+1,654%",
-    bestPick: { coin: "SHIB", return: "+8,500%", logo: "🐕" }
-  },
-  {
-    rank: 3,
-    name: "DiamondHands",
-    avatar: "DH",
-    score: 81,
-    accuracy: 68,
-    picks: 178,
-    totalReturn: "+1,432%",
-    bestPick: { coin: "DOGE", return: "+6,200%", logo: "🐕" }
-  },
-  {
-    rank: 4,
-    name: "MoonHunter",
-    avatar: "MH",
-    score: 78,
-    accuracy: 65,
-    picks: 134,
-    totalReturn: "+1,234%",
-    bestPick: { coin: "FLOKI", return: "+4,800%", logo: "🐕" }
-  },
-  {
-    rank: 5,
-    name: "DegenTrader",
-    avatar: "DT",
-    score: 75,
-    accuracy: 62,
-    picks: 245,
-    totalReturn: "+987%",
-    bestPick: { coin: "BABYDOGE", return: "+3,400%", logo: "🐶" }
-  }
+const chartData = [
+  { name: 'Week 1', accuracy: 87, return: 145 },
+  { name: 'Week 2', accuracy: 89, return: 167 },
+  { name: 'Week 3', accuracy: 92, return: 189 },
+  { name: 'Week 4', accuracy: 91, return: 198 }
 ];
 
 const timeframes = [
-  { label: "Daily", value: "daily" },
-  { label: "Weekly", value: "weekly" },
-  { label: "Monthly", value: "monthly" }
+  { label: "Today", value: "today", icon: Clock },
+  { label: "This Week", value: "week", icon: Calendar },
+  { label: "This Month", value: "month", icon: BarChart3 }
 ];
 
-export default function Leaderboard() {
-  const [selectedTimeframe, setSelectedTimeframe] = useState("weekly");
+export default function Performance() {
+  const [selectedTimeframe, setSelectedTimeframe] = useState("week");
+  const { ref: metricsRef, isIntersecting: metricsVisible } = useIntersectionObserver();
+  const { ref: chartRef, isIntersecting: chartVisible } = useIntersectionObserver();
+  const { isAuthenticated } = useAuthStore();
 
-  const getRankIcon = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return <Crown className="w-6 h-6 text-yellow-400" />;
-      case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
-      case 3:
-        return <Award className="w-6 h-6 text-amber-600" />;
-      default:
-        return <span className="text-xl font-bold text-muted-foreground">#{rank}</span>;
-    }
-  };
+  const currentData = performanceData[selectedTimeframe as keyof typeof performanceData];
 
-  const getPodiumHeight = (rank: number) => {
-    switch (rank) {
-      case 1: return "h-32";
-      case 2: return "h-24";
-      case 3: return "h-20";
-      default: return "h-16";
-    }
-  };
-
-  const LeaderboardCard = ({ entry, type }: { entry: LeaderboardEntry; type: 'ai' | 'trader' }) => (
-    <Card className={`bg-gradient-card transition-all duration-300 hover:scale-[1.02] ${
-      entry.rank <= 3 ? `border-neon-${entry.rank === 1 ? 'green' : entry.rank === 2 ? 'cyan' : 'purple'}/50 shadow-lg` : 'border-border'
-    }`}>
+  const MetricCard = ({ 
+    title, 
+    value, 
+    unit, 
+    icon: Icon, 
+    trend, 
+    description,
+    formatter 
+  }: {
+    title: string;
+    value: number;
+    unit?: string;
+    icon: any;
+    trend?: number;
+    description: string;
+    formatter?: (val: number) => string;
+  }) => (
+    <Card className="bg-gradient-to-br from-card/80 to-card/40 border-border/50 hover:border-primary/30 transition-all duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-neon-green/20 to-neon-cyan/20">
-              {getRankIcon(entry.rank)}
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Icon className="w-5 h-5 text-primary" />
             </div>
-            
-            <div className="flex items-center gap-3">
-              {type === 'trader' ? (
-                <Avatar className="w-10 h-10">
-                  <AvatarFallback className="bg-neon-purple/20 text-neon-purple font-bold">
-                    {entry.avatar}
-                  </AvatarFallback>
-                </Avatar>
-              ) : (
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-cyan/30 to-neon-purple/30 flex items-center justify-center">
-                  <Brain className="w-5 h-5 text-neon-cyan" />
-                </div>
-              )}
-              
-              <div>
-                <h3 className="font-bold text-lg flex items-center gap-2">
-                  {entry.name}
-                  {entry.badge && (
-                    <Badge variant="outline" className="text-xs border-neon-green text-neon-green">
-                      {entry.badge}
-                    </Badge>
-                  )}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {entry.picks} picks • {entry.accuracy}% accuracy
-                </p>
-              </div>
-            </div>
+            <h3 className="font-medium text-muted-foreground">{title}</h3>
           </div>
-          
-          <div className="text-right">
-            <div className="text-2xl font-bold text-neon-green">{entry.totalReturn}</div>
-            <div className="text-sm text-muted-foreground">Total Return</div>
-          </div>
+          {trend && (
+            <Badge variant={trend > 0 ? "default" : "secondary"} className="text-xs">
+              {trend > 0 ? "+" : ""}{trend}%
+            </Badge>
+          )}
         </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-black/30 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Target className="w-4 h-4 text-neon-cyan" />
-              <span className="text-sm text-muted-foreground">Score</span>
-            </div>
-            <div className="text-xl font-bold text-neon-cyan">{entry.score}/100</div>
+        
+        <div className="space-y-2">
+          <div className="text-3xl font-bold tracking-tight">
+            <AnimatedNumber 
+              value={value} 
+              isVisible={metricsVisible}
+              formatter={formatter || ((val) => `${val}${unit || ""}`)}
+              className="text-primary"
+            />
           </div>
-          
-          <div className="bg-black/30 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="w-4 h-4 text-neon-purple" />
-              <span className="text-sm text-muted-foreground">Best Pick</span>
+          <p className="text-sm text-muted-foreground">{description}</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  const WorthyPickCard = ({ pick, index }: { pick: any; index: number }) => (
+    <Card className="bg-gradient-to-r from-card/60 to-card/20 border-border/30 hover:border-primary/20 transition-all duration-200">
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="text-2xl">{pick.logo}</div>
+            <div>
+              <div className="font-bold text-sm">{pick.coin}</div>
+              <div className="text-xs text-muted-foreground">{pick.timestamp}</div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-lg">{entry.bestPick.logo}</span>
-              <div>
-                <div className="font-bold text-sm">{entry.bestPick.coin}</div>
-                <div className="text-xs text-neon-green">{entry.bestPick.return}</div>
-              </div>
+          </div>
+          <div className="text-right">
+            <div className="font-bold text-lg text-primary">
+              +<AnimatedNumber 
+                value={pick.return} 
+                isVisible={metricsVisible}
+                formatter={(val) => `${val}%`}
+              />
             </div>
+            <div className="text-xs text-muted-foreground">Return</div>
           </div>
         </div>
       </CardContent>
     </Card>
   );
 
-  const PodiumDisplay = ({ entries, type }: { entries: LeaderboardEntry[]; type: 'ai' | 'trader' }) => (
-    <div className="mb-12">
-      <div className="flex items-end justify-center gap-4 mb-8">
-        {[2, 1, 3].map((position) => {
-          const entry = entries.find(e => e.rank === position);
-          if (!entry) return null;
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background">
+      {!isAuthenticated && <Header />}
+      <div className={isAuthenticated ? "pt-8" : "pt-32"}>
+        <div className="w-full px-6 py-8 max-w-7xl mx-auto">
           
-          return (
-            <div key={position} className="text-center">
-              <Card className={`${getPodiumHeight(position)} w-32 bg-gradient-to-t ${
-                position === 1 ? 'from-neon-green/20 to-neon-green/5 border-neon-green/50' :
-                position === 2 ? 'from-neon-cyan/20 to-neon-cyan/5 border-neon-cyan/50' :
-                'from-neon-purple/20 to-neon-purple/5 border-neon-purple/50'
-              } flex items-center justify-center`}>
-                <div className="text-center">
-                  {getRankIcon(position)}
-                  <div className="mt-2">
-                    {type === 'trader' ? (
-                      <Avatar className="w-8 h-8 mx-auto mb-1">
-                        <AvatarFallback className="bg-neon-purple/20 text-neon-purple text-xs">
-                          {entry.avatar}
-                        </AvatarFallback>
-                      </Avatar>
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-neon-cyan/30 to-neon-purple/30 flex items-center justify-center mx-auto mb-1">
-                        <Brain className="w-4 h-4 text-neon-cyan" />
-                      </div>
-                    )}
-                    <div className="text-xs font-bold truncate">{entry.name}</div>
-                    <div className="text-xs text-neon-green">{entry.totalReturn}</div>
+          {/* Header Section */}
+          <div className="text-center mb-12" ref={metricsRef as any}>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="p-3 rounded-full bg-primary/10">
+                <Brain className="w-8 h-8 text-primary" />
+              </div>
+              <h1 className="text-5xl font-bold">
+                Klux AI <span className="text-primary">Performance</span>
+              </h1>
+            </div>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Real-time performance metrics showcasing our AI's scanning reliability, 
+              filtering accuracy, and consistent market outperformance
+            </p>
+          </div>
+
+          {/* Timeframe Selector */}
+          <div className="flex justify-center mb-8">
+            <div className="flex gap-1 bg-card/50 rounded-xl p-1 border border-border/50">
+              {timeframes.map((timeframe) => {
+                const Icon = timeframe.icon;
+                return (
+                  <button
+                    key={timeframe.value}
+                    onClick={() => setSelectedTimeframe(timeframe.value)}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+                      selectedTimeframe === timeframe.value
+                        ? 'bg-primary text-primary-foreground shadow-lg'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-card/30'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {timeframe.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Key Performance Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <MetricCard
+              title="Coins Analyzed"
+              value={currentData.coinsAnalyzed}
+              icon={Activity}
+              trend={12}
+              description="Total scanned and evaluated"
+              formatter={(val) => val.toLocaleString()}
+            />
+            <MetricCard
+              title="Worthy Selections"
+              value={currentData.worthyPicks}
+              icon={CheckCircle}
+              trend={8}
+              description="Passed AI quality filter"
+            />
+            <MetricCard
+              title="Success Rate"
+              value={currentData.accuracyRate}
+              unit="%"
+              icon={Target}
+              trend={3}
+              description="Prediction accuracy"
+              formatter={(val) => val.toFixed(1)}
+            />
+            <MetricCard
+              title="Average Return"
+              value={currentData.averageReturn}
+              unit="%"
+              icon={TrendingUp}
+              trend={15}
+              description="Per worthy selection"
+              formatter={(val) => val.toFixed(1)}
+            />
+          </div>
+
+          {/* Performance Charts & Worthy Picks */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            
+            {/* Performance Chart */}
+            <div className="lg:col-span-2" ref={chartRef as any}>
+              <Card className="bg-gradient-to-br from-card/80 to-card/40 border-border/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5 text-primary" />
+                    Weekly Performance Trend
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-80">
+                    <AnimatedChart
+                      data={chartData}
+                      lines={[
+                        { 
+                          dataKey: 'accuracy', 
+                          stroke: 'hsl(var(--primary))' 
+                        },
+                        { 
+                          dataKey: 'return', 
+                          stroke: 'hsl(var(--chart-2))' 
+                        }
+                      ]}
+                      isVisible={chartVisible}
+                    />
                   </div>
-                </div>
+                </CardContent>
               </Card>
             </div>
-          );
-        })}
-      </div>
-    </div>
-  );
 
-  const { isAuthenticated } = useAuthStore();
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-black/30 to-background">
-      
-      {!isAuthenticated && <Header />}
-      <div className={isAuthenticated ? "" : "pt-32"}>
-      <div className="w-full px-6 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4">
-            <span className="text-neon-green">Performance</span> Leaderboard
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Compare AI predictions vs top human traders in the ultimate meme coin challenge
-          </p>
-        </div>
-
-        {/* Timeframe Selector */}
-        <div className="flex justify-center mb-8">
-          <div className="flex gap-2 bg-black/50 rounded-lg p-2">
-            {timeframes.map((timeframe) => (
-              <button
-                key={timeframe.value}
-                onClick={() => setSelectedTimeframe(timeframe.value)}
-                className={`px-6 py-2 rounded-md transition-all duration-200 ${
-                  selectedTimeframe === timeframe.value
-                    ? 'bg-neon-green text-black font-bold'
-                    : 'text-muted-foreground hover:text-white'
-                }`}
-              >
-                {timeframe.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Leaderboard Tabs */}
-        <Tabs defaultValue="ai" className="max-w-6xl mx-auto">
-          <TabsList className="grid w-full grid-cols-2 mb-8 bg-black/50">
-            <TabsTrigger value="ai" className="flex items-center gap-2">
-              <Brain className="w-4 h-4" />
-              AI Leaderboard
-            </TabsTrigger>
-            <TabsTrigger value="traders" className="flex items-center gap-2">
-              <User className="w-4 h-4" />
-              Manual Traders
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="ai" className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-2">
-                🤖 <span className="text-neon-cyan">AI Champions</span>
-              </h2>
-              <p className="text-muted-foreground">
-                Our AI models ranked by prediction accuracy and returns
-              </p>
-            </div>
-            
-            <PodiumDisplay entries={aiLeaderboard.slice(0, 3)} type="ai" />
-            
-            <div className="space-y-4">
-              {aiLeaderboard.map((entry) => (
-                <LeaderboardCard key={entry.rank} entry={entry} type="ai" />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="traders" className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-2">
-                🏆 <span className="text-neon-purple">Human Legends</span>
-              </h2>
-              <p className="text-muted-foreground">
-                Top manual traders competing against our AI
-              </p>
-            </div>
-            
-            <PodiumDisplay entries={traderLeaderboard.slice(0, 3)} type="trader" />
-            
-            <div className="space-y-4">
-              {traderLeaderboard.map((entry) => (
-                <LeaderboardCard key={entry.rank} entry={entry} type="trader" />
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        {/* AI vs Human Comparison */}
-        <Card className="mt-16 bg-gradient-card border-neon-green/30">
-          <CardHeader>
-            <CardTitle className="text-center text-2xl">
-              🤖 AI vs 👨‍💼 Human Performance
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <Brain className="w-6 h-6 text-neon-cyan" />
-                  <h3 className="text-xl font-bold text-neon-cyan">AI Average</h3>
-                </div>
-                <div className="space-y-3">
-                  <div className="bg-black/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-neon-green">+2,039%</div>
-                    <div className="text-sm text-muted-foreground">Avg Return</div>
+            {/* Recent Worthy Picks */}
+            <div>
+              <Card className="bg-gradient-to-br from-card/80 to-card/40 border-border/50 h-full">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                    Top Worthy Picks
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {currentData.successfulPicks.map((pick, index) => (
+                      <WorthyPickCard key={index} pick={pick} index={index} />
+                    ))}
                   </div>
-                  <div className="bg-black/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-neon-cyan">78.6%</div>
-                    <div className="text-sm text-muted-foreground">Accuracy</div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* AI Reliability Report */}
+          <Card className="bg-gradient-to-r from-primary/5 via-card/50 to-primary/5 border-primary/20">
+            <CardHeader>
+              <CardTitle className="text-center text-2xl flex items-center justify-center gap-3">
+                <Brain className="w-6 h-6 text-primary" />
+                AI System Reliability Report
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div className="text-center space-y-4">
+                  <div className="p-4 rounded-xl bg-card/30 border border-border/30">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2">
+                      <Zap className="w-4 h-4 text-primary" />
+                      Scanning Efficiency
+                    </h3>
+                    <div className="text-3xl font-bold text-primary mb-2">
+                      <AnimatedNumber 
+                        value={97.3} 
+                        isVisible={metricsVisible}
+                        formatter={(val) => `${val.toFixed(1)}%`}
+                      />
+                    </div>
+                    <Progress value={97.3} className="h-2 mb-2" />
+                    <p className="text-sm text-muted-foreground">
+                      Market coverage & data processing
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-center space-y-4">
+                  <div className="p-4 rounded-xl bg-card/30 border border-border/30">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2">
+                      <Target className="w-4 h-4 text-primary" />
+                      Filter Precision
+                    </h3>
+                    <div className="text-3xl font-bold text-primary mb-2">
+                      <AnimatedNumber 
+                        value={94.7} 
+                        isVisible={metricsVisible}
+                        formatter={(val) => `${val.toFixed(1)}%`}
+                      />
+                    </div>
+                    <Progress value={94.7} className="h-2 mb-2" />
+                    <p className="text-sm text-muted-foreground">
+                      Quality selection accuracy
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-center space-y-4">
+                  <div className="p-4 rounded-xl bg-card/30 border border-border/30">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                      Prediction Success
+                    </h3>
+                    <div className="text-3xl font-bold text-primary mb-2">
+                      <AnimatedNumber 
+                        value={currentData.accuracyRate} 
+                        isVisible={metricsVisible}
+                        formatter={(val) => `${val.toFixed(1)}%`}
+                      />
+                    </div>
+                    <Progress value={currentData.accuracyRate} className="h-2 mb-2" />
+                    <p className="text-sm text-muted-foreground">
+                      Profitable outcome rate
+                    </p>
                   </div>
                 </div>
               </div>
               
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <User className="w-6 h-6 text-neon-purple" />
-                  <h3 className="text-xl font-bold text-neon-purple">Human Average</h3>
-                </div>
-                <div className="space-y-3">
-                  <div className="bg-black/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-neon-green">+1,446%</div>
-                    <div className="text-sm text-muted-foreground">Avg Return</div>
-                  </div>
-                  <div className="bg-black/30 rounded-lg p-4">
-                    <div className="text-2xl font-bold text-neon-purple">68.4%</div>
-                    <div className="text-sm text-muted-foreground">Accuracy</div>
-                  </div>
-                </div>
+              <div className="text-center mt-8">
+                <Badge className="bg-primary/10 text-primary border-primary/20 px-6 py-2 text-sm">
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  System Operating at Peak Performance
+                </Badge>
               </div>
-            </div>
-            
-            <div className="text-center mt-6">
-              <Badge className="bg-gradient-to-r from-neon-green to-neon-cyan text-black px-6 py-2">
-                🏆 AI Leading by +593% Average Return
-              </Badge>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
