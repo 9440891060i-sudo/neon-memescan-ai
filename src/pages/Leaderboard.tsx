@@ -110,21 +110,21 @@ export default function Performance() {
     description: string;
     formatter?: (val: number) => string;
   }) => (
-    <Card className="bg-gradient-to-br from-slate-950/90 to-slate-900/80 border-slate-800/50 hover:border-primary/40 transition-all duration-300 shadow-2xl">
+    <Card className="bg-gradient-to-br from-black/90 to-gray-950/80 border-gray-800/60 hover:border-primary/40 transition-all duration-300 shadow-2xl">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-primary/20 shadow-lg shadow-primary/20">
               <Icon className="w-5 h-5 text-primary drop-shadow-sm" />
             </div>
-            <h3 className="font-semibold text-slate-200">{title}</h3>
+            <h3 className="font-semibold text-gray-200">{title}</h3>
           </div>
           {trend && (
             <Badge 
               variant={trend > 0 ? "default" : "secondary"} 
               className={`text-xs font-semibold ${
                 trend > 0 
-                  ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" 
+                  ? "bg-green-500/20 text-green-400 border-green-500/30" 
                   : "bg-red-500/20 text-red-400 border-red-500/30"
               } shadow-sm`}
             >
@@ -142,23 +142,23 @@ export default function Performance() {
               className="text-white drop-shadow-md"
             />
           </div>
-          <p className="text-sm text-slate-400 font-medium">{description}</p>
+          <p className="text-sm text-gray-400 font-medium">{description}</p>
         </div>
       </CardContent>
     </Card>
   );
 
   const WorthyPickCard = ({ pick, index }: { pick: any; index: number }) => (
-    <Card className="bg-gradient-to-r from-slate-950/80 to-slate-900/60 border-slate-800/40 hover:border-emerald-500/30 transition-all duration-200 shadow-xl">
+    <Card className="bg-gradient-to-r from-black/80 to-gray-950/60 border-gray-800/50 hover:border-green-500/30 transition-all duration-200 shadow-xl">
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="text-2xl bg-slate-800/50 w-10 h-10 rounded-lg flex items-center justify-center">
+            <div className="text-2xl bg-gray-900/60 w-10 h-10 rounded-lg flex items-center justify-center border border-gray-800/50">
               {pick.logo}
             </div>
             <div>
               <div className="font-bold text-sm text-white">{pick.coin}</div>
-              <div className="text-xs text-slate-400">{pick.timestamp}</div>
+              <div className="text-xs text-gray-400">{pick.timestamp}</div>
             </div>
           </div>
           <div className="text-right">
@@ -169,7 +169,7 @@ export default function Performance() {
                 formatter={(val) => `${val}%`}
               />
             </div>
-            <div className="text-xs text-slate-500 font-medium">Return</div>
+            <div className="text-xs text-gray-500 font-medium">Return</div>
           </div>
         </div>
       </CardContent>
@@ -200,7 +200,7 @@ export default function Performance() {
 
           {/* Timeframe Selector */}
           <div className="flex justify-center mb-8">
-            <div className="flex gap-1 bg-slate-900/60 rounded-xl p-1 border border-slate-700/50 shadow-xl">
+            <div className="flex gap-1 bg-black/60 rounded-xl p-1 border border-gray-800/60 shadow-xl">
               {timeframes.map((timeframe) => {
                 const Icon = timeframe.icon;
                 return (
@@ -210,7 +210,7 @@ export default function Performance() {
                     className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 font-semibold ${
                       selectedTimeframe === timeframe.value
                         ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-900/50'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -263,7 +263,7 @@ export default function Performance() {
             
             {/* Performance Chart */}
             <div className="lg:col-span-2" ref={chartRef as any}>
-              <Card className="bg-gradient-to-br from-slate-950/90 to-slate-900/80 border-slate-800/50 shadow-2xl">
+              <Card className="bg-gradient-to-br from-black/90 to-gray-950/80 border-gray-800/60 shadow-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <BarChart3 className="w-5 h-5 text-primary drop-shadow-sm" />
@@ -277,7 +277,8 @@ export default function Performance() {
                       lines={[
                         { 
                           dataKey: 'accuracy', 
-                          stroke: 'hsl(var(--primary))' 
+                          stroke: 'hsl(var(--primary))',
+                          strokeDasharray: '5 5'
                         },
                         { 
                           dataKey: 'return', 
@@ -293,7 +294,7 @@ export default function Performance() {
 
             {/* Recent Worthy Picks */}
             <div>
-              <Card className="bg-gradient-to-br from-slate-950/90 to-slate-900/80 border-slate-800/50 h-full shadow-2xl">
+              <Card className="bg-gradient-to-br from-black/90 to-gray-950/80 border-gray-800/60 h-full shadow-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <Sparkles className="w-5 h-5 text-primary drop-shadow-sm" />
@@ -312,7 +313,7 @@ export default function Performance() {
           </div>
 
           {/* AI Reliability Report */}
-          <Card className="bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-950/90 border-slate-700/50 shadow-2xl">
+          <Card className="bg-gradient-to-r from-black/90 via-gray-950/80 to-black/90 border-gray-800/60 shadow-2xl">
             <CardHeader>
               <CardTitle className="text-center text-2xl flex items-center justify-center gap-3 text-white">
                 <Brain className="w-6 h-6 text-primary drop-shadow-sm" />
@@ -323,12 +324,12 @@ export default function Performance() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <div className="text-center space-y-4">
-                  <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
-                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
-                      <Zap className="w-4 h-4 text-primary" />
+                  <div className="p-4 rounded-xl bg-gray-900/60 border border-gray-800/60 shadow-lg">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-gray-200">
+                      <Zap className="w-4 h-4 text-green-400/80" />
                       Scanning Efficiency
                     </h3>
-                    <div className="text-3xl font-bold text-primary mb-2 drop-shadow-sm">
+                    <div className="text-3xl font-bold text-green-400/90 mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={97.3} 
                         isVisible={metricsVisible}
@@ -336,19 +337,19 @@ export default function Performance() {
                       />
                     </div>
                     <Progress value={97.3} className="h-2 mb-2" />
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-gray-400">
                       Market coverage & data processing
                     </p>
                   </div>
                 </div>
 
                 <div className="text-center space-y-4">
-                  <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
-                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
-                      <Target className="w-4 h-4 text-primary" />
+                  <div className="p-4 rounded-xl bg-gray-900/60 border border-gray-800/60 shadow-lg">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-gray-200">
+                      <Target className="w-4 h-4 text-green-400/80" />
                       Filter Precision
                     </h3>
-                    <div className="text-3xl font-bold text-primary mb-2 drop-shadow-sm">
+                    <div className="text-3xl font-bold text-green-400/90 mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={94.7} 
                         isVisible={metricsVisible}
@@ -356,15 +357,15 @@ export default function Performance() {
                       />
                     </div>
                     <Progress value={94.7} className="h-2 mb-2" />
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-gray-400">
                       Quality selection accuracy
                     </p>
                   </div>
                 </div>
 
                 <div className="text-center space-y-4">
-                  <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
-                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
+                  <div className="p-4 rounded-xl bg-gray-900/60 border border-gray-800/60 shadow-lg">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-gray-200">
                       <TrendingUp className="w-4 h-4 text-green-400/80" />
                       Prediction Success
                     </h3>
@@ -376,7 +377,7 @@ export default function Performance() {
                       />
                     </div>
                     <Progress value={currentData.accuracyRate} className="h-2 mb-2" />
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-gray-400">
                       Profitable outcome rate
                     </p>
                   </div>
