@@ -124,9 +124,11 @@ All colors MUST be HSL.
 
   html {
     background: hsl(var(--background));
-    overscroll-behavior: none;
     width: 100%;
     height: 100%;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
@@ -134,9 +136,11 @@ All colors MUST be HSL.
     background: var(--gradient-dark);
     min-height: 100vh;
     width: 100%;
-    overscroll-behavior: none;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   #root {
@@ -215,6 +219,63 @@ All colors MUST be HSL.
     }
     100% {
       transform: translateX(-100%);
+    }
+  }
+
+  /* Springy scroll physics */
+  .spring-scroll {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Elastic bounce keyframes */
+  @keyframes elastic-bounce-top {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(20px); }
+    75% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes elastic-bounce-bottom {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    75% { transform: translateY(10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* Spring physics for scroll containers */
+  .scroll-container {
+    position: relative;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Enhanced scroll smoothing */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 2rem;
+    }
+    
+    body {
+      scroll-behavior: smooth;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Mobile-specific enhancements */
+  @media (max-width: 768px) {
+    html, body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
     }
   }
 }
