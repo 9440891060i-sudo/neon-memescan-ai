@@ -162,7 +162,7 @@ export default function Performance() {
             </div>
           </div>
           <div className="text-right">
-            <div className="font-bold text-lg text-emerald-400 drop-shadow-sm">
+            <div className="font-bold text-lg text-green-400/90 drop-shadow-sm">
               +<AnimatedNumber 
                 value={pick.return} 
                 isVisible={metricsVisible}
@@ -188,7 +188,7 @@ export default function Performance() {
               <div className="p-3 rounded-full bg-primary/20 shadow-lg shadow-primary/20">
                 <Brain className="w-8 h-8 text-primary drop-shadow-sm" />
               </div>
-              <h1 className="text-5xl font-bold">
+              <h1 className="text-5xl font-bold text-white">
                 Klux AI <span className="text-primary drop-shadow-md">Performance</span>
               </h1>
             </div>
@@ -325,10 +325,10 @@ export default function Performance() {
                 <div className="text-center space-y-4">
                   <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
                     <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
-                      <Zap className="w-4 h-4 text-blue-400" />
+                      <Zap className="w-4 h-4 text-primary" />
                       Scanning Efficiency
                     </h3>
-                    <div className="text-3xl font-bold text-blue-400 mb-2 drop-shadow-sm">
+                    <div className="text-3xl font-bold text-primary mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={97.3} 
                         isVisible={metricsVisible}
@@ -345,10 +345,10 @@ export default function Performance() {
                 <div className="text-center space-y-4">
                   <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
                     <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
-                      <Target className="w-4 h-4 text-blue-400" />
+                      <Target className="w-4 h-4 text-primary" />
                       Filter Precision
                     </h3>
-                    <div className="text-3xl font-bold text-blue-400 mb-2 drop-shadow-sm">
+                    <div className="text-3xl font-bold text-primary mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={94.7} 
                         isVisible={metricsVisible}
@@ -365,10 +365,10 @@ export default function Performance() {
                 <div className="text-center space-y-4">
                   <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
                     <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
-                      <TrendingUp className="w-4 h-4 text-emerald-400" />
+                      <TrendingUp className="w-4 h-4 text-green-400/80" />
                       Prediction Success
                     </h3>
-                    <div className="text-3xl font-bold text-emerald-400 mb-2 drop-shadow-sm">
+                    <div className="text-3xl font-bold text-green-400/90 mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={currentData.accuracyRate} 
                         isVisible={metricsVisible}
@@ -384,7 +384,7 @@ export default function Performance() {
               </div>
               
               <div className="text-center mt-8">
-                <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-6 py-2 text-sm shadow-lg">
+                <Badge className="bg-green-500/10 text-green-400/90 border-green-500/20 px-6 py-2 text-sm shadow-lg">
                   <CheckCircle className="w-4 h-4 mr-2" />
                   System Operating at Peak Performance
                 </Badge>
