@@ -384,7 +384,7 @@ export default function Performance() {
               </div>
               
               <div className="text-center mt-8">
-                <Badge className="bg-green-500/10 text-green-400/90 border-green-500/20 px-6 py-2 text-sm shadow-lg">
+                <Badge className="bg-background/50 text-neon-green border-neon-green/20 px-6 py-2 text-sm shadow-lg backdrop-blur-sm">
                   <CheckCircle className="w-4 h-4 mr-2" />
                   System Operating at Peak Performance
                 </Badge>
