@@ -25,7 +25,7 @@ const Header = () => {
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
     { href: "/#pricing", label: "Pricing", icon: Zap, isScroll: true },
-    { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
+    { href: "/leaderboard", label: "Performance", icon: Trophy },
     { href: "/faq", label: "FAQ", icon: HelpCircle },
   ];
 

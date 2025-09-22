@@ -22,7 +22,7 @@ const sidebarItems = [
   { title: "Analyse", url: "/analyze", icon: Search },
   { title: "KLUXIFY", url: "/kluxify", icon: Crown },
   { title: "Rewards", url: "/rewards", icon: Gift },
-  { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
+  { title: "Performance", url: "/leaderboard", icon: Trophy },
 ];
 
 export function AppSidebar() {

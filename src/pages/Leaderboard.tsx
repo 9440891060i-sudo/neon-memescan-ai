@@ -110,17 +110,24 @@ export default function Performance() {
     description: string;
     formatter?: (val: number) => string;
   }) => (
-    <Card className="bg-gradient-to-br from-card/80 to-card/40 border-border/50 hover:border-primary/30 transition-all duration-300">
+    <Card className="bg-gradient-to-br from-slate-950/90 to-slate-900/80 border-slate-800/50 hover:border-primary/40 transition-all duration-300 shadow-2xl">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10">
-              <Icon className="w-5 h-5 text-primary" />
+            <div className="p-2 rounded-lg bg-primary/20 shadow-lg shadow-primary/20">
+              <Icon className="w-5 h-5 text-primary drop-shadow-sm" />
             </div>
-            <h3 className="font-medium text-muted-foreground">{title}</h3>
+            <h3 className="font-semibold text-slate-200">{title}</h3>
           </div>
           {trend && (
-            <Badge variant={trend > 0 ? "default" : "secondary"} className="text-xs">
+            <Badge 
+              variant={trend > 0 ? "default" : "secondary"} 
+              className={`text-xs font-semibold ${
+                trend > 0 
+                  ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" 
+                  : "bg-red-500/20 text-red-400 border-red-500/30"
+              } shadow-sm`}
+            >
               {trend > 0 ? "+" : ""}{trend}%
             </Badge>
           )}
@@ -132,35 +139,37 @@ export default function Performance() {
               value={value} 
               isVisible={metricsVisible}
               formatter={formatter || ((val) => `${val}${unit || ""}`)}
-              className="text-primary"
+              className="text-white drop-shadow-md"
             />
           </div>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-sm text-slate-400 font-medium">{description}</p>
         </div>
       </CardContent>
     </Card>
   );
 
   const WorthyPickCard = ({ pick, index }: { pick: any; index: number }) => (
-    <Card className="bg-gradient-to-r from-card/60 to-card/20 border-border/30 hover:border-primary/20 transition-all duration-200">
+    <Card className="bg-gradient-to-r from-slate-950/80 to-slate-900/60 border-slate-800/40 hover:border-emerald-500/30 transition-all duration-200 shadow-xl">
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="text-2xl">{pick.logo}</div>
+            <div className="text-2xl bg-slate-800/50 w-10 h-10 rounded-lg flex items-center justify-center">
+              {pick.logo}
+            </div>
             <div>
-              <div className="font-bold text-sm">{pick.coin}</div>
-              <div className="text-xs text-muted-foreground">{pick.timestamp}</div>
+              <div className="font-bold text-sm text-white">{pick.coin}</div>
+              <div className="text-xs text-slate-400">{pick.timestamp}</div>
             </div>
           </div>
           <div className="text-right">
-            <div className="font-bold text-lg text-primary">
+            <div className="font-bold text-lg text-emerald-400 drop-shadow-sm">
               +<AnimatedNumber 
                 value={pick.return} 
                 isVisible={metricsVisible}
                 formatter={(val) => `${val}%`}
               />
             </div>
-            <div className="text-xs text-muted-foreground">Return</div>
+            <div className="text-xs text-slate-500 font-medium">Return</div>
           </div>
         </div>
       </CardContent>
@@ -168,7 +177,7 @@ export default function Performance() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900/95 to-slate-950">
       {!isAuthenticated && <Header />}
       <div className={isAuthenticated ? "pt-8" : "pt-32"}>
         <div className="w-full px-6 py-8 max-w-7xl mx-auto">
@@ -176,14 +185,14 @@ export default function Performance() {
           {/* Header Section */}
           <div className="text-center mb-12" ref={metricsRef as any}>
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="p-3 rounded-full bg-primary/10">
-                <Brain className="w-8 h-8 text-primary" />
+              <div className="p-3 rounded-full bg-primary/20 shadow-lg shadow-primary/20">
+                <Brain className="w-8 h-8 text-primary drop-shadow-sm" />
               </div>
               <h1 className="text-5xl font-bold">
-                Klux AI <span className="text-primary">Performance</span>
+                Klux AI <span className="text-primary drop-shadow-md">Performance</span>
               </h1>
             </div>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
               Real-time performance metrics showcasing our AI's scanning reliability, 
               filtering accuracy, and consistent market outperformance
             </p>
@@ -191,17 +200,17 @@ export default function Performance() {
 
           {/* Timeframe Selector */}
           <div className="flex justify-center mb-8">
-            <div className="flex gap-1 bg-card/50 rounded-xl p-1 border border-border/50">
+            <div className="flex gap-1 bg-slate-900/60 rounded-xl p-1 border border-slate-700/50 shadow-xl">
               {timeframes.map((timeframe) => {
                 const Icon = timeframe.icon;
                 return (
                   <button
                     key={timeframe.value}
                     onClick={() => setSelectedTimeframe(timeframe.value)}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+                    className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 font-semibold ${
                       selectedTimeframe === timeframe.value
-                        ? 'bg-primary text-primary-foreground shadow-lg'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-card/30'
+                        ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -254,10 +263,10 @@ export default function Performance() {
             
             {/* Performance Chart */}
             <div className="lg:col-span-2" ref={chartRef as any}>
-              <Card className="bg-gradient-to-br from-card/80 to-card/40 border-border/50">
+              <Card className="bg-gradient-to-br from-slate-950/90 to-slate-900/80 border-slate-800/50 shadow-2xl">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <BarChart3 className="w-5 h-5 text-primary drop-shadow-sm" />
                     Weekly Performance Trend
                   </CardTitle>
                 </CardHeader>
@@ -272,7 +281,7 @@ export default function Performance() {
                         },
                         { 
                           dataKey: 'return', 
-                          stroke: 'hsl(var(--chart-2))' 
+                          stroke: '#10b981' 
                         }
                       ]}
                       isVisible={chartVisible}
@@ -284,10 +293,10 @@ export default function Performance() {
 
             {/* Recent Worthy Picks */}
             <div>
-              <Card className="bg-gradient-to-br from-card/80 to-card/40 border-border/50 h-full">
+              <Card className="bg-gradient-to-br from-slate-950/90 to-slate-900/80 border-slate-800/50 h-full shadow-2xl">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <Sparkles className="w-5 h-5 text-primary drop-shadow-sm" />
                     Top Worthy Picks
                   </CardTitle>
                 </CardHeader>
@@ -303,10 +312,10 @@ export default function Performance() {
           </div>
 
           {/* AI Reliability Report */}
-          <Card className="bg-gradient-to-r from-primary/5 via-card/50 to-primary/5 border-primary/20">
+          <Card className="bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-950/90 border-slate-700/50 shadow-2xl">
             <CardHeader>
-              <CardTitle className="text-center text-2xl flex items-center justify-center gap-3">
-                <Brain className="w-6 h-6 text-primary" />
+              <CardTitle className="text-center text-2xl flex items-center justify-center gap-3 text-white">
+                <Brain className="w-6 h-6 text-primary drop-shadow-sm" />
                 AI System Reliability Report
               </CardTitle>
             </CardHeader>
@@ -314,12 +323,12 @@ export default function Performance() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <div className="text-center space-y-4">
-                  <div className="p-4 rounded-xl bg-card/30 border border-border/30">
-                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2">
-                      <Zap className="w-4 h-4 text-primary" />
+                  <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
+                      <Zap className="w-4 h-4 text-blue-400" />
                       Scanning Efficiency
                     </h3>
-                    <div className="text-3xl font-bold text-primary mb-2">
+                    <div className="text-3xl font-bold text-blue-400 mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={97.3} 
                         isVisible={metricsVisible}
@@ -327,19 +336,19 @@ export default function Performance() {
                       />
                     </div>
                     <Progress value={97.3} className="h-2 mb-2" />
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-400">
                       Market coverage & data processing
                     </p>
                   </div>
                 </div>
 
                 <div className="text-center space-y-4">
-                  <div className="p-4 rounded-xl bg-card/30 border border-border/30">
-                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2">
-                      <Target className="w-4 h-4 text-primary" />
+                  <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
+                      <Target className="w-4 h-4 text-blue-400" />
                       Filter Precision
                     </h3>
-                    <div className="text-3xl font-bold text-primary mb-2">
+                    <div className="text-3xl font-bold text-blue-400 mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={94.7} 
                         isVisible={metricsVisible}
@@ -347,19 +356,19 @@ export default function Performance() {
                       />
                     </div>
                     <Progress value={94.7} className="h-2 mb-2" />
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-400">
                       Quality selection accuracy
                     </p>
                   </div>
                 </div>
 
                 <div className="text-center space-y-4">
-                  <div className="p-4 rounded-xl bg-card/30 border border-border/30">
-                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2">
-                      <TrendingUp className="w-4 h-4 text-primary" />
+                  <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 shadow-lg">
+                    <h3 className="font-semibold mb-2 flex items-center justify-center gap-2 text-slate-200">
+                      <TrendingUp className="w-4 h-4 text-emerald-400" />
                       Prediction Success
                     </h3>
-                    <div className="text-3xl font-bold text-primary mb-2">
+                    <div className="text-3xl font-bold text-emerald-400 mb-2 drop-shadow-sm">
                       <AnimatedNumber 
                         value={currentData.accuracyRate} 
                         isVisible={metricsVisible}
@@ -367,7 +376,7 @@ export default function Performance() {
                       />
                     </div>
                     <Progress value={currentData.accuracyRate} className="h-2 mb-2" />
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-400">
                       Profitable outcome rate
                     </p>
                   </div>
@@ -375,7 +384,7 @@ export default function Performance() {
               </div>
               
               <div className="text-center mt-8">
-                <Badge className="bg-primary/10 text-primary border-primary/20 px-6 py-2 text-sm">
+                <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-6 py-2 text-sm shadow-lg">
                   <CheckCircle className="w-4 h-4 mr-2" />
                   System Operating at Peak Performance
                 </Badge>
