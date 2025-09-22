@@ -177,7 +177,7 @@ export default function Performance() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900/95 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950/95 to-black">
       {!isAuthenticated && <Header />}
       <div className={isAuthenticated ? "pt-8" : "pt-32"}>
         <div className="w-full px-6 py-8 max-w-7xl mx-auto">
@@ -189,10 +189,10 @@ export default function Performance() {
                 <Brain className="w-8 h-8 text-primary drop-shadow-sm" />
               </div>
               <h1 className="text-5xl font-bold text-white">
-                Klux AI <span className="text-primary drop-shadow-md">Performance</span>
+                Klux AI <span className="text-neon-green drop-shadow-md">Performance</span>
               </h1>
             </div>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Real-time performance metrics showcasing our AI's scanning reliability, 
               filtering accuracy, and consistent market outperformance
             </p>
