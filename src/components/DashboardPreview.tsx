@@ -132,8 +132,8 @@ export default function DashboardPreview() {
             </div>
 
             <div className="p-6">
-              {/* Golden Ratio Layout - 61.8% : 38.2% */}
-              <div className="grid grid-cols-1 xl:grid-cols-[1.618fr_1fr] gap-4 mb-6">
+              {/* Compact Terminal Layout - Fill Available Space */}
+              <div className="grid grid-cols-1 xl:grid-cols-[1.618fr_1fr] gap-4 mb-4">
                 
                 {/* Main Content Area (61.8%) */}
                 <div className="space-y-4">
@@ -151,125 +151,313 @@ export default function DashboardPreview() {
                     </div>
                   </div>
 
-                  {/* Social Intelligence - Full Width */}
-                  <Card className="p-6 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="flex items-center justify-center w-8 h-8 bg-terminal-blue/20 rounded-lg">
-                        <Activity className="w-4 h-4 text-terminal-blue" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-terminal-white font-mono">
-                          SOCIAL INTELLIGENCE
-                        </h4>
-                        <div className="text-xs text-terminal-gray uppercase tracking-wider">
-                          Sentiment & Engagement Analysis
+                  {/* Combined Analytics Chart */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {/* Social Intelligence */}
+                    <Card className="p-4 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-blue/20 rounded">
+                          <Activity className="w-3 h-3 text-terminal-blue" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-terminal-white font-mono">
+                            SOCIAL INTELLIGENCE
+                          </h4>
+                          <div className="text-xs text-terminal-gray">
+                            Sentiment & Engagement
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="h-48">
-                      <AnimatedChart
-                        data={socialData}
-                        isVisible={isIntersecting}
-                        gridColor="rgba(100, 116, 139, 0.1)"
-                        lines={[
-                          { dataKey: 'engagement', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
-                          { dataKey: 'mentions', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
-                          { dataKey: 'reach', stroke: 'hsl(var(--terminal-amber))', strokeWidth: 2, strokeDasharray: "5 5" }
-                        ]}
-                        tooltipFormatter={(value, name) => {
-                          const formatValue = (val) => {
-                            if (name === 'reach' && val >= 1000) return `${(val / 1000).toFixed(0)}K`;
-                            if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;
-                            return val.toString();
-                          };
-                          const labels = {
-                            engagement: 'Engagement Score',
-                            mentions: 'Social Mentions',
-                            reach: 'Total Reach'
-                          };
-                          return [formatValue(value), labels[name] || name];
-                        }}
-                      />
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-4 mt-3">
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-blue"></div>
-                        <span className="text-terminal-gray">Engagement</span>
+                      
+                      <div className="h-32">
+                        <AnimatedChart
+                          data={socialData}
+                          isVisible={isIntersecting}
+                          gridColor="rgba(100, 116, 139, 0.1)"
+                          lines={[
+                            { dataKey: 'engagement', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
+                            { dataKey: 'mentions', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                          ]}
+                          tooltipFormatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              engagement: 'Engagement',
+                              mentions: 'Mentions'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
                       </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-green"></div>
-                        <span className="text-terminal-gray">Mentions</span>
+                      
+                      <div className="flex gap-3 mt-2">
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-blue"></div>
+                          <span className="text-terminal-gray">Engagement</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-green"></div>
+                          <span className="text-terminal-gray">Mentions</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-amber border-dashed border-b"></div>
-                        <span className="text-terminal-gray">Reach</span>
-                      </div>
-                    </div>
-                  </Card>
+                    </Card>
 
-                  {/* Technical Analysis - Full Width */}
-                  <Card className="p-6 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="flex items-center justify-center w-8 h-8 bg-terminal-green/20 rounded-lg">
-                        <BarChart3 className="w-4 h-4 text-terminal-green" />
+                    {/* Technical Analysis */}
+                    <Card className="p-4 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
+                          <BarChart3 className="w-3 h-3 text-terminal-green" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-terminal-white font-mono">
+                            TECHNICAL ANALYSIS
+                          </h4>
+                          <div className="text-xs text-terminal-gray">
+                            On-Chain Metrics
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-terminal-white font-mono">
-                          TECHNICAL ANALYSIS
-                        </h4>
-                        <div className="text-xs text-terminal-gray uppercase tracking-wider">
-                          On-Chain & Volume Metrics
+                      
+                      <div className="h-32">
+                        <AnimatedChart
+                          data={technicalData}
+                          isVisible={isIntersecting}
+                          gridColor="rgba(100, 116, 139, 0.1)"
+                          lines={[
+                            { dataKey: 'volume', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
+                          ]}
+                          tooltipFormatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}K`;
+                              if (name === 'volume') return `$${val}M`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              volume: 'Volume',
+                              holders: 'Holders'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                      </div>
+                      
+                      <div className="flex gap-3 mt-2">
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-green"></div>
+                          <span className="text-terminal-gray">Volume</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-blue"></div>
+                          <span className="text-terminal-gray">Holders</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* TradingView Chart - Expanded to Fill Space */}
+                  <Card className="p-0 bg-black/90 border border-terminal-green/30 backdrop-blur-sm overflow-hidden">
+                    
+                    {/* Trading Header */}
+                    <div className="px-4 py-3 border-b border-terminal-gray/20 bg-black/60">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-terminal-green/20 flex items-center justify-center">
+                            <span className="text-terminal-green font-bold text-xs">P</span>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-bold text-terminal-white font-mono">PEPE/USDT CHART</h4>
+                            <div className="flex items-center gap-2 text-xs">
+                              <span className="text-terminal-red font-mono">0.0000054</span>
+                              <span className="text-terminal-red font-mono">-40.2%</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Chart Timeframe */}
+                        <div className="flex items-center gap-2">
+                          <span className="text-terminal-green font-mono text-xs">4H</span>
+                          <div className="flex gap-1">
+                            <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1D</span>
+                            <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1W</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
-                    <div className="h-48">
-                      <AnimatedChart
-                        data={technicalData}
-                        isVisible={isIntersecting}
-                        gridColor="rgba(100, 116, 139, 0.1)"
-                        lines={[
-                          { dataKey: 'volume', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
-                          { dataKey: 'holders', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
-                          { dataKey: 'liquidity', stroke: 'hsl(var(--terminal-amber))', strokeWidth: 2 },
-                          { dataKey: 'txCount', stroke: 'hsl(var(--terminal-red))', strokeWidth: 1, strokeDasharray: "3 3" }
-                        ]}
-                        tooltipFormatter={(value, name) => {
-                          const formatValue = (val) => {
-                            if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}K`;
-                            if (name === 'volume') return `$${val}M`;
-                            if (name === 'liquidity' && val >= 1000) return `$${(val / 1000).toFixed(0)}K`;
-                            return val.toString();
-                          };
-                          const labels = {
-                            volume: 'Trading Volume',
-                            holders: 'Token Holders',
-                            liquidity: 'Liquidity Pool',
-                            txCount: 'Transaction Count'
-                          };
-                          return [formatValue(value), labels[name] || name];
-                        }}
-                      />
+
+                    {/* Chart Container - Compact */}
+                    <div className="relative">
+                      {/* Price Levels (Right Side) */}
+                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-black/40 border-l border-terminal-gray/20 z-10">
+                        <div className="h-full flex flex-col justify-between py-2 px-1">
+                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000100</div>
+                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000090</div>
+                          <div className="text-xs text-terminal-amber font-mono text-right font-semibold">0.0000080</div>
+                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000070</div>
+                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000060</div>
+                          <div className="text-xs text-terminal-red font-mono text-right">0.0000050</div>
+                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000040</div>
+                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000030</div>
+                        </div>
+                      </div>
+
+                      {/* Main Chart Area - Reduced Height */}
+                      <div className="pr-16 bg-black/60" style={{ height: '280px' }}>
+                        <div className="relative h-full">
+                          
+                          {/* Moving Average Lines */}
+                          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                            <defs>
+                              <linearGradient id="ma20Gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="hsl(var(--terminal-blue))" stopOpacity="0.7"/>
+                                <stop offset="100%" stopColor="hsl(var(--terminal-blue))" stopOpacity="0.9"/>
+                              </linearGradient>
+                              <linearGradient id="ma50Gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="hsl(var(--terminal-amber))" stopOpacity="0.7"/>
+                                <stop offset="100%" stopColor="hsl(var(--terminal-amber))" stopOpacity="0.9"/>
+                              </linearGradient>
+                            </defs>
+                            
+                            {/* MA20 Line (Blue) */}
+                            <path
+                              d={`M ${tradingData.map((candle, index) => {
+                                const x = (index / (tradingData.length - 1)) * 100;
+                                const y = 100 - (((candle.ma20 - 0.0000030) / 0.0000070) * 100);
+                                return `${index === 0 ? 'M' : 'L'} ${x}% ${y}%`;
+                              }).join(' ')}`}
+                              stroke="url(#ma20Gradient)"
+                              strokeWidth="2"
+                              fill="none"
+                            />
+                            
+                            {/* MA50 Line (Orange) */}
+                            <path
+                              d={`M ${tradingData.map((candle, index) => {
+                                const x = (index / (tradingData.length - 1)) * 100;
+                                const y = 100 - (((candle.ma50 - 0.0000030) / 0.0000070) * 100);
+                                return `${index === 0 ? 'M' : 'L'} ${x}% ${y}%`;
+                              }).join(' ')}`}
+                              stroke="url(#ma50Gradient)"
+                              strokeWidth="2"
+                              fill="none"
+                            />
+                          </svg>
+                          
+                          {/* Candlestick Chart */}
+                          <div className="absolute inset-0 flex items-end px-2 py-2" style={{ paddingRight: '66px' }}>
+                            {tradingData.map((candle, index) => {
+                              const isGreen = candle.close > candle.open;
+                              const priceRange = 0.0000070; // Max price range for scaling
+                              const minPrice = 0.0000030;
+                              const chartHeight = 260; // Available chart height
+                              
+                              // Calculate positions (inverted because chart goes from bottom to top)
+                              const openPos = ((candle.open - minPrice) / priceRange) * chartHeight;
+                              const closePos = ((candle.close - minPrice) / priceRange) * chartHeight;
+                              const highPos = ((candle.high - minPrice) / priceRange) * chartHeight;
+                              const lowPos = ((candle.low - minPrice) / priceRange) * chartHeight;
+                              
+                              const bodyHeight = Math.abs(closePos - openPos);
+                              const bodyBottom = Math.min(openPos, closePos);
+                              
+                              return (
+                                <div key={index} className="flex flex-col items-center relative" style={{ width: `${100 / tradingData.length}%` }}>
+                                  {/* Container for entire candle */}
+                                  <div className="relative" style={{ height: `${chartHeight}px`, width: '3px' }}>
+                                    {/* Top Wick */}
+                                    <div 
+                                      className={`absolute left-1/2 transform -translate-x-1/2 w-px ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                      style={{ 
+                                        bottom: `${Math.max(openPos, closePos)}px`,
+                                        height: `${Math.max(highPos - Math.max(openPos, closePos), 0)}px`
+                                      }}
+                                    />
+                                    
+                                    {/* Body */}
+                                    <div 
+                                      className={`absolute left-1/2 transform -translate-x-1/2 w-full ${
+                                        isGreen ? 'bg-terminal-green' : 'bg-terminal-red'
+                                      } ${bodyHeight < 2 ? 'border-t' : ''} ${
+                                        !isGreen && bodyHeight < 2 ? 'border-terminal-red' : ''
+                                      } ${
+                                        isGreen && bodyHeight < 2 ? 'border-terminal-green' : ''
+                                      }`}
+                                      style={{ 
+                                        bottom: `${bodyBottom}px`,
+                                        height: `${Math.max(bodyHeight, 1)}px`
+                                      }}
+                                    />
+                                    
+                                    {/* Bottom Wick */}
+                                    <div 
+                                      className={`absolute left-1/2 transform -translate-x-1/2 w-px ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                      style={{ 
+                                        bottom: `${lowPos}px`,
+                                        height: `${Math.max(Math.min(openPos, closePos) - lowPos, 0)}px`
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Suggested Entry Line */}
+                          <div className="absolute inset-0 flex items-center" style={{ top: '25%' }}>
+                            <div className="w-full relative">
+                              <div className="absolute w-full border-t border-terminal-amber border-dashed opacity-70" />
+                              <div className="absolute left-2 bg-terminal-amber/20 text-terminal-amber px-2 py-1 text-xs font-mono border border-terminal-amber/40 rounded">
+                                Entry: $0.0000078
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Grid Lines */}
+                          <div className="absolute inset-0 pointer-events-none">
+                            {[...Array(6)].map((_, i) => (
+                              <div 
+                                key={i}
+                                className="absolute w-full border-t border-terminal-gray/5"
+                                style={{ top: `${(i + 1) * 16.66}%` }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Current Price Indicator */}
+                      <div className="absolute right-16 bottom-1/4 transform translate-y-1/2">
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 bg-terminal-red rounded-full animate-pulse"></div>
+                          <div className="ml-2 bg-terminal-red text-white px-2 py-1 text-xs font-mono font-semibold rounded">
+                            0.0000054
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="flex flex-wrap gap-4 mt-3">
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-green"></div>
-                        <span className="text-terminal-gray">Volume</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-blue"></div>
-                        <span className="text-terminal-gray">Holders</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-amber"></div>
-                        <span className="text-terminal-gray">Liquidity</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-3 h-1 bg-terminal-red border-dashed border-b"></div>
-                        <span className="text-terminal-gray">Transactions</span>
+
+                    {/* Chart Legend */}
+                    <div className="px-4 py-2 bg-black/40 border-t border-terminal-gray/20">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-1 text-xs">
+                            <div className="w-3 h-0.5 bg-terminal-blue"></div>
+                            <span className="text-terminal-gray font-mono">MA20</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-xs">
+                            <div className="w-3 h-0.5 bg-terminal-amber"></div>
+                            <span className="text-terminal-gray font-mono">MA50</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-xs">
+                            <div className="w-3 h-0.5 bg-terminal-amber border-dashed border-b"></div>
+                            <span className="text-terminal-gray font-mono">Entry</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs text-terminal-gray font-mono">Vol: $24.8M</div>
+                        </div>
                       </div>
                     </div>
                   </Card>
