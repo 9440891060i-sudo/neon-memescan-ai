@@ -7,6 +7,7 @@ interface AnimatedChartProps {
     dataKey: string;
     stroke: string;
     strokeDasharray?: string;
+    strokeWidth?: number;
   }>;
   isVisible: boolean;
   gridColor?: string;
@@ -41,13 +42,13 @@ export const AnimatedChart = ({
           }}
           formatter={tooltipFormatter}
         />
-        {lines.map(({ dataKey, stroke, strokeDasharray }) => (
+        {lines.map(({ dataKey, stroke, strokeDasharray, strokeWidth = 2 }) => (
           <Line 
             key={dataKey}
             type="monotone" 
             dataKey={dataKey} 
             stroke={stroke} 
-            strokeWidth={2}
+            strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
             dot={(props) => {
               const isLast = props.index === data.length - 1;

@@ -1,31 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { TrendingUp, Users, Eye, Heart, Repeat, Wallet, BarChart3, Package, DollarSign, Shield } from "lucide-react";
+import { TrendingUp, BarChart3, Shield, Activity, Target, Clock } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { AnimatedChart } from "@/components/AnimatedChart";
+import CommunitySignals from "@/components/CommunitySignals";
 
 // Mock data for social signals
 const socialData = [
-  { time: '9AM', views: 45000, likes: 2800, reposts: 420, members: 15200 },
-  { time: '10AM', views: 52000, likes: 3200, reposts: 480, members: 15350 },
-  { time: '11AM', views: 48000, likes: 2950, reposts: 445, members: 15280 },
-  { time: '12PM', views: 67000, likes: 4100, reposts: 620, members: 15680 },
-  { time: '1PM', views: 72000, likes: 4500, reposts: 680, members: 15950 },
-  { time: '2PM', views: 69000, likes: 4200, reposts: 635, members: 15850 },
-  { time: '3PM', views: 85000, likes: 5100, reposts: 760, members: 16200 },
+  { time: '9AM', engagement: 4200, sentiment: 0.75, mentions: 1850, reach: 125000 },
+  { time: '10AM', engagement: 4800, sentiment: 0.78, mentions: 2100, reach: 142000 },
+  { time: '11AM', engagement: 4500, sentiment: 0.72, mentions: 1950, reach: 138000 },
+  { time: '12PM', engagement: 6200, sentiment: 0.85, mentions: 2650, reach: 165000 },
+  { time: '1PM', engagement: 6800, sentiment: 0.88, mentions: 2900, reach: 178000 },
+  { time: '2PM', engagement: 6400, sentiment: 0.82, mentions: 2750, reach: 172000 },
+  { time: '3PM', engagement: 7500, sentiment: 0.90, mentions: 3200, reach: 195000 },
 ];
 
-// Mock data for technical signals
+// Mock data for technical signals  
 const technicalData = [
-  { time: '9AM', holders: 142300, volume: 2.8, bundles: 150, marketCap: 890 },
-  { time: '10AM', holders: 143200, volume: 3.4, bundles: 165, marketCap: 940 },
-  { time: '11AM', holders: 144800, volume: 4.1, bundles: 180, marketCap: 995 },
-  { time: '12PM', holders: 146500, volume: 5.2, bundles: 195, marketCap: 1080 },
-  { time: '1PM', holders: 148900, volume: 6.8, bundles: 220, marketCap: 1180 },
-  { time: '2PM', holders: 150200, volume: 7.4, bundles: 235, marketCap: 1250 },
-  { time: '3PM', holders: 152800, volume: 8.9, bundles: 260, marketCap: 1420 },
+  { time: '9AM', holders: 142300, volume: 2.8, liquidity: 450000, txCount: 1250 },
+  { time: '10AM', holders: 143200, volume: 3.4, liquidity: 485000, txCount: 1380 },
+  { time: '11AM', holders: 144800, volume: 4.1, liquidity: 520000, txCount: 1650 },
+  { time: '12PM', holders: 146500, volume: 5.2, liquidity: 580000, txCount: 1850 },
+  { time: '1PM', holders: 148900, volume: 6.8, liquidity: 640000, txCount: 2100 },
+  { time: '2PM', holders: 150200, volume: 7.4, liquidity: 685000, txCount: 2280 },
+  { time: '3PM', holders: 152800, volume: 8.9, liquidity: 750000, txCount: 2650 },
 ];
 
 export default function DashboardPreview() {
@@ -35,298 +36,318 @@ export default function DashboardPreview() {
     <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Your <span className="text-neon-cyan">Bloomberg</span> Terminal
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2 font-mono">
+            Professional <span className="text-terminal-blue">Intelligence</span> Terminal
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-            Real-time social sentiment analysis, insider transaction tracking, and advanced market intelligence for institutional crypto trading
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2 font-mono">
+            Institutional-grade market intelligence combining real-time social sentiment analysis, 
+            insider community signals, and advanced technical metrics for professional crypto trading
           </p>
         </div>
 
         <div className="max-w-7xl mx-auto">
-          {/* Dashboard mockup */}
-          <div className="bg-gradient-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-border neon-glow-cyan shadow-card">
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground">PEPE Analysis</h3>
-                <p className="text-sm text-muted-foreground break-all sm:break-normal">Contract: 0x6982508145454ce325ddbe47a25d4ec3d2311933</p>
-              </div>
-              <div className="text-left sm:text-right">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-neon-green/20 border border-neon-green/30 rounded-lg">
-                  <div className="w-2 h-2 bg-neon-green rounded-full"></div>
-                  <span className="text-xl sm:text-2xl font-bold text-neon-green">BULLISH</span>
+          {/* Professional Terminal Interface */}
+          <div className="bg-black/60 backdrop-blur-md rounded-lg border border-terminal-gray/20 shadow-2xl">
+            
+            {/* Terminal Header */}
+            <div className="bg-black/80 border-b border-terminal-gray/20 px-6 py-4 rounded-t-lg">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-terminal-red"></div>
+                    <div className="w-3 h-3 rounded-full bg-terminal-amber"></div>
+                    <div className="w-3 h-3 rounded-full bg-terminal-green"></div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-terminal-white font-mono">KLUX.TERMINAL</h3>
+                    <p className="text-sm text-terminal-gray font-mono">PEPE/USDT Analysis Session</p>
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Confidence Score: <AnimatedNumber 
-                    value={94.2} 
+                <div className="flex items-center gap-6">
+                  <div className="text-right">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></div>
+                      <span className="text-lg font-bold text-terminal-green font-mono">LONG SIGNAL</span>
+                    </div>
+                    <div className="text-sm text-terminal-gray font-mono">
+                      Confidence: <AnimatedNumber 
+                        value={87.4} 
+                        isVisible={isIntersecting} 
+                        formatter={(val) => `${val.toFixed(1)}%`}
+                        className="text-terminal-green font-semibold"
+                      />
+                    </div>
+                  </div>
+                  <div className="text-xs text-terminal-gray font-mono">
+                    <Clock className="w-4 h-4 inline mr-1" />
+                    {new Date().toLocaleTimeString()}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6">
+              {/* Main Analytics Grid */}
+              <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-6 mb-8">
+                
+                {/* Charts Section */}
+                <div className="space-y-6">
+                  
+                  {/* Chart Controls */}
+                  <div className="flex items-center gap-4 p-3 bg-black/40 rounded border border-terminal-gray/20">
+                    <div className="text-xs text-terminal-gray uppercase tracking-wider font-mono">
+                      Market Overview
+                    </div>
+                    <div className="flex gap-2 ml-auto">
+                      <span className="text-xs px-2 py-1 bg-terminal-blue/20 text-terminal-blue rounded font-mono">5M</span>
+                      <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">15M</span>
+                      <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1H</span>
+                      <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">4H</span>
+                    </div>
+                  </div>
+
+                  {/* Analytics Charts */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    {/* Social Intelligence */}
+                    <Card className="p-6 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="flex items-center justify-center w-8 h-8 bg-terminal-blue/20 rounded-lg">
+                          <Activity className="w-4 h-4 text-terminal-blue" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-semibold text-terminal-white font-mono">
+                            SOCIAL INTELLIGENCE
+                          </h4>
+                          <div className="text-xs text-terminal-gray uppercase tracking-wider">
+                            Sentiment & Engagement Analysis
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="h-64">
+                        <AnimatedChart
+                          data={socialData}
+                          isVisible={isIntersecting}
+                          gridColor="rgba(100, 116, 139, 0.1)"
+                          lines={[
+                            { dataKey: 'engagement', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
+                            { dataKey: 'mentions', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                            { dataKey: 'reach', stroke: 'hsl(var(--terminal-amber))', strokeWidth: 2, strokeDasharray: "5 5" }
+                          ]}
+                          tooltipFormatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (name === 'reach' && val >= 1000) return `${(val / 1000).toFixed(0)}K`;
+                              if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              engagement: 'Engagement Score',
+                              mentions: 'Social Mentions',
+                              reach: 'Total Reach'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-4 mt-4">
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-blue"></div>
+                          <span className="text-terminal-gray">Engagement</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-green"></div>
+                          <span className="text-terminal-gray">Mentions</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-amber border-dashed border-b"></div>
+                          <span className="text-terminal-gray">Reach</span>
+                        </div>
+                      </div>
+                    </Card>
+
+                    {/* Technical Analysis */}
+                    <Card className="p-6 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="flex items-center justify-center w-8 h-8 bg-terminal-green/20 rounded-lg">
+                          <BarChart3 className="w-4 h-4 text-terminal-green" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-semibold text-terminal-white font-mono">
+                            TECHNICAL ANALYSIS
+                          </h4>
+                          <div className="text-xs text-terminal-gray uppercase tracking-wider">
+                            On-Chain & Volume Metrics
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="h-64">
+                        <AnimatedChart
+                          data={technicalData}
+                          isVisible={isIntersecting}
+                          gridColor="rgba(100, 116, 139, 0.1)"
+                          lines={[
+                            { dataKey: 'volume', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
+                            { dataKey: 'liquidity', stroke: 'hsl(var(--terminal-amber))', strokeWidth: 2 },
+                            { dataKey: 'txCount', stroke: 'hsl(var(--terminal-red))', strokeWidth: 1, strokeDasharray: "3 3" }
+                          ]}
+                          tooltipFormatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}K`;
+                              if (name === 'volume') return `$${val}M`;
+                              if (name === 'liquidity' && val >= 1000) return `$${(val / 1000).toFixed(0)}K`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              volume: 'Trading Volume',
+                              holders: 'Token Holders',
+                              liquidity: 'Liquidity Pool',
+                              txCount: 'Transaction Count'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-4 mt-4">
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-green"></div>
+                          <span className="text-terminal-gray">Volume</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-blue"></div>
+                          <span className="text-terminal-gray">Holders</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-amber"></div>
+                          <span className="text-terminal-gray">Liquidity</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-3 h-1 bg-terminal-red border-dashed border-b"></div>
+                          <span className="text-terminal-gray">Transactions</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+
+                {/* Right Sidebar - Community Signals & Risk Assessment */}
+                <div className="space-y-6">
+                  
+                  {/* Community Signals */}
+                  <CommunitySignals />
+                  
+                  {/* Risk Assessment */}
+                  <Card className="p-6 bg-black/40 border border-terminal-amber/20 backdrop-blur-sm">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="flex items-center justify-center w-8 h-8 bg-terminal-amber/20 rounded-lg">
+                        <Shield className="w-4 h-4 text-terminal-amber" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-terminal-white font-mono">
+                          RISK ASSESSMENT
+                        </h4>
+                        <div className="text-xs text-terminal-gray uppercase tracking-wider">
+                          Security & Compliance Metrics
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-terminal-green/5 border border-terminal-green/20 rounded p-3">
+                          <div className="text-xs text-terminal-gray mb-1 font-mono">WALLET AGE</div>
+                          <div className="text-lg text-terminal-green font-mono">
+                            <AnimatedNumber 
+                              value={68} 
+                              isVisible={isIntersecting} 
+                              formatter={(val) => `${val}D`}
+                            />
+                          </div>
+                        </div>
+                        <div className="bg-terminal-blue/5 border border-terminal-blue/20 rounded p-3">
+                          <div className="text-xs text-terminal-gray mb-1 font-mono">CREDIBILITY</div>
+                          <div className="text-lg text-terminal-blue font-mono">
+                            <AnimatedNumber 
+                              value={94} 
+                              isVisible={isIntersecting} 
+                              formatter={(val) => `${val}%`}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center p-2 bg-terminal-green/5 border border-terminal-green/20 rounded">
+                          <span className="text-sm text-terminal-gray font-mono">DEV VERIFICATION</span>
+                          <span className="text-terminal-green font-mono text-sm">✓ VERIFIED</span>
+                        </div>
+                        <div className="flex justify-between items-center p-2 bg-terminal-green/5 border border-terminal-green/20 rounded">
+                          <span className="text-sm text-terminal-gray font-mono">LIQUIDITY LOCKED</span>
+                          <span className="text-terminal-green font-mono text-sm">✓ SECURED</span>
+                        </div>
+                        <div className="flex justify-between items-center p-2 bg-terminal-amber/5 border border-terminal-amber/20 rounded">
+                          <span className="text-sm text-terminal-gray font-mono">CONTRACT AUDIT</span>
+                          <span className="text-terminal-amber font-mono text-sm">⚠ PENDING</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              </div>
+
+              {/* AI Analysis Summary */}
+              <Card className="p-6 bg-gradient-to-r from-terminal-green/5 to-terminal-blue/5 border border-terminal-green/30 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded bg-terminal-green/20 flex items-center justify-center">
+                    <Target className="w-5 h-5 text-terminal-green" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-semibold text-terminal-green mb-2 font-mono">AI ANALYSIS SUMMARY</h4>
+                    <p className="text-terminal-gray mb-4 font-mono text-sm">
+                      "Strong social momentum combined with healthy on-chain metrics. Community signals indicate sustained interest. Technical breakout pattern confirmed."
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <div className="bg-black/20 rounded p-3">
+                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">ENTRY RANGE</div>
+                        <div className="text-terminal-green font-mono text-sm">$0.0000087-92</div>
+                      </div>
+                      <div className="bg-black/20 rounded p-3">
+                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">TARGET</div>
+                        <div className="text-terminal-blue font-mono text-sm">$0.0000125</div>
+                      </div>
+                      <div className="bg-black/20 rounded p-3">
+                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">RISK LEVEL</div>
+                        <div className="text-terminal-green font-mono text-sm">LOW-MED</div>
+                      </div>
+                      <div className="bg-black/20 rounded p-3">
+                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">TIMEFRAME</div>
+                        <div className="text-terminal-amber font-mono text-sm">
+                          <AnimatedNumber value={24} isVisible={isIntersecting} />-
+                          <AnimatedNumber value={72} isVisible={isIntersecting} />H
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Terminal Action */}
+              <div className="text-center">
+                <Button 
+                  variant="analyze" 
+                  size="lg" 
+                  className="px-12 font-mono bg-terminal-blue/20 border border-terminal-blue/40 text-terminal-blue hover:bg-terminal-blue/30"
+                >
+                  INITIALIZE ANALYSIS (<AnimatedNumber 
+                    value={25} 
                     isVisible={isIntersecting} 
-                    formatter={(val) => `${val.toFixed(1)}%`}
-                    className="text-neon-green font-semibold"
-                  />
-                </div>
+                  /> CREDITS)
+                </Button>
               </div>
-            </div>
-
-            {/* Interactive Charts and Metrics */}
-            <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 mb-8">
-              {/* Charts Container */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Social Sentiment Analysis */}
-                <Card className="p-6 bg-black/30 border border-neon-green/20">
-                  <h4 className="text-lg font-semibold text-neon-green mb-6 flex items-center gap-2">
-                    <Eye className="w-5 h-5" />
-                    Social Sentiment Analysis
-                  </h4>
-                  <div className="h-64">
-                    <AnimatedChart
-                      data={socialData}
-                      isVisible={isIntersecting}
-                      gridColor="hsl(var(--neon-green) / 0.1)"
-                      lines={[
-                        { dataKey: 'views', stroke: 'hsl(var(--neon-cyan))' },
-                        { dataKey: 'likes', stroke: 'hsl(var(--neon-pink))' },
-                        { dataKey: 'reposts', stroke: 'hsl(var(--neon-purple))' },
-                        { dataKey: 'members', stroke: 'hsl(var(--neon-green))' }
-                      ]}
-                      tooltipFormatter={(value, name) => {
-                        const formatValue = (val) => {
-                          if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
-                          return val.toString();
-                        };
-                        const labels = {
-                          views: 'Views',
-                          likes: 'Engagements', 
-                          reposts: 'Shares',
-                          members: 'Community Size'
-                        };
-                        return [formatValue(value), labels[name] || name];
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-4 mt-4 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
-                      <span className="text-muted-foreground">Views</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
-                      <span className="text-muted-foreground">Engagements</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                      <span className="text-muted-foreground">Shares</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-green"></div>
-                      <span className="text-muted-foreground">Community Size</span>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Market Analytics */}
-                <Card className="p-6 bg-black/30 border border-neon-cyan/20">
-                  <h4 className="text-lg font-semibold text-neon-cyan mb-6 flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5" />
-                    Market Analytics
-                  </h4>
-                  <div className="h-64">
-                    <AnimatedChart
-                      data={technicalData}
-                      isVisible={isIntersecting}
-                      gridColor="hsl(var(--neon-cyan) / 0.1)"
-                      lines={[
-                        { dataKey: 'holders', stroke: 'hsl(var(--neon-green))' },
-                        { dataKey: 'volume', stroke: 'hsl(var(--neon-cyan))' },
-                        { dataKey: 'bundles', stroke: 'hsl(var(--neon-purple))' },
-                        { dataKey: 'marketCap', stroke: 'hsl(var(--neon-pink))' }
-                      ]}
-                      tooltipFormatter={(value, name) => {
-                        const formatValue = (val) => {
-                          if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}k`;
-                          if (name === 'volume') return `${val}M`;
-                          if (name === 'marketCap') return `$${val}M`;
-                          return val.toString();
-                        };
-                        const labels = {
-                          holders: 'Token Holders',
-                          volume: 'Trading Volume', 
-                          bundles: 'Transaction Bundles',
-                          marketCap: 'Market Capitalization'
-                        };
-                        return [formatValue(value), labels[name] || name];
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-4 mt-4 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-green"></div>
-                      <span className="text-muted-foreground">Token Holders</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
-                      <span className="text-muted-foreground">Trading Volume</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                      <span className="text-muted-foreground">Transaction Bundles</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
-                      <span className="text-muted-foreground">Market Cap</span>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-
-              {/* Additional Metrics Panel */}
-              <div className="xl:block hidden">
-                <Card className="p-6 bg-black/30 border border-neon-purple/20 h-fit">
-                  <h4 className="text-lg font-semibold text-neon-purple mb-6 flex items-center gap-2">
-                    <Shield className="w-5 h-5" />
-                    Risk Assessment
-                  </h4>
-                  <div className="space-y-4">
-                    {/* Avg Wallet Age */}
-                    <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
-                      <span className="text-neon-cyan font-semibold">
-                        <AnimatedNumber 
-                          value={60} 
-                          isVisible={isIntersecting} 
-                          formatter={(val) => `${val} days`}
-                        />
-                      </span>
-                    </div>
-
-                    {/* Dev Paid */}
-                    <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Dev Paid</span>
-                      <span className="text-neon-green font-semibold">Yes</span>
-                    </div>
-
-                    {/* Developer Verification */}
-                    <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Developer Verification</span>
-                      <span className="text-neon-green font-semibold">Verified</span>
-                    </div>
-
-                    {/* Dev Credibility Score */}
-                    <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Credibility Score</span>
-                      <span className="text-neon-pink font-semibold">
-                        <AnimatedNumber 
-                          value={87} 
-                          isVisible={isIntersecting} 
-                          formatter={(val) => `${val}/100`}
-                        />
-                      </span>
-                    </div>
-
-                    {/* Admin Followers */}
-                    <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Community Reach</span>
-                      <span className="text-neon-purple font-semibold">
-                        <AnimatedNumber 
-                          value={67} 
-                          isVisible={isIntersecting} 
-                          formatter={(val) => `${val}K Followers`}
-                        />
-                      </span>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </div>
-
-            {/* Mobile Metrics Strip */}
-            <div className="xl:hidden mb-8 overflow-x-auto">
-              <div className="flex gap-4 min-w-max pb-2">
-                <div className="bg-gradient-to-r from-neon-cyan/10 to-neon-cyan/5 border border-neon-cyan/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-xs text-muted-foreground">Avg Wallet Age:</span>
-                  <span className="text-neon-cyan font-semibold text-sm">
-                    <AnimatedNumber 
-                      value={60} 
-                      isVisible={isIntersecting} 
-                      formatter={(val) => `${val} days`}
-                    />
-                  </span>
-                </div>
-                <div className="bg-gradient-to-r from-neon-green/10 to-neon-green/5 border border-neon-green/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-xs text-muted-foreground">Dev Paid:</span>
-                  <span className="text-neon-green font-semibold text-sm">✓ Yes</span>
-                </div>
-                <div className="bg-gradient-to-r from-neon-pink/10 to-neon-pink/5 border border-neon-pink/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-xs text-muted-foreground">Dev Credibility:</span>
-                  <span className="text-neon-pink font-semibold text-sm">
-                    <AnimatedNumber 
-                      value={87} 
-                      isVisible={isIntersecting} 
-                      formatter={(val) => `${val}/100`}
-                    />
-                  </span>
-                </div>
-                <div className="bg-gradient-to-r from-neon-purple/10 to-neon-purple/5 border border-neon-purple/30 rounded-full px-4 py-2 flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-xs text-muted-foreground">Admin Followers:</span>
-                  <span className="text-neon-purple font-semibold text-sm">
-                    <AnimatedNumber 
-                      value={67} 
-                      isVisible={isIntersecting} 
-                      formatter={(val) => `${val}K`}
-                    />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* AI Verdict Section */}
-            <Card className="p-6 bg-gradient-to-r from-neon-green/5 to-neon-cyan/5 border border-neon-green/30 mb-8">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/20 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-neon-green" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-lg font-semibold text-neon-green mb-2">AI Verdict</h4>
-                  <p className="text-foreground mb-4 text-sm">
-                    "Strong community growth + stable holder base. Technicals align for an upward trend."
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-black/20 rounded-lg p-4">
-                      <div className="text-xs text-muted-foreground mb-1">Primary Entry Range</div>
-                      <div className="text-neon-green font-semibold">$0.0000085 - $0.0000092</div>
-                    </div>
-                    <div className="bg-black/20 rounded-lg p-4">
-                      <div className="text-xs text-muted-foreground mb-1">Risk Level</div>
-                      <div className="flex items-center gap-2">
-                        <Shield className="w-4 h-4 text-neon-green" />
-                        <span className="text-neon-green font-semibold">Low Risk</span>
-                      </div>
-                    </div>
-                    <div className="bg-black/20 rounded-lg p-4">
-                      <div className="text-xs text-muted-foreground mb-1">Target Timeframe</div>
-                      <div className="text-neon-cyan font-semibold">
-                        <AnimatedNumber 
-                          value={24} 
-                          isVisible={isIntersecting} 
-                        />-<AnimatedNumber 
-                          value={48} 
-                          isVisible={isIntersecting} 
-                        /> Hours
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Action button */}
-            <div className="text-center">
-              <Button variant="analyze" size="lg" className="px-12">
-                Analyze Your Coin (<AnimatedNumber 
-                  value={30} 
-                  isVisible={isIntersecting} 
-                /> Credits)
-              </Button>
             </div>
           </div>
         </div>

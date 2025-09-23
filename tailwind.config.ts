@@ -57,10 +57,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        terminal: {
+          green: "hsl(var(--terminal-green))",
+          amber: "hsl(var(--terminal-amber))",
+          blue: "hsl(var(--terminal-blue))",
+          red: "hsl(var(--terminal-red))",
+          gray: "hsl(var(--terminal-gray))",
+          white: "hsl(var(--terminal-white))",
+        },
         neon: {
           green: "hsl(var(--neon-green))",
           cyan: "hsl(var(--neon-cyan))",
           purple: "hsl(var(--neon-purple))",
+          pink: "hsl(var(--neon-pink))",
         },
       },
       backgroundImage: {
