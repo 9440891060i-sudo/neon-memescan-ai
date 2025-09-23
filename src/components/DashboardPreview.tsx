@@ -29,14 +29,49 @@ const technicalData = [
   { time: '3PM', holders: 152800, volume: 8.9, liquidity: 750000, txCount: 2650 },
 ];
 
-// Mock data for trading chart with candlestick-style data - uptrending pattern
+// Mock data for trading chart with realistic candlestick pattern
 const tradingData = [
-  { time: 'Apr 6', open: 0.0000074, high: 0.0000078, low: 0.0000072, close: 0.0000077 },
-  { time: '11', open: 0.0000077, high: 0.0000082, low: 0.0000075, close: 0.0000081 },
-  { time: '16', open: 0.0000081, high: 0.0000085, low: 0.0000079, close: 0.0000083 },
-  { time: '21', open: 0.0000083, high: 0.0000089, low: 0.0000082, close: 0.0000087 },
-  { time: '26', open: 0.0000087, high: 0.0000093, low: 0.0000085, close: 0.0000091 },
-  { time: 'May', open: 0.0000091, high: 0.0000097, low: 0.0000089, close: 0.0000095 },
+  // Early accumulation phase
+  { time: '', open: 0.0000032, high: 0.0000035, low: 0.0000031, close: 0.0000034, ma20: 0.0000033, ma50: 0.0000032 },
+  { time: '', open: 0.0000034, high: 0.0000037, low: 0.0000033, close: 0.0000036, ma20: 0.0000034, ma50: 0.0000033 },
+  { time: '', open: 0.0000036, high: 0.0000038, low: 0.0000034, close: 0.0000037, ma20: 0.0000035, ma50: 0.0000034 },
+  { time: '', open: 0.0000037, high: 0.0000041, low: 0.0000036, close: 0.0000040, ma20: 0.0000036, ma50: 0.0000035 },
+  { time: '', open: 0.0000040, high: 0.0000043, low: 0.0000039, close: 0.0000042, ma20: 0.0000038, ma50: 0.0000036 },
+  
+  // Uptrend begins
+  { time: '', open: 0.0000042, high: 0.0000048, low: 0.0000041, close: 0.0000047, ma20: 0.0000040, ma50: 0.0000037 },
+  { time: '', open: 0.0000047, high: 0.0000052, low: 0.0000045, close: 0.0000051, ma20: 0.0000042, ma50: 0.0000039 },
+  { time: '', open: 0.0000051, high: 0.0000055, low: 0.0000049, close: 0.0000054, ma20: 0.0000045, ma50: 0.0000041 },
+  { time: '', open: 0.0000054, high: 0.0000059, low: 0.0000052, close: 0.0000057, ma20: 0.0000048, ma50: 0.0000043 },
+  { time: '', open: 0.0000057, high: 0.0000063, low: 0.0000055, close: 0.0000061, ma20: 0.0000051, ma50: 0.0000045 },
+  
+  // Strong uptrend
+  { time: '', open: 0.0000061, high: 0.0000068, low: 0.0000059, close: 0.0000066, ma20: 0.0000054, ma50: 0.0000048 },
+  { time: '', open: 0.0000066, high: 0.0000072, low: 0.0000064, close: 0.0000070, ma20: 0.0000058, ma50: 0.0000051 },
+  { time: '', open: 0.0000070, high: 0.0000077, low: 0.0000068, close: 0.0000075, ma20: 0.0000062, ma50: 0.0000054 },
+  { time: '', open: 0.0000075, high: 0.0000082, low: 0.0000072, close: 0.0000079, ma20: 0.0000066, ma50: 0.0000058 },
+  { time: '', open: 0.0000079, high: 0.0000085, low: 0.0000076, close: 0.0000083, ma20: 0.0000071, ma50: 0.0000062 },
+  
+  // Peak formation
+  { time: '', open: 0.0000083, high: 0.0000089, low: 0.0000080, close: 0.0000087, ma20: 0.0000075, ma50: 0.0000066 },
+  { time: '', open: 0.0000087, high: 0.0000092, low: 0.0000084, close: 0.0000090, ma20: 0.0000079, ma50: 0.0000070 },
+  { time: '', open: 0.0000090, high: 0.0000094, low: 0.0000086, close: 0.0000088, ma20: 0.0000082, ma50: 0.0000074 },
+  { time: '', open: 0.0000088, high: 0.0000091, low: 0.0000084, close: 0.0000086, ma20: 0.0000085, ma50: 0.0000077 },
+  { time: '', open: 0.0000086, high: 0.0000089, low: 0.0000082, close: 0.0000084, ma20: 0.0000087, ma50: 0.0000080 },
+  
+  // Downtrend begins
+  { time: '', open: 0.0000084, high: 0.0000087, low: 0.0000079, close: 0.0000081, ma20: 0.0000088, ma50: 0.0000083 },
+  { time: '', open: 0.0000081, high: 0.0000084, low: 0.0000076, close: 0.0000078, ma20: 0.0000087, ma50: 0.0000085 },
+  { time: '', open: 0.0000078, high: 0.0000081, low: 0.0000073, close: 0.0000075, ma20: 0.0000085, ma50: 0.0000087 },
+  { time: '', open: 0.0000075, high: 0.0000078, low: 0.0000070, close: 0.0000072, ma20: 0.0000083, ma50: 0.0000088 },
+  { time: '', open: 0.0000072, high: 0.0000075, low: 0.0000067, close: 0.0000069, ma20: 0.0000080, ma50: 0.0000089 },
+  
+  // Continued decline
+  { time: '', open: 0.0000069, high: 0.0000072, low: 0.0000064, close: 0.0000066, ma20: 0.0000077, ma50: 0.0000089 },
+  { time: '', open: 0.0000066, high: 0.0000069, low: 0.0000061, close: 0.0000063, ma20: 0.0000074, ma50: 0.0000088 },
+  { time: '', open: 0.0000063, high: 0.0000066, low: 0.0000058, close: 0.0000060, ma20: 0.0000071, ma50: 0.0000087 },
+  { time: '', open: 0.0000060, high: 0.0000063, low: 0.0000055, close: 0.0000057, ma20: 0.0000068, ma50: 0.0000085 },
+  { time: '', open: 0.0000057, high: 0.0000060, low: 0.0000052, close: 0.0000054, ma20: 0.0000065, ma50: 0.0000083 },
 ];
 
 export default function DashboardPreview() {
@@ -244,176 +279,8 @@ export default function DashboardPreview() {
                   </div>
                 </div>
 
-                {/* Right Sidebar - Trading Chart & Risk Assessment */}
+                {/* Right Sidebar - Community Signals & Risk Assessment */}
                 <div className="space-y-6">
-                  
-                  {/* Professional TradingView-Style Chart */}
-                  <Card className="p-0 bg-black/90 border border-terminal-green/30 backdrop-blur-sm overflow-hidden">
-                    
-                    {/* Trading Header */}
-                    <div className="px-4 py-3 border-b border-terminal-gray/20 bg-black/60">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-6 h-6 rounded-full bg-terminal-green/20 flex items-center justify-center">
-                            <span className="text-terminal-green font-bold text-xs">P</span>
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-bold text-terminal-white font-mono">PEPE/USDT</h4>
-                            <div className="flex items-center gap-2 text-xs">
-                              <span className="text-terminal-green font-mono">0.0000095</span>
-                              <span className="text-terminal-green font-mono">+28.4%</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* Buy/Sell Buttons */}
-                        <div className="flex items-center gap-2">
-                          <button className="px-2 py-1 bg-terminal-red/20 border border-terminal-red/40 text-terminal-red rounded font-mono text-xs hover:bg-terminal-red/30 transition-colors">
-                            SELL
-                          </button>
-                          <button className="px-2 py-1 bg-terminal-blue/20 border border-terminal-blue/40 text-terminal-blue rounded font-mono text-xs hover:bg-terminal-blue/30 transition-colors">
-                            BUY
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Chart Container */}
-                    <div className="relative">
-                      {/* Price Levels (Right Side) */}
-                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-black/40 border-l border-terminal-gray/20 z-10">
-                        <div className="h-full flex flex-col justify-between py-2 px-1">
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000100</div>
-                          <div className="text-xs text-terminal-amber font-mono text-right font-semibold">0.0000095</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000090</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000085</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000080</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000075</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000070</div>
-                        </div>
-                      </div>
-
-                      {/* Main Chart Area */}
-                      <div className="pr-16 bg-black/60" style={{ height: '240px' }}>
-                        <div className="relative h-full">
-                          {/* Candlestick Chart */}
-                          <div className="absolute inset-0 flex items-end justify-around px-4 py-4">
-                            {tradingData.map((candle, index) => {
-                              const isGreen = candle.close > candle.open;
-                              const priceRange = 0.0000030; // Max price range for scaling
-                              const minPrice = 0.0000070;
-                              const chartHeight = 200; // Available chart height
-                              
-                              // Calculate positions (inverted because chart goes from bottom to top)
-                              const openPos = ((candle.open - minPrice) / priceRange) * chartHeight;
-                              const closePos = ((candle.close - minPrice) / priceRange) * chartHeight;
-                              const highPos = ((candle.high - minPrice) / priceRange) * chartHeight;
-                              const lowPos = ((candle.low - minPrice) / priceRange) * chartHeight;
-                              
-                              const bodyHeight = Math.abs(closePos - openPos);
-                              const bodyBottom = Math.min(openPos, closePos);
-                              
-                              return (
-                                <div key={index} className="flex flex-col items-center relative">
-                                  {/* Container for entire candle */}
-                                  <div className="relative" style={{ height: `${chartHeight}px`, width: '12px' }}>
-                                    {/* Top Wick */}
-                                    <div 
-                                      className={`absolute left-1/2 transform -translate-x-1/2 w-0.5 ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
-                                      style={{ 
-                                        bottom: `${Math.max(openPos, closePos)}px`,
-                                        height: `${highPos - Math.max(openPos, closePos)}px`
-                                      }}
-                                    />
-                                    
-                                    {/* Body */}
-                                    <div 
-                                      className={`absolute left-1/2 transform -translate-x-1/2 w-3 ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'} ${!isGreen ? 'bg-opacity-90' : ''}`}
-                                      style={{ 
-                                        bottom: `${bodyBottom}px`,
-                                        height: `${Math.max(bodyHeight, 1)}px`
-                                      }}
-                                    />
-                                    
-                                    {/* Bottom Wick */}
-                                    <div 
-                                      className={`absolute left-1/2 transform -translate-x-1/2 w-0.5 ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
-                                      style={{ 
-                                        bottom: `${lowPos}px`,
-                                        height: `${Math.min(openPos, closePos) - lowPos}px`
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-
-                          {/* Suggested Entry Line */}
-                          <div className="absolute inset-0 flex items-center">
-                            <div className="w-full relative">
-                              <div 
-                                className="absolute w-full border-t border-terminal-amber border-dashed opacity-80"
-                                style={{ top: '35%' }}
-                              />
-                              <div 
-                                className="absolute right-20 bg-terminal-amber/20 text-terminal-amber px-1 py-0.5 text-xs font-mono border border-terminal-amber/40 rounded"
-                                style={{ top: '32%' }}
-                              >
-                                ENTRY
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Grid Lines */}
-                          <div className="absolute inset-0 pointer-events-none">
-                            {[...Array(6)].map((_, i) => (
-                              <div 
-                                key={i}
-                                className="absolute w-full border-t border-terminal-gray/5"
-                                style={{ top: `${(i + 1) * 14.28}%` }}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Time Axis */}
-                      <div className="flex justify-between items-center px-4 py-1 bg-black/40 border-t border-terminal-gray/20 pr-16">
-                        {tradingData.map((item, index) => (
-                          <span key={index} className="text-xs text-terminal-gray font-mono">
-                            {item.time}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Current Price Indicator */}
-                      <div className="absolute right-16 top-1/3 transform -translate-y-1/2">
-                        <div className="flex items-center">
-                          <div className="w-1.5 h-1.5 bg-terminal-green rounded-full animate-pulse"></div>
-                          <div className="ml-1 bg-terminal-green text-black px-1 py-0.5 text-xs font-mono font-semibold rounded">
-                            0.0000095
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Chart Controls */}
-                    <div className="px-4 py-2 bg-black/40 border-t border-terminal-gray/20">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="text-terminal-green font-mono text-xs">4H</span>
-                          <div className="flex gap-1">
-                            <span className="text-xs px-1 py-0.5 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1D</span>
-                            <span className="text-xs px-1 py-0.5 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1W</span>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs text-terminal-amber font-mono">$0.0000090</div>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
                   
                   {/* Community Signals */}
                   <CommunitySignals />
@@ -475,6 +342,214 @@ export default function DashboardPreview() {
                     </div>
                   </Card>
                 </div>
+              </div>
+
+              {/* Professional TradingView-Style Chart */}
+              <div className="mb-8">
+                <Card className="p-0 bg-black/90 border border-terminal-green/30 backdrop-blur-sm overflow-hidden">
+                  
+                  {/* Trading Header */}
+                  <div className="px-6 py-4 border-b border-terminal-gray/20 bg-black/60">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-8 h-8 rounded-full bg-terminal-green/20 flex items-center justify-center">
+                          <span className="text-terminal-green font-bold text-sm">P</span>
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-bold text-terminal-white font-mono">PEPE/USDT CHART</h4>
+                          <div className="flex items-center gap-2 text-sm">
+                            <span className="text-terminal-red font-mono">0.0000054</span>
+                            <span className="text-terminal-red font-mono">-40.2%</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Chart Timeframe */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-terminal-green font-mono text-sm">4H</span>
+                        <div className="flex gap-1">
+                          <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1D</span>
+                          <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1W</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Chart Container */}
+                  <div className="relative">
+                    {/* Price Levels (Right Side) */}
+                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-black/40 border-l border-terminal-gray/20 z-10">
+                      <div className="h-full flex flex-col justify-between py-4 px-2">
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.0000100</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.0000090</div>
+                        <div className="text-xs text-terminal-amber font-mono text-right font-semibold">0.0000080</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.0000070</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.0000060</div>
+                        <div className="text-xs text-terminal-red font-mono text-right">0.0000050</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.0000040</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.0000030</div>
+                      </div>
+                    </div>
+
+                    {/* Main Chart Area */}
+                    <div className="pr-20 bg-black/60" style={{ height: '400px' }}>
+                      <div className="relative h-full">
+                        
+                        {/* Moving Average Lines */}
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                          <defs>
+                            <linearGradient id="ma20Gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="hsl(var(--terminal-blue))" stopOpacity="0.7"/>
+                              <stop offset="100%" stopColor="hsl(var(--terminal-blue))" stopOpacity="0.9"/>
+                            </linearGradient>
+                            <linearGradient id="ma50Gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="hsl(var(--terminal-amber))" stopOpacity="0.7"/>
+                              <stop offset="100%" stopColor="hsl(var(--terminal-amber))" stopOpacity="0.9"/>
+                            </linearGradient>
+                          </defs>
+                          
+                          {/* MA20 Line (Blue) */}
+                          <path
+                            d={`M ${tradingData.map((candle, index) => {
+                              const x = (index / (tradingData.length - 1)) * 100;
+                              const y = 100 - (((candle.ma20 - 0.0000030) / 0.0000070) * 100);
+                              return `${index === 0 ? 'M' : 'L'} ${x}% ${y}%`;
+                            }).join(' ')}`}
+                            stroke="url(#ma20Gradient)"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                          
+                          {/* MA50 Line (Orange) */}
+                          <path
+                            d={`M ${tradingData.map((candle, index) => {
+                              const x = (index / (tradingData.length - 1)) * 100;
+                              const y = 100 - (((candle.ma50 - 0.0000030) / 0.0000070) * 100);
+                              return `${index === 0 ? 'M' : 'L'} ${x}% ${y}%`;
+                            }).join(' ')}`}
+                            stroke="url(#ma50Gradient)"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                        </svg>
+                        
+                        {/* Candlestick Chart */}
+                        <div className="absolute inset-0 flex items-end px-4 py-4" style={{ paddingRight: '80px' }}>
+                          {tradingData.map((candle, index) => {
+                            const isGreen = candle.close > candle.open;
+                            const priceRange = 0.0000070; // Max price range for scaling
+                            const minPrice = 0.0000030;
+                            const chartHeight = 350; // Available chart height
+                            
+                            // Calculate positions (inverted because chart goes from bottom to top)
+                            const openPos = ((candle.open - minPrice) / priceRange) * chartHeight;
+                            const closePos = ((candle.close - minPrice) / priceRange) * chartHeight;
+                            const highPos = ((candle.high - minPrice) / priceRange) * chartHeight;
+                            const lowPos = ((candle.low - minPrice) / priceRange) * chartHeight;
+                            
+                            const bodyHeight = Math.abs(closePos - openPos);
+                            const bodyBottom = Math.min(openPos, closePos);
+                            
+                            return (
+                              <div key={index} className="flex flex-col items-center relative" style={{ width: `${100 / tradingData.length}%` }}>
+                                {/* Container for entire candle */}
+                                <div className="relative" style={{ height: `${chartHeight}px`, width: '4px' }}>
+                                  {/* Top Wick */}
+                                  <div 
+                                    className={`absolute left-1/2 transform -translate-x-1/2 w-px ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                    style={{ 
+                                      bottom: `${Math.max(openPos, closePos)}px`,
+                                      height: `${Math.max(highPos - Math.max(openPos, closePos), 0)}px`
+                                    }}
+                                  />
+                                  
+                                  {/* Body */}
+                                  <div 
+                                    className={`absolute left-1/2 transform -translate-x-1/2 w-full ${
+                                      isGreen ? 'bg-terminal-green' : 'bg-terminal-red'
+                                    } ${bodyHeight < 2 ? 'border-t' : ''} ${
+                                      !isGreen && bodyHeight < 2 ? 'border-terminal-red' : ''
+                                    } ${
+                                      isGreen && bodyHeight < 2 ? 'border-terminal-green' : ''
+                                    }`}
+                                    style={{ 
+                                      bottom: `${bodyBottom}px`,
+                                      height: `${Math.max(bodyHeight, 1)}px`
+                                    }}
+                                  />
+                                  
+                                  {/* Bottom Wick */}
+                                  <div 
+                                    className={`absolute left-1/2 transform -translate-x-1/2 w-px ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                    style={{ 
+                                      bottom: `${lowPos}px`,
+                                      height: `${Math.max(Math.min(openPos, closePos) - lowPos, 0)}px`
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Suggested Entry Line */}
+                        <div className="absolute inset-0 flex items-center" style={{ top: '30%' }}>
+                          <div className="w-full relative">
+                            <div className="absolute w-full border-t border-terminal-amber border-dashed opacity-70" />
+                            <div className="absolute left-4 bg-terminal-amber/20 text-terminal-amber px-2 py-1 text-xs font-mono border border-terminal-amber/40 rounded">
+                              Suggested Entry: $0.0000078
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Grid Lines */}
+                        <div className="absolute inset-0 pointer-events-none">
+                          {[...Array(8)].map((_, i) => (
+                            <div 
+                              key={i}
+                              className="absolute w-full border-t border-terminal-gray/5"
+                              style={{ top: `${(i + 1) * 12.5}%` }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Current Price Indicator */}
+                    <div className="absolute right-20 bottom-1/4 transform translate-y-1/2">
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-terminal-red rounded-full animate-pulse"></div>
+                        <div className="ml-2 bg-terminal-red text-white px-2 py-1 text-xs font-mono font-semibold rounded">
+                          0.0000054
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Chart Legend */}
+                  <div className="px-6 py-3 bg-black/40 border-t border-terminal-gray/20">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-4 h-0.5 bg-terminal-blue"></div>
+                          <span className="text-terminal-gray font-mono">MA20</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-4 h-0.5 bg-terminal-amber"></div>
+                          <span className="text-terminal-gray font-mono">MA50</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <div className="w-4 h-0.5 bg-terminal-amber border-dashed border-b"></div>
+                          <span className="text-terminal-gray font-mono">Entry Zone</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-terminal-gray font-mono">Volume:</div>
+                        <div className="text-sm text-terminal-green font-mono">$24.8M</div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
               </div>
 
               {/* AI Analysis Summary */}
