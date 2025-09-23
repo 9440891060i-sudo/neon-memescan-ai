@@ -29,15 +29,14 @@ const technicalData = [
   { time: '3PM', holders: 152800, volume: 8.9, liquidity: 750000, txCount: 2650 },
 ];
 
-// Mock data for trading chart with price action
+// Mock data for trading chart with candlestick-style data
 const tradingData = [
-  { time: '9AM', price: 0.0000089, suggestedEntry: 0.0000090 },
-  { time: '10AM', price: 0.0000092, suggestedEntry: 0.0000090 },
-  { time: '11AM', price: 0.0000087, suggestedEntry: 0.0000090 },
-  { time: '12PM', price: 0.0000095, suggestedEntry: 0.0000090 },
-  { time: '1PM', price: 0.0000098, suggestedEntry: 0.0000090 },
-  { time: '2PM', price: 0.0000093, suggestedEntry: 0.0000090 },
-  { time: '3PM', price: 0.0000099, suggestedEntry: 0.0000090 },
+  { time: '06', open: 0.0000087, high: 0.0000091, low: 0.0000085, close: 0.0000089, suggestedEntry: 0.0000090 },
+  { time: '11', open: 0.0000089, high: 0.0000094, low: 0.0000088, close: 0.0000092, suggestedEntry: 0.0000090 },
+  { time: '16', open: 0.0000092, high: 0.0000093, low: 0.0000084, close: 0.0000087, suggestedEntry: 0.0000090 },
+  { time: '21', open: 0.0000087, high: 0.0000097, low: 0.0000086, close: 0.0000095, suggestedEntry: 0.0000090 },
+  { time: '26', open: 0.0000095, high: 0.0000102, low: 0.0000094, close: 0.0000098, suggestedEntry: 0.0000090 },
+  { time: 'Mar', open: 0.0000098, high: 0.0000099, low: 0.0000091, close: 0.0000093, suggestedEntry: 0.0000090 },
 ];
 
 export default function DashboardPreview() {
@@ -310,74 +309,153 @@ export default function DashboardPreview() {
                 </div>
               </div>
 
-              {/* Professional Trading Chart */}
+              {/* Professional TradingView-Style Chart */}
               <div className="mb-8">
-                <Card className="p-6 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-8 h-8 bg-terminal-green/20 rounded-lg">
-                        <TrendingUp className="w-4 h-4 text-terminal-green" />
+                <Card className="p-0 bg-black/90 border border-terminal-green/30 backdrop-blur-sm overflow-hidden">
+                  
+                  {/* Trading Header */}
+                  <div className="px-6 py-4 border-b border-terminal-gray/20 bg-black/60">
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-terminal-green/20 flex items-center justify-center">
+                            <span className="text-terminal-green font-bold text-sm">P</span>
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-terminal-white font-mono">PEPE / TetherUS</h4>
+                            <div className="flex items-center gap-2 text-sm">
+                              <span className="text-terminal-green font-mono">0.0000089</span>
+                              <span className="text-terminal-green font-mono">+0.0000008 (+9.85%)</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-terminal-white font-mono">
-                          PEPE/USDT TRADING VIEW
-                        </h4>
-                        <div className="text-xs text-terminal-gray uppercase tracking-wider">
-                          Real-Time Price Action & Entry Signals
+                      
+                      {/* Buy/Sell Buttons */}
+                      <div className="flex items-center gap-3">
+                        <button className="px-4 py-2 bg-terminal-red/20 border border-terminal-red/40 text-terminal-red rounded font-mono text-sm hover:bg-terminal-red/30 transition-colors">
+                          0.0000088<br/>
+                          <span className="text-xs">SELL</span>
+                        </button>
+                        <span className="text-terminal-gray font-mono text-xs">0.0001</span>
+                        <button className="px-4 py-2 bg-terminal-blue/20 border border-terminal-blue/40 text-terminal-blue rounded font-mono text-sm hover:bg-terminal-blue/30 transition-colors">
+                          0.0000089<br/>
+                          <span className="text-xs">BUY</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Chart Container */}
+                  <div className="relative">
+                    {/* Price Levels (Right Side) */}
+                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-black/40 border-l border-terminal-gray/20 z-10">
+                      <div className="h-full flex flex-col justify-between py-4 px-2">
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.000010</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.000009</div>
+                        <div className="text-xs text-terminal-amber font-mono text-right font-semibold">0.000008</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.000007</div>
+                        <div className="text-xs text-terminal-gray font-mono text-right">0.000006</div>
+                      </div>
+                    </div>
+
+                    {/* Main Chart Area */}
+                    <div className="pr-20 bg-black/60" style={{ height: '400px' }}>
+                      <div className="relative h-full">
+                        {/* Candlestick Chart Simulation */}
+                        <div className="absolute inset-0 flex items-end justify-around px-8 py-8">
+                          {tradingData.map((candle, index) => {
+                            const isGreen = candle.close > candle.open;
+                            const bodyHeight = Math.abs(candle.close - candle.open) * 2000000;
+                            const wickTop = (candle.high - Math.max(candle.open, candle.close)) * 2000000;
+                            const wickBottom = (Math.min(candle.open, candle.close) - candle.low) * 2000000;
+                            
+                            return (
+                              <div key={index} className="flex flex-col items-center relative" style={{ height: '300px' }}>
+                                {/* Top Wick */}
+                                <div 
+                                  className={`w-0.5 ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                  style={{ height: `${wickTop}px` }}
+                                />
+                                {/* Body */}
+                                <div 
+                                  className={`w-3 ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                  style={{ height: `${Math.max(bodyHeight, 2)}px` }}
+                                />
+                                {/* Bottom Wick */}
+                                <div 
+                                  className={`w-0.5 ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
+                                  style={{ height: `${wickBottom}px` }}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Suggested Entry Line */}
+                        <div className="absolute inset-0 flex items-center">
+                          <div className="w-full relative">
+                            <div 
+                              className="absolute w-full border-t-2 border-terminal-amber border-dashed"
+                              style={{ top: '60%' }}
+                            />
+                            <div 
+                              className="absolute right-24 bg-terminal-amber text-black px-2 py-1 text-xs font-mono font-semibold"
+                              style={{ top: '57%' }}
+                            >
+                              SUGGESTED ENTRY
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Grid Lines */}
+                        <div className="absolute inset-0 pointer-events-none">
+                          {[...Array(5)].map((_, i) => (
+                            <div 
+                              key={i}
+                              className="absolute w-full border-t border-terminal-gray/10"
+                              style={{ top: `${(i + 1) * 16.66}%` }}
+                            />
+                          ))}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-xs">
-                      <div className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></div>
-                      <span className="text-terminal-green font-mono">LIVE</span>
+
+                    {/* Time Axis */}
+                    <div className="flex justify-between items-center px-8 py-2 bg-black/40 border-t border-terminal-gray/20 pr-20">
+                      {tradingData.map((item, index) => (
+                        <span key={index} className="text-xs text-terminal-gray font-mono">
+                          {item.time}
+                        </span>
+                      ))}
                     </div>
-                  </div>
-                  
-                  <div className="h-80">
-                    <AnimatedChart
-                      data={tradingData}
-                      isVisible={isIntersecting}
-                      gridColor="rgba(100, 116, 139, 0.1)"
-                      lines={[
-                        { 
-                          dataKey: 'price', 
-                          stroke: 'hsl(var(--terminal-green))', 
-                          strokeWidth: 3,
-                          dot: { fill: 'hsl(var(--terminal-green))', strokeWidth: 2, r: 4 }
-                        },
-                        { 
-                          dataKey: 'suggestedEntry', 
-                          stroke: 'hsl(var(--terminal-amber))', 
-                          strokeWidth: 2,
-                          strokeDasharray: "8 8",
-                          dot: false
-                        }
-                      ]}
-                      tooltipFormatter={(value, name) => {
-                        const formatValue = (val) => `$${val.toFixed(10)}`;
-                        const labels = {
-                          price: 'Current Price',
-                          suggestedEntry: 'Suggested Entry'
-                        };
-                        return [formatValue(value), labels[name] || name];
-                      }}
-                    />
-                  </div>
-                  
-                  <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
-                    <div className="flex flex-wrap gap-6">
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-4 h-1 bg-terminal-green"></div>
-                        <span className="text-terminal-gray font-mono">Price Action</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <div className="w-4 h-1 bg-terminal-amber border-dashed border-b-2"></div>
-                        <span className="text-terminal-gray font-mono">Suggested Entry</span>
+
+                    {/* Current Price Indicator */}
+                    <div className="absolute right-20 top-1/2 transform -translate-y-1/2">
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></div>
+                        <div className="ml-2 bg-terminal-green text-black px-2 py-1 text-xs font-mono font-semibold">
+                          0.0000089
+                        </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-sm text-terminal-gray font-mono">Entry Zone:</div>
-                      <div className="text-lg text-terminal-amber font-mono">$0.0000089-91</div>
+                  </div>
+
+                  {/* Chart Controls */}
+                  <div className="px-6 py-3 bg-black/40 border-t border-terminal-gray/20">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <span className="text-terminal-green font-mono text-sm">4H</span>
+                        <div className="flex gap-2">
+                          <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1D</span>
+                          <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1W</span>
+                          <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1M</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-terminal-gray font-mono">Entry Zone</div>
+                        <div className="text-sm text-terminal-amber font-mono">$0.0000088-90</div>
+                      </div>
                     </div>
                   </div>
                 </Card>
