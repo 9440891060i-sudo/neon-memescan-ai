@@ -29,6 +29,17 @@ const technicalData = [
   { time: '3PM', holders: 152800, volume: 8.9, liquidity: 750000, txCount: 2650 },
 ];
 
+// Mock data for trading chart with price action
+const tradingData = [
+  { time: '9AM', price: 0.0000089, suggestedEntry: 0.0000090 },
+  { time: '10AM', price: 0.0000092, suggestedEntry: 0.0000090 },
+  { time: '11AM', price: 0.0000087, suggestedEntry: 0.0000090 },
+  { time: '12PM', price: 0.0000095, suggestedEntry: 0.0000090 },
+  { time: '1PM', price: 0.0000098, suggestedEntry: 0.0000090 },
+  { time: '2PM', price: 0.0000093, suggestedEntry: 0.0000090 },
+  { time: '3PM', price: 0.0000099, suggestedEntry: 0.0000090 },
+];
+
 export default function DashboardPreview() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
   
@@ -37,7 +48,7 @@ export default function DashboardPreview() {
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2 font-mono">
-            Professional <span className="text-terminal-blue">Intelligence</span> Terminal
+            Your <span className="text-terminal-blue">Bloomberg</span> Terminal
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2 font-mono">
             Institutional-grade market intelligence combining real-time social sentiment analysis, 
@@ -297,6 +308,79 @@ export default function DashboardPreview() {
                     </div>
                   </Card>
                 </div>
+              </div>
+
+              {/* Professional Trading Chart */}
+              <div className="mb-8">
+                <Card className="p-6 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-8 h-8 bg-terminal-green/20 rounded-lg">
+                        <TrendingUp className="w-4 h-4 text-terminal-green" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-terminal-white font-mono">
+                          PEPE/USDT TRADING VIEW
+                        </h4>
+                        <div className="text-xs text-terminal-gray uppercase tracking-wider">
+                          Real-Time Price Action & Entry Signals
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></div>
+                      <span className="text-terminal-green font-mono">LIVE</span>
+                    </div>
+                  </div>
+                  
+                  <div className="h-80">
+                    <AnimatedChart
+                      data={tradingData}
+                      isVisible={isIntersecting}
+                      gridColor="rgba(100, 116, 139, 0.1)"
+                      lines={[
+                        { 
+                          dataKey: 'price', 
+                          stroke: 'hsl(var(--terminal-green))', 
+                          strokeWidth: 3,
+                          dot: { fill: 'hsl(var(--terminal-green))', strokeWidth: 2, r: 4 }
+                        },
+                        { 
+                          dataKey: 'suggestedEntry', 
+                          stroke: 'hsl(var(--terminal-amber))', 
+                          strokeWidth: 2,
+                          strokeDasharray: "8 8",
+                          dot: false
+                        }
+                      ]}
+                      tooltipFormatter={(value, name) => {
+                        const formatValue = (val) => `$${val.toFixed(10)}`;
+                        const labels = {
+                          price: 'Current Price',
+                          suggestedEntry: 'Suggested Entry'
+                        };
+                        return [formatValue(value), labels[name] || name];
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
+                    <div className="flex flex-wrap gap-6">
+                      <div className="flex items-center gap-2 text-xs">
+                        <div className="w-4 h-1 bg-terminal-green"></div>
+                        <span className="text-terminal-gray font-mono">Price Action</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs">
+                        <div className="w-4 h-1 bg-terminal-amber border-dashed border-b-2"></div>
+                        <span className="text-terminal-gray font-mono">Suggested Entry</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-terminal-gray font-mono">Entry Zone:</div>
+                      <div className="text-lg text-terminal-amber font-mono">$0.0000089-91</div>
+                    </div>
+                  </div>
+                </Card>
               </div>
 
               {/* AI Analysis Summary */}

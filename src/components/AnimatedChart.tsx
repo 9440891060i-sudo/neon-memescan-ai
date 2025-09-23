@@ -8,6 +8,7 @@ interface AnimatedChartProps {
     stroke: string;
     strokeDasharray?: string;
     strokeWidth?: number;
+    dot?: any;
   }>;
   isVisible: boolean;
   gridColor?: string;
@@ -42,7 +43,7 @@ export const AnimatedChart = ({
           }}
           formatter={tooltipFormatter}
         />
-        {lines.map(({ dataKey, stroke, strokeDasharray, strokeWidth = 2 }) => (
+        {lines.map(({ dataKey, stroke, strokeDasharray, strokeWidth = 2, dot }) => (
           <Line 
             key={dataKey}
             type="monotone" 
@@ -50,7 +51,7 @@ export const AnimatedChart = ({
             stroke={stroke} 
             strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
-            dot={(props) => {
+            dot={dot !== false ? (dot || ((props) => {
               const isLast = props.index === data.length - 1;
               return isLast ? (
                 <circle 
@@ -62,7 +63,7 @@ export const AnimatedChart = ({
                   strokeWidth={2}
                 />
               ) : null;
-            }}
+            })) : false}
             activeDot={{ r: 4, stroke, strokeWidth: 2, fill: stroke }}
             isAnimationActive={false}
           />
