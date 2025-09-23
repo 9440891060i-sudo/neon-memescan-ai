@@ -37,19 +37,19 @@ All colors MUST be HSL.
     --input: 220 15% 12%;
     --ring: 158 100% 50%;
 
-    /* Professional terminal colors - vibrant but refined */
-    --terminal-green: 158 85% 60%;
-    --terminal-amber: 45 95% 65%;
-    --terminal-blue: 210 90% 65%;
-    --terminal-red: 0 85% 60%;
+    /* Professional terminal colors - full vibrancy */
+    --terminal-green: 158 100% 50%;
+    --terminal-amber: 45 100% 60%;
+    --terminal-blue: 210 100% 60%;
+    --terminal-red: 0 100% 60%;
     --terminal-gray: 210 15% 75%;
     --terminal-white: 0 0% 95%;
     
     /* Legacy neon colors for compatibility */
-    --neon-green: 158 85% 60%;
-    --neon-cyan: 210 90% 65%;
-    --neon-purple: 270 85% 70%;
-    --neon-pink: 330 85% 70%;
+    --neon-green: 158 100% 50%;
+    --neon-cyan: 210 100% 60%;
+    --neon-purple: 270 100% 70%;
+    --neon-pink: 330 100% 70%;
     
     /* Gradients */
     --gradient-neon: linear-gradient(135deg, hsl(158 100% 50%), hsl(180 100% 50%), hsl(270 100% 70%));
