@@ -5,7 +5,6 @@ import { TrendingUp, Users, Eye, Heart, Repeat, Wallet, BarChart3, Package, Doll
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { AnimatedChart } from "@/components/AnimatedChart";
-import InteractiveTerminal from "@/components/InteractiveTerminal";
 
 // Mock data for social signals
 const socialData = [
@@ -69,13 +68,116 @@ export default function DashboardPreview() {
               </div>
             </div>
 
-            {/* Interactive Bloomberg Terminal */}
+            {/* Interactive Charts and Metrics */}
             <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 mb-8">
-              <InteractiveTerminal 
-                socialData={socialData}
-                technicalData={technicalData}
-                isVisible={isIntersecting}
-              />
+              {/* Charts Container */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Social Sentiment Analysis */}
+                <Card className="p-6 bg-black/30 border border-neon-green/20">
+                  <h4 className="text-lg font-semibold text-neon-green mb-6 flex items-center gap-2">
+                    <Eye className="w-5 h-5" />
+                    Social Sentiment Analysis
+                  </h4>
+                  <div className="h-64">
+                    <AnimatedChart
+                      data={socialData}
+                      isVisible={isIntersecting}
+                      gridColor="hsl(var(--neon-green) / 0.1)"
+                      lines={[
+                        { dataKey: 'views', stroke: 'hsl(var(--neon-cyan))' },
+                        { dataKey: 'likes', stroke: 'hsl(var(--neon-pink))' },
+                        { dataKey: 'reposts', stroke: 'hsl(var(--neon-purple))' },
+                        { dataKey: 'members', stroke: 'hsl(var(--neon-green))' }
+                      ]}
+                      tooltipFormatter={(value, name) => {
+                        const formatValue = (val) => {
+                          if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+                          return val.toString();
+                        };
+                        const labels = {
+                          views: 'Views',
+                          likes: 'Engagements', 
+                          reposts: 'Shares',
+                          members: 'Community Size'
+                        };
+                        return [formatValue(value), labels[name] || name];
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-4 mt-4 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
+                      <span className="text-muted-foreground">Views</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
+                      <span className="text-muted-foreground">Engagements</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
+                      <span className="text-muted-foreground">Shares</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-green"></div>
+                      <span className="text-muted-foreground">Community Size</span>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Market Analytics */}
+                <Card className="p-6 bg-black/30 border border-neon-cyan/20">
+                  <h4 className="text-lg font-semibold text-neon-cyan mb-6 flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5" />
+                    Market Analytics
+                  </h4>
+                  <div className="h-64">
+                    <AnimatedChart
+                      data={technicalData}
+                      isVisible={isIntersecting}
+                      gridColor="hsl(var(--neon-cyan) / 0.1)"
+                      lines={[
+                        { dataKey: 'holders', stroke: 'hsl(var(--neon-green))' },
+                        { dataKey: 'volume', stroke: 'hsl(var(--neon-cyan))' },
+                        { dataKey: 'bundles', stroke: 'hsl(var(--neon-purple))' },
+                        { dataKey: 'marketCap', stroke: 'hsl(var(--neon-pink))' }
+                      ]}
+                      tooltipFormatter={(value, name) => {
+                        const formatValue = (val) => {
+                          if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+                          if (name === 'volume') return `${val}M`;
+                          if (name === 'marketCap') return `$${val}M`;
+                          return val.toString();
+                        };
+                        const labels = {
+                          holders: 'Token Holders',
+                          volume: 'Trading Volume', 
+                          bundles: 'Transaction Bundles',
+                          marketCap: 'Market Capitalization'
+                        };
+                        return [formatValue(value), labels[name] || name];
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-4 mt-4 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-green"></div>
+                      <span className="text-muted-foreground">Token Holders</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-cyan"></div>
+                      <span className="text-muted-foreground">Trading Volume</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
+                      <span className="text-muted-foreground">Transaction Bundles</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-neon-pink"></div>
+                      <span className="text-muted-foreground">Market Cap</span>
+                    </div>
+                  </div>
+                </Card>
+              </div>
 
               {/* Additional Metrics Panel */}
               <div className="xl:block hidden">
