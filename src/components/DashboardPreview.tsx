@@ -29,6 +29,28 @@ const technicalData = [
   { time: '3PM', holders: 152800, volume: 8.9, liquidity: 750000, txCount: 2650 },
 ];
 
+// Mock data for market intelligence
+const marketData = [
+  { time: '9AM', whaleActivity: 3.2, institutionalFlow: 1.8, retailSentiment: 0.65, marketCap: 2.1 },
+  { time: '10AM', whaleActivity: 4.1, institutionalFlow: 2.3, retailSentiment: 0.72, marketCap: 2.2 },
+  { time: '11AM', whaleActivity: 3.8, institutionalFlow: 2.1, retailSentiment: 0.68, marketCap: 2.15 },
+  { time: '12PM', whaleActivity: 5.2, institutionalFlow: 3.1, retailSentiment: 0.85, marketCap: 2.4 },
+  { time: '1PM', whaleActivity: 6.4, institutionalFlow: 3.8, retailSentiment: 0.88, marketCap: 2.6 },
+  { time: '2PM', whaleActivity: 5.9, institutionalFlow: 3.5, retailSentiment: 0.82, marketCap: 2.5 },
+  { time: '3PM', whaleActivity: 7.2, institutionalFlow: 4.2, retailSentiment: 0.91, marketCap: 2.8 },
+];
+
+// Mock data for liquidity analysis
+const liquidityData = [
+  { time: '9AM', depth: 245000, spread: 0.12, slippage: 2.8, orderBook: 85 },
+  { time: '10AM', depth: 268000, spread: 0.09, slippage: 2.3, orderBook: 92 },
+  { time: '11AM', depth: 287000, spread: 0.08, slippage: 2.1, orderBook: 88 },
+  { time: '12PM', depth: 325000, spread: 0.06, slippage: 1.8, orderBook: 94 },
+  { time: '1PM', depth: 358000, spread: 0.05, slippage: 1.5, orderBook: 97 },
+  { time: '2PM', depth: 342000, spread: 0.07, slippage: 1.9, orderBook: 91 },
+  { time: '3PM', depth: 385000, spread: 0.04, slippage: 1.2, orderBook: 99 },
+];
+
 // Mock data for trading chart with realistic candlestick pattern
 const tradingData = [
   // Early accumulation phase
@@ -461,6 +483,116 @@ export default function DashboardPreview() {
                       </div>
                     </div>
                   </Card>
+
+                  {/* Additional Analysis Charts */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {/* Market Intelligence */}
+                    <Card className="p-4 bg-black/40 border border-terminal-amber/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-amber/20 rounded">
+                          <TrendingUp className="w-3 h-3 text-terminal-amber" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-terminal-white font-mono">
+                            MARKET INTELLIGENCE
+                          </h4>
+                          <div className="text-xs text-terminal-gray">
+                            Whale & Institution Activity
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="h-32">
+                        <AnimatedChart
+                          data={marketData}
+                          isVisible={isIntersecting}
+                          gridColor="rgba(100, 116, 139, 0.1)"
+                          lines={[
+                            { dataKey: 'whaleActivity', stroke: 'hsl(var(--terminal-amber))', strokeWidth: 2 },
+                            { dataKey: 'institutionalFlow', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
+                          ]}
+                          tooltipFormatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (name === 'marketCap') return `$${val.toFixed(1)}B`;
+                              if (name === 'whaleActivity') return `${val.toFixed(1)}M`;
+                              if (name === 'institutionalFlow') return `$${val.toFixed(1)}M`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              whaleActivity: 'Whale Activity',
+                              institutionalFlow: 'Institutional Flow'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                      </div>
+                      
+                      <div className="flex gap-3 mt-2">
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-amber"></div>
+                          <span className="text-terminal-gray">Whale Activity</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-blue"></div>
+                          <span className="text-terminal-gray">Institution Flow</span>
+                        </div>
+                      </div>
+                    </Card>
+
+                    {/* Liquidity Analysis */}
+                    <Card className="p-4 bg-black/40 border border-terminal-red/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-red/20 rounded">
+                          <BarChart3 className="w-3 h-3 text-terminal-red" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-terminal-white font-mono">
+                            LIQUIDITY ANALYSIS
+                          </h4>
+                          <div className="text-xs text-terminal-gray">
+                            Order Book & Market Depth
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="h-32">
+                        <AnimatedChart
+                          data={liquidityData}
+                          isVisible={isIntersecting}
+                          gridColor="rgba(100, 116, 139, 0.1)"
+                          lines={[
+                            { dataKey: 'depth', stroke: 'hsl(var(--terminal-red))', strokeWidth: 2 },
+                            { dataKey: 'orderBook', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                          ]}
+                          tooltipFormatter={(value, name) => {
+                            const formatValue = (val) => {
+                              if (name === 'depth' && val >= 1000) return `$${(val / 1000).toFixed(0)}K`;
+                              if (name === 'orderBook') return `${val}%`;
+                              if (name === 'spread') return `${val}%`;
+                              if (name === 'slippage') return `${val}%`;
+                              return val.toString();
+                            };
+                            const labels = {
+                              depth: 'Market Depth',
+                              orderBook: 'Order Book Health'
+                            };
+                            return [formatValue(value), labels[name] || name];
+                          }}
+                        />
+                      </div>
+                      
+                      <div className="flex gap-3 mt-2">
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-red"></div>
+                          <span className="text-terminal-gray">Market Depth</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-xs">
+                          <div className="w-2 h-1 bg-terminal-green"></div>
+                          <span className="text-terminal-gray">Order Book</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
                 </div>
 
                 {/* Sidebar (38.2%) - Community Signals & Risk Assessment */}
