@@ -288,9 +288,14 @@ export default function AnalysisInput() {
 
         {/* Pulse Section */}
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">
-            <span className="text-neon-cyan">Pulse</span>
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-5xl md:text-6xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-neon-cyan via-neon-green to-neon-purple bg-clip-text text-transparent">
+                Pulse
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground">Live market sentiment & trending opportunities</p>
+          </div>
           
           <Card className="p-6 bg-gradient-card border-neon-purple/30 hover:border-neon-purple/50 transition-all duration-300">
             <div className="relative">

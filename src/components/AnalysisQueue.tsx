@@ -21,14 +21,23 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
 
   return (
     <div className="max-w-7xl mx-auto mb-16">
-      <h2 className="text-2xl font-bold text-center mb-8">
-        <span className="text-neon-green">Analysis Queue</span>
-      </h2>
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold mb-2">
+          <span className="text-neon-green">Analysis Queue</span>
+        </h2>
+        <div className="w-16 h-0.5 bg-gradient-to-r from-neon-green to-neon-cyan mx-auto"></div>
+      </div>
       
-      <Card className="p-6 bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300">
-        <div className="space-y-4">
-          <div className="text-sm text-muted-foreground text-center mb-4">
-            Click on any coin below to view its Bloomberg-style analysis terminal
+      <Card className="bg-black/90 border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 backdrop-blur-sm">
+        <div className="p-6">
+          <div className="bg-gradient-to-r from-neon-green/10 to-neon-cyan/10 rounded-lg p-4 mb-6 border border-neon-green/20">
+            <div className="flex items-center gap-3 justify-center">
+              <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
+              <span className="text-sm text-neon-green font-medium">
+                Click on any coin below to view its Bloomberg-style analysis terminal
+              </span>
+              <div className="w-2 h-2 bg-neon-cyan rounded-full animate-pulse"></div>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -36,50 +45,53 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
               <div
                 key={coin.address}
                 onClick={() => onCoinSelect(coin.address)}
-                className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 group ${
+                className={`p-5 rounded-lg border cursor-pointer transition-all duration-300 group relative overflow-hidden ${
                   selectedCoin === coin.address
-                    ? 'bg-neon-green/20 border-neon-green shadow-lg shadow-neon-green/20'
-                    : 'bg-black/50 border-white/20 hover:border-neon-green/60 hover:bg-black/70'
+                    ? 'bg-gradient-to-br from-neon-green/20 via-black/80 to-neon-cyan/20 border-neon-green shadow-lg shadow-neon-green/20'
+                    : 'bg-gradient-to-br from-black/80 via-black/60 to-black/80 border-white/20 hover:border-neon-green/60 hover:from-neon-green/10 hover:to-neon-cyan/10'
                 }`}
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 border border-neon-green/30 flex items-center justify-center text-lg">
+                {/* Background Terminal Effect */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,127,0.03),transparent_70%)] opacity-50"></div>
+                
+                <div className="relative flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/30 to-neon-cyan/30 border border-neon-green/40 flex items-center justify-center text-xl shadow-lg shadow-neon-green/10">
                     {coin.logo}
                   </div>
                   <div className="flex-1">
-                    <h3 className={`font-bold transition-colors ${
+                    <h3 className={`text-lg font-bold transition-colors ${
                       selectedCoin === coin.address 
                         ? 'text-neon-green' 
                         : 'text-white group-hover:text-neon-cyan'
                     }`}>
                       {coin.name}
                     </h3>
-                    <div className="text-xs text-muted-foreground font-mono">
-                      {coin.address.slice(0, 12)}...
+                    <div className="text-xs text-muted-foreground font-mono bg-black/40 px-2 py-1 rounded border border-neon-green/20">
+                      {coin.address.slice(0, 16)}...
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                <div className="relative flex items-center justify-between">
+                  <div className="flex items-center gap-3">
                     {coin.status === 'analyzing' ? (
                       <>
-                        <Clock className="w-4 h-4 text-neon-cyan animate-pulse" />
-                        <Badge className="bg-neon-cyan/20 text-neon-cyan border-neon-cyan/30">
+                        <Clock className="w-5 h-5 text-neon-cyan animate-pulse" />
+                        <Badge className="bg-neon-cyan/30 text-neon-cyan border-neon-cyan/50 font-medium px-3 py-1">
                           Analyzing...
                         </Badge>
                       </>
                     ) : (
                       <>
-                        <CheckCircle className="w-4 h-4 text-neon-green" />
-                        <Badge className="bg-neon-green/20 text-neon-green border-neon-green/30">
+                        <CheckCircle className="w-5 h-5 text-neon-green" />
+                        <Badge className="bg-neon-green/30 text-neon-green border-neon-green/50 font-medium px-3 py-1">
                           Complete
                         </Badge>
                       </>
                     )}
                   </div>
                   
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-xs text-neon-cyan font-mono bg-black/40 px-2 py-1 rounded border border-neon-cyan/30">
                     {coin.timestamp.toLocaleTimeString([], { 
                       hour: '2-digit', 
                       minute: '2-digit' 
@@ -88,10 +100,11 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
                 </div>
                 
                 {selectedCoin === coin.address && (
-                  <div className="mt-3 pt-3 border-t border-neon-green/30">
-                    <div className="flex items-center gap-2 text-xs text-neon-green">
-                      <Zap className="w-3 h-3" />
-                      <span>Terminal Active</span>
+                  <div className="mt-4 pt-4 border-t border-gradient-to-r from-neon-green/50 to-neon-cyan/50">
+                    <div className="flex items-center justify-center gap-2 text-sm text-neon-green bg-black/60 rounded-lg py-2 px-4 border border-neon-green/40">
+                      <Zap className="w-4 h-4 animate-pulse" />
+                      <span className="font-medium">Bloomberg Terminal Active</span>
+                      <div className="w-2 h-2 bg-neon-green rounded-full animate-ping"></div>
                     </div>
                   </div>
                 )}
