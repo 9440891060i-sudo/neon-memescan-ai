@@ -21,99 +21,99 @@ export const AnalysisQueue = ({ queuedCoins, selectedCoin, onCoinSelect }: Analy
 
   return (
     <div className="max-w-7xl mx-auto mb-16">
-      <div className="mb-8">
-        <div className="flex items-center justify-between border-b border-gray-700 pb-4">
-          <div>
-            <h2 className="text-xl font-semibold text-white">Analysis Queue</h2>
-            <p className="text-sm text-gray-400 mt-1">Active analysis sessions</p>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span>LIVE</span>
-          </div>
+      <div className="mb-6">
+        <div className="flex items-center gap-3 pb-3 border-b border-gray-800">
+          <h2 className="text-lg font-medium text-gray-100 uppercase tracking-wider">Analysis Queue</h2>
+          <div className="h-4 w-px bg-gray-700"></div>
+          <span className="text-xs text-gray-500 uppercase tracking-wide">
+            {queuedCoins.length} Active Session{queuedCoins.length !== 1 ? 's' : ''}
+          </span>
         </div>
       </div>
       
-      <Card className="bg-gray-950 border-gray-700 shadow-2xl">
-        <div className="p-0">
-          <div className="bg-gray-900 px-4 py-3 border-b border-gray-700">
-            <div className="flex items-center justify-between text-xs text-gray-400 font-mono uppercase tracking-wide">
-              <span>Asset</span>
-              <span>Status</span>
-              <span>Timestamp</span>
-            </div>
-          </div>
-          
-          <div className="divide-y divide-gray-800">
-            {queuedCoins.map((coin) => (
-              <div
-                key={coin.address}
-                onClick={() => onCoinSelect(coin.address)}
-                className={`px-4 py-4 cursor-pointer transition-all duration-200 hover:bg-gray-900/50 ${
-                  selectedCoin === coin.address
-                    ? 'bg-blue-950/50 border-l-2 border-l-blue-500'
-                    : ''
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-sm border border-gray-700">
-                      {coin.logo}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-3">
-                        <h3 className={`font-medium ${
-                          selectedCoin === coin.address 
-                            ? 'text-blue-400' 
-                            : 'text-white'
-                        }`}>
-                          {coin.name}
-                        </h3>
-                        <div className="text-xs text-gray-500 font-mono">
-                          {coin.address.slice(0, 8)}...{coin.address.slice(-4)}
-                        </div>
-                      </div>
-                      {selectedCoin === coin.address && (
-                        <div className="flex items-center gap-2 mt-1">
-                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                          <span className="text-xs text-blue-400 font-medium">Terminal Active</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-2">
-                      {coin.status === 'analyzing' ? (
-                        <>
-                          <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-                          <span className="text-xs text-yellow-500 font-medium uppercase tracking-wide">
-                            Processing
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <span className="text-xs text-green-500 font-medium uppercase tracking-wide">
-                            Complete
-                          </span>
-                        </>
-                      )}
-                    </div>
-                    
-                    <div className="text-xs text-gray-400 font-mono min-w-[60px] text-right">
-                      {coin.timestamp.toLocaleTimeString([], { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+      <div className="bg-gray-950 border border-gray-800 rounded-none shadow-none">
+        <div className="border-b border-gray-800 bg-gray-900">
+          <div className="grid grid-cols-12 gap-4 px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
+            <div className="col-span-1">ID</div>
+            <div className="col-span-4">Asset</div>
+            <div className="col-span-3">Contract Address</div>
+            <div className="col-span-2">Status</div>
+            <div className="col-span-2">Initiated</div>
           </div>
         </div>
-      </Card>
+        
+        <div>
+          {queuedCoins.map((coin, index) => (
+            <div
+              key={coin.address}
+              onClick={() => onCoinSelect(coin.address)}
+              className={`grid grid-cols-12 gap-4 px-6 py-4 border-b border-gray-800 cursor-pointer transition-colors duration-150 hover:bg-gray-900/50 ${
+                selectedCoin === coin.address ? 'bg-gray-900 border-l-2 border-l-gray-500' : ''
+              }`}
+            >
+              <div className="col-span-1">
+                <span className="text-xs font-mono text-gray-500">
+                  {String(index + 1).padStart(3, '0')}
+                </span>
+              </div>
+              
+              <div className="col-span-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-gray-800 border border-gray-700 flex items-center justify-center text-xs">
+                    {coin.logo}
+                  </div>
+                  <span className={`text-sm font-medium ${
+                    selectedCoin === coin.address ? 'text-gray-200' : 'text-gray-300'
+                  }`}>
+                    {coin.name}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="col-span-3">
+                <span className="text-xs font-mono text-gray-500">
+                  {coin.address.slice(0, 12)}...{coin.address.slice(-8)}
+                </span>
+              </div>
+              
+              <div className="col-span-2">
+                <div className="flex items-center gap-2">
+                  <div className={`w-1.5 h-1.5 rounded-full ${
+                    coin.status === 'analyzing' ? 'bg-yellow-600' : 'bg-green-600'
+                  }`}></div>
+                  <span className={`text-xs font-medium uppercase tracking-wide ${
+                    coin.status === 'analyzing' ? 'text-yellow-600' : 'text-green-600'
+                  }`}>
+                    {coin.status === 'analyzing' ? 'PROCESSING' : 'COMPLETE'}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="col-span-2">
+                <span className="text-xs font-mono text-gray-500">
+                  {coin.timestamp.toLocaleDateString('en-US', { 
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: '2-digit'
+                  })} {coin.timestamp.toLocaleTimeString('en-US', { 
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {selectedCoin && (
+          <div className="border-t border-gray-700 bg-gray-900 px-6 py-2">
+            <div className="text-xs text-gray-400 uppercase tracking-wide">
+              ► Terminal session active for {queuedCoins.find(c => c.address === selectedCoin)?.name}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
