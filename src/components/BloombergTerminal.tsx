@@ -57,7 +57,7 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
   if (!isExpanded) return null;
 
   return (
-    <div ref={ref as any} className="relative space-y-6 animate-fade-in">
+    <div ref={ref as any} className="space-y-6 animate-fade-in">
       {/* Terminal Header */}
       <div className="bg-black/90 border border-neon-green/30 rounded-lg p-4">
         <div className="flex items-center justify-between">
@@ -77,274 +77,244 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
         </div>
       </div>
 
-      {/* Main Terminal Layout with Fade Effect */}
-      <div className="relative">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Main Terminal Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Left Column - Charts */}
+        <div className="lg:col-span-2 space-y-6">
           
-          {/* Left Column - Charts */}
-          <div className="lg:col-span-2 space-y-6">
-            
-            {/* Social Sentiment Chart */}
-            <Card className="bg-black/90 border-neon-cyan/30">
-              <CardHeader>
-                <CardTitle className="text-neon-cyan flex items-center gap-2">
-                  <Eye className="w-5 h-5" />
-                  Social Sentiment Analysis
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-64">
-                  <AnimatedChart
-                    data={socialData}
-                    lines={[
-                      { dataKey: 'views', stroke: 'hsl(var(--neon-cyan))' },
-                      { dataKey: 'likes', stroke: 'hsl(var(--neon-green))' },
-                      { dataKey: 'reposts', stroke: 'hsl(var(--neon-purple))' },
-                      { dataKey: 'members', stroke: '#ff6b6b' }
-                    ]}
-                    isVisible={isIntersecting}
-                    tooltipFormatter={(value, name) => [
-                      typeof value === 'number' ? value.toLocaleString() : value,
-                      name.charAt(0).toUpperCase() + name.slice(1)
-                    ]}
-                  />
-                </div>
-                <div className="grid grid-cols-4 gap-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Views</div>
-                    <div className="text-neon-cyan font-bold">
-                      <AnimatedNumber 
-                        value={socialData[socialData.length - 1]?.views || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => val.toLocaleString()}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Likes</div>
-                    <div className="text-neon-green font-bold">
-                      <AnimatedNumber 
-                        value={socialData[socialData.length - 1]?.likes || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => val.toLocaleString()}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Reposts</div>
-                    <div className="text-neon-purple font-bold">
-                      <AnimatedNumber 
-                        value={socialData[socialData.length - 1]?.reposts || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => val.toLocaleString()}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Members</div>
-                    <div className="text-red-400 font-bold">
-                      <AnimatedNumber 
-                        value={socialData[socialData.length - 1]?.members || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => val.toLocaleString()}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Technical Indicators Chart */}
-            <Card className="bg-black/90 border-neon-green/30">
-              <CardHeader>
-                <CardTitle className="text-neon-green flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5" />
-                  Technical Indicators
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-64">
-                  <AnimatedChart
-                    data={technicalData}
-                    lines={[
-                      { dataKey: 'holders', stroke: 'hsl(var(--neon-green))' },
-                      { dataKey: 'volume', stroke: 'hsl(var(--neon-cyan))' },
-                      { dataKey: 'bundles', stroke: 'hsl(var(--neon-purple))' },
-                      { dataKey: 'marketCap', stroke: '#ffd700' }
-                    ]}
-                    isVisible={isIntersecting}
-                    tooltipFormatter={(value, name) => [
-                      typeof value === 'number' ? value.toLocaleString() : value,
-                      name.charAt(0).toUpperCase() + name.slice(1)
-                    ]}
-                  />
-                </div>
-                <div className="grid grid-cols-4 gap-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Holders</div>
-                    <div className="text-neon-green font-bold">
-                      <AnimatedNumber 
-                        value={technicalData[technicalData.length - 1]?.holders || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => val.toLocaleString()}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Volume</div>
-                    <div className="text-neon-cyan font-bold">
-                      <AnimatedNumber 
-                        value={technicalData[technicalData.length - 1]?.volume || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => `$${val.toLocaleString()}`}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Bundles</div>
-                    <div className="text-neon-purple font-bold">
-                      <AnimatedNumber 
-                        value={technicalData[technicalData.length - 1]?.bundles || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => val.toLocaleString()}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-muted-foreground">Market Cap</div>
-                    <div className="text-yellow-400 font-bold">
-                      <AnimatedNumber 
-                        value={technicalData[technicalData.length - 1]?.marketCap || 0}
-                        isVisible={isIntersecting}
-                        formatter={(val) => `$${(val / 1000000).toFixed(1)}M`}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Column - Stats & Prediction */}
-          <div className="space-y-6">
-            
-            {/* Quick Stats */}
-            <Card className="bg-black/90 border-neon-purple/30">
-              <CardHeader>
-                <CardTitle className="text-neon-purple">Quick Stats</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
-                  <span className="text-neon-cyan font-bold">
-                    <AnimatedNumber 
-                      value={127}
-                      isVisible={isIntersecting}
-                      formatter={(val) => `${val} days`}
-                    />
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Dev Paid</span>
-                  <Badge className="bg-neon-green/20 text-neon-green border-neon-green/30">
-                    Yes
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Dev Credibility</span>
-                  <span className="text-neon-green font-bold">
-                    <AnimatedNumber 
-                      value={parseInt(coin.devScore)}
-                      isVisible={isIntersecting}
-                      formatter={(val) => `${val}%`}
-                    />
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Admin Followers</span>
-                  <span className="text-neon-cyan font-bold">
-                    <AnimatedNumber 
-                      value={12400}
-                      isVisible={isIntersecting}
-                      formatter={(val) => `${(val / 1000).toFixed(1)}K`}
-                    />
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* AI Prediction */}
-            <Card className="bg-black/90 border-neon-green/30">
-              <CardHeader>
-                <CardTitle className="text-neon-green flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
-                  AI Prediction
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+          {/* Social Sentiment Chart */}
+          <Card className="bg-black/90 border-neon-cyan/30">
+            <CardHeader>
+              <CardTitle className="text-neon-cyan flex items-center gap-2">
+                <Eye className="w-5 h-5" />
+                Social Sentiment Analysis
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <AnimatedChart
+                  data={socialData}
+                  lines={[
+                    { dataKey: 'views', stroke: 'hsl(var(--neon-cyan))' },
+                    { dataKey: 'likes', stroke: 'hsl(var(--neon-green))' },
+                    { dataKey: 'reposts', stroke: 'hsl(var(--neon-purple))' },
+                    { dataKey: 'members', stroke: '#ff6b6b' }
+                  ]}
+                  isVisible={isIntersecting}
+                  tooltipFormatter={(value, name) => [
+                    typeof value === 'number' ? value.toLocaleString() : value,
+                    name.charAt(0).toUpperCase() + name.slice(1)
+                  ]}
+                />
+              </div>
+              <div className="grid grid-cols-4 gap-4 mt-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-neon-green mb-2">
+                  <div className="text-xs text-muted-foreground">Views</div>
+                  <div className="text-neon-cyan font-bold">
                     <AnimatedNumber 
-                      value={78}
+                      value={socialData[socialData.length - 1]?.views || 0}
                       isVisible={isIntersecting}
-                      formatter={(val) => `${val}%`}
+                      formatter={(val) => val.toLocaleString()}
                     />
                   </div>
-                  <div className="text-sm text-muted-foreground">Bullish Score</div>
                 </div>
-                
-                <div className="space-y-3">
-                  <div className="bg-gradient-to-r from-neon-green/20 to-transparent p-3 rounded-lg border border-neon-green/30">
-                    <div className="flex items-center gap-2 mb-1">
-                      <TrendingUp className="w-4 h-4 text-neon-green" />
-                      <span className="text-sm font-medium text-neon-green">Entry Suggestion</span>
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Consider entry on next 5-10% dip for optimal risk/reward
-                    </div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-r from-neon-cyan/20 to-transparent p-3 rounded-lg border border-neon-cyan/30">
-                    <div className="flex items-center gap-2 mb-1">
-                      <TrendingDown className="w-4 h-4 text-neon-cyan" />
-                      <span className="text-sm font-medium text-neon-cyan">Exit Target</span>
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Take profits at 2.5x - 4x current levels based on momentum
-                    </div>
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Likes</div>
+                  <div className="text-neon-green font-bold">
+                    <AnimatedNumber 
+                      value={socialData[socialData.length - 1]?.likes || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => val.toLocaleString()}
+                    />
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Reposts</div>
+                  <div className="text-neon-purple font-bold">
+                    <AnimatedNumber 
+                      value={socialData[socialData.length - 1]?.reposts || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => val.toLocaleString()}
+                    />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Members</div>
+                  <div className="text-red-400 font-bold">
+                    <AnimatedNumber 
+                      value={socialData[socialData.length - 1]?.members || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => val.toLocaleString()}
+                    />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Technical Indicators Chart */}
+          <Card className="bg-black/90 border-neon-green/30">
+            <CardHeader>
+              <CardTitle className="text-neon-green flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Technical Indicators
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <AnimatedChart
+                  data={technicalData}
+                  lines={[
+                    { dataKey: 'holders', stroke: 'hsl(var(--neon-green))' },
+                    { dataKey: 'volume', stroke: 'hsl(var(--neon-cyan))' },
+                    { dataKey: 'bundles', stroke: 'hsl(var(--neon-purple))' },
+                    { dataKey: 'marketCap', stroke: '#ffd700' }
+                  ]}
+                  isVisible={isIntersecting}
+                  tooltipFormatter={(value, name) => [
+                    typeof value === 'number' ? value.toLocaleString() : value,
+                    name.charAt(0).toUpperCase() + name.slice(1)
+                  ]}
+                />
+              </div>
+              <div className="grid grid-cols-4 gap-4 mt-4">
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Holders</div>
+                  <div className="text-neon-green font-bold">
+                    <AnimatedNumber 
+                      value={technicalData[technicalData.length - 1]?.holders || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => val.toLocaleString()}
+                    />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Volume</div>
+                  <div className="text-neon-cyan font-bold">
+                    <AnimatedNumber 
+                      value={technicalData[technicalData.length - 1]?.volume || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => `$${val.toLocaleString()}`}
+                    />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Bundles</div>
+                  <div className="text-neon-purple font-bold">
+                    <AnimatedNumber 
+                      value={technicalData[technicalData.length - 1]?.bundles || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => val.toLocaleString()}
+                    />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs text-muted-foreground">Market Cap</div>
+                  <div className="text-yellow-400 font-bold">
+                    <AnimatedNumber 
+                      value={technicalData[technicalData.length - 1]?.marketCap || 0}
+                      isVisible={isIntersecting}
+                      formatter={(val) => `$${(val / 1000000).toFixed(1)}M`}
+                    />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Mysterious Fade Out Overlay */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Top fade */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-background/80 to-transparent z-10" />
+        {/* Right Column - Stats & Prediction */}
+        <div className="space-y-6">
           
-          {/* Bottom fade with intrigue text */}
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/90 to-transparent z-10" />
-          
-          {/* Side fades */}
-          <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-background via-background/60 to-transparent z-10" />
-          <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-background via-background/60 to-transparent z-10" />
-          
-          {/* Center mysterious glow */}
-          <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/40 z-10" />
-          
-          {/* Curiosity text overlay */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="text-center space-y-2">
-              <div className="text-neon-green/70 text-sm font-medium animate-pulse">
-                ● ANALYZING TERMINAL DATA
+          {/* Quick Stats */}
+          <Card className="bg-black/90 border-neon-purple/30">
+            <CardHeader>
+              <CardTitle className="text-neon-purple">Quick Stats</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Avg Wallet Age</span>
+                <span className="text-neon-cyan font-bold">
+                  <AnimatedNumber 
+                    value={127}
+                    isVisible={isIntersecting}
+                    formatter={(val) => `${val} days`}
+                  />
+                </span>
               </div>
-              <div className="text-xs text-muted-foreground/60">
-                Real-time insights loading...
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Dev Paid</span>
+                <Badge className="bg-neon-green/20 text-neon-green border-neon-green/30">
+                  Yes
+                </Badge>
               </div>
-            </div>
-          </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Dev Credibility</span>
+                <span className="text-neon-green font-bold">
+                  <AnimatedNumber 
+                    value={parseInt(coin.devScore)}
+                    isVisible={isIntersecting}
+                    formatter={(val) => `${val}%`}
+                  />
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Admin Followers</span>
+                <span className="text-neon-cyan font-bold">
+                  <AnimatedNumber 
+                    value={12400}
+                    isVisible={isIntersecting}
+                    formatter={(val) => `${(val / 1000).toFixed(1)}K`}
+                  />
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* AI Prediction */}
+          <Card className="bg-black/90 border-neon-green/30">
+            <CardHeader>
+              <CardTitle className="text-neon-green flex items-center gap-2">
+                <Zap className="w-5 h-5" />
+                AI Prediction
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-neon-green mb-2">
+                  <AnimatedNumber 
+                    value={78}
+                    isVisible={isIntersecting}
+                    formatter={(val) => `${val}%`}
+                  />
+                </div>
+                <div className="text-sm text-muted-foreground">Bullish Score</div>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="bg-gradient-to-r from-neon-green/20 to-transparent p-3 rounded-lg border border-neon-green/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <TrendingUp className="w-4 h-4 text-neon-green" />
+                    <span className="text-sm font-medium text-neon-green">Entry Suggestion</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Consider entry on next 5-10% dip for optimal risk/reward
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-neon-cyan/20 to-transparent p-3 rounded-lg border border-neon-cyan/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <TrendingDown className="w-4 h-4 text-neon-cyan" />
+                    <span className="text-sm font-medium text-neon-cyan">Exit Target</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Take profits at 2.5x - 4x current levels based on momentum
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
