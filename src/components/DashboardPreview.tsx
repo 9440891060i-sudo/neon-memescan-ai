@@ -153,12 +153,11 @@ export default function DashboardPreview() {
               </div>
             </div>
 
-            <div className="relative">
-              <div className="p-6">
-                {/* Compact Terminal Layout - Fill Available Space */}
-                <div className="grid grid-cols-1 xl:grid-cols-[1.618fr_1fr] gap-4 mb-4">
-                  
-                  {/* Main Content Area (61.8%) */}
+            <div className="p-6">
+              {/* Compact Terminal Layout - Fill Available Space */}
+              <div className="grid grid-cols-1 xl:grid-cols-[1.618fr_1fr] gap-4 mb-4">
+                
+                {/* Main Content Area (61.8%) */}
                 <div className="space-y-4">
                   
                   {/* Chart Controls */}
@@ -739,25 +738,7 @@ export default function DashboardPreview() {
                     value={25} 
                     isVisible={isIntersecting} 
                   /> CREDITS)
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Fade to Black Effect - Bottom Half */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background via-background/85 via-70% to-transparent z-10" />
-              
-              {/* Mysterious text overlay */}
-              <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="text-center space-y-2">
-                  <div className="text-terminal-green/70 text-sm font-mono font-medium animate-pulse">
-                    ● PREMIUM ANALYSIS FEATURES
-                  </div>
-                  <div className="text-xs text-terminal-gray/60 font-mono">
-                    Sign up to unlock full terminal access...
-                  </div>
-                </div>
+                </Button>
               </div>
             </div>
           </div>
