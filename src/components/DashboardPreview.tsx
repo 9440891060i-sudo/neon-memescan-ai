@@ -744,9 +744,9 @@ export default function DashboardPreview() {
               </div>
             </div>
 
-            {/* Fade to Black Effect - Bottom Half */}
+            {/* Blur Effect - Bottom 2/3 */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background via-background/85 via-70% to-transparent z-10" />
+              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-background/90 via-background/40 via-30% to-transparent backdrop-blur-sm z-10" />
               
               {/* Mysterious text overlay */}
               <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
