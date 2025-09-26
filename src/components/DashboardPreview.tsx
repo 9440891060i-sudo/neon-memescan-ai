@@ -113,38 +113,11 @@ export default function DashboardPreview() {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          {/* Professional Terminal Interface - Enhanced Liquid Glass Effect */}
-          <div className="relative group">
-            {/* Background Pattern for Glass Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-900/40 rounded-[12px]"></div>
+          {/* Professional Terminal Interface */}
+          <div className="bg-black/60 backdrop-blur-md rounded-lg border border-terminal-gray/20 shadow-2xl">
             
-            {/* Primary Glass Panel */}
-            <div 
-              className="absolute inset-0 rounded-[12px] border border-white/20"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%)',
-                backdropFilter: 'blur(20px) saturate(1.8)',
-                WebkitBackdropFilter: 'blur(20px) saturate(1.8)',
-                boxShadow: `
-                  inset 0 1px 0 0 rgba(255,255,255,0.3),
-                  inset 0 -1px 0 0 rgba(255,255,255,0.1),
-                  0 20px 60px -12px rgba(0,0,0,0.5),
-                  0 0 0 1px rgba(255,255,255,0.1)
-                `
-              }}
-            >
-              {/* Inner Glow Layer */}
-              <div className="absolute inset-[1px] rounded-[11px] bg-gradient-to-br from-white/[0.15] via-transparent to-white/[0.05] opacity-60"></div>
-              
-              {/* Animated Shimmer Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.1] to-transparent rounded-[12px] opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:animate-[shimmer_2s_ease-in-out_infinite] bg-[length:200%_100%]"></div>
-            </div>
-            
-            {/* Terminal Content */}
-            <div className="relative bg-black/30 rounded-[12px] overflow-hidden backdrop-blur-sm">
-            
-              {/* Terminal Header */}
-              <div className="bg-black/80 border-b border-terminal-gray/20 px-6 py-4 rounded-t-[12px]">
+            {/* Terminal Header */}
+            <div className="bg-black/80 border-b border-terminal-gray/20 px-6 py-4 rounded-t-lg">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className="flex gap-2">
@@ -766,7 +739,6 @@ export default function DashboardPreview() {
                     isVisible={isIntersecting} 
                   /> CREDITS)
                 </Button>
-              </div>
               </div>
             </div>
           </div>
