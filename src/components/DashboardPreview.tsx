@@ -100,13 +100,13 @@ export default function DashboardPreview() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
   
   return (
-    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6 scroll-smooth">
+    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2 font-mono transition-all duration-500 ease-out">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2 font-mono">
             Your <span className="text-terminal-blue">Bloomberg</span> Terminal
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2 font-mono transition-opacity duration-500 ease-out">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2 font-mono">
             Institutional-grade market intelligence combining real-time social sentiment analysis, 
             insider community signals, and advanced technical metrics for professional crypto trading
           </p>
@@ -114,7 +114,7 @@ export default function DashboardPreview() {
 
         <div className="max-w-7xl mx-auto">
           {/* Professional Terminal Interface */}
-          <div className="bg-black/60 backdrop-blur-md rounded-lg border border-terminal-gray/20 shadow-2xl transition-all duration-700 ease-out will-change-transform hover:shadow-3xl">
+          <div className="bg-black/60 backdrop-blur-md rounded-lg border border-terminal-gray/20 shadow-2xl">
             
             {/* Terminal Header */}
             <div className="bg-black/80 border-b border-terminal-gray/20 px-6 py-4 rounded-t-lg">
@@ -744,9 +744,9 @@ export default function DashboardPreview() {
               </div>
             </div>
 
-            {/* Smooth Blur Effect - Bottom 2/3 */}
-            <div className="absolute inset-0 pointer-events-none blur-optimized">
-              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-background/90 via-background/40 via-30% to-transparent enhanced-blur z-10 terminal-smooth" />
+            {/* Fade to Black Effect - Bottom Half */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background via-background/85 via-70% to-transparent z-10" />
               
               {/* Mysterious text overlay */}
               <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
