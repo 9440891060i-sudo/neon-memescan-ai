@@ -113,11 +113,16 @@ export default function DashboardPreview() {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          {/* Professional Terminal Interface */}
-          <div className="bg-black/60 backdrop-blur-md rounded-lg border border-terminal-gray/20 shadow-2xl">
+          {/* Professional Terminal Interface - Liquid Glass Effect */}
+          <div className="relative group">
+            {/* Glass Panel Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-transparent backdrop-blur-xl rounded-[12px] border border-white/[0.12] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.4)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/[0.02] before:to-transparent before:rounded-[12px] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"></div>
             
-            {/* Terminal Header */}
-            <div className="bg-black/80 border-b border-terminal-gray/20 px-6 py-4 rounded-t-lg">
+            {/* Terminal Content */}
+            <div className="relative bg-gradient-to-br from-black/[0.85] via-black/[0.75] to-black/[0.85] backdrop-blur-lg rounded-[12px] border border-white/[0.06] shadow-2xl overflow-hidden">
+            
+              {/* Terminal Header */}
+              <div className="bg-black/80 border-b border-terminal-gray/20 px-6 py-4 rounded-t-[12px]">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className="flex gap-2">
@@ -739,6 +744,7 @@ export default function DashboardPreview() {
                     isVisible={isIntersecting} 
                   /> CREDITS)
                 </Button>
+              </div>
               </div>
             </div>
           </div>
