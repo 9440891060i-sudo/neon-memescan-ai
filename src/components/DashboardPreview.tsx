@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { TrendingUp, BarChart3, Shield, Activity, Target, Clock } from "lucide-react";
+import { TrendingUp, BarChart3, Shield, Activity, Target, Clock, Database, Brain, Wallet, Users } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { AnimatedChart } from "@/components/AnimatedChart";
 import CommunitySignals from "@/components/CommunitySignals";
+import { useState } from "react";
 
 // Mock data for social signals
 const socialData = [
@@ -96,8 +97,40 @@ const tradingData = [
   { time: '', open: 0.0000057, high: 0.0000060, low: 0.0000052, close: 0.0000054, ma20: 0.0000065, ma50: 0.0000083 },
 ];
 
+const featureBoxes = [
+  {
+    id: 'x-data',
+    title: 'X Data',
+    icon: Database,
+    description: 'Real-time social sentiment analysis from X (Twitter), tracking mentions, engagement, and influencer activity for comprehensive market intelligence.',
+    details: ['Live tweet monitoring', 'Influencer tracking', 'Sentiment scoring', 'Viral trend detection']
+  },
+  {
+    id: 'ai-analysis',
+    title: 'AI Analysis', 
+    icon: Brain,
+    description: 'Advanced machine learning algorithms that analyze market patterns, predict price movements, and identify optimal entry/exit points.',
+    details: ['Pattern recognition', 'Price prediction', 'Risk assessment', 'Market anomaly detection']
+  },
+  {
+    id: 'wallet-data',
+    title: 'Wallet Data',
+    icon: Wallet,
+    description: 'On-chain wallet analytics tracking whale movements, holder distribution, and large transactions to predict market direction.',
+    details: ['Whale tracking', 'Holder analysis', 'Transaction monitoring', 'Flow analysis']
+  },
+  {
+    id: 'lca',
+    title: 'LCA',
+    icon: Users,
+    description: 'Large Community Alerts from exclusive insider groups, providing early signals on major market movements and upcoming catalysts.',
+    details: ['Insider signals', 'Community alerts', 'Early warnings', 'Exclusive insights']
+  }
+];
+
 export default function DashboardPreview() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
+  const [expandedBox, setExpandedBox] = useState(null);
   
   return (
     <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6">
@@ -744,22 +777,84 @@ export default function DashboardPreview() {
               </div>
             </div>
 
-            {/* Fade to Black Effect - Bottom Half */}
+            {/* Fade to Black Effect - Higher Start */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background via-background/85 via-70% to-transparent z-10" />
-              
-              {/* Mysterious text overlay */}
-              <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="text-center space-y-2">
-                  <div className="text-terminal-green/70 text-sm font-mono font-medium animate-pulse">
-                    ● PREMIUM ANALYSIS FEATURES
-                  </div>
-                  <div className="text-xs text-terminal-gray/60 font-mono">
-                    Sign up to unlock full terminal access...
-                  </div>
-                </div>
-              </div>
+              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black via-black/90 via-40% to-transparent z-10" />
             </div>
+          </div>
+
+          {/* Feature Boxes Section */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {featureBoxes.map((feature) => {
+              const Icon = feature.icon;
+              const isExpanded = expandedBox === feature.id;
+              
+              return (
+                <div
+                  key={feature.id}
+                  className={`relative bg-black/80 border border-terminal-gray/30 rounded-lg transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer hover:border-terminal-blue/50 ${
+                    isExpanded ? 'transform scale-105 z-20 border-terminal-blue/70 shadow-lg shadow-terminal-blue/20' : ''
+                  }`}
+                  onClick={() => setExpandedBox(isExpanded ? null : feature.id)}
+                  onMouseLeave={() => {
+                    // Auto-collapse when mouse leaves
+                    setTimeout(() => {
+                      if (expandedBox === feature.id) {
+                        setExpandedBox(null);
+                      }
+                    }, 100);
+                  }}
+                >
+                  <div className="p-4">
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 rounded bg-terminal-blue/20 flex items-center justify-center">
+                        <Icon className="w-4 h-4 text-terminal-blue" />
+                      </div>
+                      <h4 className="text-sm font-semibold text-terminal-white font-mono">
+                        {feature.title}
+                      </h4>
+                    </div>
+                    
+                    {/* Description */}
+                    <p className="text-xs text-terminal-gray/80 font-mono leading-relaxed mb-3">
+                      {feature.description}
+                    </p>
+                    
+                    {/* Expandable Details */}
+                    <div className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                      isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                      <div className="pt-2 border-t border-terminal-gray/20">
+                        <div className="text-xs text-terminal-gray/60 font-mono mb-2 uppercase tracking-wide">
+                          Features
+                        </div>
+                        <ul className="space-y-1">
+                          {feature.details.map((detail, index) => (
+                            <li key={index} className="text-xs text-terminal-gray font-mono flex items-center gap-2">
+                              <div className="w-1 h-1 bg-terminal-blue rounded-full"></div>
+                              {detail}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    {/* Expand Indicator */}
+                    <div className={`mt-3 flex items-center justify-center transition-transform duration-300 ${
+                      isExpanded ? 'rotate-180' : ''
+                    }`}>
+                      <div className="w-4 h-0.5 bg-terminal-blue/50"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Subtle Glow Effect */}
+                  {isExpanded && (
+                    <div className="absolute inset-0 rounded-lg bg-terminal-blue/5 pointer-events-none"></div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
