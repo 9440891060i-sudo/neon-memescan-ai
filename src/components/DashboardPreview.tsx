@@ -776,7 +776,7 @@ export default function DashboardPreview() {
                 </div>
 
                 {/* Feature Boxes Section - Inside Terminal */}
-                <div className="mt-8 mb-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 relative z-30">
+                <div className="mt-2 mb-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 relative z-30">
                   {featureBoxes.map((feature) => {
                     const Icon = feature.icon;
                     const isExpanded = expandedBox === feature.id;
