@@ -774,97 +774,95 @@ export default function DashboardPreview() {
                   /> CREDITS)
                   </Button>
                 </div>
-              </div>
-            </div>
 
-              {/* Feature Boxes Section - Inside Terminal */}
-              <div className="mt-8 mb-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 relative z-30">
-                {featureBoxes.map((feature) => {
-                  const Icon = feature.icon;
-                  const isExpanded = expandedBox === feature.id;
-                  
-                  return (
-                    <div
-                      key={feature.id}
-                      className={`relative bg-black/90 border rounded-lg transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] cursor-pointer backdrop-blur-sm ${
-                        isExpanded 
-                          ? 'transform scale-[1.02] z-40 border-terminal-blue/80 shadow-2xl shadow-terminal-blue/30 bg-black/95' 
-                          : 'border-terminal-gray/40 hover:border-terminal-blue/60 hover:bg-black/95'
-                      }`}
-                      onClick={() => setExpandedBox(isExpanded ? null : feature.id)}
-                      onMouseLeave={() => {
-                        setTimeout(() => {
-                          if (expandedBox === feature.id) {
-                            setExpandedBox(null);
-                          }
-                        }, 150);
-                      }}
-                    >
-                      <div className="p-4">
-                        {/* Header */}
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-terminal-blue/30 to-terminal-blue/10 border border-terminal-blue/30 flex items-center justify-center">
-                            <Icon className="w-3.5 h-3.5 text-terminal-blue" strokeWidth={1.5} />
-                          </div>
-                          <h4 className="text-xs font-semibold text-terminal-white font-mono uppercase tracking-wider">
-                            {feature.title}
-                          </h4>
-                        </div>
-                        
-                        {/* Description */}
-                        <p className="text-xs text-terminal-gray/90 font-mono leading-relaxed mb-3 line-clamp-3">
-                          {feature.description}
-                        </p>
-                        
-                        {/* Expandable Details */}
-                        <div className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
-                          isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
-                        }`}>
-                          <div className="pt-3 border-t border-terminal-gray/30">
-                            <div className="text-[10px] text-terminal-blue/80 font-mono mb-2 uppercase tracking-widest">
-                              Capabilities
+                {/* Feature Boxes Section - Inside Terminal */}
+                <div className="mt-8 mb-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 relative z-30">
+                  {featureBoxes.map((feature) => {
+                    const Icon = feature.icon;
+                    const isExpanded = expandedBox === feature.id;
+                    
+                    return (
+                      <div
+                        key={feature.id}
+                        className={`relative bg-black/90 border rounded-lg transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] cursor-pointer backdrop-blur-sm ${
+                          isExpanded 
+                            ? 'transform scale-[1.02] z-40 border-terminal-blue/80 shadow-2xl shadow-terminal-blue/30 bg-black/95' 
+                            : 'border-terminal-gray/40 hover:border-terminal-blue/60 hover:bg-black/95'
+                        }`}
+                        onClick={() => setExpandedBox(isExpanded ? null : feature.id)}
+                        onMouseLeave={() => {
+                          setTimeout(() => {
+                            if (expandedBox === feature.id) {
+                              setExpandedBox(null);
+                            }
+                          }, 150);
+                        }}
+                      >
+                        <div className="p-4">
+                          {/* Header */}
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-terminal-blue/30 to-terminal-blue/10 border border-terminal-blue/30 flex items-center justify-center">
+                              <Icon className="w-3.5 h-3.5 text-terminal-blue" strokeWidth={1.5} />
                             </div>
-                            <ul className="space-y-1.5">
-                              {feature.details.map((detail, index) => (
-                                <li key={index} className="text-xs text-terminal-gray/80 font-mono flex items-start gap-2">
-                                  <div className="w-1 h-1 bg-terminal-blue/70 rounded-full mt-1.5 flex-shrink-0"></div>
-                                  <span className="leading-relaxed">{detail}</span>
-                                </li>
-                              ))}
-                            </ul>
+                            <h4 className="text-xs font-semibold text-terminal-white font-mono uppercase tracking-wider">
+                              {feature.title}
+                            </h4>
+                          </div>
+                          
+                          {/* Description */}
+                          <p className="text-xs text-terminal-gray/90 font-mono leading-relaxed mb-3 line-clamp-3">
+                            {feature.description}
+                          </p>
+                          
+                          {/* Expandable Details */}
+                          <div className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
+                            isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                          }`}>
+                            <div className="pt-3 border-t border-terminal-gray/30">
+                              <div className="text-[10px] text-terminal-blue/80 font-mono mb-2 uppercase tracking-widest">
+                                Capabilities
+                              </div>
+                              <ul className="space-y-1.5">
+                                {feature.details.map((detail, index) => (
+                                  <li key={index} className="text-xs text-terminal-gray/80 font-mono flex items-start gap-2">
+                                    <div className="w-1 h-1 bg-terminal-blue/70 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <span className="leading-relaxed">{detail}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                          
+                          {/* Status Indicator */}
+                          <div className="mt-3 flex items-center justify-between">
+                            <div className="flex items-center gap-1">
+                              <div className={`w-1.5 h-1.5 rounded-full ${isExpanded ? 'bg-terminal-green animate-pulse' : 'bg-terminal-gray/50'}`}></div>
+                              <span className="text-[10px] text-terminal-gray/60 font-mono uppercase tracking-wide">
+                                {isExpanded ? 'Active' : 'Ready'}
+                              </span>
+                            </div>
+                            <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                              <div className="w-3 h-px bg-terminal-blue/60"></div>
+                            </div>
                           </div>
                         </div>
                         
-                        {/* Status Indicator */}
-                        <div className="mt-3 flex items-center justify-between">
-                          <div className="flex items-center gap-1">
-                            <div className={`w-1.5 h-1.5 rounded-full ${isExpanded ? 'bg-terminal-green animate-pulse' : 'bg-terminal-gray/50'}`}></div>
-                            <span className="text-[10px] text-terminal-gray/60 font-mono uppercase tracking-wide">
-                              {isExpanded ? 'Active' : 'Ready'}
-                            </span>
-                          </div>
-                          <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-                            <div className="w-3 h-px bg-terminal-blue/60"></div>
-                          </div>
-                        </div>
+                        {/* Subtle Glow Effect */}
+                        {isExpanded && (
+                          <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-terminal-blue/10 via-transparent to-terminal-blue/5 pointer-events-none border border-terminal-blue/20"></div>
+                        )}
                       </div>
-                      
-                      {/* Subtle Glow Effect */}
-                      {isExpanded && (
-                        <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-terminal-blue/10 via-transparent to-terminal-blue/5 pointer-events-none border border-terminal-blue/20"></div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+                    );
+                  })}
+                 </div>
+               </div>
+             </div>
 
-            {/* Fade to Black Effect - Start Higher */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black via-black/95 via-30% to-transparent z-20" />
-            </div>
-          </div>
-
+             {/* Fade to Black Effect - Start Higher */}
+             <div className="absolute inset-0 pointer-events-none">
+               <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black via-black/95 via-30% to-transparent z-20" />
+             </div>
+           </div>
         </div>
       </div>
     </section>
