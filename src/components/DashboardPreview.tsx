@@ -776,7 +776,7 @@ export default function DashboardPreview() {
                 </div>
 
                 {/* Feature Boxes Section - Inside Terminal */}
-                <div className="-mt-4 mb-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 relative z-30">
+                <div className="-mt-12 mb-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 relative z-30">
                   {featureBoxes.map((feature) => {
                     const Icon = feature.icon;
                     const isExpanded = expandedBox === feature.id;
@@ -860,7 +860,7 @@ export default function DashboardPreview() {
 
              {/* Fade to Black Effect - Start Higher */}
              <div className="absolute inset-0 pointer-events-none">
-               <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black via-black/95 via-30% to-transparent z-20" />
+               <div className="absolute bottom-0 left-0 right-0 h-4/5 bg-gradient-to-t from-black via-black/98 via-25% to-transparent z-20" />
              </div>
            </div>
         </div>
