@@ -38,16 +38,8 @@ const Header = () => {
     <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
       <div className="bg-background/40 backdrop-blur-xl rounded-full border border-border/50 shadow-lg">
         <div className="flex items-center justify-between px-6 h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
-            <div className="w-8 h-8 rounded-full bg-gradient-neon flex items-center justify-center">
-              <Zap className="w-5 h-5 text-black" />
-            </div>
-            <span className="font-bold text-xl text-neon-green hidden sm:inline">KLUX</span>
-          </Link>
-
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden md:flex items-center space-x-1 flex-1 justify-center">
             {navItems.map((item) => {
               const Icon = item.icon;
               return item.isScroll ? (
@@ -77,14 +69,12 @@ const Header = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Button asChild className="rounded-full bg-gradient-neon text-black hover:shadow-glow transition-all duration-300 group">
-              <Link to="/auth" className="flex items-center space-x-1">
+          <Button asChild className="hidden md:flex rounded-full bg-gradient-neon text-black hover:shadow-glow transition-all duration-300 group">
+            <Link to="/auth" className="flex items-center space-x-1">
                 <span>Start</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </div>
+            </Link>
+          </Button>
 
           {/* Mobile Menu Button */}
           <Button
