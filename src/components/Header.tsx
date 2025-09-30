@@ -35,9 +35,9 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
-      <div className="bg-background/40 backdrop-blur-xl rounded-full border border-border/50 shadow-lg">
-        <div className="flex items-center justify-between px-6 h-16">
+    <header className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-auto">
+      <div className="bg-background/40 backdrop-blur-xl rounded-full border border-border/50 shadow-lg px-2">
+        <div className="flex items-center justify-center px-4 h-14">
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1 flex-1 justify-center">
             {navItems.map((item) => {
