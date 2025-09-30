@@ -18,7 +18,6 @@ const Header = () => {
 
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
-    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "#pricing", label: "Pricing", icon: DollarSign, isModal: true },
     { href: "/leaderboard", label: "Performance", icon: Trophy },
     { href: "/kluxify", label: "Community", icon: Users },
@@ -36,7 +35,7 @@ const Header = () => {
   return (
     <>
       <PricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
-    <header className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-auto">
+    <header className="fixed top-14 left-1/2 -translate-x-1/2 z-50 w-auto">
       <div className="bg-background/40 backdrop-blur-xl rounded-full border border-border/50 shadow-lg px-2">
         <div className="flex items-center justify-center px-4 h-14">
           {/* Desktop Navigation */}
