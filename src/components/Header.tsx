@@ -3,9 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Zap, LayoutDashboard, DollarSign, Trophy, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
+import PricingModal from "@/components/PricingModal";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const location = useLocation();
   const { isAuthenticated } = useAuthStore();
 
@@ -17,24 +19,23 @@ const Header = () => {
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/#pricing", label: "Pricing", icon: DollarSign, isScroll: true },
+    { href: "#pricing", label: "Pricing", icon: DollarSign, isModal: true },
     { href: "/leaderboard", label: "Performance", icon: Trophy },
     { href: "/kluxify", label: "Community", icon: Users },
   ];
 
   const isActive = (href: string) => location.pathname === href;
 
-  const handleNavClick = (href: string, isScroll?: boolean) => {
-    if (isScroll && href === "/#pricing") {
-      const pricingSection = document.getElementById("pricing");
-      if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: "smooth" });
-      }
+  const handleNavClick = (href: string, isModal?: boolean) => {
+    if (isModal) {
+      setIsPricingModalOpen(true);
     }
     setIsMobileMenuOpen(false);
   };
 
   return (
+    <>
+      <PricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
     <header className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-auto">
       <div className="bg-background/40 backdrop-blur-xl rounded-full border border-border/50 shadow-lg px-2">
         <div className="flex items-center justify-center px-4 h-14">
@@ -42,13 +43,11 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-1 flex-1 justify-center">
             {navItems.map((item) => {
               const Icon = item.icon;
-              return item.isScroll ? (
+              return item.isModal ? (
                 <button
                   key={item.href}
-                  onClick={() => handleNavClick(item.href, item.isScroll)}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-accent/50 ${
-                    isActive(item.href) ? "bg-accent text-foreground" : "text-muted-foreground"
-                  }`}
+                  onClick={() => handleNavClick(item.href, item.isModal)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-accent/50 text-muted-foreground`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{item.label}</span>
@@ -93,10 +92,10 @@ const Header = () => {
             <nav className="flex flex-col space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                return item.isScroll ? (
+                return item.isModal ? (
                   <button
                     key={item.href}
-                    onClick={() => handleNavClick(item.href, item.isScroll)}
+                    onClick={() => handleNavClick(item.href, item.isModal)}
                     className="flex items-center space-x-3 px-4 py-3 rounded-full transition-all duration-200 text-foreground hover:bg-accent w-full text-left"
                   >
                     <Icon className="w-5 h-5" />
@@ -131,6 +130,7 @@ const Header = () => {
         )}
       </div>
     </header>
+    </>
   );
 };
 
