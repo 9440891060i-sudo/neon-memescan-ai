@@ -52,24 +52,24 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="w-64 bg-gradient-card backdrop-blur-sm border-r-0 group-data-[side=left]:border-r-0 group-data-[side=right]:border-l-0 shadow-none">
-      <SidebarHeader className="pt-6 pb-4 px-4 border-b border-neon-green/20">
+    <Sidebar className="w-64 bg-black backdrop-blur-sm border-r border-gray-900 group-data-[side=left]:border-r group-data-[side=right]:border-l shadow-none">
+      <SidebarHeader className="pt-6 pb-4 px-4 border-b border-gray-900">
         {/* User Profile Section */}
         <Link 
           to="/profile-settings" 
-          className="flex items-center gap-3 p-3 bg-gradient-to-r from-neon-green/10 to-transparent rounded-lg border border-neon-green/20 hover:border-neon-green/40 transition-all duration-300 group"
+          className="flex items-center gap-3 p-3 bg-gray-950 rounded-lg border border-gray-900 hover:border-gray-800 transition-all duration-300 group"
         >
-          <Avatar className="h-10 w-10 border-2 border-neon-green/30 group-hover:border-neon-green/50 transition-all">
+          <Avatar className="h-10 w-10 border-2 border-gray-800 group-hover:border-gray-700 transition-all">
             <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
-            <AvatarFallback className="bg-gradient-neon text-black font-bold">
+            <AvatarFallback className="bg-gray-900 text-white font-bold">
               {getUserInitials()}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-foreground truncate group-hover:text-neon-green transition-colors">
+            <p className="font-semibold text-white truncate group-hover:text-gray-300 transition-colors">
               {user?.username || "User"}
             </p>
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1 text-xs text-gray-400">
               <Coins className="w-3 h-3 text-neon-green" />
               <span>1,250 credits</span>
             </div>
@@ -79,7 +79,7 @@ export function AppSidebar() {
 
       <SidebarContent className="px-2">
         <SidebarGroup className="py-4">
-          <SidebarGroupLabel className="text-muted-foreground text-xs uppercase tracking-wider mb-4 px-3 font-medium">
+          <SidebarGroupLabel className="text-gray-500 text-xs uppercase tracking-wider mb-4 px-3 font-medium">
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -93,15 +93,12 @@ export function AppSidebar() {
                         to={item.url}
                         className={`flex items-center space-x-3 px-4 py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden ${
                           isActive(item.url)
-                            ? "bg-neon-green/20 text-neon-green border border-neon-green/50 shadow-neon-green"
-                            : "text-foreground hover:bg-neon-green/10 hover:text-neon-green hover:border-neon-green/30 border border-transparent"
+                            ? "bg-gray-900 text-white border border-gray-800"
+                            : "text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent"
                         }`}
                       >
-                        <div className={`absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-cyan/5 opacity-0 transition-opacity duration-300 ${
-                          isActive(item.url) ? "opacity-100" : "group-hover:opacity-50"
-                        }`} />
                         <Icon className={`w-5 h-5 relative z-10 transition-transform duration-300 ${
-                          isActive(item.url) ? "scale-110" : "group-hover:scale-110"
+                          isActive(item.url) ? "scale-110 text-neon-green" : "group-hover:scale-110"
                         }`} />
                         <span className={`font-medium relative z-10 transition-all duration-300 ${
                           isActive(item.url) ? "font-semibold" : ""
@@ -120,9 +117,8 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <button
                     onClick={handleSupport}
-                    className="flex items-center space-x-3 px-4 py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden text-foreground hover:bg-neon-green/10 hover:text-neon-green hover:border-neon-green/30 border border-transparent w-full text-left"
+                    className="flex items-center space-x-3 px-4 py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent w-full text-left"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-cyan/5 opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
                     <HelpCircle className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
                     <span className="font-medium relative z-10 transition-all duration-300">Support</span>
                   </button>
@@ -133,13 +129,12 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t border-neon-green/20">
+      <SidebarFooter className="p-4 border-t border-gray-900">
         <Button
           onClick={handleLogout}
           variant="outline"
-          className="w-full justify-start border-destructive/50 text-destructive hover:bg-destructive/20 hover:border-destructive transition-all duration-300 group relative overflow-hidden"
+          className="w-full justify-start border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-destructive/10 to-destructive/5 opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
           <LogOut className="w-4 h-4 mr-3 relative z-10 transition-transform duration-300 group-hover:scale-110" />
           <span className="relative z-10">Logout</span>
         </Button>

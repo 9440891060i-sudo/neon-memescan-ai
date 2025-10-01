@@ -71,13 +71,13 @@ const Rewards = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-6">
+    <div className="min-h-screen bg-black p-6">
       <div className="w-full space-y-8">
         
         {/* Header Section */}
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold">Rewards</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold text-white">Rewards</h1>
+          <p className="text-gray-400">
             Track your referral earnings, payouts, and performance.
           </p>
         </div>
@@ -97,30 +97,30 @@ const Rewards = () => {
               <div className="lg:col-span-2 space-y-6">
                 
                 {/* Your Stats */}
-                <Card>
+                <Card className="bg-black border-gray-800">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <TrendingUp className="w-5 h-5" />
+                    <CardTitle className="flex items-center gap-2 text-white">
+                      <TrendingUp className="w-5 h-5 text-gray-400" />
                       Your Performance
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-primary">2,450</p>
-                        <p className="text-sm text-muted-foreground">Points</p>
+                        <p className="text-2xl font-bold text-white">2,450</p>
+                        <p className="text-sm text-gray-400">Points</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-2xl font-bold">12</p>
-                        <p className="text-sm text-muted-foreground">Referrals</p>
+                        <p className="text-2xl font-bold text-white">12</p>
+                        <p className="text-sm text-gray-400">Referrals</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-green-600">$186</p>
-                        <p className="text-sm text-muted-foreground">Earned</p>
+                        <p className="text-2xl font-bold text-neon-green">$186</p>
+                        <p className="text-sm text-gray-400">Earned</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-primary">$24</p>
-                        <p className="text-sm text-muted-foreground">Pending</p>
+                        <p className="text-2xl font-bold text-white">$24</p>
+                        <p className="text-sm text-gray-400">Pending</p>
                       </div>
                     </div>
                     
@@ -136,10 +136,10 @@ const Rewards = () => {
                 </Card>
 
                 {/* Current Referrals */}
-                <Card>
+                <Card className="bg-black border-gray-800">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Users className="w-5 h-5" />
+                    <CardTitle className="flex items-center gap-2 text-white">
+                      <Users className="w-5 h-5 text-gray-400" />
                       Current Referrals
                     </CardTitle>
                   </CardHeader>
@@ -148,7 +148,7 @@ const Rewards = () => {
                       {userReferrals.map((referral, index) => (
                         <div
                           key={index}
-                          className="flex items-center justify-between p-3 rounded-lg border"
+                          className="flex items-center justify-between p-3 rounded-lg bg-gray-950 border border-gray-900"
                         >
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-2">
@@ -176,16 +176,16 @@ const Rewards = () => {
               <div className="space-y-6">
                 
                 {/* Referral Code Section */}
-                <Card>
+                <Card className="bg-black border-gray-800">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Share className="w-5 h-5" />
+                    <CardTitle className="flex items-center gap-2 text-lg text-white">
+                      <Share className="w-5 h-5 text-gray-400" />
                       Referral Code
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="p-3 rounded-lg bg-muted/50 border">
-                      <p className="font-mono text-center font-bold text-primary">
+                    <div className="p-3 rounded-lg bg-gray-950 border border-gray-900">
+                      <p className="font-mono text-center font-bold text-neon-green">
                         {referralCode}
                       </p>
                     </div>
@@ -203,23 +203,23 @@ const Rewards = () => {
                 </Card>
 
                 {/* Payouts */}
-                <Card>
+                <Card className="bg-black border-gray-800">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Wallet className="w-5 h-5" />
+                    <CardTitle className="flex items-center gap-2 text-lg text-white">
+                      <Wallet className="w-5 h-5 text-gray-400" />
                       Payouts
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-4">
-                      <div className="text-center p-4 rounded-lg border">
-                        <p className="text-xl font-bold text-green-600">$186.00</p>
-                        <p className="text-sm text-muted-foreground">Total Earned</p>
+                      <div className="text-center p-4 rounded-lg bg-gray-950 border border-gray-900">
+                        <p className="text-xl font-bold text-neon-green">$186.00</p>
+                        <p className="text-sm text-gray-400">Total Earned</p>
                       </div>
                       
-                      <div className="text-center p-4 rounded-lg border">
-                        <p className="font-semibold">Jan 15, 2025</p>
-                        <p className="text-sm text-muted-foreground">Next Payout Date</p>
+                      <div className="text-center p-4 rounded-lg bg-gray-950 border border-gray-900">
+                        <p className="font-semibold text-white">Jan 15, 2025</p>
+                        <p className="text-sm text-gray-400">Next Payout Date</p>
                       </div>
                     </div>
                     
@@ -242,12 +242,12 @@ const Rewards = () => {
 
           {/* Leaderboard Tab */}
           <TabsContent value="leaderboard" className="space-y-6">
-            <Card>
+            <Card className="bg-black border-gray-800">
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6" />
+                  <Trophy className="w-6 h-6 text-gray-400" />
                   <div>
-                    <CardTitle className="text-xl">Top Performers</CardTitle>
+                    <CardTitle className="text-xl text-white">Top Performers</CardTitle>
                     <CardDescription>Leading users by referrals and earnings</CardDescription>
                   </div>
                 </div>
@@ -269,14 +269,14 @@ const Rewards = () => {
                         <TableCell className="font-medium">#{user.rank}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            {user.rank <= 3 && <Trophy className="w-4 h-4 text-primary" />}
-                            <span className="font-mono">{user.username}</span>
+                            {user.rank <= 3 && <Trophy className="w-4 h-4 text-neon-green" />}
+                            <span className="font-mono text-white">{user.username}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-right font-medium">{user.referrals}</TableCell>
-                        <TableCell className="text-right font-medium text-green-600">{user.earnings}</TableCell>
+                        <TableCell className="text-right font-medium text-gray-300">{user.referrals}</TableCell>
+                        <TableCell className="text-right font-medium text-neon-green">{user.earnings}</TableCell>
                         <TableCell className="text-right">
-                          <span className="font-bold text-primary">
+                          <span className="font-bold text-white">
                             {user.points.toLocaleString()}
                           </span>
                         </TableCell>

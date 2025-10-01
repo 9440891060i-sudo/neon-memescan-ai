@@ -112,17 +112,17 @@ export default function ProfileSettings() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-4xl mx-auto">
+    <div className="p-6 space-y-6 max-w-4xl mx-auto bg-black min-h-screen">
       <div>
-        <h1 className="text-3xl font-bold text-neon-green mb-2">Profile Settings</h1>
-        <p className="text-muted-foreground">Manage your account, subscription, and preferences</p>
+        <h1 className="text-3xl font-bold text-white mb-2">Profile Settings</h1>
+        <p className="text-gray-400">Manage your account, subscription, and preferences</p>
       </div>
 
       {/* Profile Information */}
-      <Card className="bg-gradient-card border-neon-green/20">
+      <Card className="bg-black border-gray-800">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-foreground">
-            <User className="w-5 h-5 text-neon-green" />
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <User className="w-5 h-5 text-gray-400" />
             Profile Information
           </CardTitle>
           <CardDescription>Update your personal information</CardDescription>
@@ -132,15 +132,15 @@ export default function ProfileSettings() {
           <div className="flex items-center gap-4">
             <Avatar className="h-20 w-20">
               <AvatarImage src="/placeholder.svg" />
-              <AvatarFallback className="bg-neon-green/20 text-neon-green text-xl font-bold">
+              <AvatarFallback className="bg-gray-900 text-white text-xl font-bold">
                 {getUserInitials()}
               </AvatarFallback>
             </Avatar>
             <div>
-              <Button variant="outline" size="sm" className="border-neon-green/50 text-neon-green hover:bg-neon-green/10">
+              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-900">
                 Change Avatar
               </Button>
-              <p className="text-xs text-muted-foreground mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 Upload a new profile picture
               </p>
             </div>
@@ -148,112 +148,112 @@ export default function ProfileSettings() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username" className="text-gray-400">Username</Label>
               <Input
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="border-neon-green/30 focus:border-neon-green"
+                className="bg-gray-950 border-gray-800 text-white"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-gray-400">Email</Label>
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border-neon-green/30 focus:border-neon-green"
+                className="bg-gray-950 border-gray-800 text-white"
               />
             </div>
           </div>
 
-          <Button onClick={handleUpdateProfile} className="bg-neon-green/20 text-neon-green hover:bg-neon-green/30 border border-neon-green/50">
+          <Button onClick={handleUpdateProfile} className="bg-neon-green text-black hover:bg-neon-green/90">
             Update Profile
           </Button>
         </CardContent>
       </Card>
 
       {/* Password Section */}
-      <Card className="bg-gradient-card border-border">
+      <Card className="bg-black border-gray-800">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-foreground">
-            <Lock className="w-5 h-5 text-neon-cyan" />
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <Lock className="w-5 h-5 text-gray-400" />
             Change Password
           </CardTitle>
           <CardDescription>Update your account password</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="current-password">Current Password</Label>
+            <Label htmlFor="current-password" className="text-gray-400">Current Password</Label>
             <Input
               id="current-password"
               type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              className="border-neon-cyan/30 focus:border-neon-cyan"
+              className="bg-gray-950 border-gray-800 text-white"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="new-password">New Password</Label>
+            <Label htmlFor="new-password" className="text-gray-400">New Password</Label>
             <Input
               id="new-password"
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="border-neon-cyan/30 focus:border-neon-cyan"
+              className="bg-gray-950 border-gray-800 text-white"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="confirm-password">Confirm New Password</Label>
+            <Label htmlFor="confirm-password" className="text-gray-400">Confirm New Password</Label>
             <Input
               id="confirm-password"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="border-neon-cyan/30 focus:border-neon-cyan"
+              className="bg-gray-950 border-gray-800 text-white"
             />
           </div>
-          <Button onClick={handleUpdatePassword} className="bg-neon-cyan/20 text-neon-cyan hover:bg-neon-cyan/30 border border-neon-cyan/50">
+          <Button onClick={handleUpdatePassword} className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-800">
             Update Password
           </Button>
         </CardContent>
       </Card>
 
       {/* Subscription Management */}
-      <Card className="bg-gradient-card border-neon-purple/20">
+      <Card className="bg-black border-gray-800">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-foreground">
-            <Crown className="w-5 h-5 text-neon-purple" />
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <Crown className="w-5 h-5 text-gray-400" />
             Subscription Plan
           </CardTitle>
           <CardDescription>Manage your subscription and billing</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-900">
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-neon-purple">{subscriptionData.plan} Plan</h3>
-                <Badge className="bg-neon-purple/20 text-neon-purple">
+                <h3 className="font-semibold text-white">{subscriptionData.plan} Plan</h3>
+                <Badge className="bg-gray-900 text-white border-gray-800">
                   {subscriptionData.status}
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-gray-400">
                 Next billing: {subscriptionData.nextBilling}
               </p>
             </div>
-            <Button onClick={handleUpgradePlan} variant="outline" className="border-neon-purple/50 text-neon-purple hover:bg-neon-purple/10">
+            <Button onClick={handleUpgradePlan} variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-900">
               Manage Plan
             </Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 bg-black/20 rounded-lg">
+            <div className="p-4 bg-gray-950 rounded-lg border border-gray-900">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Credits Remaining</span>
+                <span className="text-sm text-gray-400">Credits Remaining</span>
                 <span className="text-lg font-bold text-neon-green">{subscriptionData.creditsRemaining}</span>
               </div>
-              <div className="w-full bg-black/50 rounded-full h-2">
+              <div className="w-full bg-gray-900 rounded-full h-2">
                 <div 
                   className="bg-neon-green h-2 rounded-full transition-all duration-300"
                   style={{ width: `${(subscriptionData.creditsRemaining / (subscriptionData.creditsRemaining + subscriptionData.creditsUsed)) * 100}%` }}
@@ -261,12 +261,12 @@ export default function ProfileSettings() {
               </div>
             </div>
 
-            <div className="p-4 bg-black/20 rounded-lg">
+            <div className="p-4 bg-gray-950 rounded-lg border border-gray-900">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Credits Used</span>
-                <span className="text-lg font-bold text-neon-cyan">{subscriptionData.creditsUsed}</span>
+                <span className="text-sm text-gray-400">Credits Used</span>
+                <span className="text-lg font-bold text-white">{subscriptionData.creditsUsed}</span>
               </div>
-              <Button variant="outline" size="sm" className="w-full border-neon-cyan/50 text-neon-cyan hover:bg-neon-cyan/10">
+              <Button variant="outline" size="sm" className="w-full border-gray-700 text-gray-300 hover:bg-gray-900">
                 Buy More Credits
               </Button>
             </div>
@@ -275,26 +275,26 @@ export default function ProfileSettings() {
       </Card>
 
       {/* Payment Method */}
-      <Card className="bg-gradient-card border-border">
+      <Card className="bg-black border-gray-800">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-foreground">
-            <CreditCard className="w-5 h-5 text-yellow-400" />
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <CreditCard className="w-5 h-5 text-gray-400" />
             Payment Method
           </CardTitle>
           <CardDescription>Manage your billing information</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-900">
             <div className="flex items-center gap-3">
               <div className="w-10 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded flex items-center justify-center text-white text-xs font-bold">
                 VISA
               </div>
               <div>
-                <p className="font-medium">•••• •••• •••• {paymentMethod.last4}</p>
-                <p className="text-sm text-muted-foreground">Expires {paymentMethod.expiry}</p>
+                <p className="font-medium text-white">•••• •••• •••• {paymentMethod.last4}</p>
+                <p className="text-sm text-gray-400">Expires {paymentMethod.expiry}</p>
               </div>
             </div>
-            <Button onClick={handleUpdatePayment} variant="outline" className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10">
+            <Button onClick={handleUpdatePayment} variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-900">
               Update Payment
             </Button>
           </div>
@@ -302,10 +302,10 @@ export default function ProfileSettings() {
       </Card>
 
       {/* Activity Logs */}
-      <Card className="bg-gradient-card border-border">
+      <Card className="bg-black border-gray-800">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-foreground">
-            <Activity className="w-5 h-5 text-muted-foreground" />
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <Activity className="w-5 h-5 text-gray-400" />
             Account Activity
           </CardTitle>
           <CardDescription>Recent account activities and logs</CardDescription>
@@ -313,19 +313,19 @@ export default function ProfileSettings() {
         <CardContent>
           <div className="space-y-3">
             {activityLogs.map((log, index) => (
-              <div key={index} className="flex items-start gap-3 p-3 bg-black/20 rounded-lg">
+              <div key={index} className="flex items-start gap-3 p-3 bg-gray-950 rounded-lg border border-gray-900">
                 <div className="mt-0.5">
                   {getActivityIcon(log.type)}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium truncate">{log.action}</p>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <p className="font-medium truncate text-white">{log.action}</p>
+                    <div className="flex items-center gap-2 text-xs text-gray-400">
                       <Calendar className="w-3 h-3" />
                       {log.date}
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground truncate">{log.details}</p>
+                  <p className="text-sm text-gray-400 truncate">{log.details}</p>
                 </div>
               </div>
             ))}
