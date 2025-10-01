@@ -37,29 +37,29 @@ All colors MUST be HSL.
     --input: 220 15% 12%;
     --ring: 158 100% 50%;
 
-    /* Professional terminal colors - reduced vibrancy */
-    --terminal-green: 158 60% 45%;
-    --terminal-amber: 45 70% 55%;
-    --terminal-blue: 210 65% 55%;
-    --terminal-red: 0 70% 55%;
-    --terminal-gray: 210 15% 70%;
-    --terminal-white: 0 0% 90%;
+    /* Professional terminal colors - full vibrancy */
+    --terminal-green: 158 100% 50%;
+    --terminal-amber: 45 100% 60%;
+    --terminal-blue: 210 100% 60%;
+    --terminal-red: 0 100% 60%;
+    --terminal-gray: 210 15% 75%;
+    --terminal-white: 0 0% 95%;
     
-    /* Subtle accent colors for professional look */
-    --neon-green: 158 60% 45%;
-    --neon-cyan: 210 65% 55%;
-    --neon-purple: 270 50% 60%;
-    --neon-pink: 330 50% 60%;
+    /* Legacy neon colors for compatibility */
+    --neon-green: 158 100% 50%;
+    --neon-cyan: 210 100% 60%;
+    --neon-purple: 270 100% 70%;
+    --neon-pink: 330 100% 70%;
     
-    /* Gradients - more subtle */
-    --gradient-neon: linear-gradient(135deg, hsl(158 60% 45% / 0.6), hsl(180 65% 50% / 0.5), hsl(270 50% 60% / 0.4));
+    /* Gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(158 100% 50%), hsl(180 100% 50%), hsl(270 100% 70%));
     --gradient-dark: linear-gradient(135deg, hsl(220 15% 3%), hsl(220 15% 8%));
     --gradient-card: linear-gradient(135deg, hsl(220 15% 6%), hsl(220 15% 10%));
     
-    /* Shadows and glows - 50% reduced */
-    --shadow-neon-green: 0 0 10px hsl(158 60% 45% / 0.25);
-    --shadow-neon-cyan: 0 0 10px hsl(180 65% 50% / 0.25);
-    --shadow-neon-purple: 0 0 10px hsl(270 50% 60% / 0.25);
+    /* Shadows and glows */
+    --shadow-neon-green: 0 0 20px hsl(158 100% 50% / 0.5);
+    --shadow-neon-cyan: 0 0 20px hsl(180 100% 50% / 0.5);
+    --shadow-neon-purple: 0 0 20px hsl(270 100% 70% / 0.5);
     --shadow-card: 0 8px 32px hsl(220 15% 0% / 0.3);
 
     --radius: 0.75rem;
@@ -225,20 +225,20 @@ All colors MUST be HSL.
     background-color: hsl(var(--terminal-white));
   }
 
-  /* Professional text colors - reduced glow */
+  /* Legacy neon text colors for compatibility */
   .text-neon-green {
     color: hsl(var(--neon-green));
-    text-shadow: 0 0 5px hsl(var(--neon-green) / 0.4);
+    text-shadow: 0 0 10px hsl(var(--neon-green) / 0.8);
   }
   
   .text-neon-cyan {
     color: hsl(var(--neon-cyan));
-    text-shadow: 0 0 5px hsl(var(--neon-cyan) / 0.4);
+    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.8);
   }
   
   .text-neon-purple {
     color: hsl(var(--neon-purple));
-    text-shadow: 0 0 5px hsl(var(--neon-purple) / 0.4);
+    text-shadow: 0 0 10px hsl(var(--neon-purple) / 0.8);
   }
 
   /* Gradient backgrounds */
@@ -250,7 +250,7 @@ All colors MUST be HSL.
     background: var(--gradient-card);
   }
 
-  /* Animated elements - subtle pulse */
+  /* Animated elements */
   .animate-pulse-neon {
     animation: pulse-neon 2s ease-in-out infinite alternate;
   }
@@ -260,7 +260,7 @@ All colors MUST be HSL.
       box-shadow: var(--shadow-neon-green);
     }
     to {
-      box-shadow: 0 0 15px hsl(var(--neon-green) / 0.4), 0 0 20px hsl(var(--neon-green) / 0.3);
+      box-shadow: 0 0 30px hsl(var(--neon-green) / 0.8), 0 0 40px hsl(var(--neon-green) / 0.6);
     }
   }
 
