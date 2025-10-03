@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap, LayoutDashboard, DollarSign, Trophy, Users, ArrowRight } from "lucide-react";
+import { Menu, X, Zap, LayoutDashboard, DollarSign, HelpCircle, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
 import PricingModal from "@/components/PricingModal";
@@ -19,7 +19,7 @@ const Header = () => {
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
     { href: "#pricing", label: "Pricing", icon: DollarSign, isModal: true },
-    { href: "/leaderboard", label: "Performance", icon: Trophy },
+    { href: "/faq", label: "FAQs", icon: HelpCircle },
     { href: "/kluxify", label: "Community", icon: Users },
   ];
 
