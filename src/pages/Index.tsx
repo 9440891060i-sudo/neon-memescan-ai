@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import DashboardPreview from "@/components/DashboardPreview";
 import HowItWorks from "@/components/HowItWorks";
-import PricingSection from "@/components/PricingSection";
+import PerformancePreview from "@/components/PerformancePreview";
 import MemeCoinDisplay from "@/components/MemeCoinDisplay";
 import CTASection from "@/components/CTASection";
 
@@ -15,9 +15,7 @@ const Index = () => {
         <HowItWorks />
         <DashboardPreview />
         <MemeCoinDisplay />
-        <div id="pricing">
-          <PricingSection />
-        </div>
+        <PerformancePreview />
         <CTASection />
       </main>
     </div>
