@@ -14,7 +14,7 @@ const memeCoins = [
 
 export default function MemeCoinTicker() {
   return (
-    <div className="w-full bg-black/90 backdrop-blur-sm border-b border-neon-green/20 h-10 sm:h-12 mt-16">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-neon-green/20 h-10 sm:h-12">
       <div className="overflow-hidden py-1 sm:py-2">
         <div className="animate-ticker flex items-center gap-4 sm:gap-8 whitespace-nowrap">
           {/* Repeat the coins multiple times for seamless scrolling */}
