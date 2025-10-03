@@ -5,12 +5,14 @@ import HowItWorks from "@/components/HowItWorks";
 import PerformancePreview from "@/components/PerformancePreview";
 import MemeCoinDisplay from "@/components/MemeCoinDisplay";
 import CTASection from "@/components/CTASection";
+import MemeCoinTicker from "@/components/MemeCoinTicker";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-16">
+      <MemeCoinTicker />
+      <main className="pt-0">
         <HeroSection />
         <HowItWorks />
         <DashboardPreview />
