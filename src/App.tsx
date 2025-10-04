@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { useAuthStore } from "@/store/authStore";
-import MemeCoinTicker from "@/components/MemeCoinTicker";
 import Index from "./pages/Index";
 import AnalysisInput from "./pages/AnalysisInput";
 import Dashboard from "./pages/Dashboard";
@@ -56,7 +55,6 @@ const AppContent = () => {
         </SidebarProvider>
       ) : (
         <div className="min-h-screen bg-background">
-          <MemeCoinTicker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
