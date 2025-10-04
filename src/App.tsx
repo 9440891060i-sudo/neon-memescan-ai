@@ -30,7 +30,7 @@ const AppContent = () => {
           <div className="flex min-h-screen w-full">
             <AppSidebar />
             <main className="flex-1">
-              <header className="sticky top-0 z-50 flex h-14 items-center gap-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:hidden">
+              <header className="sticky top-0 z-50 flex h-14 items-center gap-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 border-b border-gray-900">
                 <SidebarTrigger className="-ml-1" />
                 <div className="flex-1" />
               </header>
