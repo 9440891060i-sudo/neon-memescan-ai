@@ -264,6 +264,18 @@ All colors MUST be HSL.
     }
   }
 
+  /* Floating bubble animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-20px);
+      opacity: 0.3;
+    }
+  }
+
   /* Ticker animation - seamless loop */
   .animate-ticker {
     animation: ticker 45s linear infinite;
