@@ -32,7 +32,7 @@ export default function PricingModal({ open, onOpenChange }: PricingModalProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl p-0 border-0 bg-transparent overflow-hidden animate-fade-in">
+      <DialogContent className="max-w-4xl p-0 border-0 bg-transparent overflow-hidden animate-fade-in">
         <div className="relative bg-background/40 backdrop-blur-2xl rounded-2xl border border-neon-green/20 shadow-[0_0_50px_rgba(0,255,136,0.1)] overflow-hidden animate-scale-in">
           {/* Glassmorphism overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-xl" />
@@ -40,14 +40,14 @@ export default function PricingModal({ open, onOpenChange }: PricingModalProps) 
           {/* Content */}
           <div className="relative grid md:grid-cols-2 gap-0">
             {/* Left Section - Klud Fluid Refill */}
-            <div className="p-8 border-r border-neon-green/10">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-foreground mb-2 tracking-tight">Refill Klud Fluid</h2>
-                <p className="text-sm text-muted-foreground">Power Your Analysis</p>
+            <div className="p-6 border-r border-neon-green/10">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-foreground mb-1 tracking-tight">Refill Klud Fluid</h2>
+                <p className="text-xs text-muted-foreground">Power Your Analysis</p>
               </div>
 
               {/* Glowing Jar Container */}
-              <div className="relative h-64 mb-8 flex items-center justify-center">
+              <div className="relative h-48 mb-6 flex items-center justify-center">
                 {/* Main Jar */}
                 <div className="relative">
                   {/* Jar Body */}
@@ -161,7 +161,7 @@ export default function PricingModal({ open, onOpenChange }: PricingModalProps) 
             </div>
 
             {/* Right Section - KLUX AI Info */}
-            <div className="p-8 bg-gradient-to-br from-neon-green/5 to-transparent">
+            <div className="p-6 bg-gradient-to-br from-neon-green/5 to-transparent">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 rounded-xl bg-neon-purple/10 border border-neon-purple/20">
                   <Sparkles className="w-6 h-6 text-neon-purple" />
