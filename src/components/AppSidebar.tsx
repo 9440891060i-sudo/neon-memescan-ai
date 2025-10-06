@@ -55,11 +55,11 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className={`${open ? "w-64" : "w-16"} bg-black backdrop-blur-sm border-r border-gray-900 group-data-[side=left]:border-r group-data-[side=right]:border-l shadow-none transition-all duration-300`}>
-      <SidebarHeader className={`pt-6 pb-4 ${open ? "px-4" : "px-2"} border-b border-gray-900`}>
+      <SidebarHeader className={`pt-6 pb-4 ${open ? "px-4" : "px-1"} border-b border-gray-900`}>
         {/* User Profile Section */}
         <Link 
           to="/profile-settings" 
-          className={`flex items-center ${open ? "gap-3 p-3" : "p-2 justify-center"} bg-gray-950 rounded-lg border border-gray-900 hover:border-gray-800 transition-all duration-300 group`}
+          className={`flex items-center ${open ? "gap-3 p-3" : "p-2 justify-center w-full"} bg-gray-950 rounded-lg border border-gray-900 hover:border-gray-800 transition-all duration-300 group`}
         >
           <Avatar className="h-10 w-10 border-2 border-gray-800 group-hover:border-gray-700 transition-all shrink-0">
             <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
@@ -81,7 +81,7 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
 
-      <SidebarContent className="px-2">
+      <SidebarContent className={open ? "px-2" : "px-1"}>
         <SidebarGroup className="py-4">
           {open && (
             <SidebarGroupLabel className="text-gray-500 text-xs uppercase tracking-wider mb-4 px-3 font-medium">
@@ -97,7 +97,7 @@ export function AppSidebar() {
                     <SidebarMenuButton asChild>
                       <Link
                         to={item.url}
-                        className={`flex items-center ${open ? "space-x-3 px-4" : "justify-center px-0"} py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden ${
+                        className={`flex items-center ${open ? "space-x-3 px-4 mx-1" : "justify-center px-0 mx-0 w-full"} py-3 rounded-lg transition-all duration-300 group relative overflow-hidden ${
                           isActive(item.url)
                             ? "bg-gray-900 text-white border border-gray-800"
                             : "text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent"
@@ -125,7 +125,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <button
                     onClick={handleSupport}
-                    className={`flex items-center ${open ? "space-x-3 px-4" : "justify-center px-0"} py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent w-full text-left`}
+                    className={`flex items-center ${open ? "space-x-3 px-4 mx-1" : "justify-center px-0 mx-0 w-full"} py-3 rounded-lg transition-all duration-300 group relative overflow-hidden text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent text-left`}
                   >
                     <HelpCircle className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
                     {open && <span className="font-medium relative z-10 transition-all duration-300">Support</span>}
@@ -137,11 +137,11 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className={`${open ? "p-4" : "p-2"} border-t border-gray-900`}>
+      <SidebarFooter className={`${open ? "p-4" : "p-1"} border-t border-gray-900`}>
         <Button
           onClick={handleLogout}
           variant="outline"
-          className={`w-full ${open ? "justify-start" : "justify-center px-0"} border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group`}
+          className={`w-full ${open ? "justify-start" : "justify-center"} border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group`}
         >
           <LogOut className={`w-4 h-4 ${open ? "mr-3" : ""} relative z-10 transition-transform duration-300 group-hover:scale-110`} />
           {open && <span className="relative z-10">Logout</span>}
