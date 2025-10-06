@@ -97,13 +97,13 @@ export function AppSidebar() {
                     <SidebarMenuButton asChild>
                       <Link
                         to={item.url}
-                        className={`flex items-center ${open ? "space-x-3 px-4" : "justify-center px-2"} py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden ${
+                        className={`flex items-center ${open ? "space-x-3 px-4" : "justify-center px-0"} py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden ${
                           isActive(item.url)
                             ? "bg-gray-900 text-white border border-gray-800"
                             : "text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent"
                         }`}
                       >
-                        <Icon className={`w-5 h-5 relative z-10 transition-transform duration-300 shrink-0 ${
+                        <Icon className={`w-5 h-5 relative z-10 transition-transform duration-300 ${
                           isActive(item.url) ? "scale-110 text-neon-green" : "group-hover:scale-110"
                         }`} />
                         {open && (
@@ -125,9 +125,9 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <button
                     onClick={handleSupport}
-                    className={`flex items-center ${open ? "space-x-3 px-4" : "justify-center px-2"} py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent w-full text-left`}
+                    className={`flex items-center ${open ? "space-x-3 px-4" : "justify-center px-0"} py-3 mx-1 rounded-lg transition-all duration-300 group relative overflow-hidden text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent w-full text-left`}
                   >
-                    <HelpCircle className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110 shrink-0" />
+                    <HelpCircle className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
                     {open && <span className="font-medium relative z-10 transition-all duration-300">Support</span>}
                   </button>
                 </SidebarMenuButton>
@@ -141,9 +141,9 @@ export function AppSidebar() {
         <Button
           onClick={handleLogout}
           variant="outline"
-          className={`w-full ${open ? "justify-start" : "justify-center px-2"} border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group`}
+          className={`w-full ${open ? "justify-start" : "justify-center px-0"} border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group`}
         >
-          <LogOut className={`w-4 h-4 ${open ? "mr-3" : ""} relative z-10 transition-transform duration-300 group-hover:scale-110 shrink-0`} />
+          <LogOut className={`w-4 h-4 ${open ? "mr-3" : ""} relative z-10 transition-transform duration-300 group-hover:scale-110`} />
           {open && <span className="relative z-10">Logout</span>}
         </Button>
       </SidebarFooter>
