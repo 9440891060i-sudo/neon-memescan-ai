@@ -55,13 +55,13 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className={`${open ? "w-64" : "w-16"} bg-black backdrop-blur-sm border-r border-gray-900 group-data-[side=left]:border-r group-data-[side=right]:border-l shadow-none transition-all duration-300`}>
-      <SidebarHeader className={`pt-6 pb-4 ${open ? "px-4" : "px-0"} border-b border-gray-900`}>
+      <SidebarHeader className={`py-4 ${open ? "px-4" : "px-0"} border-b border-gray-900`}>
         {/* User Profile Section */}
         <Link 
           to="/profile-settings" 
           className={`flex items-center ${open ? "gap-3 p-3 bg-gray-950 border border-gray-900" : "p-0 justify-center w-full bg-transparent border-0"} rounded-lg hover:border-gray-800 transition-all duration-300 group`}
         >
-          <Avatar className="h-10 w-10 border-2 border-gray-800 group-hover:border-gray-700 transition-all shrink-0">
+          <Avatar className="h-8 w-8 border-2 border-gray-800 group-hover:border-gray-700 transition-all shrink-0">
             <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
             <AvatarFallback className="bg-gray-900 text-white font-bold">
               {getUserInitials()}
