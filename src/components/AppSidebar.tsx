@@ -20,7 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const sidebarItems = [
   { title: "Dashboard", url: "/user-dashboard", icon: BarChart3 },
-  { title: "Analyse", url: "/analyze", icon: Search },
+  { title: "Terminal", url: "/analyze", icon: Search },
   { title: "KLUXIFY", url: "/kluxify", icon: Crown },
   { title: "Rewards", url: "/rewards", icon: Gift },
   { title: "Performance", url: "/leaderboard", icon: Trophy },

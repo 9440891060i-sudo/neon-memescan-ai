@@ -7,6 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import { AnalysisQueue } from "@/components/AnalysisQueue";
 import { BloombergTerminal } from "@/components/BloombergTerminal";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TrackersView } from "@/components/TrackersView";
 
 const trendingCoins = [
   { 
@@ -188,20 +190,41 @@ export default function AnalysisInput() {
     <div className="min-h-screen bg-black">
       {/* Header */}
       <div className="w-full px-6 pt-20 pb-12">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-            Paste Contract Address.
-            <br />
-            <span className="text-neon-green">Let Klux Handle the Rest.</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Our AI analyzes social sentiment, technical indicators, and market dynamics 
-            to predict meme coin potential in minutes.
-          </p>
-        </div>
+        <Tabs defaultValue="terminal" className="w-full">
+          {/* Horizontal Tab Navigation */}
+          <div className="max-w-7xl mx-auto mb-12">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-gray-950 border border-gray-800 h-14">
+              <TabsTrigger 
+                value="terminal" 
+                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black"
+              >
+                Terminal
+              </TabsTrigger>
+              <TabsTrigger 
+                value="trackers" 
+                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black"
+              >
+                Trackers
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-        {/* Main Input Section */}
-        <div className="max-w-4xl mx-auto mb-16">
+          {/* Terminal Tab Content */}
+          <TabsContent value="terminal" className="mt-0">
+            <div className="text-center mb-16">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+                Paste Contract Address.
+                <br />
+                <span className="text-neon-green">Let Klux Handle the Rest.</span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Our AI analyzes social sentiment, technical indicators, and market dynamics 
+                to predict meme coin potential in minutes.
+              </p>
+            </div>
+
+            {/* Main Input Section */}
+            <div className="max-w-4xl mx-auto mb-16">
           <Card className="p-8 bg-black border-gray-800">
             <div className="space-y-6">
               {/* Input Bar */}
@@ -255,120 +278,129 @@ export default function AnalysisInput() {
                 </div>
               </div>
             </div>
-          </Card>
-        </div>
+              </Card>
+            </div>
 
-        {/* Analysis Queue */}
-        <AnalysisQueue 
-          queuedCoins={queuedCoins}
-          selectedCoin={selectedCoin}
-          onCoinSelect={setSelectedCoin}
-        />
+            {/* Analysis Queue */}
+            <AnalysisQueue
+              queuedCoins={queuedCoins}
+              selectedCoin={selectedCoin}
+              onCoinSelect={setSelectedCoin}
+            />
 
-        {/* Bloomberg Terminal */}
-        {selectedCoin && (
-          <div className="max-w-7xl mx-auto mb-16">
-            {(() => {
-              const selectedQueuedCoin = queuedCoins.find(coin => coin.address === selectedCoin);
-              const selectedTrendingCoin = trendingCoins.find(coin => coin.address === selectedCoin);
+            {/* Bloomberg Terminal */}
+            {selectedCoin && (
+              <div className="max-w-7xl mx-auto mb-16">
+                {(() => {
+                  const selectedQueuedCoin = queuedCoins.find(coin => coin.address === selectedCoin);
+                  const selectedTrendingCoin = trendingCoins.find(coin => coin.address === selectedCoin);
+                  
+                  if (selectedQueuedCoin && selectedTrendingCoin) {
+                    return (
+                      <BloombergTerminal 
+                        coin={selectedTrendingCoin}
+                        isExpanded={true}
+                      />
+                    );
+                  }
+                  return null;
+                })()}
+              </div>
+            )}
+
+            {/* Pulse Section */}
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-5xl md:text-6xl font-bold mb-4">
+                  <span className="text-white">
+                    Pulse
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-400">Live market sentiment & trending opportunities</p>
+              </div>
               
-              if (selectedQueuedCoin && selectedTrendingCoin) {
-                return (
-                  <BloombergTerminal 
-                    coin={selectedTrendingCoin}
-                    isExpanded={true}
-                  />
-                );
-              }
-              return null;
-            })()}
-          </div>
-        )}
-
-        {/* Pulse Section */}
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4">
-              <span className="text-white">
-                Pulse
-              </span>
-            </h2>
-            <p className="text-lg text-gray-400">Live market sentiment & trending opportunities</p>
-          </div>
-          
-          <Card className="p-6 bg-black border-gray-800">
-            <div className="relative">
-              <div className="relative">
-                <div className="grid grid-cols-3 gap-4">
-                  {trendingCoins.map((coin, index) => (
-                    <div 
-                      key={index}
-                      onClick={() => handleQuickSelect(coin)}
-                      className="p-4 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 cursor-pointer transition-all duration-300 group hover:bg-gray-900"
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center text-2xl">
-                            {coin.logo}
+              <Card className="p-6 bg-black border-gray-800">
+                <div className="relative">
+                  <div className="relative">
+                    <div className="grid grid-cols-3 gap-4">
+                      {trendingCoins.map((coin, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleQuickSelect(coin)}
+                          className="p-4 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 cursor-pointer transition-all duration-300 group hover:bg-gray-900"
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center text-2xl">
+                                {coin.logo}
+                              </div>
+                              <div>
+                                <h3 className="font-bold text-white group-hover:text-gray-300 transition-colors">
+                                  {coin.name}
+                                </h3>
+                                <div className="text-xs text-gray-500">
+                                  {coin.age}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-xs text-gray-500">MC</div>
+                              <div className="text-sm font-semibold text-white">{coin.marketCap}</div>
+                            </div>
                           </div>
-                          <div>
-                            <h3 className="font-bold text-white group-hover:text-gray-300 transition-colors">
-                              {coin.name}
-                            </h3>
-                            <div className="text-xs text-gray-500">
-                              {coin.age}
+                          
+                          <div className="grid grid-cols-3 gap-3 text-xs">
+                            <div className="text-center">
+                              <div className="text-gray-500 mb-1">Holders</div>
+                              <div className="text-white font-medium">{coin.holders}</div>
+                            </div>
+                            <div className="text-center">
+                              <div className="text-gray-500 mb-1">Dev Score</div>
+                              <div className="text-gray-300 font-medium">{coin.devScore}</div>
+                            </div>
+                            <div className="text-center">
+                              <div className="text-gray-500 mb-1">24h</div>
+                              <div className={`font-medium ${coin.changePositive ? 'text-neon-green' : 'text-red-400'}`}>
+                                {coin.change}
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-xs text-gray-500">MC</div>
-                          <div className="text-sm font-semibold text-white">{coin.marketCap}</div>
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-3 gap-3 text-xs">
-                        <div className="text-center">
-                          <div className="text-gray-500 mb-1">Holders</div>
-                          <div className="text-white font-medium">{coin.holders}</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-gray-500 mb-1">Dev Score</div>
-                          <div className="text-gray-300 font-medium">{coin.devScore}</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-gray-500 mb-1">24h</div>
-                          <div className={`font-medium ${coin.changePositive ? 'text-neon-green' : 'text-red-400'}`}>
-                            {coin.change}
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            {/* Bottom Stats */}
+            <div className="text-center mt-16">
+              <div className="inline-flex items-center gap-6 px-8 py-4 bg-gray-950 rounded-full border border-gray-800">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
+                  <span className="text-sm text-gray-400">
+                    <span className="text-white font-semibold">4min</span> avg analysis
+                  </span>
+                </div>
+                <div className="w-px h-4 bg-gray-800"></div>
+                <div className="text-sm text-gray-400">
+                  <span className="text-white font-semibold">65%</span> accuracy rate
+                </div>
+                <div className="w-px h-4 bg-gray-800"></div>
+                <div className="text-sm text-gray-400">
+                  <span className="text-white font-semibold">5,000+</span> coins analyzed
                 </div>
               </div>
             </div>
-          </Card>
-        </div>
+          </TabsContent>
 
-        {/* Bottom Stats */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-6 px-8 py-4 bg-gray-950 rounded-full border border-gray-800">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-400">
-                <span className="text-white font-semibold">4min</span> avg analysis
-              </span>
+          {/* Trackers Tab Content */}
+          <TabsContent value="trackers" className="mt-0">
+            <div className="max-w-7xl mx-auto">
+              <TrackersView />
             </div>
-            <div className="w-px h-4 bg-gray-800"></div>
-            <div className="text-sm text-gray-400">
-              <span className="text-white font-semibold">65%</span> accuracy rate
-            </div>
-            <div className="w-px h-4 bg-gray-800"></div>
-            <div className="text-sm text-gray-400">
-              <span className="text-white font-semibold">5,000+</span> coins analyzed
-            </div>
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
