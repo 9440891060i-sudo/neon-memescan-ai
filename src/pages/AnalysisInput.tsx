@@ -9,6 +9,7 @@ import { AnalysisQueue } from "@/components/AnalysisQueue";
 import { BloombergTerminal } from "@/components/BloombergTerminal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrackersView } from "@/components/TrackersView";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const trendingCoins = [
   { 
@@ -191,7 +192,13 @@ export default function AnalysisInput() {
       <Tabs defaultValue="analyse" className="w-full">
         {/* Top Navigation Bar with Tabs */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-900">
-          <div className="flex items-center h-16 px-6">
+          <div className="flex items-center justify-center h-16 px-6 relative">
+            {/* Sidebar Toggle - Left Side */}
+            <div className="absolute left-6">
+              <SidebarTrigger className="text-white hover:bg-gray-900" />
+            </div>
+            
+            {/* Tabs - Centered */}
             <TabsList className="bg-gray-950 border border-gray-800 h-12">
               <TabsTrigger 
                 value="analyse" 
