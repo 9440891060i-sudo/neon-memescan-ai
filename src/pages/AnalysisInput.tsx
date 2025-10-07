@@ -188,29 +188,31 @@ export default function AnalysisInput() {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Header */}
-      <div className="w-full px-6 pt-20 pb-12">
-        <Tabs defaultValue="terminal" className="w-full">
-          {/* Horizontal Tab Navigation */}
-          <div className="max-w-7xl mx-auto mb-12">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-gray-950 border border-gray-800 h-14">
+      <Tabs defaultValue="analyse" className="w-full">
+        {/* Top Navigation Bar with Tabs */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-900">
+          <div className="flex items-center h-16 px-6">
+            <TabsList className="bg-gray-950 border border-gray-800 h-12">
               <TabsTrigger 
-                value="terminal" 
-                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black"
+                value="analyse" 
+                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black px-8"
               >
-                Terminal
+                Analyse
               </TabsTrigger>
               <TabsTrigger 
                 value="trackers" 
-                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black"
+                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black px-8"
               >
                 Trackers
               </TabsTrigger>
             </TabsList>
           </div>
+        </div>
 
-          {/* Terminal Tab Content */}
-          <TabsContent value="terminal" className="mt-0">
+        {/* Page Content */}
+        <div className="w-full px-6 pt-28 pb-12">
+          {/* Analyse Tab Content */}
+          <TabsContent value="analyse" className="mt-0">
             <div className="text-center mb-16">
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
                 Paste Contract Address.
@@ -400,8 +402,8 @@ export default function AnalysisInput() {
               <TrackersView />
             </div>
           </TabsContent>
-        </Tabs>
-      </div>
+        </div>
+      </Tabs>
     </div>
   );
 }
