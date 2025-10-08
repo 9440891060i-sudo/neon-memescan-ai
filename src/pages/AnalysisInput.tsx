@@ -190,9 +190,9 @@ export default function AnalysisInput() {
   return (
     <div className="min-h-screen bg-black">
       <Tabs defaultValue="analyse" className="w-full">
-        {/* Tabs in Header - Centered to main content */}
-        <div className="flex items-center justify-center h-14">
-          <TabsList className="bg-gray-950 border border-gray-800 h-10">
+        {/* Tabs aligned with header */}
+        <div className="absolute top-0 left-0 right-0 h-14 flex items-center justify-center pointer-events-none z-40">
+          <TabsList className="bg-gray-950 border border-gray-800 h-10 pointer-events-auto">
             <TabsTrigger 
               value="analyse" 
               className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black px-8"
@@ -209,7 +209,7 @@ export default function AnalysisInput() {
         </div>
 
         {/* Page Content */}
-        <div className="w-full px-6 pb-12">
+        <div className="w-full px-6 pt-20 pb-12">
           {/* Analyse Tab Content */}
           <TabsContent value="analyse" className="mt-0">
             <div className="text-center mb-16">
