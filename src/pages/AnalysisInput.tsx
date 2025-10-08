@@ -9,7 +9,7 @@ import { AnalysisQueue } from "@/components/AnalysisQueue";
 import { BloombergTerminal } from "@/components/BloombergTerminal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrackersView } from "@/components/TrackersView";
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+
 
 const trendingCoins = [
   { 
@@ -95,7 +95,6 @@ export default function AnalysisInput() {
   const [queuedCoins, setQueuedCoins] = useState<QueuedCoin[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
   const { toast } = useToast();
-  const { open } = useSidebar();
 
   const handleAnalyze = () => {
     if (!contractAddress) {
@@ -193,15 +192,9 @@ export default function AnalysisInput() {
       <Tabs defaultValue="analyse" className="w-full">
         {/* Top Navigation Bar with Tabs */}
         <div 
-          className="fixed top-0 right-0 z-50 bg-black border-b border-gray-900 transition-all duration-300"
-          style={{ left: open ? '256px' : '64px' }}
+          className="fixed top-14 right-0 z-40 bg-black border-b border-gray-900 transition-all duration-300 left-0"
         >
-          <div className="flex items-center justify-center h-16 px-6 relative">
-            {/* Sidebar Toggle - Left Side */}
-            <div className="absolute left-6">
-              <SidebarTrigger className="text-white hover:bg-gray-900" />
-            </div>
-            
+          <div className="flex items-center justify-center h-16 px-6">
             {/* Tabs - Centered */}
             <TabsList className="bg-gray-950 border border-gray-800 h-12">
               <TabsTrigger 
