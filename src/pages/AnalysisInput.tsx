@@ -190,12 +190,9 @@ export default function AnalysisInput() {
   return (
     <div className="min-h-screen bg-black">
       <Tabs defaultValue="analyse" className="w-full">
-        {/* Top Navigation Bar with Tabs */}
-        <div 
-          className="fixed top-14 right-0 z-40 bg-black border-b border-gray-900 transition-all duration-300 left-0"
-        >
-          <div className="flex items-center justify-center h-16 px-6">
-            {/* Tabs - Centered */}
+        {/* Page Header Tabs */}
+        <div className="w-full px-6 pt-2">
+          <div className="flex items-center justify-center">
             <TabsList className="bg-gray-950 border border-gray-800 h-12">
               <TabsTrigger 
                 value="analyse" 
@@ -214,7 +211,7 @@ export default function AnalysisInput() {
         </div>
 
         {/* Page Content */}
-        <div className="w-full px-6 pt-28 pb-12">
+        <div className="w-full px-6 pt-8 pb-12">
           {/* Analyse Tab Content */}
           <TabsContent value="analyse" className="mt-0">
             <div className="text-center mb-16">
