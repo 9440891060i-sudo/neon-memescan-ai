@@ -190,8 +190,8 @@ export default function AnalysisInput() {
   return (
     <div className="min-h-screen bg-black">
       <Tabs defaultValue="analyse" className="w-full">
-        {/* Tabs aligned with header */}
-        <div className="absolute top-0 left-0 right-0 h-14 flex items-center justify-center pointer-events-none z-40">
+        {/* Tabs in Header - Centered */}
+        <div className="fixed top-0 left-0 right-0 h-14 flex items-center justify-center z-50 pointer-events-none">
           <TabsList className="bg-gray-950 border border-gray-800 h-10 pointer-events-auto">
             <TabsTrigger 
               value="analyse" 
