@@ -209,7 +209,7 @@ export default function AnalysisInput() {
         </div>
 
         {/* Page Content */}
-        <div className="w-full px-6 pt-6 pb-12">
+        <div className="w-full px-6 pt-20 pb-12">
           {/* Analyse Tab Content */}
           <TabsContent value="analyse" className="mt-0">
             <div className="text-center mb-16">
