@@ -9,6 +9,7 @@ import { AnalysisQueue } from "@/components/AnalysisQueue";
 import { BloombergTerminal } from "@/components/BloombergTerminal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrackersView } from "@/components/TrackersView";
+import { useSidebar } from "@/components/ui/sidebar";
 
 
 const trendingCoins = [
@@ -94,7 +95,9 @@ export default function AnalysisInput() {
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
   const [queuedCoins, setQueuedCoins] = useState<QueuedCoin[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
-  const { toast } = useToast();
+const { toast } = useToast();
+const { state, isMobile } = useSidebar();
+const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
 
   const handleAnalyze = () => {
     if (!contractAddress) {
@@ -191,7 +194,7 @@ export default function AnalysisInput() {
     <div className="min-h-screen bg-black">
       <Tabs defaultValue="analyse" className="w-full">
         {/* Tabs in Header - Centered to Content Area */}
-        <div className="fixed top-0 left-0 right-0 h-14 z-50 pointer-events-none">
+        <div className="fixed top-0 right-0 h-14 z-50 pointer-events-none" style={{ left: sidebarLeft }}>
           <div className="h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
             <TabsList className="bg-gray-950 border border-gray-800 h-10 pointer-events-auto">
               <TabsTrigger 
