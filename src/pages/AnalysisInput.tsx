@@ -9,6 +9,7 @@ import { AnalysisQueue } from "@/components/AnalysisQueue";
 import { BloombergTerminal } from "@/components/BloombergTerminal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrackersView } from "@/components/TrackersView";
+import { WalletsView } from "@/components/WalletsView";
 import { useSidebar } from "@/components/ui/sidebar";
 
 
@@ -193,21 +194,27 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
   return (
     <div className="min-h-screen bg-black">
       <Tabs defaultValue="analyse" className="w-full">
-        {/* Tabs in Header - Centered to Content Area */}
+        {/* Professional Tab Navigation */}
         <div className="fixed top-0 right-0 h-14 z-50 pointer-events-none" style={{ left: sidebarLeft }}>
           <div className="h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
-            <TabsList className="bg-gray-950 border border-gray-800 h-10 pointer-events-auto">
+            <TabsList className="bg-transparent border-0 h-auto gap-1 pointer-events-auto">
               <TabsTrigger 
                 value="analyse" 
-                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black px-8"
+                className="text-sm font-medium text-gray-400 data-[state=active]:text-neon-green data-[state=active]:bg-transparent px-6 py-2 border-b-2 border-transparent data-[state=active]:border-neon-green rounded-none transition-all"
               >
                 Analyse
               </TabsTrigger>
               <TabsTrigger 
-                value="trackers" 
-                className="text-base font-semibold data-[state=active]:bg-neon-green data-[state=active]:text-black px-8"
+                value="socials" 
+                className="text-sm font-medium text-gray-400 data-[state=active]:text-neon-green data-[state=active]:bg-transparent px-6 py-2 border-b-2 border-transparent data-[state=active]:border-neon-green rounded-none transition-all"
               >
-                Trackers
+                Socials
+              </TabsTrigger>
+              <TabsTrigger 
+                value="wallets" 
+                className="text-sm font-medium text-gray-400 data-[state=active]:text-neon-green data-[state=active]:bg-transparent px-6 py-2 border-b-2 border-transparent data-[state=active]:border-neon-green rounded-none transition-all"
+              >
+                Wallets
               </TabsTrigger>
             </TabsList>
           </div>
@@ -400,10 +407,17 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
             </div>
           </TabsContent>
 
-          {/* Trackers Tab Content */}
-          <TabsContent value="trackers" className="mt-0">
+          {/* Socials Tab Content */}
+          <TabsContent value="socials" className="mt-0">
             <div className="max-w-7xl mx-auto">
               <TrackersView />
+            </div>
+          </TabsContent>
+
+          {/* Wallets Tab Content */}
+          <TabsContent value="wallets" className="mt-0">
+            <div className="max-w-7xl mx-auto">
+              <WalletsView />
             </div>
           </TabsContent>
         </div>
