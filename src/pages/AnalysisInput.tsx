@@ -192,7 +192,7 @@ export default function AnalysisInput() {
       <Tabs defaultValue="analyse" className="w-full">
         {/* Tabs in Header - Centered to Content Area */}
         <div className="fixed top-0 left-0 right-0 h-14 z-50 pointer-events-none">
-          <div className="flex items-center justify-center h-full pl-14">
+          <div className="h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
             <TabsList className="bg-gray-950 border border-gray-800 h-10 pointer-events-auto">
               <TabsTrigger 
                 value="analyse" 
