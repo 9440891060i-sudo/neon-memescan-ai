@@ -48,7 +48,7 @@ export default function HeroSection() {
           <Button 
             size="lg" 
             onClick={() => navigate('/auth')}
-            className="bg-foreground text-background hover:bg-foreground/90 h-14 px-8 text-base font-semibold group"
+            className="bg-foreground/90 backdrop-blur-xl text-background hover:bg-foreground border border-white/20 h-14 px-8 text-base font-semibold group shadow-xl"
           >
             Start analyzing free
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -60,7 +60,7 @@ export default function HeroSection() {
             onClick={() => {
               document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="h-14 px-8 text-base font-semibold"
+            className="h-14 px-8 text-base font-semibold bg-background/40 backdrop-blur-xl border-border/50 hover:bg-background/60 shadow-lg"
           >
             See how it works
             <ChevronRight className="w-5 h-5 ml-2" />
@@ -88,19 +88,24 @@ export default function HeroSection() {
         </div>
 
         {/* Coin ticker preview */}
-        <div className="relative mt-16">
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10"></div>
-          <div className="flex gap-4 overflow-hidden">
-            {['pepe', 'doge', 'shiba', 'bonk', 'floki', 'pepe', 'doge'].map((coin, i) => (
-              <div 
-                key={i}
-                className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-border bg-muted overflow-hidden opacity-50 hover:opacity-100 transition-opacity"
-              >
-                <img 
-                  src={`/src/assets/coins/${coin}.png`} 
-                  alt={coin}
-                  className="w-full h-full object-cover"
-                />
+        <div className="relative mt-16 overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10"></div>
+          <div className="flex gap-6 animate-scroll">
+            {[...Array(3)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-6 flex-shrink-0">
+                {['pepe', 'doge', 'shiba', 'bonk', 'floki'].map((coin, i) => (
+                  <div 
+                    key={`${setIndex}-${i}`}
+                    className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-border bg-muted/50 backdrop-blur-sm overflow-hidden opacity-60 hover:opacity-100 transition-opacity hover:scale-110 hover:border-neon-cyan/50 duration-300"
+                  >
+                    <img 
+                      src={`/src/assets/coins/${coin}.png`} 
+                      alt={coin}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
