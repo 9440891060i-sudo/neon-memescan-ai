@@ -4,7 +4,9 @@ import DashboardPreview from "@/components/DashboardPreview";
 import HowItWorks from "@/components/HowItWorks";
 import PerformancePreview from "@/components/PerformancePreview";
 import MemeCoinDisplay from "@/components/MemeCoinDisplay";
+import DownloadExtension from "@/components/DownloadExtension";
 import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -16,8 +18,10 @@ const Index = () => {
         <DashboardPreview />
         <MemeCoinDisplay />
         <PerformancePreview />
+        <DownloadExtension />
         <CTASection />
       </main>
+      <Footer />
     </div>
   );
 };

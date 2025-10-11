@@ -28,33 +28,33 @@ export default function CTASection() {
             {/* Discord */}
             <a 
               href="#" 
-              className="group relative"
+              className="group"
               aria-label="Join our Discord"
             >
-              <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-purple/20 flex items-center justify-center group-hover:border-neon-purple/40 transition-all duration-300 group-hover:scale-105">
-                <MessageCircle className="w-5 h-5 text-neon-purple/60 group-hover:text-neon-purple group-hover:scale-105 transition-all duration-300" />
+              <div className="w-12 h-12 rounded-lg bg-foreground/5 hover:bg-foreground/10 flex items-center justify-center transition-all duration-200">
+                <MessageCircle className="w-5 h-5 text-foreground/60 group-hover:text-foreground transition-colors" />
               </div>
             </a>
 
             {/* Telegram */}
             <a 
               href="#" 
-              className="group relative"
+              className="group"
               aria-label="Join our Telegram"
             >
-              <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-cyan/20 flex items-center justify-center group-hover:border-neon-cyan/40 transition-all duration-300 group-hover:scale-105">
-                <Send className="w-5 h-5 text-neon-cyan/60 group-hover:text-neon-cyan group-hover:scale-105 transition-all duration-300" />
+              <div className="w-12 h-12 rounded-lg bg-foreground/5 hover:bg-foreground/10 flex items-center justify-center transition-all duration-200">
+                <Send className="w-5 h-5 text-foreground/60 group-hover:text-foreground transition-colors" />
               </div>
             </a>
 
             {/* X */}
             <a 
               href="#" 
-              className="group relative"
+              className="group"
               aria-label="Follow us on X"
             >
-              <div className="w-12 h-12 bg-gradient-card rounded-xl border border-neon-green/20 flex items-center justify-center group-hover:border-neon-green/40 transition-all duration-300 group-hover:scale-105">
-                <svg className="w-5 h-5 text-neon-green/60 group-hover:text-neon-green group-hover:scale-105 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 rounded-lg bg-foreground/5 hover:bg-foreground/10 flex items-center justify-center transition-all duration-200">
+                <svg className="w-5 h-5 text-foreground/60 group-hover:text-foreground transition-colors" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </div>
