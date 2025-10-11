@@ -22,78 +22,78 @@ export default function PerformancePreview() {
   const avgDaily = (totalReturn / weekData.length).toFixed(2);
 
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-terminal-dark">
-      <div className="container mx-auto max-w-5xl">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-background">
+      <div className="container mx-auto max-w-6xl">
         <Separator className="mb-12 bg-border/50" />
         
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Last Week's <span className="text-neon-purple">Performance</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            7 Days Performance
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground">
             See how our AI performed in real-time meme coin analysis
           </p>
         </div>
 
-        <Card className="p-6 sm:p-8 bg-terminal-darker border-border/50 shadow-lg">
+        <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
           {/* Quick Stats */}
           <div className="grid grid-cols-2 gap-6 mb-10">
-            <div className="p-6 rounded-lg bg-terminal-dark/50 border border-border/30">
+            <div className="p-6 rounded-lg bg-muted/30 border border-border">
               <div className="flex items-center justify-center gap-2 mb-3">
-                <TrendingUp className="w-6 h-6 text-neon-cyan" />
-                <span className="text-3xl font-bold bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent">
+                <TrendingUp className="w-5 h-5 text-foreground/60" />
+                <span className="text-3xl font-semibold text-foreground">
                   +{totalReturn.toFixed(1)}%
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground text-center">Total Weekly Return</p>
+              <p className="text-sm text-muted-foreground text-center font-medium">Total 7-Day Return</p>
             </div>
-            <div className="p-6 rounded-lg bg-terminal-dark/50 border border-border/30">
-              <div className="text-3xl font-bold text-center mb-3 bg-gradient-to-r from-neon-purple to-neon-cyan bg-clip-text text-transparent">
+            <div className="p-6 rounded-lg bg-muted/30 border border-border">
+              <div className="text-3xl font-semibold text-center mb-3 text-foreground">
                 +{avgDaily}%
               </div>
-              <p className="text-sm text-muted-foreground text-center">Avg Daily Return</p>
+              <p className="text-sm text-muted-foreground text-center font-medium">Avg Daily Return</p>
             </div>
           </div>
 
           {/* Chart */}
-          <div className="h-72 mb-10 p-4 rounded-lg bg-terminal-dark/30">
+          <div className="h-96 mb-10 p-6 rounded-lg bg-muted/20 border border-border">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={weekData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border) / 0.2)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border) / 0.3)" />
                 <XAxis 
                   dataKey="day" 
                   stroke="hsl(var(--muted-foreground))"
-                  style={{ fontSize: '13px' }}
+                  style={{ fontSize: '14px', fontWeight: '500' }}
                 />
                 <YAxis 
                   stroke="hsl(var(--muted-foreground))"
-                  style={{ fontSize: '13px' }}
+                  style={{ fontSize: '14px', fontWeight: '500' }}
                   tickFormatter={(value) => `${value}%`}
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'hsl(var(--terminal-darker))',
-                    border: '1px solid hsl(var(--border) / 0.5)',
+                    backgroundColor: 'hsl(var(--card))',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: '8px',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)'
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
                   }}
                   formatter={(value: number) => [`${value}%`, 'Return']}
-                  labelStyle={{ color: 'hsl(var(--foreground))' }}
+                  labelStyle={{ color: 'hsl(var(--foreground))', fontWeight: '600' }}
                 />
                 <Line 
                   type="monotone" 
                   dataKey="performance" 
-                  stroke="hsl(var(--neon-cyan))" 
-                  strokeWidth={3}
-                  dot={{ fill: 'hsl(var(--neon-cyan))', r: 5 }}
-                  activeDot={{ r: 7, fill: 'hsl(var(--neon-purple))' }}
+                  stroke="hsl(var(--foreground))" 
+                  strokeWidth={2.5}
+                  dot={{ fill: 'hsl(var(--foreground))', r: 4, strokeWidth: 2, stroke: 'hsl(var(--background))' }}
+                  activeDot={{ r: 6, fill: 'hsl(var(--foreground))', strokeWidth: 2, stroke: 'hsl(var(--background))' }}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
 
           {/* CTA */}
-          <Separator className="mb-8 bg-border/30" />
+          <Separator className="mb-8 bg-border" />
           <div className="text-center">
             <p className="text-muted-foreground mb-6 text-base">
               Want to see the full analysis history and detailed insights?
@@ -101,7 +101,7 @@ export default function PerformancePreview() {
             <Button 
               size="lg"
               onClick={() => navigate('/auth')}
-              className="bg-gradient-to-r from-neon-purple to-neon-cyan hover:opacity-90 text-base px-8"
+              className="bg-foreground text-background hover:bg-foreground/90 text-base px-8 font-semibold"
             >
               View Full History
             </Button>
