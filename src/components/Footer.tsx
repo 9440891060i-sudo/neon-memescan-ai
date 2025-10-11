@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold text-foreground">
               Klux
             </h3>
             <p className="text-sm text-muted-foreground">
@@ -52,37 +52,10 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-8 border-t border-border/50 text-center">
           <p className="text-sm text-muted-foreground">
             © {currentYear} Klux. All rights reserved.
           </p>
-
-          {/* Social links */}
-          <div className="flex items-center gap-4">
-            <a 
-              href="#" 
-              className="w-9 h-9 rounded-lg bg-muted/50 hover:bg-muted flex items-center justify-center transition-colors group"
-              aria-label="Discord"
-            >
-              <MessageCircle className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-            </a>
-            <a 
-              href="#" 
-              className="w-9 h-9 rounded-lg bg-muted/50 hover:bg-muted flex items-center justify-center transition-colors group"
-              aria-label="Telegram"
-            >
-              <Send className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-            </a>
-            <a 
-              href="#" 
-              className="w-9 h-9 rounded-lg bg-muted/50 hover:bg-muted flex items-center justify-center transition-colors group"
-              aria-label="X (Twitter)"
-            >
-              <svg className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-          </div>
         </div>
       </div>
     </footer>

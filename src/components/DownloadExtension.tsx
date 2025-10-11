@@ -14,7 +14,6 @@ export default function DownloadExtension() {
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Download the{" "}
             <span className="bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent">
               Klux Extension
             </span>
