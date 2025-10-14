@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Twitter, Newspaper, Users, X, Plus, Trash2 } from "lucide-react";
+import { Newspaper, Users, X as XIcon, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -74,7 +74,7 @@ export function TrackersView() {
     <div className="p-8 space-y-8">
       {/* Expanded Boxes */}
       <div className={`grid grid-cols-1 ${gridCols} gap-8`}>
-        {/* Twitter Tracking */}
+        {/* X Tracking */}
         {expandedBoxes.twitter && (
           <Card className="bg-card border-border min-h-[700px] flex flex-col relative group hover:border-foreground/20 transition-all animate-scale-in">
             <Button 
@@ -83,7 +83,7 @@ export function TrackersView() {
               onClick={() => toggleBox('twitter')}
               className="absolute top-4 left-4 w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted z-10"
             >
-              <X className="w-4 h-4" />
+              <XIcon className="w-4 h-4" />
             </Button>
 
             <Button 
@@ -98,9 +98,9 @@ export function TrackersView() {
             <div className="flex-1 p-8 pt-16">
               <div className="flex items-center gap-3 mb-8">
                 <div className="p-3 rounded-lg bg-muted/30">
-                  <Twitter className="w-6 h-6 text-foreground" />
+                  <XIcon className="w-6 h-6 text-foreground" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground">Twitter Tracking</h3>
+                <h3 className="text-xl font-semibold text-foreground">X Tracking</h3>
               </div>
 
               <div className="space-y-6">
@@ -130,7 +130,7 @@ export function TrackersView() {
               onClick={() => toggleBox('lc')}
               className="absolute top-4 left-4 w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted z-10"
             >
-              <X className="w-4 h-4" />
+              <XIcon className="w-4 h-4" />
             </Button>
 
             <Button 
@@ -177,7 +177,7 @@ export function TrackersView() {
               onClick={() => toggleBox('news')}
               className="absolute top-4 left-4 w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted z-10"
             >
-              <X className="w-4 h-4" />
+              <XIcon className="w-4 h-4" />
             </Button>
 
             <Button 
@@ -224,8 +224,8 @@ export function TrackersView() {
               onClick={() => toggleBox('twitter')}
               className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-neon-green transition-all animate-scale-in"
             >
-              <Twitter className="w-5 h-5 text-foreground" />
-              <span className="text-sm font-semibold text-foreground">Twitter Tracking</span>
+              <XIcon className="w-5 h-5 text-foreground" />
+              <span className="text-sm font-semibold text-foreground">X Tracking</span>
             </Card>
           )}
 
@@ -251,19 +251,19 @@ export function TrackersView() {
         </div>
       )}
 
-      {/* Twitter Modal */}
+      {/* X Modal */}
       <Dialog open={openModal === 'twitter'} onOpenChange={() => setOpenModal(null)}>
         <DialogContent className="sm:max-w-[500px] bg-card border-border">
           <DialogHeader>
             <DialogTitle className="text-foreground flex items-center gap-2">
-              <Twitter className="w-5 h-5" />
-              Twitter Accounts
+              <XIcon className="w-5 h-5" />
+              X Accounts
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="flex gap-2">
               <Input
-                placeholder="Enter Twitter account..."
+                placeholder="Enter X account..."
                 value={twitterInput}
                 onChange={(e) => setTwitterInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addTwitterAccount()}
