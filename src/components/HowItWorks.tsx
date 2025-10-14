@@ -3,8 +3,17 @@ import { Play } from "lucide-react";
 
 export default function HowItWorks() {
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-background to-black/50">
-      <div className="container mx-auto">
+    <section id="how-it-works" className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+      {/* Abstract background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-black/50"></div>
+      <div className="absolute top-10 right-10 w-80 h-80 bg-neon-green/10 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-neon-purple/10 blur-[140px]"></div>
+      
+      {/* Hexagon pattern */}
+      <div className="absolute top-1/4 right-1/4 w-32 h-32 border border-neon-cyan/10 rotate-45"></div>
+      <div className="absolute bottom-1/3 left-1/3 w-24 h-24 border-2 border-neon-green/10 rounded-full"></div>
+      
+      <div className="container mx-auto relative z-10">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
             How <span className="text-neon-green">Klux</span> Works

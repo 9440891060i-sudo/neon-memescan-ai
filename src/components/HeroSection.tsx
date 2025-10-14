@@ -7,11 +7,26 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-      {/* Simple gradient background */}
+      {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-terminal-dark"></div>
       
-      {/* Subtle accent glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-neon-cyan/5 blur-[120px] rounded-full"></div>
+      {/* Abstract geometric shapes */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-neon-purple/10 rounded-full blur-[100px] animate-float"></div>
+      <div className="absolute top-40 right-20 w-96 h-96 bg-neon-cyan/10 rounded-full blur-[120px] animate-float" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute bottom-40 left-1/4 w-64 h-64 bg-neon-green/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: '4s' }}></div>
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(hsl(var(--border)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
+      
+      {/* Diagonal lines */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-20">
+        <div className="absolute top-20 right-20 w-px h-96 bg-gradient-to-b from-neon-cyan/0 via-neon-cyan/50 to-neon-cyan/0 rotate-45"></div>
+        <div className="absolute top-40 right-40 w-px h-64 bg-gradient-to-b from-neon-purple/0 via-neon-purple/50 to-neon-purple/0 rotate-45" style={{ animationDelay: '1s' }}></div>
+      </div>
+      
+      {/* Corner accents */}
+      <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-neon-cyan/20"></div>
+      <div className="absolute bottom-0 right-0 w-40 h-40 border-r-2 border-b-2 border-neon-green/20"></div>
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center space-y-12">
