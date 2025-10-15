@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Search, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { AlertPopup } from "@/components/AlertPopup";
 
 const trackedWallets = [
   {
@@ -244,8 +246,10 @@ const activeAlerts = [
 ];
 
 export function WalletsView() {
+  const navigate = useNavigate();
   const [walletAddress, setWalletAddress] = useState("");
   const [selectedWallets, setSelectedWallets] = useState<number[]>([]);
+  const [alertPopupOpen, setAlertPopupOpen] = useState(false);
   const { toast } = useToast();
 
   const toggleWallet = (walletId: number) => {
@@ -265,7 +269,7 @@ export function WalletsView() {
   };
 
   const filteredTrades = selectedWallets.length === 0 
-    ? recentTrades 
+    ? [] 
     : recentTrades.filter(trade => selectedWallets.includes(trade.walletId));
 
   const handleAddWallet = () => {
@@ -561,7 +565,10 @@ export function WalletsView() {
               <CardTitle className="text-white">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="p-6 space-y-3">
-              <Button className="w-full bg-neon-green hover:bg-neon-green/90 text-black font-semibold">
+              <Button 
+                onClick={() => setAlertPopupOpen(true)}
+                className="w-full bg-neon-green hover:bg-neon-green/90 text-black font-semibold"
+              >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Alert
               </Button>
@@ -569,7 +576,11 @@ export function WalletsView() {
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 View All Alerts
               </Button>
-              <Button variant="outline" className="w-full border-gray-700 text-white hover:bg-gray-900">
+              <Button 
+                onClick={() => navigate('/wallet-analytics')}
+                variant="outline" 
+                className="w-full border-gray-700 text-white hover:bg-gray-900"
+              >
                 <TrendingUp className="w-4 h-4 mr-2" />
                 Analytics Dashboard
               </Button>
@@ -598,6 +609,13 @@ export function WalletsView() {
           </Card>
         </div>
       </div>
+
+      {/* Alert Popup */}
+      <AlertPopup 
+        open={alertPopupOpen}
+        onOpenChange={setAlertPopupOpen}
+        wallets={trackedWallets}
+      />
     </div>
   );
 }
