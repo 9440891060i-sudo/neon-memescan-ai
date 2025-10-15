@@ -22,20 +22,8 @@ export default function PerformancePreview() {
   const avgDaily = (totalReturn / weekData.length).toFixed(2);
 
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
-      {/* Abstract background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-terminal-dark/20 to-background"></div>
-      
-      {/* Geometric shapes */}
-      <div className="absolute top-20 right-20 w-64 h-64 border border-neon-green/10 rotate-12"></div>
-      <div className="absolute bottom-40 left-10 w-48 h-48 bg-neon-cyan/5 blur-[80px]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-neon-purple/5 blur-[120px] rotate-45"></div>
-      
-      {/* Subtle line pattern */}
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-neon-cyan/10 to-transparent"></div>
-      <div className="absolute bottom-0 right-0 w-full h-2 bg-gradient-to-r from-transparent via-neon-green/10 to-transparent"></div>
-      
-      <div className="container mx-auto max-w-6xl relative z-10">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-background">
+      <div className="container mx-auto max-w-6xl">
         <Separator className="mb-12 bg-border/50" />
         
         <div className="text-center mb-12">

@@ -55,23 +55,8 @@ export default function MemeCoinDisplay() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
   
   return (
-    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
-      {/* Abstract background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-terminal-dark/20 via-background to-background"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-neon-purple/5 blur-[150px]"></div>
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-neon-cyan/5 blur-[120px]"></div>
-      
-      {/* Scattered dots */}
-      <div className="absolute top-20 left-10 w-1 h-1 bg-neon-green rounded-full animate-pulse"></div>
-      <div className="absolute top-40 right-20 w-1 h-1 bg-neon-cyan rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-      <div className="absolute bottom-40 left-1/3 w-1 h-1 bg-neon-purple rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute bottom-60 right-1/4 w-1 h-1 bg-neon-green rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-      
-      {/* Geometric accents */}
-      <div className="absolute top-1/3 right-10 w-32 h-32 border border-neon-cyan/10 rotate-45"></div>
-      <div className="absolute bottom-1/4 left-20 w-24 h-24 border-2 border-neon-purple/10 rounded-full"></div>
-      
-      <div className="container mx-auto relative z-10">
+    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black/50 to-background">
+      <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
             Top <span className="text-neon-cyan">AI Picks</span> Today
