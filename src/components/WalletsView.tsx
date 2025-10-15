@@ -42,12 +42,61 @@ const trackedWallets = [
     lastActive: "1h ago",
     totalTrades: 156,
     winRate: "61%"
+  },
+  {
+    id: 4,
+    address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+    label: "Degen King",
+    balance: "$1.2M",
+    pnl: "+$287K",
+    pnlPercent: "+31.2%",
+    isPositive: true,
+    lastActive: "22m ago",
+    totalTrades: 342,
+    winRate: "65%"
+  },
+  {
+    id: 5,
+    address: "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+    label: "Crypto Sniper",
+    balance: "$650K",
+    pnl: "+$98K",
+    pnlPercent: "+17.8%",
+    isPositive: true,
+    lastActive: "45m ago",
+    totalTrades: 201,
+    winRate: "70%"
+  },
+  {
+    id: 6,
+    address: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+    label: "Moon Chaser",
+    balance: "$890K",
+    pnl: "-$67K",
+    pnlPercent: "-7.0%",
+    isPositive: false,
+    lastActive: "2h ago",
+    totalTrades: 178,
+    winRate: "58%"
+  },
+  {
+    id: 7,
+    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    label: "Silent Whale",
+    balance: "$3.1M",
+    pnl: "+$512K",
+    pnlPercent: "+19.8%",
+    isPositive: true,
+    lastActive: "8m ago",
+    totalTrades: 423,
+    winRate: "74%"
   }
 ];
 
 const recentTrades = [
   {
     id: 1,
+    walletId: 1,
     wallet: "Whale #1",
     action: "BUY",
     coin: "PEPE",
@@ -59,6 +108,7 @@ const recentTrades = [
   },
   {
     id: 2,
+    walletId: 2,
     wallet: "Smart Money",
     action: "SELL",
     coin: "SHIB",
@@ -70,6 +120,7 @@ const recentTrades = [
   },
   {
     id: 3,
+    walletId: 1,
     wallet: "Whale #1",
     action: "BUY",
     coin: "BONK",
@@ -81,6 +132,7 @@ const recentTrades = [
   },
   {
     id: 4,
+    walletId: 3,
     wallet: "Alpha Trader",
     action: "SELL",
     coin: "FLOKI",
@@ -89,6 +141,78 @@ const recentTrades = [
     timestamp: "22m ago",
     pnl: "-$5K",
     isPositive: false
+  },
+  {
+    id: 5,
+    walletId: 4,
+    wallet: "Degen King",
+    action: "BUY",
+    coin: "DOGE",
+    amount: "$180K",
+    price: "$0.08234",
+    timestamp: "28m ago",
+    pnl: "+$42K",
+    isPositive: true
+  },
+  {
+    id: 6,
+    walletId: 5,
+    wallet: "Crypto Sniper",
+    action: "BUY",
+    coin: "PEPE",
+    amount: "$55K",
+    price: "$0.0000091",
+    timestamp: "35m ago",
+    pnl: "+$8K",
+    isPositive: true
+  },
+  {
+    id: 7,
+    walletId: 7,
+    wallet: "Silent Whale",
+    action: "SELL",
+    coin: "SHIB",
+    amount: "$320K",
+    price: "$0.0000245",
+    timestamp: "42m ago",
+    pnl: "+$67K",
+    isPositive: true
+  },
+  {
+    id: 8,
+    walletId: 6,
+    wallet: "Moon Chaser",
+    action: "BUY",
+    coin: "BONK",
+    amount: "$95K",
+    price: "$0.0000052",
+    timestamp: "1h ago",
+    pnl: "-$12K",
+    isPositive: false
+  },
+  {
+    id: 9,
+    walletId: 4,
+    wallet: "Degen King",
+    action: "SELL",
+    coin: "FLOKI",
+    amount: "$142K",
+    price: "$0.0001456",
+    timestamp: "1h ago",
+    pnl: "+$28K",
+    isPositive: true
+  },
+  {
+    id: 10,
+    walletId: 2,
+    wallet: "Smart Money",
+    action: "BUY",
+    coin: "PEPE",
+    amount: "$205K",
+    price: "$0.0000087",
+    timestamp: "2h ago",
+    pnl: "+$35K",
+    isPositive: true
   }
 ];
 
@@ -121,7 +245,28 @@ const activeAlerts = [
 
 export function WalletsView() {
   const [walletAddress, setWalletAddress] = useState("");
+  const [selectedWallets, setSelectedWallets] = useState<number[]>([]);
   const { toast } = useToast();
+
+  const toggleWallet = (walletId: number) => {
+    setSelectedWallets(prev => 
+      prev.includes(walletId) 
+        ? prev.filter(id => id !== walletId)
+        : [...prev, walletId]
+    );
+  };
+
+  const selectAllWallets = () => {
+    if (selectedWallets.length === trackedWallets.length) {
+      setSelectedWallets([]);
+    } else {
+      setSelectedWallets(trackedWallets.map(w => w.id));
+    }
+  };
+
+  const filteredTrades = selectedWallets.length === 0 
+    ? recentTrades 
+    : recentTrades.filter(trade => selectedWallets.includes(trade.walletId));
 
   const handleAddWallet = () => {
     if (!walletAddress) {
@@ -255,81 +400,86 @@ export function WalletsView() {
                 </Badge>
               </div>
             </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              {trackedWallets.map((wallet) => (
-                <div 
-                  key={wallet.id}
-                  className="p-5 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 transition-all group"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-semibold text-white text-lg">{wallet.label}</h4>
-                        <Badge variant="outline" className="bg-gray-900 text-gray-400 border-gray-700 text-xs">
-                          {wallet.lastActive}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm text-gray-500 font-mono">{wallet.address}</p>
-                        <button
-                          onClick={() => copyAddress(wallet.address)}
-                          className="text-gray-500 hover:text-white transition-colors"
-                        >
-                          <Copy className="w-3 h-3" />
-                        </button>
-                        <button className="text-gray-500 hover:text-white transition-colors">
-                          <ExternalLink className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">Balance</p>
-                      <p className="text-lg font-semibold text-white">{wallet.balance}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">P&L</p>
-                      <div className="flex items-center gap-1">
-                        {wallet.isPositive ? (
-                          <TrendingUp className="w-4 h-4 text-green-400" />
-                        ) : (
-                          <TrendingDown className="w-4 h-4 text-red-400" />
-                        )}
-                        <p className={`text-lg font-semibold ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+            <CardContent className="p-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {trackedWallets.map((wallet) => (
+                  <button
+                    key={wallet.id}
+                    onClick={() => toggleWallet(wallet.id)}
+                    className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                      selectedWallets.includes(wallet.id)
+                        ? 'border-neon-green bg-neon-green/10'
+                        : 'border-gray-800 bg-gray-950 hover:border-gray-700'
+                    }`}
+                  >
+                    <div className="flex flex-col items-center gap-2">
+                      <Wallet className={`w-6 h-6 ${selectedWallets.includes(wallet.id) ? 'text-neon-green' : 'text-gray-400'}`} />
+                      <div className="text-center">
+                        <p className={`text-sm font-semibold ${selectedWallets.includes(wallet.id) ? 'text-neon-green' : 'text-white'}`}>
+                          {wallet.label}
+                        </p>
+                        <p className={`text-xs mt-1 ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                           {wallet.pnl}
                         </p>
                       </div>
-                      <p className={`text-xs ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
-                        {wallet.pnlPercent}
+                    </div>
+                  </button>
+                ))}
+                
+                {/* Select All Button */}
+                <button
+                  onClick={selectAllWallets}
+                  className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                    selectedWallets.length === trackedWallets.length
+                      ? 'border-neon-cyan bg-neon-cyan/10'
+                      : 'border-gray-800 bg-gray-950 hover:border-gray-700'
+                  }`}
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-6 h-6 rounded border-2 border-current flex items-center justify-center">
+                      {selectedWallets.length === trackedWallets.length && (
+                        <div className="w-3 h-3 bg-neon-cyan rounded-sm" />
+                      )}
+                    </div>
+                    <div className="text-center">
+                      <p className={`text-sm font-semibold ${
+                        selectedWallets.length === trackedWallets.length ? 'text-neon-cyan' : 'text-white'
+                      }`}>
+                        Select All
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {selectedWallets.length}/{trackedWallets.length}
                       </p>
                     </div>
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">Total Trades</p>
-                      <p className="text-lg font-semibold text-white">{wallet.totalTrades}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">Win Rate</p>
-                      <p className="text-lg font-semibold text-neon-green">{wallet.winRate}</p>
-                    </div>
                   </div>
-                </div>
-              ))}
+                </button>
+              </div>
             </CardContent>
           </Card>
 
           {/* Recent Trades */}
           <Card className="bg-black border-gray-800">
             <CardHeader className="border-b border-gray-800">
-              <CardTitle className="flex items-center gap-2 text-white">
-                <TrendingUp className="w-5 h-5 text-blue-400" />
-                Recent Trades
-              </CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-white">
+                  <TrendingUp className="w-5 h-5 text-blue-400" />
+                  Recent Trades
+                </CardTitle>
+                {selectedWallets.length > 0 && (
+                  <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/20">
+                    Filtered: {selectedWallets.length} wallet{selectedWallets.length > 1 ? 's' : ''}
+                  </Badge>
+                )}
+              </div>
             </CardHeader>
             <CardContent className="p-6">
-              <div className="space-y-3">
-                {recentTrades.map((trade) => (
+              {filteredTrades.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">No trades found for selected wallets</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {filteredTrades.map((trade) => (
                   <div 
                     key={trade.id}
                     className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
@@ -360,8 +510,9 @@ export function WalletsView() {
                       <p className="text-xs text-gray-500">{trade.timestamp}</p>
                     </div>
                   </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
