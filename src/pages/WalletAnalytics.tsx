@@ -155,7 +155,7 @@ export default function WalletAnalytics() {
         <Card className="bg-black border-gray-800">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-white">
-              <Wallet className="w-5 h-5 text-neon-cyan" />
+              <Wallet className="w-5 h-5 text-primary" />
               Select Wallet
             </CardTitle>
           </CardHeader>
@@ -165,15 +165,15 @@ export default function WalletAnalytics() {
                 <button
                   key={wallet.id}
                   onClick={() => setSelectedWallet(wallet)}
-                  className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                  className={`p-4 rounded-lg border transition-all hover:scale-105 ${
                     selectedWallet.id === wallet.id
-                      ? 'border-neon-cyan bg-neon-cyan/10'
+                      ? 'border-primary bg-primary/5'
                       : 'border-gray-800 bg-gray-950 hover:border-gray-700'
                   }`}
                 >
                   <div className="text-center space-y-2">
-                    <Wallet className={`w-5 h-5 mx-auto ${selectedWallet.id === wallet.id ? 'text-neon-cyan' : 'text-gray-400'}`} />
-                    <p className={`text-sm font-semibold ${selectedWallet.id === wallet.id ? 'text-neon-cyan' : 'text-white'}`}>
+                    <Wallet className={`w-5 h-5 mx-auto ${selectedWallet.id === wallet.id ? 'text-primary' : 'text-gray-400'}`} />
+                    <p className={`text-sm font-semibold ${selectedWallet.id === wallet.id ? 'text-primary' : 'text-white'}`}>
                       {wallet.label}
                     </p>
                     <p className={`text-xs ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
@@ -217,7 +217,7 @@ export default function WalletAnalytics() {
                   <p className="text-2xl font-bold text-white mt-1">{selectedWallet.winRate}</p>
                   <p className="text-sm text-gray-400 mt-1">{selectedWallet.totalTrades} trades</p>
                 </div>
-                <Percent className="w-8 h-8 text-neon-green" />
+                <Percent className="w-8 h-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -230,7 +230,7 @@ export default function WalletAnalytics() {
                   <p className="text-2xl font-bold text-white mt-1">{selectedWallet.avgTradeSize}</p>
                   <p className="text-sm text-gray-400 mt-1">Per transaction</p>
                 </div>
-                <DollarSign className="w-8 h-8 text-blue-400" />
+                <DollarSign className="w-8 h-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -243,7 +243,7 @@ export default function WalletAnalytics() {
                   <p className="text-2xl font-bold text-white mt-1">{selectedWallet.balance}</p>
                   <p className="text-sm text-gray-400 mt-1">Current value</p>
                 </div>
-                <Activity className="w-8 h-8 text-neon-cyan" />
+                <Activity className="w-8 h-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -254,7 +254,7 @@ export default function WalletAnalytics() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-white">
-                <TrendingUp className="w-5 h-5 text-neon-green" />
+                <TrendingUp className="w-5 h-5 text-primary" />
                 P&L Performance
               </CardTitle>
               <Badge variant="outline" className={selectedWallet.isPositive ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"}>
