@@ -61,12 +61,6 @@ All colors MUST be HSL.
     --shadow-neon-cyan: 0 0 20px hsl(180 100% 50% / 0.5);
     --shadow-neon-purple: 0 0 20px hsl(270 100% 70% / 0.5);
     --shadow-card: 0 8px 32px hsl(220 15% 0% / 0.3);
-    
-    /* Liquid Glass Effects */
-    --glass-bg: hsl(220 15% 15% / 0.6);
-    --glass-border: hsl(180 100% 95% / 0.15);
-    --glass-shadow: 0 8px 32px hsl(220 15% 0% / 0.4);
-    --glass-highlight: hsl(180 100% 95% / 0.05);
 
     --radius: 0.75rem;
 
