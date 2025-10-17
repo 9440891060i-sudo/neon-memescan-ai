@@ -21,12 +21,14 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <Prism 
           animationType="3drotate"
-          glow={1.2}
-          noise={0.3}
-          scale={3.2}
-          colorFrequency={1.5}
-          bloom={1.3}
-          timeScale={0.4}
+          timeScale={0.5}
+          scale={1}
+          height={8}
+          baseWidth={1}
+          noise={0}
+          glow={0.5}
+          hueShift={-0.04}
+          colorFrequency={1}
         />
       </div>
       
