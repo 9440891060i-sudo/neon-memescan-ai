@@ -49,13 +49,12 @@ export default function HeroSection() {
             See Through
             <br />
             <span className="relative inline-block mt-2">
-              <span className="relative z-10 text-white/80 [text-shadow:_0_1px_20px_rgba(255,255,255,0.8),_0_0_40px_rgba(255,255,255,0.4)] backdrop-blur-sm" style={{ 
-                WebkitTextStroke: '1px rgba(255,255,255,0.3)',
-                filter: 'blur(0.3px)'
-              }}>
-                The Glare
+              <span className="relative z-10 px-8 py-4 rounded-2xl backdrop-blur-xl bg-background/30 border border-white/10 shadow-2xl inline-block">
+                <span className="bg-gradient-to-r from-primary via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  The Glare
+                </span>
               </span>
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-blue-400/20 to-cyan-400/20 blur-xl"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 via-blue-400/10 to-cyan-400/10 blur-2xl"></div>
             </span>
           </h1>
           
