@@ -120,12 +120,11 @@ export default function MemeCoinDisplay() {
             ))}
           </div>
 
-          {/* Live indicator */}
+          {/* Update indicator */}
           <div className="text-center mt-8 sm:mt-12">
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-card rounded-full border border-neon-green/30">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-neon-green rounded-full animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-card rounded-full border border-gray-800">
               <span className="text-xs sm:text-sm text-muted-foreground">
-                Live data • Updated every <span className="text-neon-green font-semibold">30 seconds</span>
+                Updated every <span className="text-neon-green font-semibold">Friday</span>
               </span>
             </div>
           </div>
