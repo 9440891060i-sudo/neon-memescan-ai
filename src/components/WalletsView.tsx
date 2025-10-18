@@ -443,9 +443,21 @@ export function WalletsView() {
                   <Wallet className="w-5 h-5 text-neon-green" />
                   Tracked Wallets
                 </CardTitle>
-                <Badge variant="outline" className="bg-neon-green/10 text-neon-green border-neon-green/20">
-                  {trackedWallets.length} Active
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={selectAllWallets}
+                    className={`px-3 py-1.5 text-xs rounded-md border transition-all ${
+                      selectedWallets.length === trackedWallets.length
+                        ? 'border-white text-white'
+                        : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                    }`}
+                  >
+                    Select All ({selectedWallets.length}/{trackedWallets.length})
+                  </button>
+                  <Badge variant="outline" className="bg-neon-green/10 text-neon-green border-neon-green/20">
+                    {trackedWallets.length} Active
+                  </Badge>
+                </div>
               </div>
             </CardHeader>
             <CardContent className="p-6">
@@ -473,32 +485,6 @@ export function WalletsView() {
                     </div>
                   </button>
                 ))}
-                
-                {/* Select All Button */}
-                <button
-                  onClick={selectAllWallets}
-                  className={`p-3 rounded-lg border transition-all bg-gray-950 ${
-                    selectedWallets.length === trackedWallets.length
-                      ? 'border-white'
-                      : 'border-gray-800 hover:border-gray-700'
-                  }`}
-                >
-                  <div className="flex flex-col items-center gap-1.5">
-                    <div className="w-5 h-5 rounded border border-current flex items-center justify-center">
-                      {selectedWallets.length === trackedWallets.length && (
-                        <div className="w-2.5 h-2.5 bg-white rounded-sm" />
-                      )}
-                    </div>
-                    <div className="text-center">
-                      <p className="text-xs font-medium text-white">
-                        Select All
-                      </p>
-                      <p className="text-[10px] text-gray-500 mt-0.5">
-                        {selectedWallets.length}/{trackedWallets.length}
-                      </p>
-                    </div>
-                  </div>
-                </button>
               </div>
             </CardContent>
           </Card>
