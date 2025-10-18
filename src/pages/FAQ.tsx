@@ -73,12 +73,12 @@ export default function FAQ() {
                 <span className="text-sm font-medium text-neon-green">Frequently Asked Questions</span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-neon bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-8 py-6 inline-block text-white">
                 Get Your Answers
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Everything you need to know about our AI-powered meme coin analysis platform.
+                Everything you need to know about Klux
               </p>
             </div>
           </div>
