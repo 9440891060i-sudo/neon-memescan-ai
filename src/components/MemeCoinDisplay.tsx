@@ -62,7 +62,7 @@ export default function MemeCoinDisplay() {
             Top <span className="text-neon-cyan">AI Picks</span> Today
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-            Real-time sentiment analysis for the most popular meme coins
+            Yes, This model uses the same data you can see, and still makes more money than you
           </p>
         </div>
 
