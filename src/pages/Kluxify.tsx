@@ -14,9 +14,11 @@ import {
   Users,
   BarChart3,
   Target,
-  Star
+  Star,
+  Delete
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import PricingModal from "@/components/PricingModal";
 
 interface CoinAnalysis {
   id: string;
@@ -40,6 +42,8 @@ export default function Kluxify() {
   const [isPremium, setIsPremium] = useState(false);
   const [analyses, setAnalyses] = useState<CoinAnalysis[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<CoinAnalysis | null>(null);
+  const [pinCode, setPinCode] = useState("");
+  const [showPricingModal, setShowPricingModal] = useState(false);
   const { toast } = useToast();
 
   // Simulate real-time coin analysis
@@ -93,20 +97,29 @@ export default function Kluxify() {
     }
   }, [isPremium, analyses.length]);
 
-  // Generate background coins for locked state
-  const backgroundCoins = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    delay: Math.random() * 2,
-  }));
+  const handleNumberClick = (num: string) => {
+    if (pinCode.length < 6) {
+      const newPin = pinCode + num;
+      setPinCode(newPin);
+      
+      // Check if code is correct (simple check for demo - use "1234")
+      if (newPin === "1234") {
+        setIsPremium(true);
+        setPinCode("");
+        toast({
+          title: "Access Granted",
+          description: "Welcome to KLUXIFY Premium!",
+        });
+      }
+    }
+  };
 
-  const handleUpgrade = () => {
-    setIsPremium(true);
-    toast({
-      title: "Welcome to KLUXIFY Premium!",
-      description: "You now have access to real-time AI analysis and entry/exit signals.",
-    });
+  const handleDelete = () => {
+    setPinCode(pinCode.slice(0, -1));
+  };
+
+  const handleClear = () => {
+    setPinCode("");
   };
 
   const getVerdictColor = (verdict: string) => {
@@ -137,83 +150,82 @@ export default function Kluxify() {
 
   if (!isPremium) {
     return (
-      <div className="relative min-h-screen overflow-hidden">
-        {/* Blurred Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background to-black/50 blur-sm">
-          {/* Animated background coins */}
-          {backgroundCoins.map((coin) => (
-            <div
-              key={coin.id}
-              className="absolute w-16 h-16 bg-gradient-card border border-neon-green/30 rounded-lg flex items-center justify-center animate-bounce"
-              style={{
-                left: `${coin.x}%`,
-                top: `${coin.y}%`,
-                animationDelay: `${coin.delay}s`,
-                animationDuration: '3s',
-              }}
-            >
-              <div className="text-2xl">🚀</div>
-            </div>
-          ))}
+      <>
+        <div className="relative min-h-screen bg-background flex items-center justify-center p-6">
+          {/* ATM Screen */}
+          <div className="w-full max-w-md">
+            <Card className="bg-gradient-card border-border shadow-2xl">
+              <CardContent className="p-8 space-y-8">
+                {/* Display Screen */}
+                <div className="bg-black/50 rounded-lg p-6 border border-neon-green/30 min-h-[100px] flex items-center justify-center">
+                  <div className="flex gap-3">
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-4 h-4 rounded-full border-2 transition-all ${
+                          i < pinCode.length
+                            ? "bg-neon-green border-neon-green shadow-[0_0_10px_rgba(0,255,136,0.5)]"
+                            : "border-muted-foreground/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Keypad */}
+                <div className="grid grid-cols-3 gap-3">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                    <Button
+                      key={num}
+                      onClick={() => handleNumberClick(num.toString())}
+                      className="h-16 text-2xl font-bold bg-card hover:bg-neon-green/10 border border-border hover:border-neon-green/50 transition-all"
+                      variant="outline"
+                    >
+                      {num}
+                    </Button>
+                  ))}
+                  <Button
+                    onClick={handleClear}
+                    className="h-16 text-sm font-bold bg-card hover:bg-red-500/10 border border-border hover:border-red-500/50 transition-all"
+                    variant="outline"
+                  >
+                    Clear
+                  </Button>
+                  <Button
+                    onClick={() => handleNumberClick("0")}
+                    className="h-16 text-2xl font-bold bg-card hover:bg-neon-green/10 border border-border hover:border-neon-green/50 transition-all"
+                    variant="outline"
+                  >
+                    0
+                  </Button>
+                  <Button
+                    onClick={handleDelete}
+                    className="h-16 font-bold bg-card hover:bg-yellow-500/10 border border-border hover:border-yellow-500/50 transition-all"
+                    variant="outline"
+                  >
+                    <Delete className="w-5 h-5" />
+                  </Button>
+                </div>
+
+                {/* Generate Code Button */}
+                <Button
+                  onClick={() => setShowPricingModal(true)}
+                  variant="ghost"
+                  className="w-full text-sm text-muted-foreground hover:text-neon-cyan transition-all"
+                >
+                  Generate Code
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
-        {/* Lock Overlay */}
-        <div className="relative z-10 flex items-center justify-center min-h-screen p-6">
-          <Card className="max-w-md w-full bg-gradient-card border-neon-purple/50 shadow-2xl">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-neon-purple to-neon-cyan rounded-full flex items-center justify-center">
-                <Crown className="w-8 h-8 text-black" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-neon-purple">KLUXIFY</CardTitle>
-              <CardDescription className="text-lg">
-                Premium AI Trading Signals
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center space-y-6">
-              <div className="p-4 bg-black/30 rounded-lg border border-neon-purple/30">
-                <p className="text-lg font-medium mb-2">
-                  KLUXIFY scans coins 24/7. Get AI-powered entries & exits. Upgrade to unlock
-                </p>
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <Zap className="w-4 h-4 text-neon-green" />
-                  <span>Real-time analysis</span>
-                  <span>•</span>
-                  <Target className="w-4 h-4 text-neon-cyan" />
-                  <span>Entry/Exit signals</span>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Current Plan:</span>
-                  <Badge variant="outline" className="border-neon-green/50 text-neon-green">
-                    Pro Trader
-                  </Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Required:</span>
-                  <Badge className="bg-neon-purple/20 text-neon-purple">
-                    KLUXIFY Premium
-                  </Badge>
-                </div>
-              </div>
-
-              <Button 
-                onClick={handleUpgrade}
-                className="w-full bg-gradient-to-r from-neon-purple to-neon-cyan hover:from-neon-purple/80 hover:to-neon-cyan/80 text-black font-bold"
-                size="lg"
-              >
-                <Crown className="w-5 h-5 mr-2" />
-                Upgrade to KLUXIFY Premium
-              </Button>
-
-              <p className="text-xs text-muted-foreground">
-                30-day money-back guarantee • Cancel anytime
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+        {/* Pricing Modal */}
+        <PricingModal 
+          open={showPricingModal} 
+          onOpenChange={setShowPricingModal}
+        />
+      </>
     );
   }
 
