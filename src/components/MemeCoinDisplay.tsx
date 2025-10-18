@@ -8,46 +8,31 @@ const topMemeCoins = [
     name: "PEPE",
     symbol: "PEPE",
     marketCap: "$3.2B",
-    sentiment: 8.7,
+    entryPrice: "$0.0000082",
+    exitPrice: "$0.0000311",
+    gain: "280%",
     change: "+15.4%",
-    trend: "up",
-    color: "neon-green"
+    trend: "up"
   },
   {
     name: "Dogecoin",
     symbol: "DOGE",
     marketCap: "$10.8B", 
-    sentiment: 7.2,
+    entryPrice: "$0.068",
+    exitPrice: "$0.299",
+    gain: "340%",
     change: "+8.2%",
-    trend: "up",
-    color: "neon-cyan"
+    trend: "up"
   },
   {
     name: "Shiba Inu",
     symbol: "SHIB",
     marketCap: "$4.9B",
-    sentiment: 5.8,
+    entryPrice: "$0.0000071",
+    exitPrice: "$0.0000426",
+    gain: "500%",
     change: "-2.1%",
-    trend: "down",
-    color: "red-500"
-  },
-  {
-    name: "Floki",
-    symbol: "FLOKI",
-    marketCap: "$1.1B",
-    sentiment: 9.1,
-    change: "+22.8%",
-    trend: "up", 
-    color: "neon-purple"
-  },
-  {
-    name: "Bonk",
-    symbol: "BONK",
-    marketCap: "$890M",
-    sentiment: 8.3,
-    change: "+12.5%",
-    trend: "up",
-    color: "neon-green"
+    trend: "up"
   }
 ];
 
@@ -59,7 +44,7 @@ export default function MemeCoinDisplay() {
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Top <span className="text-neon-cyan">AI Picks</span> Today
+            Top <span className="text-neon-cyan">AI Picks</span> This Week
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Yes, This model uses the same data you can see, and still makes more money than you
@@ -71,16 +56,13 @@ export default function MemeCoinDisplay() {
             {topMemeCoins.slice(0, 3).map((coin, index) => (
               <Card 
                 key={index}
-                className={`p-4 sm:p-6 bg-gradient-card border-${coin.color === 'red-500' ? 'red-500' : coin.color}/30 hover:border-${coin.color === 'red-500' ? 'red-500' : coin.color} transition-all duration-300 group relative overflow-hidden`}
+                className="p-4 sm:p-6 bg-gradient-card border-gray-800 hover:border-gray-700 transition-all duration-300 group relative overflow-hidden"
               >
-                {/* Background glow */}
-                <div className={`absolute inset-0 bg-${coin.color === 'red-500' ? 'red-500' : coin.color}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                
                 <div className="relative z-10">
                   {/* Header */}
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-${coin.color === 'red-500' ? 'red-500' : coin.color}/20 flex items-center justify-center`}>
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 flex items-center justify-center">
                         <span className="font-bold text-xs sm:text-sm">{coin.symbol.slice(0, 2)}</span>
                       </div>
                       <div>
@@ -115,48 +97,22 @@ export default function MemeCoinDisplay() {
                     </div>
                   </div>
 
-                  {/* Sentiment score */}
-                  <div className="mb-3 sm:mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs sm:text-sm text-muted-foreground">AI Sentiment</span>
-                      <span className={`text-xs sm:text-sm font-bold ${
-                        coin.sentiment >= 8 ? 'text-neon-green' :
-                        coin.sentiment >= 6 ? 'text-neon-cyan' :
-                        'text-red-500'
-                      }`}>
-                        <AnimatedNumber 
-                          value={coin.sentiment} 
-                          isVisible={isIntersecting}
-                          formatter={(val) => `${val.toFixed(1)}/10`}
-                        />
-                      </span>
+                  {/* Entry and Exit Prices */}
+                  <div className="mb-3 sm:mb-4 grid grid-cols-2 gap-3">
+                    <div>
+                      <div className="text-xs text-muted-foreground mb-1">Entry Price</div>
+                      <div className="text-sm font-semibold text-foreground">{coin.entryPrice}</div>
                     </div>
-                    <div className="w-full bg-black/30 rounded-full h-2">
-                      <div 
-                        className={`h-2 rounded-full transition-all duration-1000 ease-out ${
-                          coin.sentiment >= 8 ? 'bg-neon-green' :
-                          coin.sentiment >= 6 ? 'bg-neon-cyan' :
-                          'bg-red-500'
-                        }`}
-                        style={{ 
-                          width: isIntersecting ? `${coin.sentiment * 10}%` : '0%',
-                          transitionDelay: `${index * 200}ms`
-                        }}
-                      ></div>
+                    <div>
+                      <div className="text-xs text-muted-foreground mb-1">Exit Price</div>
+                      <div className="text-sm font-semibold text-foreground">{coin.exitPrice}</div>
                     </div>
                   </div>
 
-                  {/* Sentiment indicator */}
+                  {/* Gain indicator */}
                   <div className="flex items-center justify-center">
-                    <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      coin.sentiment >= 8 
-                        ? 'bg-neon-green/20 text-neon-green border border-neon-green/30' :
-                      coin.sentiment >= 6 
-                        ? 'bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30' :
-                        'bg-red-500/20 text-red-400 border border-red-500/30'
-                    }`}>
-                      {coin.sentiment >= 8 ? 'VERY BULLISH' :
-                       coin.sentiment >= 6 ? 'BULLISH' : 'BEARISH'}
+                    <div className="px-3 py-1 rounded-full text-xs font-semibold bg-neon-green/20 text-neon-green border border-neon-green/30">
+                      {coin.gain}
                     </div>
                   </div>
                 </div>
