@@ -120,7 +120,7 @@ export default function MemeCoinDisplay() {
                   <div className="flex items-center justify-center">
                     <Button 
                       size="sm" 
-                      className="bg-neon-green/10 hover:bg-neon-green/20 text-neon-green border border-neon-green/30 text-xs font-medium gap-1.5"
+                      className="bg-white/5 hover:bg-white/10 text-foreground border border-white/10 backdrop-blur-md hover:backdrop-blur-lg text-xs font-medium gap-1.5 transition-all"
                     >
                       Open this trade
                       <ExternalLink className="w-3 h-3" />
