@@ -135,7 +135,7 @@ export default function MemeCoinDisplay() {
           <div className="text-center mt-8 sm:mt-12">
             <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-card rounded-full border border-gray-800">
               <span className="text-xs sm:text-sm text-muted-foreground">
-                Updated every <span className="text-foreground/80 font-semibold">Friday</span>
+                Updated every <span className="text-white font-semibold">Friday</span>
               </span>
             </div>
           </div>
