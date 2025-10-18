@@ -62,7 +62,7 @@ export default function FAQ() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-32">
+      <main className="pt-20">
         {/* Hero Section */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-cyan/5" />
