@@ -99,7 +99,7 @@ const Auth = () => {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm text-muted-foreground">Back to home</span>
           </Link>
-          <div className="flex items-center justify-center mb-8">
+          <div className="flex items-center justify-center mb-4">
             <img src={kluxLogo} alt="KLUX" className="h-28 md:h-32 w-auto" />
           </div>
         </div>
