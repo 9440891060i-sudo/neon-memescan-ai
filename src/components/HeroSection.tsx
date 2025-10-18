@@ -11,14 +11,14 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Aurora Background */}
       <Aurora 
-        colorStops={['#FFFFFF', '#858585', '#C2C2C2']}
-        amplitude={1.0}
+        colorStops={['#8B5CF6', '#06B6D4', '#10B981']}
+        amplitude={1.5}
         blend={1.0}
-        speed={0.5}
+        speed={1.0}
       />
       
-      {/* Dark overlay for better text contrast */}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+      {/* Subtle overlay for text contrast - much lighter */}
+      <div className="absolute inset-0 bg-background/40"></div>
 
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
