@@ -94,7 +94,7 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
+        <div className="mb-4 text-center">
           <Link to="/" className="inline-flex items-center space-x-2 mb-4">
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm text-muted-foreground">Back to home</span>
