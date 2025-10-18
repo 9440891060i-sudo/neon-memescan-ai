@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy, Search, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy, Search, ArrowUpRight, ArrowDownRight, Bell, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import pepeIcon from "@/assets/coins/pepe.png";
 import dogeIcon from "@/assets/coins/doge.png";
@@ -163,6 +163,14 @@ const tradesData = [
   { id: 4, type: 'sell', coin: 'BONK', logo: bonkIcon, amount: '$6,700', quantity: '2.3M', price: '$0.00002913', time: '8 hours ago', profit: '+$1,200', profitPercent: '+17.9%', isPositive: true },
   { id: 5, type: 'buy', coin: 'FLOKI', logo: flokiIcon, amount: '$10,400', quantity: '800K', price: '$0.000130', time: '12 hours ago', profit: '-$890', profitPercent: '-8.6%', isPositive: false },
   { id: 6, type: 'sell', coin: 'PEPE', logo: pepeIcon, amount: '$9,300', quantity: '900K', price: '$0.00001033', time: '1 day ago', profit: '+$1,670', profitPercent: '+18.0%', isPositive: true },
+];
+
+const triggeredAlerts = [
+  { id: 1, type: 'price', coin: 'PEPE', logo: pepeIcon, message: 'Price reached $0.00001050', threshold: '$0.00001050', currentValue: '$0.00001042', triggeredAt: '2 hours ago', timestamp: '2025-10-18 14:30:00' },
+  { id: 2, type: 'volume', coin: 'DOGE', logo: dogeIcon, message: 'Volume spike detected +45%', threshold: '+30%', currentValue: '+45%', triggeredAt: '3 hours ago', timestamp: '2025-10-18 13:45:00' },
+  { id: 3, type: 'wallet', coin: 'SHIBA', logo: shibaIcon, message: 'Large transaction detected', threshold: '>$10K', currentValue: '$15.2K', triggeredAt: '6 hours ago', timestamp: '2025-10-18 10:20:00' },
+  { id: 4, type: 'price', coin: 'BONK', logo: bonkIcon, message: 'Price drop alert -8%', threshold: '-5%', currentValue: '-8.2%', triggeredAt: '8 hours ago', timestamp: '2025-10-18 08:15:00' },
+  { id: 5, type: 'momentum', coin: 'FLOKI', logo: flokiIcon, message: 'Momentum shift detected', threshold: 'RSI < 30', currentValue: 'RSI 28', triggeredAt: '10 hours ago', timestamp: '2025-10-18 06:30:00' },
 ];
 
 export default function WalletAnalytics() {
@@ -471,6 +479,63 @@ export default function WalletAnalytics() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Active Alerts Section */}
+        <Card className="bg-black border-gray-800">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-white">
+              <Bell className="w-5 h-5 text-primary" />
+              Active Alerts
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+              {triggeredAlerts.map((alert) => (
+                <div
+                  key={alert.id}
+                  className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-4 flex-1">
+                      <img src={alert.logo} alt={alert.coin} className="w-10 h-10 rounded-full" />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Badge 
+                            variant="outline" 
+                            className={`${
+                              alert.type === 'price' 
+                                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
+                                : alert.type === 'volume'
+                                ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                                : alert.type === 'wallet'
+                                ? 'bg-green-500/10 text-green-400 border-green-500/20'
+                                : 'bg-orange-500/10 text-orange-400 border-orange-500/20'
+                            }`}
+                          >
+                            {alert.type.toUpperCase()}
+                          </Badge>
+                          <span className="text-white font-semibold">{alert.coin}</span>
+                        </div>
+                        <p className="text-white text-sm mb-2">{alert.message}</p>
+                        <div className="flex items-center gap-4 text-xs text-gray-400">
+                          <span>Threshold: <span className="text-gray-300">{alert.threshold}</span></span>
+                          <span>Current: <span className="text-gray-300">{alert.currentValue}</span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="flex items-center gap-1 text-gray-400 text-xs mb-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{alert.triggeredAt}</span>
+                      </div>
+                      <p className="text-xs text-gray-500 font-mono">{alert.timestamp}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Trades Section */}
         <Card className="bg-black border-gray-800">
