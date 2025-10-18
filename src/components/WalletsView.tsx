@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Search, AlertTriangle } from "lucide-react";
+import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Search, AlertTriangle, Activity, Percent } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AlertPopup } from "@/components/AlertPopup";
 import { ViewAlertsDialog } from "@/components/ViewAlertsDialog";
@@ -356,7 +356,7 @@ export function WalletsView() {
                 <p className="text-sm text-gray-500">Tracked Wallets</p>
                 <p className="text-3xl font-bold text-white mt-1">12</p>
               </div>
-              <Wallet className="w-8 h-8 text-neon-green" />
+              <Wallet className="w-8 h-8 text-gray-400" />
             </div>
             <p className="text-xs text-gray-500 mt-2">+3 this week</p>
           </CardContent>
@@ -369,7 +369,7 @@ export function WalletsView() {
                 <p className="text-sm text-gray-500">Total Trades</p>
                 <p className="text-3xl font-bold text-white mt-1">{getTotalTrades()}</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-blue-400" />
+              <Activity className="w-8 h-8 text-gray-400" />
             </div>
             <div className="flex gap-1 mt-3">
               <button
@@ -415,7 +415,7 @@ export function WalletsView() {
                 <p className="text-sm text-gray-500">Active Alerts</p>
                 <p className="text-3xl font-bold text-white mt-1">8</p>
               </div>
-              <Bell className="w-8 h-8 text-yellow-400" />
+              <Bell className="w-8 h-8 text-gray-400" />
             </div>
             <p className="text-xs text-gray-500 mt-2">2 triggered today</p>
           </CardContent>
@@ -428,7 +428,7 @@ export function WalletsView() {
                 <p className="text-sm text-gray-500">Avg Win Rate</p>
                 <p className="text-3xl font-bold text-white mt-1">67%</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-green-400" />
+              <Percent className="w-8 h-8 text-gray-400" />
             </div>
             <p className="text-xs text-gray-500 mt-2">Across all wallets</p>
           </CardContent>
@@ -443,7 +443,7 @@ export function WalletsView() {
             <CardHeader className="border-b border-gray-800">
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-white">
-                  <Wallet className="w-5 h-5 text-neon-green" />
+                  <Wallet className="w-5 h-5 text-gray-400" />
                   Tracked Wallets
                 </CardTitle>
                 <div className="flex items-center gap-2">
@@ -497,7 +497,7 @@ export function WalletsView() {
             <CardHeader className="border-b border-gray-800">
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-white">
-                  <TrendingUp className="w-5 h-5 text-blue-400" />
+                  <TrendingUp className="w-5 h-5 text-gray-400" />
                   Trades
                 </CardTitle>
                 <div className="flex gap-1">
@@ -595,7 +595,7 @@ export function WalletsView() {
           <Card className="bg-black border-gray-800">
             <CardHeader className="border-b border-gray-800">
               <CardTitle className="flex items-center gap-2 text-white">
-                <Bell className="w-5 h-5 text-yellow-400" />
+                <Bell className="w-5 h-5 text-gray-400" />
                 Active Alerts
               </CardTitle>
             </CardHeader>
