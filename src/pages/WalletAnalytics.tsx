@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy, Search } from "lucide-react";
+import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy, Search, ArrowUpRight, ArrowDownRight, Bell, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import pepeIcon from "@/assets/coins/pepe.png";
 import dogeIcon from "@/assets/coins/doge.png";
@@ -156,11 +156,30 @@ const generatePnLData = (isPositive: boolean, timeframe: string) => {
   return data;
 };
 
+const tradesData = [
+  { id: 1, type: 'buy', coin: 'PEPE', logo: pepeIcon, amount: '$12,500', quantity: '1.2M', price: '$0.00001042', time: '2 hours ago', profit: '+$2,340', profitPercent: '+18.7%', isPositive: true },
+  { id: 2, type: 'sell', coin: 'DOGE', logo: dogeIcon, amount: '$8,900', quantity: '50K', price: '$0.178', time: '4 hours ago', profit: '-$450', profitPercent: '-5.1%', isPositive: false },
+  { id: 3, type: 'buy', coin: 'SHIBA', logo: shibaIcon, amount: '$15,200', quantity: '500M', price: '$0.0000304', time: '6 hours ago', profit: '+$3,120', profitPercent: '+20.5%', isPositive: true },
+  { id: 4, type: 'sell', coin: 'BONK', logo: bonkIcon, amount: '$6,700', quantity: '2.3M', price: '$0.00002913', time: '8 hours ago', profit: '+$1,200', profitPercent: '+17.9%', isPositive: true },
+  { id: 5, type: 'buy', coin: 'FLOKI', logo: flokiIcon, amount: '$10,400', quantity: '800K', price: '$0.000130', time: '12 hours ago', profit: '-$890', profitPercent: '-8.6%', isPositive: false },
+  { id: 6, type: 'sell', coin: 'PEPE', logo: pepeIcon, amount: '$9,300', quantity: '900K', price: '$0.00001033', time: '1 day ago', profit: '+$1,670', profitPercent: '+18.0%', isPositive: true },
+];
+
+const alertsData = [
+  { id: 1, type: 'price', coin: 'PEPE', logo: pepeIcon, message: 'Price increased by 15%', threshold: '$0.00001200', current: '$0.00001380', triggered: '45 minutes ago', severity: 'high' },
+  { id: 2, type: 'volume', coin: 'DOGE', logo: dogeIcon, message: 'Volume spike detected', threshold: '2.5M', current: '8.9M', triggered: '2 hours ago', severity: 'medium' },
+  { id: 3, type: 'price', coin: 'BONK', logo: bonkIcon, message: 'Price dropped below target', threshold: '$0.000030', current: '$0.000028', triggered: '3 hours ago', severity: 'high' },
+  { id: 4, type: 'wallet', coin: 'SHIBA', logo: shibaIcon, message: 'Large transaction detected', threshold: '$50K', current: '$125K', triggered: '5 hours ago', severity: 'high' },
+  { id: 5, type: 'price', coin: 'FLOKI', logo: flokiIcon, message: 'Price target reached', threshold: '$0.000140', current: '$0.000142', triggered: '8 hours ago', severity: 'medium' },
+  { id: 6, type: 'volume', coin: 'PEPE', logo: pepeIcon, message: 'Unusual trading activity', threshold: '5M', current: '15.3M', triggered: '1 day ago', severity: 'medium' },
+];
+
 export default function WalletAnalytics() {
   const navigate = useNavigate();
   const [selectedWallet, setSelectedWallet] = useState(wallets[0]);
   const [searchTerm, setSearchTerm] = useState("");
   const [timeframe, setTimeframe] = useState("1y");
+  const [activeTab, setActiveTab] = useState<'trades' | 'alerts'>('trades');
   const pnlData = generatePnLData(selectedWallet.isPositive, timeframe);
   const { toast } = useToast();
 
@@ -462,6 +481,120 @@ export default function WalletAnalytics() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Trades & Alerts Section */}
+        <Card className="bg-black border-gray-800">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Button
+                variant={activeTab === 'trades' ? 'default' : 'outline'}
+                onClick={() => setActiveTab('trades')}
+                className={activeTab === 'trades' ? '' : 'bg-gray-950 border-gray-800 text-gray-400 hover:text-white'}
+              >
+                <Activity className="w-4 h-4 mr-2" />
+                Trades
+              </Button>
+              <Button
+                variant={activeTab === 'alerts' ? 'default' : 'outline'}
+                onClick={() => setActiveTab('alerts')}
+                className={activeTab === 'alerts' ? '' : 'bg-gray-950 border-gray-800 text-gray-400 hover:text-white'}
+              >
+                <Bell className="w-4 h-4 mr-2" />
+                Alerts
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {activeTab === 'trades' ? (
+              <div className="space-y-3">
+                {tradesData.map((trade) => (
+                  <div
+                    key={trade.id}
+                    className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 flex-1">
+                        <img src={trade.logo} alt={trade.coin} className="w-10 h-10 rounded-full" />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <Badge 
+                              variant="outline" 
+                              className={`${
+                                trade.type === 'buy' 
+                                  ? 'bg-green-500/10 text-green-400 border-green-500/20' 
+                                  : 'bg-red-500/10 text-red-400 border-red-500/20'
+                              }`}
+                            >
+                              {trade.type === 'buy' ? <ArrowUpRight className="w-3 h-3 mr-1" /> : <ArrowDownRight className="w-3 h-3 mr-1" />}
+                              {trade.type.toUpperCase()}
+                            </Badge>
+                            <span className="text-white font-semibold">{trade.coin}</span>
+                          </div>
+                          <div className="flex items-center gap-4 mt-2 text-sm text-gray-400">
+                            <span>Amount: <span className="text-white">{trade.amount}</span></span>
+                            <span>Qty: <span className="text-white">{trade.quantity}</span></span>
+                            <span>Price: <span className="text-white">{trade.price}</span></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className={`text-lg font-bold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                          {trade.profit}
+                        </p>
+                        <p className={`text-sm ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                          {trade.profitPercent}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">{trade.time}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {alertsData.map((alert) => (
+                  <div
+                    key={alert.id}
+                    className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 flex-1">
+                        <img src={alert.logo} alt={alert.coin} className="w-10 h-10 rounded-full" />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <Badge 
+                              variant="outline" 
+                              className={`${
+                                alert.severity === 'high' 
+                                  ? 'bg-red-500/10 text-red-400 border-red-500/20' 
+                                  : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
+                              }`}
+                            >
+                              <Bell className="w-3 h-3 mr-1" />
+                              {alert.type.toUpperCase()}
+                            </Badge>
+                            <span className="text-white font-semibold">{alert.coin}</span>
+                          </div>
+                          <p className="text-white mt-2">{alert.message}</p>
+                          <div className="flex items-center gap-4 mt-2 text-sm text-gray-400">
+                            <span>Threshold: <span className="text-white">{alert.threshold}</span></span>
+                            <span>Current: <span className="text-white">{alert.current}</span></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <Clock className="w-4 h-4" />
+                          <span className="text-sm">{alert.triggered}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
