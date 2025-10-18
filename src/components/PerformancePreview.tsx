@@ -56,37 +56,37 @@ export default function PerformancePreview() {
           </div>
 
           {/* Chart */}
-          <div className="h-96 mb-10 p-6 rounded-lg bg-muted/20 border border-border">
+          <div className="h-64 mb-10 p-6 rounded-lg bg-black border border-gray-800">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={weekData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border) / 0.3)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.05)" />
                 <XAxis 
                   dataKey="day" 
-                  stroke="hsl(var(--muted-foreground))"
-                  style={{ fontSize: '14px', fontWeight: '500' }}
+                  stroke="rgba(255, 255, 255, 0.3)"
+                  style={{ fontSize: '12px', fontWeight: '500' }}
                 />
                 <YAxis 
-                  stroke="hsl(var(--muted-foreground))"
-                  style={{ fontSize: '14px', fontWeight: '500' }}
+                  stroke="rgba(255, 255, 255, 0.3)"
+                  style={{ fontSize: '12px', fontWeight: '500' }}
                   tickFormatter={(value) => `${value}%`}
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
+                    backgroundColor: '#000',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
                     borderRadius: '8px',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)'
                   }}
                   formatter={(value: number) => [`${value}%`, 'Return']}
-                  labelStyle={{ color: 'hsl(var(--foreground))', fontWeight: '600' }}
+                  labelStyle={{ color: '#fff', fontWeight: '600' }}
                 />
                 <Line 
                   type="monotone" 
                   dataKey="performance" 
-                  stroke="hsl(var(--foreground))" 
+                  stroke="hsl(var(--neon-green))" 
                   strokeWidth={2.5}
-                  dot={{ fill: 'hsl(var(--foreground))', r: 4, strokeWidth: 2, stroke: 'hsl(var(--background))' }}
-                  activeDot={{ r: 6, fill: 'hsl(var(--foreground))', strokeWidth: 2, stroke: 'hsl(var(--background))' }}
+                  dot={{ fill: 'hsl(var(--neon-green))', r: 4, strokeWidth: 2, stroke: '#000' }}
+                  activeDot={{ r: 6, fill: 'hsl(var(--neon-green))', strokeWidth: 2, stroke: '#000' }}
                 />
               </LineChart>
             </ResponsiveContainer>
