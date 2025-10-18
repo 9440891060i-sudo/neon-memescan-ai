@@ -140,8 +140,7 @@ export default function DashboardPreview() {
             Your <span className="text-terminal-blue">Bloomberg</span> Terminal
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2 font-mono">
-            Institutional-grade market intelligence combining real-time social sentiment analysis, 
-            insider community signals, and advanced technical metrics for professional crypto trading
+            All the data that&apos;s required to not be a degen gambler is right here. If you somehow still loose money, you are gay
           </p>
         </div>
 
