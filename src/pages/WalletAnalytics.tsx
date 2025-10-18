@@ -480,63 +480,6 @@ export default function WalletAnalytics() {
           </Card>
         </div>
 
-        {/* Active Alerts Section */}
-        <Card className="bg-black border-gray-800">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Bell className="w-5 h-5 text-primary" />
-              Active Alerts
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
-              {triggeredAlerts.map((alert) => (
-                <div
-                  key={alert.id}
-                  className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-4 flex-1">
-                      <img src={alert.logo} alt={alert.coin} className="w-10 h-10 rounded-full" />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge 
-                            variant="outline" 
-                            className={`${
-                              alert.type === 'price' 
-                                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
-                                : alert.type === 'volume'
-                                ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
-                                : alert.type === 'wallet'
-                                ? 'bg-green-500/10 text-green-400 border-green-500/20'
-                                : 'bg-orange-500/10 text-orange-400 border-orange-500/20'
-                            }`}
-                          >
-                            {alert.type.toUpperCase()}
-                          </Badge>
-                          <span className="text-white font-semibold">{alert.coin}</span>
-                        </div>
-                        <p className="text-white text-sm mb-2">{alert.message}</p>
-                        <div className="flex items-center gap-4 text-xs text-gray-400">
-                          <span>Threshold: <span className="text-gray-300">{alert.threshold}</span></span>
-                          <span>Current: <span className="text-gray-300">{alert.currentValue}</span></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="flex items-center gap-1 text-gray-400 text-xs mb-1">
-                        <Clock className="w-3 h-3" />
-                        <span>{alert.triggeredAt}</span>
-                      </div>
-                      <p className="text-xs text-gray-500 font-mono">{alert.timestamp}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Trades Section */}
         <Card className="bg-black border-gray-800">
           <CardHeader>

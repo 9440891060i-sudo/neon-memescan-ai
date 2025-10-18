@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Search, AlertTriangle, Activity, Percent } from "lucide-react";
+import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Search, AlertTriangle, Activity, Percent, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AlertPopup } from "@/components/AlertPopup";
 import { ViewAlertsDialog } from "@/components/ViewAlertsDialog";
@@ -216,6 +216,64 @@ const recentTrades = [
     timestamp: "2h ago",
     pnl: "+$35K",
     isPositive: true
+  }
+];
+
+const triggeredAlerts = [
+  {
+    id: 1,
+    type: "price",
+    wallet: "Whale #1",
+    coin: "PEPE",
+    message: "Price reached $0.00001050",
+    threshold: "$0.00001050",
+    currentValue: "$0.00001042",
+    triggeredAt: "2 hours ago",
+    timestamp: "2025-10-18 14:30:00"
+  },
+  {
+    id: 2,
+    type: "volume",
+    wallet: "Smart Money",
+    coin: "DOGE",
+    message: "Volume spike detected +45%",
+    threshold: "+30%",
+    currentValue: "+45%",
+    triggeredAt: "3 hours ago",
+    timestamp: "2025-10-18 13:45:00"
+  },
+  {
+    id: 3,
+    type: "wallet",
+    wallet: "Alpha Trader",
+    coin: "SHIBA",
+    message: "Large transaction detected",
+    threshold: ">$10K",
+    currentValue: "$15.2K",
+    triggeredAt: "6 hours ago",
+    timestamp: "2025-10-18 10:20:00"
+  },
+  {
+    id: 4,
+    type: "price",
+    wallet: "Degen King",
+    coin: "BONK",
+    message: "Price drop alert -8%",
+    threshold: "-5%",
+    currentValue: "-8.2%",
+    triggeredAt: "8 hours ago",
+    timestamp: "2025-10-18 08:15:00"
+  },
+  {
+    id: 5,
+    type: "momentum",
+    wallet: "Crypto Sniper",
+    coin: "FLOKI",
+    message: "Momentum shift detected",
+    threshold: "RSI < 30",
+    currentValue: "RSI 28",
+    triggeredAt: "10 hours ago",
+    timestamp: "2025-10-18 06:30:00"
   }
 ];
 
@@ -599,31 +657,50 @@ export function WalletsView() {
                 Active Alerts
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6 space-y-3">
-              {activeAlerts.map((alert) => (
-                <div 
-                  key={alert.id}
-                  className="p-4 bg-gray-950 rounded-lg border border-gray-800"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <p className="font-semibold text-white text-sm">{alert.type}</p>
-                      <p className="text-xs text-gray-500">{alert.wallet}</p>
+            <CardContent className="p-6">
+              <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+                {triggeredAlerts.map((alert) => (
+                  <div
+                    key={alert.id}
+                    className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs ${
+                              alert.type === 'price' 
+                                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
+                                : alert.type === 'volume'
+                                ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                                : alert.type === 'wallet'
+                                ? 'bg-green-500/10 text-green-400 border-green-500/20'
+                                : 'bg-orange-500/10 text-orange-400 border-orange-500/20'
+                            }`}
+                          >
+                            {alert.type.toUpperCase()}
+                          </Badge>
+                          <span className="text-white font-semibold text-sm">{alert.coin}</span>
+                        </div>
+                        <p className="text-xs text-gray-400 mb-1">{alert.wallet}</p>
+                        <p className="text-sm text-white mb-2">{alert.message}</p>
+                        <div className="flex items-center gap-3 text-xs text-gray-500">
+                          <span>Threshold: <span className="text-gray-400">{alert.threshold}</span></span>
+                          <span>Current: <span className="text-gray-400">{alert.currentValue}</span></span>
+                        </div>
+                      </div>
+                      <div className="text-right ml-3">
+                        <div className="flex items-center gap-1 text-gray-400 text-xs mb-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{alert.triggeredAt}</span>
+                        </div>
+                        <p className="text-xs text-gray-600 font-mono">{alert.timestamp}</p>
+                      </div>
                     </div>
-                    <Badge 
-                      variant="outline"
-                      className={alert.status === "active"
-                        ? "bg-green-500/10 text-green-400 border-green-500/20 text-xs"
-                        : "bg-gray-700/10 text-gray-400 border-gray-700/20 text-xs"
-                      }
-                    >
-                      {alert.status}
-                    </Badge>
                   </div>
-                  <p className="text-xs text-gray-400 mb-2">{alert.condition}</p>
-                  <p className="text-xs text-gray-500">Triggered {alert.triggered}x</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </CardContent>
           </Card>
 
