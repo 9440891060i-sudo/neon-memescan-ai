@@ -3,11 +3,15 @@ import { Button } from "@/components/ui/button";
 import { TrendingUp, TrendingDown, ExternalLink } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
+import pepeImg from "@/assets/coins/pepe.png";
+import dogeImg from "@/assets/coins/doge.png";
+import shibaImg from "@/assets/coins/shiba.png";
 
 const topMemeCoins = [
   {
     name: "PEPE",
     symbol: "PEPE",
+    image: pepeImg,
     marketCap: "$3.2B",
     entryPrice: "$0.0000082",
     exitPrice: "$0.0000311",
@@ -18,6 +22,7 @@ const topMemeCoins = [
   {
     name: "Dogecoin",
     symbol: "DOGE",
+    image: dogeImg,
     marketCap: "$10.8B", 
     entryPrice: "$0.068",
     exitPrice: "$0.299",
@@ -28,6 +33,7 @@ const topMemeCoins = [
   {
     name: "Shiba Inu",
     symbol: "SHIB",
+    image: shibaImg,
     marketCap: "$4.9B",
     entryPrice: "$0.0000071",
     exitPrice: "$0.0000426",
@@ -63,8 +69,8 @@ export default function MemeCoinDisplay() {
                   {/* Header */}
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 flex items-center justify-center">
-                        <span className="font-bold text-xs sm:text-sm">{coin.symbol.slice(0, 2)}</span>
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
+                        <img src={coin.image} alt={coin.name} className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h3 className="font-bold text-sm sm:text-base text-foreground">{coin.name}</h3>
