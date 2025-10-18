@@ -27,9 +27,9 @@ export default function HeroSection() {
           {/* Main headline */}
           <div className="space-y-8">
             <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-tight">
-              <span className="block text-foreground drop-shadow-2xl">Discover</span>
+              <span className="block text-foreground drop-shadow-2xl">Trade what&apos;s</span>
               <span className="block mt-2 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-2xl">
-                The Glare
+                under the smoke
               </span>
             </h1>
             
