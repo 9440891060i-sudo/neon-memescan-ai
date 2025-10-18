@@ -10,7 +10,7 @@ export default function HowItWorks() {
             How <span className="text-neon-green">Klux</span> Works
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-12 px-2">
-            Watch our quick explanation video to understand how Klux analyzes meme coins
+            Watch the quick explanation where you&apos;ll understand how klux helps you
           </p>
           
           {/* Video Placeholder */}
@@ -22,8 +22,7 @@ export default function HowItWorks() {
                   <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 rounded-full bg-neon-green/20 border-2 border-neon-green flex items-center justify-center group-hover:bg-neon-green/30 transition-all duration-300">
                     <Play className="w-6 h-6 sm:w-8 sm:h-8 text-neon-green ml-1 group-hover:scale-110 transition-transform" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 px-2">How Klux Predicts Moon Shots</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground px-2">Click to watch the explanation video</p>
+                  <p className="text-sm sm:text-base text-muted-foreground px-2">Click here to watch</p>
                 </div>
                 
                 {/* Glow effect overlay */}
