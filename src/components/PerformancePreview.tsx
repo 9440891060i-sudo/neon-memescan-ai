@@ -27,11 +27,11 @@ export default function PerformancePreview() {
         <Separator className="mb-12 bg-border/50" />
         
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            7 Days Performance
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-neon-green" style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.5)' }}>
+            Performance
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground">
-            See how our AI performed in real-time meme coin analysis
+            Yes, losses are included here
           </p>
         </div>
 
