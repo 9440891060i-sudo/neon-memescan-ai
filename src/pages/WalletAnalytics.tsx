@@ -241,7 +241,7 @@ export default function WalletAnalytics() {
                   <button
                     key={wallet.id}
                     onClick={() => setSelectedWallet(wallet)}
-                    className={`p-4 rounded-lg border transition-all hover:scale-105 flex-shrink-0 bg-gray-950 ${
+                    className={`p-4 rounded-lg border transition-colors flex-shrink-0 bg-gray-950 ${
                       selectedWallet.id === wallet.id
                         ? 'border-white'
                         : 'border-gray-800 hover:border-gray-700'
