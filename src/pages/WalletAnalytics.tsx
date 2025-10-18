@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity } from "lucide-react";
+import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import pepeIcon from "@/assets/coins/pepe.png";
+import dogeIcon from "@/assets/coins/doge.png";
+import shibaIcon from "@/assets/coins/shiba.png";
+import flokiIcon from "@/assets/coins/floki.png";
+import bonkIcon from "@/assets/coins/bonk.png";
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const wallets = [
@@ -18,8 +24,8 @@ const wallets = [
     totalTrades: 247,
     winRate: "68%",
     avgTradeSize: "$15.2K",
-    bestTrade: "+$89K",
-    worstTrade: "-$12K"
+    bestTrade: { amount: "+$89K", coin: "PEPE", logo: pepeIcon, ca: "0x6982508145454Ce325dDbE47a25d4ec3d2311933" },
+    worstTrade: { amount: "-$12K", coin: "BONK", logo: bonkIcon, ca: "0xDEfac16715671B7B6aCd9442f3b5c06f0e50E6E5" }
   },
   {
     id: 2,
@@ -32,8 +38,8 @@ const wallets = [
     totalTrades: 189,
     winRate: "72%",
     avgTradeSize: "$12.8K",
-    bestTrade: "+$67K",
-    worstTrade: "-$8K"
+    bestTrade: { amount: "+$67K", coin: "DOGE", logo: dogeIcon, ca: "0xba2ae424d960c26247dd6c32edc70b295c744c43" },
+    worstTrade: { amount: "-$8K", coin: "FLOKI", logo: flokiIcon, ca: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E" }
   },
   {
     id: 3,
@@ -46,8 +52,8 @@ const wallets = [
     totalTrades: 156,
     winRate: "61%",
     avgTradeSize: "$9.5K",
-    bestTrade: "+$45K",
-    worstTrade: "-$23K"
+    bestTrade: { amount: "+$45K", coin: "SHIBA", logo: shibaIcon, ca: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE" },
+    worstTrade: { amount: "-$23K", coin: "PEPE", logo: pepeIcon, ca: "0x6982508145454Ce325dDbE47a25d4ec3d2311933" }
   },
   {
     id: 4,
@@ -60,8 +66,8 @@ const wallets = [
     totalTrades: 342,
     winRate: "65%",
     avgTradeSize: "$11.3K",
-    bestTrade: "+$102K",
-    worstTrade: "-$18K"
+    bestTrade: { amount: "+$102K", coin: "BONK", logo: bonkIcon, ca: "0xDEfac16715671B7B6aCd9442f3b5c06f0e50E6E5" },
+    worstTrade: { amount: "-$18K", coin: "DOGE", logo: dogeIcon, ca: "0xba2ae424d960c26247dd6c32edc70b295c744c43" }
   },
   {
     id: 5,
@@ -74,8 +80,8 @@ const wallets = [
     totalTrades: 201,
     winRate: "70%",
     avgTradeSize: "$8.7K",
-    bestTrade: "+$56K",
-    worstTrade: "-$9K"
+    bestTrade: { amount: "+$56K", coin: "FLOKI", logo: flokiIcon, ca: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E" },
+    worstTrade: { amount: "-$9K", coin: "SHIBA", logo: shibaIcon, ca: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE" }
   },
   {
     id: 6,
@@ -88,8 +94,8 @@ const wallets = [
     totalTrades: 178,
     winRate: "58%",
     avgTradeSize: "$10.2K",
-    bestTrade: "+$38K",
-    worstTrade: "-$31K"
+    bestTrade: { amount: "+$38K", coin: "PEPE", logo: pepeIcon, ca: "0x6982508145454Ce325dDbE47a25d4ec3d2311933" },
+    worstTrade: { amount: "-$31K", coin: "BONK", logo: bonkIcon, ca: "0xDEfac16715671B7B6aCd9442f3b5c06f0e50E6E5" }
   },
   {
     id: 7,
@@ -102,8 +108,8 @@ const wallets = [
     totalTrades: 423,
     winRate: "74%",
     avgTradeSize: "$18.9K",
-    bestTrade: "+$124K",
-    worstTrade: "-$15K"
+    bestTrade: { amount: "+$124K", coin: "DOGE", logo: dogeIcon, ca: "0xba2ae424d960c26247dd6c32edc70b295c744c43" },
+    worstTrade: { amount: "-$15K", coin: "FLOKI", logo: flokiIcon, ca: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E" }
   }
 ];
 
@@ -129,6 +135,15 @@ export default function WalletAnalytics() {
   const navigate = useNavigate();
   const [selectedWallet, setSelectedWallet] = useState(wallets[0]);
   const pnlData = generatePnLData(selectedWallet.isPositive);
+  const { toast } = useToast();
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied!",
+      description: "Contract address copied to clipboard",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black p-8">
@@ -307,9 +322,28 @@ export default function WalletAnalytics() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                  <div>
-                    <p className="text-sm text-gray-400">Maximum Profit</p>
-                    <p className="text-2xl font-bold text-green-400 mt-1">{selectedWallet.bestTrade}</p>
+                  <div className="flex items-center gap-3 flex-1">
+                    <img src={selectedWallet.bestTrade.logo} alt={selectedWallet.bestTrade.coin} className="w-10 h-10 rounded-full" />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm text-gray-400">Maximum Profit</p>
+                        <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
+                          {selectedWallet.bestTrade.coin}
+                        </Badge>
+                      </div>
+                      <p className="text-2xl font-bold text-green-400 mt-1">{selectedWallet.bestTrade.amount}</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <p className="text-xs text-gray-500 font-mono truncate max-w-[200px]">
+                          {selectedWallet.bestTrade.ca}
+                        </p>
+                        <button 
+                          onClick={() => copyToClipboard(selectedWallet.bestTrade.ca)}
+                          className="text-gray-400 hover:text-white transition-colors"
+                        >
+                          <Copy className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <TrendingUp className="w-8 h-8 text-green-400" />
                 </div>
@@ -336,9 +370,28 @@ export default function WalletAnalytics() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                  <div>
-                    <p className="text-sm text-gray-400">Maximum Loss</p>
-                    <p className="text-2xl font-bold text-red-400 mt-1">{selectedWallet.worstTrade}</p>
+                  <div className="flex items-center gap-3 flex-1">
+                    <img src={selectedWallet.worstTrade.logo} alt={selectedWallet.worstTrade.coin} className="w-10 h-10 rounded-full" />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm text-gray-400">Maximum Loss</p>
+                        <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/20 text-xs">
+                          {selectedWallet.worstTrade.coin}
+                        </Badge>
+                      </div>
+                      <p className="text-2xl font-bold text-red-400 mt-1">{selectedWallet.worstTrade.amount}</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <p className="text-xs text-gray-500 font-mono truncate max-w-[200px]">
+                          {selectedWallet.worstTrade.ca}
+                        </p>
+                        <button 
+                          onClick={() => copyToClipboard(selectedWallet.worstTrade.ca)}
+                          className="text-gray-400 hover:text-white transition-colors"
+                        >
+                          <Copy className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <TrendingDown className="w-8 h-8 text-red-400" />
                 </div>
