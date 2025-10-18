@@ -35,8 +35,8 @@ const Header = () => {
   return (
     <>
       <PricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-auto max-w-5xl">
-        <div className="mx-4 px-6 py-3 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-auto max-w-7xl">
+        <div className="mx-4 px-8 py-3 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 shadow-2xl">
           <div className="flex items-center justify-between gap-8">
             {/* Left: Logo + Nav */}
             <div className="flex items-center gap-8">
