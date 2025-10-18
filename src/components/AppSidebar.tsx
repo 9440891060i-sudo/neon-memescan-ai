@@ -111,9 +111,6 @@ export function AppSidebar() {
                             isActive(item.url) ? "font-semibold" : ""
                           }`}>{item.title}</span>
                         )}
-                        {isActive(item.url) && open && (
-                          <div className="absolute right-2 w-2 h-2 bg-neon-green rounded-full animate-pulse" />
-                        )}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
