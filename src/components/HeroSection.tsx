@@ -1,113 +1,145 @@
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Sparkles, ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, TrendingUp, Zap, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Aurora from "./Aurora";
 
 export default function HeroSection() {
   const navigate = useNavigate();
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-      {/* Simple gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-terminal-dark"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Aurora Background */}
+      <Aurora 
+        colorStops={['#FFFFFF', '#858585', '#C2C2C2']}
+        amplitude={1.0}
+        blend={1.0}
+        speed={0.5}
+      />
       
-      {/* Subtle accent glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-neon-cyan/5 blur-[120px] rounded-full"></div>
+      {/* Dark overlay for better text contrast */}
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-[10%] w-2 h-2 bg-neon-cyan/30 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-[15%] w-3 h-3 bg-neon-purple/20 rounded-full animate-pulse delay-75"></div>
+        <div className="absolute bottom-40 left-[20%] w-2 h-2 bg-neon-green/25 rounded-full animate-pulse delay-150"></div>
+        <div className="absolute bottom-20 right-[25%] w-3 h-3 bg-neon-cyan/20 rounded-full animate-pulse"></div>
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-12">
-        
-        {/* Main headline */}
-        <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border/50 text-sm">
-            <Sparkles className="w-3.5 h-3.5 text-neon-cyan" />
-            <span className="text-muted-foreground">AI-Powered Meme Coin Intelligence</span>
-          </div>
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
+        <div className="text-center space-y-8">
           
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1]">
-            Find the next
-            <br />
-            <span className="relative inline-block mt-2">
-              <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent">
-                100x gem
+          {/* Top badges */}
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium backdrop-blur-xl bg-background/60 border border-border/50">
+              <Sparkles className="w-4 h-4 mr-2 text-neon-cyan" />
+              AI-Powered Analysis
+            </Badge>
+            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium backdrop-blur-xl bg-background/60 border border-border/50">
+              <TrendingUp className="w-4 h-4 mr-2 text-neon-green" />
+              Real-time Tracking
+            </Badge>
+          </div>
+
+          {/* Main headline with better hierarchy */}
+          <div className="space-y-6">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-[0.95]">
+              <span className="block text-foreground">Discover</span>
+              <span className="block relative mt-2">
+                <span className="relative inline-block">
+                  <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent">
+                    The Glare
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/30 via-neon-cyan/30 to-neon-green/30 blur-2xl"></div>
+                </span>
               </span>
-              <div className="absolute -inset-2 bg-gradient-to-r from-neon-purple/20 via-neon-cyan/20 to-neon-green/20 blur-xl"></div>
-            </span>
-            {" "}before
-            <br />
-            everyone else
-          </h1>
-          
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            AI analyzes thousands of meme coins in real-time, tracking social signals 
-            and on-chain activity to spot opportunities early.
-          </p>
-        </div>
+            </h1>
+            
+            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
+              Uncover hidden gems before they moon. AI-powered intelligence for the next generation of meme coin investors.
+            </p>
+          </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button 
-            size="lg" 
-            onClick={() => navigate('/auth')}
-            className="bg-foreground/90 backdrop-blur-xl text-background hover:bg-foreground border border-white/20 h-14 px-8 text-base font-semibold group shadow-xl"
-          >
-            Start analyzing free
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          
-          <Button 
-            size="lg" 
-            variant="outline"
-            onClick={() => {
-              document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="h-14 px-8 text-base font-semibold bg-background/40 backdrop-blur-xl border-border/50 hover:bg-background/60 shadow-lg"
-          >
-            See how it works
-            <ChevronRight className="w-5 h-5 ml-2" />
-          </Button>
-        </div>
-
-        {/* Social proof */}
-        <div className="pt-8 space-y-4">
-          <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground">
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold text-foreground">5,000+</span>
-              <span>Coins tracked</span>
+          {/* Feature highlights */}
+          <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap pt-4">
+            <div className="flex items-center gap-2 text-sm sm:text-base text-muted-foreground">
+              <div className="w-8 h-8 rounded-full bg-neon-cyan/10 flex items-center justify-center">
+                <Zap className="w-4 h-4 text-neon-cyan" />
+              </div>
+              <span className="font-medium">Instant Analysis</span>
             </div>
-            <div className="h-8 w-px bg-border"></div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold text-foreground">65%</span>
-              <span>Success rate</span>
+            <div className="flex items-center gap-2 text-sm sm:text-base text-muted-foreground">
+              <div className="w-8 h-8 rounded-full bg-neon-purple/10 flex items-center justify-center">
+                <Shield className="w-4 h-4 text-neon-purple" />
+              </div>
+              <span className="font-medium">Risk Detection</span>
             </div>
-            <div className="h-8 w-px bg-border"></div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold text-foreground">&lt;4min</span>
-              <span>Analysis time</span>
+            <div className="flex items-center gap-2 text-sm sm:text-base text-muted-foreground">
+              <div className="w-8 h-8 rounded-full bg-neon-green/10 flex items-center justify-center">
+                <TrendingUp className="w-4 h-4 text-neon-green" />
+              </div>
+              <span className="font-medium">Smart Alerts</span>
             </div>
           </div>
-        </div>
 
-        {/* Coin ticker preview */}
-        <div className="relative mt-16 overflow-hidden">
-          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10"></div>
-          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10"></div>
-          <div className="flex gap-6 animate-scroll">
-            {[...Array(3)].map((_, setIndex) => (
-              <div key={setIndex} className="flex gap-6 flex-shrink-0">
-                {['pepe', 'doge', 'shiba', 'bonk', 'floki'].map((coin, i) => (
-                  <div 
-                    key={`${setIndex}-${i}`}
-                    className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-border bg-muted/50 backdrop-blur-sm overflow-hidden opacity-60 hover:opacity-100 transition-opacity hover:scale-110 hover:border-neon-cyan/50 duration-300"
-                  >
-                    <img 
-                      src={`/src/assets/coins/${coin}.png`} 
-                      alt={coin}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
+          {/* CTA Section */}
+          <div className="pt-8 space-y-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button 
+                size="lg" 
+                onClick={() => navigate('/auth')}
+                className="h-16 px-10 text-lg font-bold bg-foreground text-background hover:bg-foreground/90 shadow-2xl hover:shadow-neon-cyan/20 transition-all duration-300 hover:scale-105"
+              >
+                Start Free Analysis
+                <Sparkles className="w-5 h-5 ml-2" />
+              </Button>
+              
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => {
+                  document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="h-16 px-10 text-lg font-bold bg-background/50 backdrop-blur-xl border-2 border-border hover:bg-background/70 hover:border-foreground/20 transition-all duration-300"
+              >
+                Learn More
+              </Button>
+            </div>
+
+            {/* Trust indicators */}
+            <p className="text-sm text-muted-foreground">
+              Join <span className="text-foreground font-semibold">10,000+ traders</span> finding gems daily
+            </p>
+          </div>
+
+          {/* Stats grid */}
+          <div className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+              <div className="relative bg-background/60 backdrop-blur-xl border border-border/50 rounded-2xl p-6 hover:border-neon-cyan/50 transition-all">
+                <div className="text-4xl sm:text-5xl font-black text-foreground mb-2">5K+</div>
+                <div className="text-sm text-muted-foreground font-medium">Coins Tracked Daily</div>
               </div>
-            ))}
+            </div>
+            
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan/10 to-neon-green/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+              <div className="relative bg-background/60 backdrop-blur-xl border border-border/50 rounded-2xl p-6 hover:border-neon-green/50 transition-all">
+                <div className="text-4xl sm:text-5xl font-black text-foreground mb-2">65%</div>
+                <div className="text-sm text-muted-foreground font-medium">Success Rate</div>
+              </div>
+            </div>
+            
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-purple/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+              <div className="relative bg-background/60 backdrop-blur-xl border border-border/50 rounded-2xl p-6 hover:border-neon-purple/50 transition-all">
+                <div className="text-4xl sm:text-5xl font-black text-foreground mb-2">&lt;4min</div>
+                <div className="text-sm text-muted-foreground font-medium">Average Analysis</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
