@@ -25,7 +25,7 @@ export default function HeroSection() {
         <div className="text-center space-y-12">
           
           {/* Main headline */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-tight">
               <span className="block text-foreground drop-shadow-2xl">Trade what&apos;s</span>
               <span className="block mt-2 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-2xl">
@@ -33,32 +33,30 @@ export default function HeroSection() {
               </span>
             </h1>
             
-            <p className="text-xl sm:text-2xl text-foreground/80 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-              AI-powered meme coin intelligence. Find hidden gems before they moon.
+            <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+              Get the data which actually moves this market
             </p>
           </div>
 
-          {/* CTA Section */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/auth')}
-              className="h-14 px-8 text-base font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-xl transition-all duration-300"
-            >
-              Start Free Analysis
-              <Sparkles className="w-5 h-5 ml-2" />
-            </Button>
-            
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => {
-                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="h-14 px-8 text-base font-semibold backdrop-blur-xl bg-background/40 border-2 hover:bg-background/60 transition-all duration-300"
-            >
-              Learn More
-            </Button>
+          {/* CA Input Section */}
+          <div className="max-w-2xl mx-auto">
+            <div className="relative backdrop-blur-xl bg-background/60 border-2 border-border/50 rounded-2xl p-3 shadow-2xl">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  placeholder="Paste contract address (CA)"
+                  className="flex-1 h-14 px-6 bg-background/80 border border-border/30 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 transition-all"
+                />
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate('/auth')}
+                  className="h-14 px-8 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-lg transition-all duration-300 whitespace-nowrap"
+                >
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Analyze
+                </Button>
+              </div>
+            </div>
           </div>
 
           {/* Stats */}
