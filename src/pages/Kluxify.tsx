@@ -44,6 +44,7 @@ export default function Kluxify() {
   const [selectedCoin, setSelectedCoin] = useState<CoinAnalysis | null>(null);
   const [pinCode, setPinCode] = useState("");
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
   const { toast } = useToast();
 
   // Simulate real-time coin analysis
@@ -102,14 +103,28 @@ export default function Kluxify() {
       const newPin = pinCode + num;
       setPinCode(newPin);
       
-      // Check if code is correct (simple check for demo - use "1234")
-      if (newPin === "1234") {
-        setIsPremium(true);
-        setPinCode("");
-        toast({
-          title: "Access Granted",
-          description: "Welcome to KLUXIFY Premium!",
-        });
+      // Check if code is complete (6 digits)
+      if (newPin.length === 6) {
+        if (newPin === "132513") {
+          setIsPremium(true);
+          setPinCode("");
+          toast({
+            title: "Access Granted",
+            description: "Welcome to KLUXIFY Premium!",
+          });
+        } else {
+          // Wrong code - shake and clear
+          setIsShaking(true);
+          setTimeout(() => {
+            setPinCode("");
+            setIsShaking(false);
+          }, 500);
+          toast({
+            title: "Access Denied",
+            description: "Incorrect code entered.",
+            variant: "destructive",
+          });
+        }
       }
     }
   };
@@ -153,7 +168,7 @@ export default function Kluxify() {
       <>
         <div className="relative min-h-screen bg-background flex items-center justify-center p-6">
           {/* ATM Screen */}
-          <div className="w-full max-w-md">
+          <div className={`w-full max-w-md transition-transform ${isShaking ? 'animate-shake' : ''}`}>
             <Card className="bg-gradient-card border-border shadow-2xl">
               <CardContent className="p-8 space-y-8">
                 {/* Display Screen */}

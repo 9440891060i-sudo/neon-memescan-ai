@@ -131,6 +131,11 @@ export default {
             opacity: "1"
           }
         },
+        "shake": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "10%, 30%, 50%, 70%, 90%": { transform: "translateX(-10px)" },
+          "20%, 40%, 60%, 80%": { transform: "translateX(10px)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -139,6 +144,7 @@ export default {
         "elastic-bounce-top": "elastic-bounce-top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
         "elastic-bounce-bottom": "elastic-bounce-bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
         "spring-in": "spring-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "shake": "shake 0.5s ease-in-out",
       },
     },
   },
