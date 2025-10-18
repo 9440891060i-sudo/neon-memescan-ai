@@ -9,8 +9,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Bell, Edit2, Trash2, Save, X } from "lucide-react";
+import { Bell, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Alert {
@@ -30,32 +29,7 @@ interface ViewAlertsDialogProps {
 
 export function ViewAlertsDialog({ open, onOpenChange, alerts: initialAlerts }: ViewAlertsDialogProps) {
   const [alerts, setAlerts] = useState<Alert[]>(initialAlerts);
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [editedCondition, setEditedCondition] = useState("");
   const { toast } = useToast();
-
-  const handleEdit = (alert: Alert) => {
-    setEditingId(alert.id);
-    setEditedCondition(alert.condition);
-  };
-
-  const handleSave = (id: number) => {
-    setAlerts(alerts.map(alert => 
-      alert.id === id 
-        ? { ...alert, condition: editedCondition }
-        : alert
-    ));
-    setEditingId(null);
-    toast({
-      title: "Alert Updated",
-      description: "Your alert condition has been updated successfully",
-    });
-  };
-
-  const handleCancel = () => {
-    setEditingId(null);
-    setEditedCondition("");
-  };
 
   const handleDelete = (id: number) => {
     setAlerts(alerts.filter(alert => alert.id !== id));
@@ -83,7 +57,7 @@ export function ViewAlertsDialog({ open, onOpenChange, alerts: initialAlerts }: 
             All Alerts
           </DialogTitle>
           <DialogDescription className="text-gray-400">
-            Manage and edit your wallet alerts
+            Manage your wallet alerts
           </DialogDescription>
         </DialogHeader>
 
@@ -118,70 +92,31 @@ export function ViewAlertsDialog({ open, onOpenChange, alerts: initialAlerts }: 
                       
                       {/* Action Buttons */}
                       <div className="flex items-center gap-2">
-                        {editingId === alert.id ? (
-                          <>
-                            <Button
-                              size="sm"
-                              onClick={() => handleSave(alert.id)}
-                              className="bg-neon-green hover:bg-neon-green/90 text-black"
-                            >
-                              <Save className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={handleCancel}
-                              className="border-gray-700 text-white hover:bg-gray-900"
-                            >
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </>
-                        ) : (
-                          <>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleEdit(alert)}
-                              className="border-gray-700 text-white hover:bg-gray-900"
-                            >
-                              <Edit2 className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => toggleStatus(alert.id)}
-                              className="border-gray-700 text-white hover:bg-gray-900"
-                            >
-                              {alert.status === "active" ? "Pause" : "Activate"}
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleDelete(alert.id)}
-                              className="border-red-500/50 text-red-400 hover:bg-red-500/10"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </>
-                        )}
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => toggleStatus(alert.id)}
+                          className="border-gray-700 text-white hover:bg-gray-900"
+                        >
+                          {alert.status === "active" ? "Pause" : "Activate"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleDelete(alert.id)}
+                          className="border-red-500/50 text-red-400 hover:bg-red-500/10"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
 
                     {/* Condition */}
                     <div>
                       <label className="text-xs text-gray-500 mb-1 block">Condition</label>
-                      {editingId === alert.id ? (
-                        <Input
-                          value={editedCondition}
-                          onChange={(e) => setEditedCondition(e.target.value)}
-                          className="bg-black border-gray-800 text-white"
-                          placeholder="Enter alert condition"
-                        />
-                      ) : (
-                        <p className="text-sm text-white bg-black px-3 py-2 rounded border border-gray-800">
-                          {alert.condition}
-                        </p>
-                      )}
+                      <p className="text-sm text-white bg-black px-3 py-2 rounded border border-gray-800">
+                        {alert.condition}
+                      </p>
                     </div>
 
                     {/* Stats */}
