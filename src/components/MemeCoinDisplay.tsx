@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, TrendingDown, ExternalLink } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 
@@ -109,11 +110,15 @@ export default function MemeCoinDisplay() {
                     </div>
                   </div>
 
-                  {/* Gain indicator */}
+                  {/* Open Trade Button */}
                   <div className="flex items-center justify-center">
-                    <div className="px-3 py-1 rounded-full text-xs font-semibold bg-neon-green/20 text-neon-green border border-neon-green/30">
-                      {coin.gain}
-                    </div>
+                    <Button 
+                      size="sm" 
+                      className="bg-neon-green/10 hover:bg-neon-green/20 text-neon-green border border-neon-green/30 text-xs font-medium gap-1.5"
+                    >
+                      Open this trade
+                      <ExternalLink className="w-3 h-3" />
+                    </Button>
                   </div>
                 </div>
               </Card>
