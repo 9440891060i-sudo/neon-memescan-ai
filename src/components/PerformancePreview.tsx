@@ -35,61 +35,99 @@ export default function PerformancePreview() {
           </p>
         </div>
 
-        <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+        <div className="backdrop-blur-sm bg-gradient-to-br from-background/40 via-background/60 to-background/40 border border-white/5 rounded-2xl p-8 shadow-2xl">
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 gap-6 mb-10">
-            <div className="p-6 rounded-lg bg-muted/30 border border-border">
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <TrendingUp className="w-5 h-5 text-foreground/60" />
-                <span className="text-3xl font-semibold text-foreground">
-                  +{totalReturn.toFixed(1)}%
-                </span>
+          <div className="grid grid-cols-2 gap-8 mb-12">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 to-transparent rounded-xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+              <div className="relative p-8 rounded-xl bg-black/40 border border-white/10 backdrop-blur-sm">
+                <div className="flex items-baseline justify-center gap-2 mb-2">
+                  <TrendingUp className="w-4 h-4 text-neon-green/70 mt-1" />
+                  <span className="text-4xl font-light tracking-tight text-white">
+                    +{totalReturn.toFixed(1)}
+                  </span>
+                  <span className="text-2xl font-light text-white/60">%</span>
+                </div>
+                <p className="text-xs text-white/50 text-center font-medium tracking-wider uppercase">Total 7-Day Return</p>
               </div>
-              <p className="text-sm text-muted-foreground text-center font-medium">Total 7-Day Return</p>
             </div>
-            <div className="p-6 rounded-lg bg-muted/30 border border-border">
-              <div className="text-3xl font-semibold text-center mb-3 text-foreground">
-                +{avgDaily}%
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 to-transparent rounded-xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+              <div className="relative p-8 rounded-xl bg-black/40 border border-white/10 backdrop-blur-sm">
+                <div className="flex items-baseline justify-center gap-2 mb-2">
+                  <span className="text-4xl font-light tracking-tight text-white">
+                    +{avgDaily}
+                  </span>
+                  <span className="text-2xl font-light text-white/60">%</span>
+                </div>
+                <p className="text-xs text-white/50 text-center font-medium tracking-wider uppercase">Avg Daily Return</p>
               </div>
-              <p className="text-sm text-muted-foreground text-center font-medium">Avg Daily Return</p>
             </div>
           </div>
 
           {/* Chart */}
-          <div className="h-64 mb-10 p-6 rounded-lg bg-black border border-gray-800">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={weekData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.05)" />
-                <XAxis 
-                  dataKey="day" 
-                  stroke="rgba(255, 255, 255, 0.3)"
-                  style={{ fontSize: '12px', fontWeight: '500' }}
-                />
-                <YAxis 
-                  stroke="rgba(255, 255, 255, 0.3)"
-                  style={{ fontSize: '12px', fontWeight: '500' }}
-                  tickFormatter={(value) => `${value}%`}
-                />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#000',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)'
-                  }}
-                  formatter={(value: number) => [`${value}%`, 'Return']}
-                  labelStyle={{ color: '#fff', fontWeight: '600' }}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="performance" 
-                  stroke="hsl(var(--neon-green))" 
-                  strokeWidth={2.5}
-                  dot={{ fill: 'hsl(var(--neon-green))', r: 4, strokeWidth: 2, stroke: '#000' }}
-                  activeDot={{ r: 6, fill: 'hsl(var(--neon-green))', strokeWidth: 2, stroke: '#000' }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+          <div className="relative group mb-12">
+            <div className="absolute inset-0 bg-gradient-to-br from-neon-green/3 via-transparent to-transparent rounded-xl blur-2xl" />
+            <div className="relative h-72 p-8 rounded-xl bg-black/60 border border-white/10 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(34,197,94,0.05),transparent_50%)]" />
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={weekData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="hsl(var(--neon-green))" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="hsl(var(--neon-green))" stopOpacity="1" />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid 
+                    strokeDasharray="1 3" 
+                    stroke="rgba(255, 255, 255, 0.03)" 
+                    vertical={false}
+                  />
+                  <XAxis 
+                    dataKey="day" 
+                    stroke="rgba(255, 255, 255, 0.2)"
+                    tick={{ fill: 'rgba(255, 255, 255, 0.5)', fontSize: 11 }}
+                    axisLine={{ stroke: 'rgba(255, 255, 255, 0.1)' }}
+                    tickLine={false}
+                  />
+                  <YAxis 
+                    stroke="rgba(255, 255, 255, 0.2)"
+                    tick={{ fill: 'rgba(255, 255, 255, 0.5)', fontSize: 11 }}
+                    tickFormatter={(value) => `${value}%`}
+                    axisLine={{ stroke: 'rgba(255, 255, 255, 0.1)' }}
+                    tickLine={false}
+                    width={45}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                      border: '1px solid rgba(34, 197, 94, 0.2)',
+                      borderRadius: '12px',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(12px)',
+                      padding: '12px 16px'
+                    }}
+                    formatter={(value: number) => [`${value}%`, 'Return']}
+                    labelStyle={{ color: 'rgba(255, 255, 255, 0.9)', fontWeight: '500', fontSize: '13px' }}
+                    itemStyle={{ color: 'hsl(var(--neon-green))', fontSize: '14px', fontWeight: '600' }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="performance" 
+                    stroke="url(#lineGradient)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ 
+                      r: 5, 
+                      fill: 'hsl(var(--neon-green))', 
+                      stroke: 'rgba(0, 0, 0, 0.8)',
+                      strokeWidth: 3,
+                      filter: 'drop-shadow(0 0 8px hsl(var(--neon-green)))'
+                    }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           {/* CTA */}
@@ -106,7 +144,7 @@ export default function PerformancePreview() {
               View Full History
             </Button>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   );
