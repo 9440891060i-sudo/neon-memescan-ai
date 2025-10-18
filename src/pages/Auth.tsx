@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Zap, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import kluxLogo from "@/assets/klux-logo.png";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthStore } from "@/store/authStore";
@@ -98,14 +99,9 @@ const Auth = () => {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm text-muted-foreground">Back to home</span>
           </Link>
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-10 h-10 rounded-full bg-gradient-neon flex items-center justify-center">
-              <Zap className="w-6 h-6 text-black" />
-            </div>
-            <span className="font-bold text-2xl text-neon-green">KLUX</span>
+          <div className="flex items-center justify-center mb-8">
+            <img src={kluxLogo} alt="KLUX" className="h-16 w-auto" />
           </div>
-          <h1 className="text-2xl font-bold">Join the AI Revolution</h1>
-          <p className="text-muted-foreground">Get started with advanced meme coin analysis</p>
         </div>
 
         <Card className="border-neon-green/20 bg-black/50">
