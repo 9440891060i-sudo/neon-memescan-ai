@@ -371,16 +371,6 @@ export function WalletsView() {
 
   return (
     <div className="space-y-8">
-      {/* Header Section */}
-      <div className="text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-          Wallet Intelligence
-        </h2>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-          Track wallets and their performance, monitor trades, set custom alerts
-        </p>
-      </div>
-
       {/* Add Wallet Section */}
       <Card className="bg-black border-gray-800">
         <CardContent className="p-8">
