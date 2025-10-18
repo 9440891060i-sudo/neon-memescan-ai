@@ -67,7 +67,7 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
       <DialogContent className="sm:max-w-[600px] bg-black border-gray-800">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-white text-xl">
-            <Bell className="w-5 h-5 text-neon-cyan" />
+            <Bell className="w-5 h-5 text-gray-400" />
             Create Wallet Alert
           </DialogTitle>
         </DialogHeader>
@@ -81,7 +81,7 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
                 variant="ghost"
                 size="sm"
                 onClick={selectAllWallets}
-                className="text-neon-cyan hover:text-neon-cyan/80 hover:bg-neon-cyan/10"
+                className="text-gray-400 hover:text-white hover:bg-gray-900"
               >
                 {selectedWallets.length === wallets.length ? "Deselect All" : "Select All"}
               </Button>
@@ -93,13 +93,13 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
                   onClick={() => toggleWallet(wallet.id)}
                   className={`p-3 rounded-lg border transition-all text-left ${
                     selectedWallets.includes(wallet.id)
-                      ? 'border-neon-cyan bg-neon-cyan/10'
+                      ? 'border-gray-400 bg-gray-900'
                       : 'border-gray-800 hover:border-gray-700'
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <Wallet className={`w-4 h-4 ${selectedWallets.includes(wallet.id) ? 'text-neon-cyan' : 'text-gray-400'}`} />
-                    <span className={`text-sm font-medium ${selectedWallets.includes(wallet.id) ? 'text-neon-cyan' : 'text-white'}`}>
+                    <Wallet className={`w-4 h-4 ${selectedWallets.includes(wallet.id) ? 'text-white' : 'text-gray-400'}`} />
+                    <span className={`text-sm font-medium ${selectedWallets.includes(wallet.id) ? 'text-white' : 'text-gray-500'}`}>
                       {wallet.label}
                     </span>
                   </div>
@@ -107,7 +107,7 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
               ))}
             </div>
             {selectedWallets.length > 0 && (
-              <Badge variant="outline" className="mt-2 bg-neon-cyan/10 text-neon-cyan border-neon-cyan/20">
+              <Badge variant="outline" className="mt-2 bg-gray-900 text-gray-400 border-gray-700">
                 {selectedWallets.length} wallet{selectedWallets.length > 1 ? 's' : ''} selected
               </Badge>
             )}
@@ -121,13 +121,13 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
                 onClick={() => setAlertType("large-trade")}
                 className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                   alertType === "large-trade"
-                    ? 'border-neon-green bg-neon-green/10'
+                    ? 'border-gray-400 bg-gray-900'
                     : 'border-gray-800 hover:border-gray-700'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className={`font-semibold ${alertType === "large-trade" ? 'text-neon-green' : 'text-white'}`}>
+                    <p className={`font-semibold ${alertType === "large-trade" ? 'text-white' : 'text-gray-400'}`}>
                       Large Trade Alert
                     </p>
                     <p className="text-sm text-gray-400 mt-1">
@@ -135,10 +135,10 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
                     </p>
                   </div>
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    alertType === "large-trade" ? 'border-neon-green' : 'border-gray-700'
+                    alertType === "large-trade" ? 'border-gray-400' : 'border-gray-700'
                   }`}>
                     {alertType === "large-trade" && (
-                      <div className="w-2.5 h-2.5 rounded-full bg-neon-green" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-gray-400" />
                     )}
                   </div>
                 </div>
@@ -160,13 +160,13 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
                 onClick={() => setAlertType("any-trade")}
                 className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                   alertType === "any-trade"
-                    ? 'border-neon-green bg-neon-green/10'
+                    ? 'border-gray-400 bg-gray-900'
                     : 'border-gray-800 hover:border-gray-700'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className={`font-semibold ${alertType === "any-trade" ? 'text-neon-green' : 'text-white'}`}>
+                    <p className={`font-semibold ${alertType === "any-trade" ? 'text-white' : 'text-gray-400'}`}>
                       Any Trade Alert
                     </p>
                     <p className="text-sm text-gray-400 mt-1">
@@ -174,10 +174,10 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
                     </p>
                   </div>
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    alertType === "any-trade" ? 'border-neon-green' : 'border-gray-700'
+                    alertType === "any-trade" ? 'border-gray-400' : 'border-gray-700'
                   }`}>
                     {alertType === "any-trade" && (
-                      <div className="w-2.5 h-2.5 rounded-full bg-neon-green" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-gray-400" />
                     )}
                   </div>
                 </div>
@@ -196,7 +196,7 @@ export function AlertPopup({ open, onOpenChange, wallets }: AlertPopupProps) {
           </Button>
           <Button
             onClick={handleCreateAlert}
-            className="flex-1 bg-neon-green hover:bg-neon-green/90 text-black font-semibold"
+            className="flex-1 bg-white hover:bg-gray-200 text-black font-semibold"
           >
             <Bell className="w-4 h-4 mr-2" />
             Create Alert
