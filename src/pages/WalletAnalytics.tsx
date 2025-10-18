@@ -155,33 +155,35 @@ export default function WalletAnalytics() {
         <Card className="bg-black border-gray-800">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-white">
-              <Wallet className="w-5 h-5 text-primary" />
+              <Wallet className="w-5 h-5 text-gray-400" />
               Select Wallet
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-              {wallets.map((wallet) => (
-                <button
-                  key={wallet.id}
-                  onClick={() => setSelectedWallet(wallet)}
-                  className={`p-4 rounded-lg border transition-all hover:scale-105 ${
-                    selectedWallet.id === wallet.id
-                      ? 'border-primary bg-primary/5'
-                      : 'border-gray-800 bg-gray-950 hover:border-gray-700'
-                  }`}
-                >
-                  <div className="text-center space-y-2">
-                    <Wallet className={`w-5 h-5 mx-auto ${selectedWallet.id === wallet.id ? 'text-primary' : 'text-gray-400'}`} />
-                    <p className={`text-sm font-semibold ${selectedWallet.id === wallet.id ? 'text-primary' : 'text-white'}`}>
-                      {wallet.label}
-                    </p>
-                    <p className={`text-xs ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
-                      {wallet.pnlPercent}
-                    </p>
-                  </div>
-                </button>
-              ))}
+            <div className="overflow-x-auto">
+              <div className="flex gap-3 pb-2">
+                {wallets.map((wallet) => (
+                  <button
+                    key={wallet.id}
+                    onClick={() => setSelectedWallet(wallet)}
+                    className={`p-4 rounded-lg border transition-all hover:scale-105 flex-shrink-0 bg-gray-950 ${
+                      selectedWallet.id === wallet.id
+                        ? 'border-white'
+                        : 'border-gray-800 hover:border-gray-700'
+                    }`}
+                  >
+                    <div className="text-center space-y-2">
+                      <Wallet className="w-5 h-5 mx-auto text-gray-400" />
+                      <p className="text-sm font-semibold text-white">
+                        {wallet.label}
+                      </p>
+                      <p className={`text-xs ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                        {wallet.pnlPercent}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           </CardContent>
         </Card>
