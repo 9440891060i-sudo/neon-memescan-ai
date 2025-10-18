@@ -250,7 +250,18 @@ export function WalletsView() {
   const [walletAddress, setWalletAddress] = useState("");
   const [selectedWallets, setSelectedWallets] = useState<number[]>([]);
   const [alertPopupOpen, setAlertPopupOpen] = useState(false);
+  const [timeframe, setTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
   const { toast } = useToast();
+
+  const getTotalTrades = () => {
+    switch(timeframe) {
+      case '1d': return 142;
+      case '7d': return 523;
+      case '1M': return 847;
+      case 'all': return 1247;
+      default: return 847;
+    }
+  };
 
   const toggleWallet = (walletId: number) => {
     setSelectedWallets(prev => 
@@ -305,7 +316,7 @@ export function WalletsView() {
           Wallet Intelligence
         </h2>
         <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-          Track whale wallets, monitor trades, and set custom alerts for smart money movements
+          Track wallets and their performance, monitor trades, set custom alerts
         </p>
       </div>
 
@@ -316,7 +327,7 @@ export function WalletsView() {
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
               <Input
-                placeholder="Enter wallet address (0x... or Solana address)"
+                placeholder="Enter wallet address"
                 value={walletAddress}
                 onChange={(e) => setWalletAddress(e.target.value)}
                 className="pl-12 bg-gray-950 border-gray-800 text-white placeholder:text-gray-500 font-mono h-14 text-sm"
@@ -353,11 +364,44 @@ export function WalletsView() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500">Total Trades</p>
-                <p className="text-3xl font-bold text-white mt-1">847</p>
+                <p className="text-3xl font-bold text-white mt-1">{getTotalTrades()}</p>
               </div>
               <TrendingUp className="w-8 h-8 text-blue-400" />
             </div>
-            <p className="text-xs text-gray-500 mt-2">+142 today</p>
+            <div className="flex gap-1 mt-3">
+              <button
+                onClick={() => setTimeframe('1d')}
+                className={`px-2 py-1 text-xs rounded transition-colors ${
+                  timeframe === '1d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                1d
+              </button>
+              <button
+                onClick={() => setTimeframe('7d')}
+                className={`px-2 py-1 text-xs rounded transition-colors ${
+                  timeframe === '7d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                7d
+              </button>
+              <button
+                onClick={() => setTimeframe('1M')}
+                className={`px-2 py-1 text-xs rounded transition-colors ${
+                  timeframe === '1M' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                1M
+              </button>
+              <button
+                onClick={() => setTimeframe('all')}
+                className={`px-2 py-1 text-xs rounded transition-colors ${
+                  timeframe === 'all' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                ∞
+              </button>
+            </div>
           </CardContent>
         </Card>
 
@@ -410,16 +454,16 @@ export function WalletsView() {
                   <button
                     key={wallet.id}
                     onClick={() => toggleWallet(wallet.id)}
-                    className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                    className={`p-4 rounded-lg border transition-all hover:scale-105 bg-gray-950 ${
                       selectedWallets.includes(wallet.id)
-                        ? 'border-neon-green bg-neon-green/10'
-                        : 'border-gray-800 bg-gray-950 hover:border-gray-700'
+                        ? 'border-white'
+                        : 'border-gray-800 hover:border-gray-700'
                     }`}
                   >
                     <div className="flex flex-col items-center gap-2">
-                      <Wallet className={`w-6 h-6 ${selectedWallets.includes(wallet.id) ? 'text-neon-green' : 'text-gray-400'}`} />
+                      <Wallet className="w-6 h-6 text-gray-400" />
                       <div className="text-center">
-                        <p className={`text-sm font-semibold ${selectedWallets.includes(wallet.id) ? 'text-neon-green' : 'text-white'}`}>
+                        <p className="text-sm font-semibold text-white">
                           {wallet.label}
                         </p>
                         <p className={`text-xs mt-1 ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
@@ -433,25 +477,23 @@ export function WalletsView() {
                 {/* Select All Button */}
                 <button
                   onClick={selectAllWallets}
-                  className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                  className={`p-3 rounded-lg border transition-all bg-gray-950 ${
                     selectedWallets.length === trackedWallets.length
-                      ? 'border-neon-cyan bg-neon-cyan/10'
-                      : 'border-gray-800 bg-gray-950 hover:border-gray-700'
+                      ? 'border-white'
+                      : 'border-gray-800 hover:border-gray-700'
                   }`}
                 >
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-6 h-6 rounded border-2 border-current flex items-center justify-center">
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="w-5 h-5 rounded border border-current flex items-center justify-center">
                       {selectedWallets.length === trackedWallets.length && (
-                        <div className="w-3 h-3 bg-neon-cyan rounded-sm" />
+                        <div className="w-2.5 h-2.5 bg-white rounded-sm" />
                       )}
                     </div>
                     <div className="text-center">
-                      <p className={`text-sm font-semibold ${
-                        selectedWallets.length === trackedWallets.length ? 'text-neon-cyan' : 'text-white'
-                      }`}>
+                      <p className="text-xs font-medium text-white">
                         Select All
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-[10px] text-gray-500 mt-0.5">
                         {selectedWallets.length}/{trackedWallets.length}
                       </p>
                     </div>
