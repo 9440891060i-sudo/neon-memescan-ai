@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowLeft, Wallet, TrendingUp, TrendingDown, DollarSign, Percent, Activity, Copy, Search } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import pepeIcon from "@/assets/coins/pepe.png";
 import dogeIcon from "@/assets/coins/doge.png";
@@ -113,18 +114,42 @@ const wallets = [
   }
 ];
 
-const generatePnLData = (isPositive: boolean) => {
+const generatePnLData = (isPositive: boolean, timeframe: string) => {
   const data = [];
   let value = 100000;
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  let labels = [];
+  let periods = 0;
   
-  for (let i = 0; i < 12; i++) {
+  switch(timeframe) {
+    case '7d':
+      labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      periods = 7;
+      break;
+    case '1m':
+      labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      periods = 4;
+      break;
+    case '3m':
+      labels = ['Month 1', 'Month 2', 'Month 3'];
+      periods = 3;
+      break;
+    case '6m':
+      labels = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6'];
+      periods = 6;
+      break;
+    case '1y':
+    default:
+      labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      periods = 12;
+  }
+  
+  for (let i = 0; i < periods; i++) {
     const change = isPositive 
       ? Math.random() * 50000 - 10000 
       : Math.random() * 30000 - 40000;
     value += change;
     data.push({
-      month: months[i],
+      month: labels[i],
       pnl: Math.round(value)
     });
   }
@@ -134,8 +159,15 @@ const generatePnLData = (isPositive: boolean) => {
 export default function WalletAnalytics() {
   const navigate = useNavigate();
   const [selectedWallet, setSelectedWallet] = useState(wallets[0]);
-  const pnlData = generatePnLData(selectedWallet.isPositive);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [timeframe, setTimeframe] = useState("1y");
+  const pnlData = generatePnLData(selectedWallet.isPositive, timeframe);
   const { toast } = useToast();
+
+  const filteredWallets = wallets.filter(wallet => 
+    wallet.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    wallet.address.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -174,10 +206,19 @@ export default function WalletAnalytics() {
               Select Wallet
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                placeholder="Search by name or contract address..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 bg-gray-950 border-gray-800 text-white"
+              />
+            </div>
             <div className="overflow-x-auto">
               <div className="flex gap-3 pb-2">
-                {wallets.map((wallet) => (
+                {filteredWallets.map((wallet) => (
                   <button
                     key={wallet.id}
                     onClick={() => setSelectedWallet(wallet)}
@@ -269,14 +310,24 @@ export default function WalletAnalytics() {
         {/* P&L Chart */}
         <Card className="bg-black border-gray-800">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-4">
               <CardTitle className="flex items-center gap-2 text-white">
                 <TrendingUp className="w-5 h-5 text-primary" />
                 P&L Performance
               </CardTitle>
-              <Badge variant="outline" className={selectedWallet.isPositive ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"}>
-                12 Month View
-              </Badge>
+              <div className="flex gap-2">
+                {['7d', '1m', '3m', '6m', '1y'].map((tf) => (
+                  <Button
+                    key={tf}
+                    variant={timeframe === tf ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setTimeframe(tf)}
+                    className={timeframe === tf ? "" : "bg-gray-950 border-gray-800 text-gray-400 hover:text-white"}
+                  >
+                    {tf === '7d' ? '7D' : tf === '1m' ? '1M' : tf === '3m' ? '3M' : tf === '6m' ? '6M' : '1Y'}
+                  </Button>
+                ))}
+              </div>
             </div>
           </CardHeader>
           <CardContent className="p-6">
