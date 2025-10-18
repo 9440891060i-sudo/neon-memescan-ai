@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -91,6 +92,7 @@ interface QueuedCoin {
 }
 
 export default function AnalysisInput() {
+  const location = useLocation();
   const [contractAddress, setContractAddress] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
@@ -98,6 +100,9 @@ export default function AnalysisInput() {
   const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
 const { toast } = useToast();
 const { state, isMobile } = useSidebar();
+  
+  // Get default tab from navigation state
+  const defaultTab = (location.state as any)?.tab || 'analyse';
 const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
 
   const handleAnalyze = () => {
@@ -193,7 +198,7 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
 
   return (
     <div className="min-h-screen bg-black">
-      <Tabs defaultValue="analyse" className="w-full">
+      <Tabs defaultValue={defaultTab} className="w-full">
         {/* Professional Tab Navigation */}
         <div className="fixed top-0 right-0 h-14 z-50 pointer-events-none" style={{ left: sidebarLeft }}>
           <div className="h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
