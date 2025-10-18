@@ -251,6 +251,7 @@ export function WalletsView() {
   const [selectedWallets, setSelectedWallets] = useState<number[]>([]);
   const [alertPopupOpen, setAlertPopupOpen] = useState(false);
   const [timeframe, setTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
+  const [tradesTimeframe, setTradesTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
   const { toast } = useToast();
 
   const getTotalTrades = () => {
@@ -495,13 +496,42 @@ export function WalletsView() {
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-white">
                   <TrendingUp className="w-5 h-5 text-blue-400" />
-                  Recent Trades
+                  Trades
                 </CardTitle>
-                {selectedWallets.length > 0 && (
-                  <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/20">
-                    Filtered: {selectedWallets.length} wallet{selectedWallets.length > 1 ? 's' : ''}
-                  </Badge>
-                )}
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => setTradesTimeframe('1d')}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      tradesTimeframe === '1d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                    }`}
+                  >
+                    1d
+                  </button>
+                  <button
+                    onClick={() => setTradesTimeframe('7d')}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      tradesTimeframe === '7d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                    }`}
+                  >
+                    7d
+                  </button>
+                  <button
+                    onClick={() => setTradesTimeframe('1M')}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      tradesTimeframe === '1M' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                    }`}
+                  >
+                    1M
+                  </button>
+                  <button
+                    onClick={() => setTradesTimeframe('all')}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      tradesTimeframe === 'all' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
+                    }`}
+                  >
+                    ∞
+                  </button>
+                </div>
               </div>
             </CardHeader>
             <CardContent className="p-6">
@@ -510,40 +540,48 @@ export function WalletsView() {
                   <p className="text-gray-500">No trades found for selected wallets</p>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {filteredTrades.map((trade) => (
-                  <div 
-                    key={trade.id}
-                    className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
-                  >
-                    <div className="flex items-center gap-4">
-                      <Badge 
-                        variant="outline"
-                        className={trade.action === "BUY" 
-                          ? "bg-green-500/10 text-green-400 border-green-500/20 font-semibold" 
-                          : "bg-red-500/10 text-red-400 border-red-500/20 font-semibold"
-                        }
-                      >
-                        {trade.action}
-                      </Badge>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className="font-semibold text-white">{trade.coin}</p>
-                          <span className="text-gray-600">•</span>
-                          <p className="text-sm text-gray-500">{trade.wallet}</p>
+                <>
+                  <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredTrades.map((trade) => (
+                    <div 
+                      key={trade.id}
+                      className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
+                    >
+                      <div className="flex items-center gap-4">
+                        <Badge 
+                          variant="outline"
+                          className={trade.action === "BUY" 
+                            ? "bg-green-500/10 text-green-400 border-green-500/20 font-semibold" 
+                            : "bg-red-500/10 text-red-400 border-red-500/20 font-semibold"
+                          }
+                        >
+                          {trade.action}
+                        </Badge>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p className="font-semibold text-white">{trade.coin}</p>
+                            <span className="text-gray-600">•</span>
+                            <p className="text-sm text-gray-500">{trade.wallet}</p>
+                          </div>
+                          <p className="text-xs text-gray-500">{trade.amount} at {trade.price}</p>
                         </div>
-                        <p className="text-xs text-gray-500">{trade.amount} at {trade.price}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className={`font-semibold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                          {trade.pnl}
+                        </p>
+                        <p className="text-xs text-gray-500">{trade.timestamp}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className={`font-semibold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
-                        {trade.pnl}
-                      </p>
-                      <p className="text-xs text-gray-500">{trade.timestamp}</p>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-gray-800">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-400">Total PnL</span>
+                      <span className="text-lg font-semibold text-green-400">635.87 SOL</span>
                     </div>
                   </div>
-                  ))}
-                </div>
+                </>
               )}
             </CardContent>
           </Card>
