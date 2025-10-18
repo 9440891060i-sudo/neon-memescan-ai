@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Search, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AlertPopup } from "@/components/AlertPopup";
+import { ViewAlertsDialog } from "@/components/ViewAlertsDialog";
 
 const trackedWallets = [
   {
@@ -224,7 +225,7 @@ const activeAlerts = [
     type: "Large Trade",
     wallet: "Whale #1",
     condition: "Trade > $100K",
-    status: "active",
+    status: "active" as const,
     triggered: 12
   },
   {
@@ -232,7 +233,7 @@ const activeAlerts = [
     type: "Wallet Balance",
     wallet: "Smart Money",
     condition: "Balance change > 10%",
-    status: "active",
+    status: "active" as const,
     triggered: 5
   },
   {
@@ -240,7 +241,7 @@ const activeAlerts = [
     type: "Token Movement",
     wallet: "Alpha Trader",
     condition: "New token detected",
-    status: "paused",
+    status: "paused" as const,
     triggered: 8
   }
 ];
@@ -250,6 +251,7 @@ export function WalletsView() {
   const [walletAddress, setWalletAddress] = useState("");
   const [selectedWallets, setSelectedWallets] = useState<number[]>([]);
   const [alertPopupOpen, setAlertPopupOpen] = useState(false);
+  const [viewAlertsOpen, setViewAlertsOpen] = useState(false);
   const [timeframe, setTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
   const [tradesTimeframe, setTradesTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
   const { toast } = useToast();
@@ -638,7 +640,11 @@ export function WalletsView() {
                 <Plus className="w-4 h-4 mr-2" />
                 Create Alert
               </Button>
-              <Button variant="outline" className="w-full border-gray-700 text-white hover:bg-gray-900">
+              <Button 
+                onClick={() => setViewAlertsOpen(true)}
+                variant="outline" 
+                className="w-full border-gray-700 text-white hover:bg-gray-900"
+              >
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 View All Alerts
               </Button>
@@ -681,6 +687,13 @@ export function WalletsView() {
         open={alertPopupOpen}
         onOpenChange={setAlertPopupOpen}
         wallets={trackedWallets}
+      />
+
+      {/* View All Alerts Dialog */}
+      <ViewAlertsDialog
+        open={viewAlertsOpen}
+        onOpenChange={setViewAlertsOpen}
+        alerts={activeAlerts}
       />
     </div>
   );
