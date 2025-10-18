@@ -100,7 +100,7 @@ const Auth = () => {
             <span className="text-sm text-muted-foreground">Back to home</span>
           </Link>
           <div className="flex items-center justify-center mb-8">
-            <img src={kluxLogo} alt="KLUX" className="h-40 w-auto" />
+            <img src={kluxLogo} alt="KLUX" className="h-24 w-auto" />
           </div>
         </div>
 
