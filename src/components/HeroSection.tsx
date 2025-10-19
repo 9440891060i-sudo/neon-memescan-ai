@@ -95,8 +95,8 @@ export default function HeroSection() {
           {/* Scrolling Meme Coins */}
           <ScrollingCoins />
 
-          {/* Stats grid with enhanced design */}
-          <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+          {/* Stats grid */}
+          <div className="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
             <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
               <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
               <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
