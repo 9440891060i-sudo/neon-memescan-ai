@@ -68,7 +68,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
           {/* Main Content */}
           <div className="flex-1 flex flex-col min-h-0">
-            <div className="p-8 flex-1 flex flex-col gap-8 min-h-0 overflow-x-hidden">
+            <div className="p-8 flex-1 flex flex-col gap-8 min-h-0 overflow-x-hidden overflow-y-auto">
               {/* Header */}
               <div className="mb-0">
                 <h2 className="text-3xl font-bold text-white mb-2">Plans & Kludd</h2>
@@ -112,7 +112,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
               </div>
 
               {/* Scrollable Pricing Cards */}
-              <div className="flex-1 min-h-0 overflow-y-auto pr-2">
+              <div className="pr-2">
                 <div className="grid grid-cols-[2fr_2fr_1fr] gap-6 pb-8">
                   {/* Card A - Kludd Fuel Credits */}
                   <div className="bg-[#151719] rounded-xl p-6 border border-white/5 hover:border-white/10 transition-all hover:translate-y-[-4px] hover:shadow-2xl">
