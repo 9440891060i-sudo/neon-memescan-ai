@@ -72,25 +72,23 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* CA Input Section */}
-          <div className="max-w-xl mx-auto animate-fade-in delay-300">
-            <div className="bg-background/70 backdrop-blur-md border border-border/40 rounded-xl p-1.5 shadow-lg">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="text"
-                  placeholder="Paste contract address (CA)"
-                  className="flex-1 h-11 px-4 bg-transparent border-0 rounded-lg text-sm text-foreground placeholder:text-foreground/40 focus:outline-none"
-                />
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate('/auth')}
-                  className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 transition-all whitespace-nowrap rounded-lg"
-                >
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Analyze
-                </Button>
-              </div>
-            </div>
+          {/* Action Buttons */}
+          <div className="flex items-center justify-center gap-4 animate-fade-in delay-300">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/auth')}
+              className="h-12 px-8 text-sm font-semibold bg-foreground text-background hover:bg-foreground/90 transition-all rounded-xl shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Analyze Now
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="h-12 px-8 text-sm font-semibold bg-background/50 backdrop-blur-sm border-2 border-border/60 hover:bg-background/70 hover:border-foreground/40 transition-all rounded-xl shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              Download Extension
+            </Button>
           </div>
 
           {/* Stats grid with enhanced design */}
