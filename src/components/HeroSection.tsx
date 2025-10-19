@@ -93,7 +93,7 @@ export default function HeroSection() {
           </div>
 
           {/* Video Section */}
-          <div className="pt-12 max-w-2xl mx-auto animate-fade-in delay-300">
+          <div className="pt-12 max-w-5xl mx-auto animate-fade-in delay-300">
             <Card className="relative overflow-hidden bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 group cursor-pointer">
               <div className="aspect-video bg-gradient-to-br from-black/80 to-black/60 flex items-center justify-center">
                 {/* Video Preview/Thumbnail Placeholder */}
