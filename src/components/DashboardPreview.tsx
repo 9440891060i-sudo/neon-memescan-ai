@@ -1,12 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { TrendingUp, BarChart3, Shield, Activity, Target, Clock, Database, Brain, Wallet, Users, User, UserPlus, Crown } from "lucide-react";
+import { TrendingUp, BarChart3, Shield, Activity, Target, Clock, Database, Brain, Wallet, Users, User, UserPlus, Crown, MessageSquare } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { AnimatedChart } from "@/components/AnimatedChart";
 import CommunitySignals from "@/components/CommunitySignals";
 import { useState } from "react";
+
+// Mock data for members vs authors chart
+const membersAuthorsData = [
+  { time: '9:00', members: 50, authors: 32 },
+  { time: '9:15', members: 25, authors: 63 },
+  { time: '9:30', members: 40, authors: 53 },
+  { time: '9:45', members: 55, authors: 63 },
+  { time: '10:00', members: 30, authors: 38 },
+  { time: '10:15', members: 35, authors: 46 },
+  { time: '10:30', members: 40, authors: 31 },
+];
 
 // Mock data for social signals
 const socialData = [
@@ -680,33 +691,86 @@ export default function DashboardPreview() {
                     </div>
                   </Card>
 
-                  {/* Compact Key Metrics */}
+                  {/* Members vs Unique Authors */}
                   <Card className="p-4 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="flex items-center justify-center w-6 h-6 bg-terminal-blue/20 rounded">
-                        <TrendingUp className="w-3 h-3 text-terminal-blue" />
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="text-base font-semibold text-terminal-white font-mono">
+                          Members vs Unique Authors
+                        </h4>
+                        <div className="text-xs text-terminal-gray font-mono">5m</div>
                       </div>
-                      <h4 className="text-sm font-semibold text-terminal-white font-mono">
-                        KEY METRICS
-                      </h4>
+                      <div className="text-xs text-terminal-gray">
+                        Current vs Previous Refresh
+                      </div>
                     </div>
                     
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-terminal-gray font-mono">24H VOLUME</span>
-                        <span className="text-terminal-green font-mono text-xs">$24.8M</span>
+                    <div className="h-40 mb-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={membersAuthorsData}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="rgba(100, 116, 139, 0.1)" />
+                          <XAxis 
+                            dataKey="time" 
+                            stroke="hsl(var(--terminal-gray))"
+                            style={{ fontSize: '10px', fontFamily: 'monospace' }}
+                          />
+                          <YAxis 
+                            stroke="hsl(var(--terminal-gray))"
+                            style={{ fontSize: '10px', fontFamily: 'monospace' }}
+                          />
+                          <Tooltip
+                            contentStyle={{
+                              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                              border: '1px solid rgba(100, 116, 139, 0.2)',
+                              borderRadius: '4px',
+                              fontFamily: 'monospace',
+                              fontSize: '12px'
+                            }}
+                          />
+                          <Line 
+                            type="monotone" 
+                            dataKey="members" 
+                            stroke="hsl(var(--terminal-gray))" 
+                            strokeWidth={0}
+                            fill="hsl(var(--terminal-gray))"
+                            fillOpacity={0.6}
+                            dot={{ fill: 'hsl(var(--terminal-gray))', r: 0 }}
+                          />
+                          <Line 
+                            type="monotone" 
+                            dataKey="authors" 
+                            stroke="hsl(var(--terminal-white))" 
+                            strokeWidth={2}
+                            dot={{ fill: 'hsl(var(--terminal-white))', r: 3 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-3">
+                      <div>
+                        <div className="flex items-center gap-1 mb-1">
+                          <Users className="w-3 h-3 text-terminal-gray" />
+                          <span className="text-lg font-bold text-terminal-white font-mono">1,247</span>
+                        </div>
+                        <div className="text-xs text-terminal-gray mb-1">Members</div>
+                        <div className="text-xs text-terminal-green font-mono">+12.5%</div>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-terminal-gray font-mono">MARKET CAP</span>
-                        <span className="text-terminal-blue font-mono text-xs">$2.1B</span>
+                      <div>
+                        <div className="flex items-center gap-1 mb-1">
+                          <User className="w-3 h-3 text-terminal-gray" />
+                          <span className="text-lg font-bold text-terminal-white font-mono">89</span>
+                        </div>
+                        <div className="text-xs text-terminal-gray mb-1">Unique Authors</div>
+                        <div className="text-xs text-terminal-red font-mono">-3.2%</div>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-terminal-gray font-mono">HOLDERS</span>
-                        <span className="text-terminal-amber font-mono text-xs">152.8K</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-terminal-gray font-mono">CONFIDENCE</span>
-                        <span className="text-terminal-green font-mono text-xs">87.4%</span>
+                      <div>
+                        <div className="flex items-center gap-1 mb-1">
+                          <MessageSquare className="w-3 h-3 text-terminal-gray" />
+                          <span className="text-lg font-bold text-terminal-white font-mono">20</span>
+                        </div>
+                        <div className="text-xs text-terminal-gray mb-1">Total Posts</div>
+                        <div className="text-xs text-terminal-gray font-mono">M: 8 OT: 12</div>
                       </div>
                     </div>
                   </Card>
