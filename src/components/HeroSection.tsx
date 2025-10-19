@@ -41,113 +41,73 @@ export default function HeroSection() {
           </div>
 
           {/* Main headline */}
-          <div className="space-y-6">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-black leading-[1.05] tracking-tight">
-              <span className="block text-foreground/95 animate-fade-in drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+          <div className="space-y-5">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
+              <span className="block text-foreground/90 animate-fade-in">
                 Trade what's
               </span>
-              <span className="block mt-3 relative animate-fade-in delay-75">
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink bg-clip-text text-transparent animate-pulse" style={{ 
-                    textShadow: '0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(180, 0, 255, 0.2)'
-                  }}>
-                    under the smoke
-                  </span>
-                  <div className="absolute -inset-2 bg-gradient-to-r from-neon-cyan/20 via-neon-purple/20 to-neon-pink/20 blur-3xl -z-10"></div>
-                </span>
+              <span className="block mt-1 text-foreground/60 animate-fade-in delay-75">
+                under the smoke
               </span>
             </h1>
             
-            <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed animate-fade-in delay-150">
+            <p className="text-base sm:text-lg text-foreground/50 max-w-lg mx-auto leading-relaxed animate-fade-in delay-150">
               Get the data which actually moves this market
             </p>
           </div>
 
           {/* Feature highlights */}
-          <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap animate-fade-in delay-200">
-            <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-full blur-md opacity-0 group-hover:opacity-70 transition-opacity"></div>
-              <div className="relative flex items-center gap-2 px-5 py-2.5 bg-background/80 backdrop-blur-xl border border-neon-cyan/30 rounded-full hover:border-neon-cyan/60 transition-all">
-                <Zap className="w-4 h-4 text-neon-cyan" />
-                <span className="text-sm font-semibold text-foreground/90">Social data</span>
-              </div>
+          <div className="flex items-center justify-center gap-6 flex-wrap animate-fade-in delay-200">
+            <div className="flex items-center gap-2 text-sm text-foreground/60">
+              <Zap className="w-3.5 h-3.5" />
+              <span>Social data</span>
             </div>
-            <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full blur-md opacity-0 group-hover:opacity-70 transition-opacity"></div>
-              <div className="relative flex items-center gap-2 px-5 py-2.5 bg-background/80 backdrop-blur-xl border border-neon-purple/30 rounded-full hover:border-neon-purple/60 transition-all">
-                <Shield className="w-4 h-4 text-neon-purple" />
-                <span className="text-sm font-semibold text-foreground/90">Risk Detection</span>
-              </div>
+            <div className="flex items-center gap-2 text-sm text-foreground/60">
+              <Shield className="w-3.5 h-3.5" />
+              <span>Risk Detection</span>
             </div>
-            <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-green to-neon-cyan rounded-full blur-md opacity-0 group-hover:opacity-70 transition-opacity"></div>
-              <div className="relative flex items-center gap-2 px-5 py-2.5 bg-background/80 backdrop-blur-xl border border-neon-green/30 rounded-full hover:border-neon-green/60 transition-all">
-                <TrendingUp className="w-4 h-4 text-neon-green" />
-                <span className="text-sm font-semibold text-foreground/90">Smart Alerts</span>
-              </div>
+            <div className="flex items-center gap-2 text-sm text-foreground/60">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>Smart Alerts</span>
             </div>
           </div>
 
           {/* CA Input Section */}
-          <div className="max-w-2xl mx-auto animate-fade-in delay-300">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
-              <div className="relative bg-background/90 backdrop-blur-xl border-2 border-border/40 rounded-2xl p-2 shadow-2xl">
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input
-                    type="text"
-                    placeholder="Paste contract address (CA)"
-                    className="flex-1 h-14 px-5 bg-background/50 border border-border/20 rounded-xl text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon-cyan/50 focus:bg-background/70 transition-all"
-                  />
-                  <Button 
-                    size="lg" 
-                    onClick={() => navigate('/auth')}
-                    className="relative h-14 px-8 text-base font-bold bg-gradient-to-r from-neon-cyan to-neon-purple text-background hover:from-neon-purple hover:to-neon-pink shadow-lg hover:shadow-neon-cyan/50 transition-all duration-300 whitespace-nowrap"
-                  >
-                    <Sparkles className="w-5 h-5 mr-2" />
-                    Analyze
-                  </Button>
-                </div>
+          <div className="max-w-xl mx-auto animate-fade-in delay-300">
+            <div className="bg-background/70 backdrop-blur-md border border-border/40 rounded-xl p-1.5 shadow-lg">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  placeholder="Paste contract address (CA)"
+                  className="flex-1 h-11 px-4 bg-transparent border-0 rounded-lg text-sm text-foreground placeholder:text-foreground/40 focus:outline-none"
+                />
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate('/auth')}
+                  className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 transition-all whitespace-nowrap rounded-lg"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Analyze
+                </Button>
               </div>
             </div>
           </div>
 
           {/* Stats grid with enhanced design */}
-          <div className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="relative group animate-fade-in delay-300">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-              <div className="relative bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-xl border border-neon-cyan/20 rounded-3xl p-8 hover:border-neon-cyan/50 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-                <div className="text-5xl sm:text-6xl font-black text-transparent bg-gradient-to-br from-neon-cyan to-neon-purple bg-clip-text mb-3 drop-shadow-[0_0_20px_rgba(0,255,255,0.4)]">
-                  5K+
-                </div>
-                <div className="text-xs uppercase tracking-wider text-foreground/60 font-bold">
-                  Coins Tracked Daily
-                </div>
-              </div>
+          <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
+              <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
             </div>
             
-            <div className="relative group animate-fade-in delay-350">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/20 to-neon-pink/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-              <div className="relative bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-xl border border-neon-purple/20 rounded-3xl p-8 hover:border-neon-purple/50 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-                <div className="text-5xl sm:text-6xl font-black text-transparent bg-gradient-to-br from-neon-purple to-neon-pink bg-clip-text mb-3 drop-shadow-[0_0_20px_rgba(180,0,255,0.4)]">
-                  65%
-                </div>
-                <div className="text-xs uppercase tracking-wider text-foreground/60 font-bold">
-                  Success Rate
-                </div>
-              </div>
+            <div className="animate-fade-in delay-350 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">65%</div>
+              <div className="text-xs text-foreground/50">Success Rate</div>
             </div>
             
-            <div className="relative group animate-fade-in delay-400">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-neon-cyan/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-              <div className="relative bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-xl border border-neon-green/20 rounded-3xl p-8 hover:border-neon-green/50 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-                <div className="text-5xl sm:text-6xl font-black text-transparent bg-gradient-to-br from-neon-green to-neon-cyan bg-clip-text mb-3 drop-shadow-[0_0_20px_rgba(0,255,150,0.4)]">
-                  &lt;4min
-                </div>
-                <div className="text-xs uppercase tracking-wider text-foreground/60 font-bold">
-                  Average Analysis
-                </div>
-              </div>
+            <div className="animate-fade-in delay-400 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">&lt;4min</div>
+              <div className="text-xs text-foreground/50">Average Analysis</div>
             </div>
           </div>
         </div>
