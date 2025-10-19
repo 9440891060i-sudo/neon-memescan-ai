@@ -97,7 +97,7 @@ export default function HeroSection() {
         </div>
 
         {/* Video Section - Full Width */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="w-full px-4 sm:px-6 lg:px-8 pb-24 -mt-8">
           <div className="max-w-[75%] mx-auto animate-fade-in delay-300">
             <Card className="relative overflow-hidden bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 group cursor-pointer">
               <div className="aspect-video bg-gradient-to-br from-black/80 to-black/60 flex items-center justify-center">
