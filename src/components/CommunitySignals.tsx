@@ -26,7 +26,7 @@ interface WalletAlert {
 const mockSignals: CommunitySignal[] = [
   {
     id: "1",
-    community: "Alpha Signals",
+    community: "Pastel Alpha",
     coin: "PEPE",
     message: "Major whale accumulation detected",
     timestamp: "2m ago",
@@ -35,24 +35,42 @@ const mockSignals: CommunitySignal[] = [
   },
   {
     id: "2", 
+    community: "Crypto Elites",
+    coin: "PEPE",
+    message: "Strong buy signal confirmed",
+    timestamp: "3m ago",
+    sentiment: "bullish",
+    members: 38500
+  },
+  {
+    id: "3",
     community: "Potion Labs",
     coin: "BONK",
     message: "Dev team announcing new partnerships",
-    timestamp: "4m ago",
+    timestamp: "5m ago",
     sentiment: "bullish",
     members: 32800
   },
   {
-    id: "3",
+    id: "4",
+    community: "Alpha Signals",
+    coin: "BONK",
+    message: "Volume increasing rapidly",
+    timestamp: "6m ago",
+    sentiment: "bullish",
+    members: 42100
+  },
+  {
+    id: "5",
     community: "Rosita Trading",
     coin: "DOGE",
     message: "Technical breakout pattern forming",
-    timestamp: "7m ago",
+    timestamp: "8m ago",
     sentiment: "bullish", 
     members: 28500
   },
   {
-    id: "4",
+    id: "6",
     community: "Crypto Insider",
     coin: "SHIB",
     message: "Volume spike in pre-market",
@@ -105,12 +123,28 @@ export default function CommunitySignals() {
   const [currentSignals, setCurrentSignals] = useState<CommunitySignal[]>([]);
   const [tickerIndex, setTickerIndex] = useState(0);
 
+  // Group signals by coin to show all communities mentioning the same coin
+  const groupedSignals = mockSignals.reduce((acc, signal) => {
+    if (!acc[signal.coin]) {
+      acc[signal.coin] = [];
+    }
+    acc[signal.coin].push(signal);
+    return acc;
+  }, {} as Record<string, CommunitySignal[]>);
+
+  const coinAlerts = Object.entries(groupedSignals).map(([coin, signals]) => ({
+    coin,
+    communities: signals.map(s => s.community),
+    timestamp: signals[0].timestamp,
+    sentiment: signals[0].sentiment
+  }));
+
   useEffect(() => {
     setCurrentSignals(mockSignals);
 
     // Simulate live updates
     const interval = setInterval(() => {
-      setTickerIndex(prev => (prev + 1) % mockSignals.length);
+      setTickerIndex(prev => (prev + 1) % coinAlerts.length);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -158,32 +192,33 @@ export default function CommunitySignals() {
       <div className="mb-6 overflow-hidden bg-black/20 border border-terminal-gray/20 rounded-lg">
         <div className="p-3 bg-terminal-blue/5">
           <div className="flex items-center justify-between text-xs text-terminal-gray uppercase tracking-wider mb-2">
-            <span>Latest Signal</span>
+            <span>Latest Alerts</span>
             <Clock className="w-3 h-3 text-terminal-gray" />
           </div>
           <div className="space-y-2">
-            {currentSignals[tickerIndex] && (
+            {coinAlerts[tickerIndex] && (
               <div className="animate-fade-in">
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="outline" className="text-xs bg-terminal-blue/20 border-terminal-blue/40 text-terminal-blue">
-                    {currentSignals[tickerIndex].community}
-                  </Badge>
-                  <span className="text-terminal-white font-mono text-sm">
-                    ${currentSignals[tickerIndex].coin}
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-terminal-white font-mono text-lg font-bold">
+                    ${coinAlerts[tickerIndex].coin}
                   </span>
-                  <span className={`text-xs ${getSentimentColor(currentSignals[tickerIndex].sentiment)} font-mono uppercase`}>
-                    {currentSignals[tickerIndex].sentiment}
+                  <span className={`text-xs ${getSentimentColor(coinAlerts[tickerIndex].sentiment)} font-mono uppercase`}>
+                    {coinAlerts[tickerIndex].sentiment}
                   </span>
                 </div>
-                <p className="text-sm text-terminal-gray">
-                  {currentSignals[tickerIndex].message}
-                </p>
-                <div className="flex items-center justify-between text-xs text-terminal-gray/70 mt-1">
-                  <span>{currentSignals[tickerIndex].timestamp}</span>
-                  <div className="flex items-center gap-1">
-                    <Users className="w-3 h-3 text-terminal-gray" />
-                    <span>{currentSignals[tickerIndex].members.toLocaleString()}</span>
-                  </div>
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {coinAlerts[tickerIndex].communities.map((community, idx) => (
+                    <Badge 
+                      key={idx}
+                      variant="outline" 
+                      className="text-xs bg-terminal-blue/20 border-terminal-blue/40 text-terminal-blue"
+                    >
+                      {community}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="text-xs text-terminal-gray/70">
+                  {coinAlerts[tickerIndex].timestamp}
                 </div>
               </div>
             )}
