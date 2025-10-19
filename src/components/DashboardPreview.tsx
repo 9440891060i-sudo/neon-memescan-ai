@@ -21,13 +21,13 @@ const membersAuthorsData = [
 
 // Mock data for social signals
 const socialData = [
-  { time: '9AM', engagement: 4200, sentiment: 0.75, mentions: 1850, reach: 125000 },
-  { time: '10AM', engagement: 4800, sentiment: 0.78, mentions: 2100, reach: 142000 },
-  { time: '11AM', engagement: 4500, sentiment: 0.72, mentions: 1950, reach: 138000 },
-  { time: '12PM', engagement: 6200, sentiment: 0.85, mentions: 2650, reach: 165000 },
-  { time: '1PM', engagement: 6800, sentiment: 0.88, mentions: 2900, reach: 178000 },
-  { time: '2PM', engagement: 6400, sentiment: 0.82, mentions: 2750, reach: 172000 },
-  { time: '3PM', engagement: 7500, sentiment: 0.90, mentions: 3200, reach: 195000 },
+  { time: '9AM', views: 4200, likes: 1850, sentiment: 0.75, reach: 125000 },
+  { time: '10AM', views: 4800, likes: 2100, sentiment: 0.78, reach: 142000 },
+  { time: '11AM', views: 4500, likes: 1950, sentiment: 0.72, reach: 138000 },
+  { time: '12PM', views: 6200, likes: 2650, sentiment: 0.85, reach: 165000 },
+  { time: '1PM', views: 6800, likes: 2900, sentiment: 0.88, reach: 178000 },
+  { time: '2PM', views: 6400, likes: 2750, sentiment: 0.82, reach: 172000 },
+  { time: '3PM', views: 7500, likes: 3200, sentiment: 0.90, reach: 195000 },
 ];
 
 // Mock data for technical signals  
@@ -225,8 +225,8 @@ export default function DashboardPreview() {
                           isVisible={isIntersecting}
                           gridColor="rgba(100, 116, 139, 0.1)"
                           lines={[
-                            { dataKey: 'engagement', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
-                            { dataKey: 'mentions', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                            { dataKey: 'views', stroke: 'hsl(var(--terminal-white))', strokeWidth: 2 },
+                            { dataKey: 'likes', stroke: 'hsl(var(--terminal-gray))', strokeWidth: 2 },
                           ]}
                           tooltipFormatter={(value, name) => {
                             const formatValue = (val) => {
@@ -234,8 +234,8 @@ export default function DashboardPreview() {
                               return val.toString();
                             };
                             const labels = {
-                              engagement: 'Engagement',
-                              mentions: 'Mentions'
+                              views: 'Views',
+                              likes: 'Likes'
                             };
                             return [formatValue(value), labels[name] || name];
                           }}
@@ -265,7 +265,7 @@ export default function DashboardPreview() {
                           isVisible={isIntersecting}
                           gridColor="rgba(100, 116, 139, 0.1)"
                           lines={[
-                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
+                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-white))', strokeWidth: 2 },
                           ]}
                           tooltipFormatter={(value, name) => {
                             const formatValue = (val) => {
