@@ -233,7 +233,7 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
                 Paste Contract Address.
                 <br />
-                <span className="text-neon-green">Let Klux Handle the Rest.</span>
+                <span className="text-neon-green">Let Klux Show You the Rest</span>
               </h1>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                 Our AI analyzes social sentiment, technical indicators, and market dynamics 
