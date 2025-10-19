@@ -14,31 +14,31 @@ const coins = [
 
 export default function ScrollingCoins() {
   return (
-    <div className="relative w-full overflow-hidden py-6">
+    <div className="relative w-full overflow-hidden py-4">
       {/* Left fade */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background to-transparent z-10 pointer-events-none"></div>
       
       {/* Right fade */}
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background to-transparent z-10 pointer-events-none"></div>
       
       {/* Scrolling container */}
-      <div className="flex animate-scroll gap-8">
+      <div className="flex animate-scroll gap-3">
         {/* First set */}
         {coins.map((coin, index) => (
           <div
             key={`coin-1-${index}`}
-            className="flex-shrink-0 flex items-center gap-3"
+            className="flex-shrink-0 px-4 py-2.5 bg-background/60 backdrop-blur-sm border border-border/50 rounded-lg flex items-center gap-3 hover:bg-background/80 transition-colors"
           >
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-background border border-border/40 p-1.5 shadow-sm">
+            <div className="w-8 h-8 rounded-full overflow-hidden bg-muted/50 flex items-center justify-center">
               <img
                 src={coin.image}
                 alt={coin.name}
-                className="w-full h-full object-contain"
+                className="w-6 h-6 object-contain"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-foreground/90">{coin.name}</span>
-              <span className={`text-xs font-medium ${coin.change.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-foreground/90">{coin.name}</span>
+              <span className={`text-xs font-semibold tabular-nums ${coin.change.startsWith('+') ? 'text-emerald-500' : 'text-rose-500'}`}>
                 {coin.change}
               </span>
             </div>
@@ -49,18 +49,18 @@ export default function ScrollingCoins() {
         {coins.map((coin, index) => (
           <div
             key={`coin-2-${index}`}
-            className="flex-shrink-0 flex items-center gap-3"
+            className="flex-shrink-0 px-4 py-2.5 bg-background/60 backdrop-blur-sm border border-border/50 rounded-lg flex items-center gap-3 hover:bg-background/80 transition-colors"
           >
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-background border border-border/40 p-1.5 shadow-sm">
+            <div className="w-8 h-8 rounded-full overflow-hidden bg-muted/50 flex items-center justify-center">
               <img
                 src={coin.image}
                 alt={coin.name}
-                className="w-full h-full object-contain"
+                className="w-6 h-6 object-contain"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-foreground/90">{coin.name}</span>
-              <span className={`text-xs font-medium ${coin.change.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-foreground/90">{coin.name}</span>
+              <span className={`text-xs font-semibold tabular-nums ${coin.change.startsWith('+') ? 'text-emerald-500' : 'text-rose-500'}`}>
                 {coin.change}
               </span>
             </div>
