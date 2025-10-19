@@ -173,20 +173,9 @@ export default function DashboardPreview() {
                     <p className="text-sm text-terminal-gray font-mono">PEPE/USDT Analysis Session</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-6">
-                  <div className="text-right">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></div>
-                      <span className="text-lg font-bold text-terminal-green font-mono">Buys suggested</span>
-                    </div>
-                    <div className="text-sm text-terminal-gray font-mono">
-                      Entry range: <span className="text-terminal-green font-semibold">120,000$-122,000$ MC</span>
-                    </div>
-                  </div>
-                  <div className="text-xs text-terminal-gray font-mono">
-                    <Clock className="w-4 h-4 inline mr-1" />
-                    {new Date().toLocaleTimeString()}
-                  </div>
+                <div className="text-xs text-terminal-gray font-mono">
+                  <Clock className="w-4 h-4 inline mr-1" />
+                  {new Date().toLocaleTimeString()}
                 </div>
               </div>
             </div>
