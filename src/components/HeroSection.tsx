@@ -34,7 +34,8 @@ export default function HeroSection() {
           
           {/* Top badge */}
           <div className="flex items-center justify-center animate-fade-in">
-            <div className="px-4 py-2 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 text-sm font-medium text-white">
+            <div className="px-6 py-2 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 text-sm font-medium text-white flex items-center gap-2">
+              <Sparkles className="w-4 h-4" />
               AI-Powered
             </div>
           </div>
