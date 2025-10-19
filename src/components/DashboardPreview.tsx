@@ -219,7 +219,7 @@ export default function DashboardPreview() {
                         </div>
                       </div>
                       
-                      <div className="h-32">
+                      <div className="h-48">
                         <AnimatedChart
                           data={socialData}
                           isVisible={isIntersecting}
@@ -240,17 +240,6 @@ export default function DashboardPreview() {
                             return [formatValue(value), labels[name] || name];
                           }}
                         />
-                      </div>
-                      
-                      <div className="flex gap-3 mt-2">
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-blue"></div>
-                          <span className="text-terminal-gray">Engagement</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-green"></div>
-                          <span className="text-terminal-gray">Mentions</span>
-                        </div>
                       </div>
                     </Card>
 
