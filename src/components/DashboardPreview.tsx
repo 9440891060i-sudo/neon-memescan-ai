@@ -211,10 +211,10 @@ export default function DashboardPreview() {
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
-                            SOCIAL INTELLIGENCE
+                            ENGAGEMENT
                           </h4>
                           <div className="text-xs text-terminal-gray">
-                            Sentiment & Engagement
+                            Views & Favourites
                           </div>
                         </div>
                       </div>
