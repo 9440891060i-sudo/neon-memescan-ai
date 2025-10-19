@@ -308,94 +308,153 @@ export default function DashboardPreview() {
                   </div>
 
                   {/* Wallet Age Distribution */}
-                  <Card className="p-0 bg-black/90 border border-terminal-purple/30 backdrop-blur-sm overflow-hidden">
+                  <Card className="p-0 bg-black/90 border border-terminal-gray/20 backdrop-blur-sm overflow-hidden">
                     
                     {/* Header */}
-                    <div className="px-4 py-3 border-b border-terminal-gray/20 bg-black/60">
-                      <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-terminal-purple/20 flex items-center justify-center">
-                          <Wallet className="w-3 h-3 text-terminal-purple" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-terminal-white font-mono">WALLET AGE DISTRIBUTION</h4>
-                          <div className="flex items-center gap-2 text-xs">
-                            <span className="text-terminal-gray font-mono">Holder Classification</span>
-                          </div>
-                        </div>
-                      </div>
+                    <div className="px-6 py-4 border-b border-terminal-gray/20 bg-black/60">
+                      <h4 className="text-lg font-bold text-terminal-white font-mono">Wallet Age Distribution</h4>
+                      <p className="text-xs text-terminal-gray font-mono mt-1">
+                        Based on wallet creation date · Detailed planetary visualization with orbit animations
+                      </p>
                     </div>
 
-                    {/* Distribution Container */}
-                    <div className="p-6 space-y-6">
-                      {/* Jupiter - Large Wallets */}
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            {/* Jupiter with asteroid belt */}
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-terminal-amber via-orange-400 to-terminal-amber opacity-90 shadow-lg shadow-terminal-amber/30"></div>
-                            {/* Asteroid belt */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-terminal-gray/30 rounded-full border-dashed"></div>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 border border-terminal-gray/20 rounded-full border-dashed"></div>
-                          </div>
-                          <div>
-                            <h5 className="text-terminal-amber font-mono font-bold">Large Wallets</h5>
-                            <p className="text-xs text-terminal-gray font-mono">Whales & Major Holders</p>
-                          </div>
-                        </div>
-                        <div className="bg-black/40 border border-terminal-gray/20 rounded-lg p-3 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-terminal-amber/50 scrollbar-track-black/20">
-                          <div className="space-y-1.5">
-                            {['0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45', '0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD', '0xEf1c6E67703c7BD7107eed8303Fbe6EC2554BF6B', '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'].map((address, idx) => (
-                              <div key={idx} className="text-xs font-mono text-terminal-amber/80 hover:text-terminal-amber hover:bg-terminal-amber/10 p-1.5 rounded transition-colors">
-                                {address}
+                    {/* Planets Visualization */}
+                    <div className="p-8">
+                      <div className="grid grid-cols-3 gap-8 mb-8">
+                        {/* Jupiter - Old Wallets */}
+                        <div className="flex flex-col items-center">
+                          <div className="relative mb-4 flex items-center justify-center" style={{ height: '140px' }}>
+                            {/* Orbital rings */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 border border-dashed border-terminal-gray/20 rounded-full animate-[spin_40s_linear_infinite]"></div>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-terminal-gray/10 rounded-full animate-[spin_50s_linear_infinite_reverse]"></div>
+                            {/* Jupiter planet */}
+                            <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-amber-600 via-orange-500 to-amber-700 shadow-2xl shadow-amber-500/30">
+                              {/* Jupiter bands */}
+                              <div className="absolute inset-0 rounded-full overflow-hidden">
+                                <div className="absolute top-1/4 left-0 right-0 h-1 bg-amber-800/40"></div>
+                                <div className="absolute top-1/2 left-0 right-0 h-2 bg-amber-900/30"></div>
+                                <div className="absolute top-3/4 left-0 right-0 h-1 bg-amber-800/40"></div>
                               </div>
-                            ))}
+                              {/* Asteroid particles */}
+                              <div className="absolute -top-8 -right-8 w-1 h-1 bg-terminal-gray rounded-full"></div>
+                              <div className="absolute -bottom-6 -left-6 w-0.5 h-0.5 bg-terminal-gray rounded-full"></div>
+                              <div className="absolute top-0 -right-12 w-1 h-1 bg-terminal-gray/70 rounded-full"></div>
+                            </div>
                           </div>
+                          <div className="text-4xl font-bold text-amber-500 mb-1 font-mono">
+                            <AnimatedNumber value={112} isVisible={isIntersecting} />
+                          </div>
+                          <div className="text-sm text-terminal-gray font-mono">Old Wallets</div>
+                        </div>
+
+                        {/* Earth - Average Wallets */}
+                        <div className="flex flex-col items-center">
+                          <div className="relative mb-4 flex items-center justify-center" style={{ height: '140px' }}>
+                            {/* Earth planet */}
+                            <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 shadow-2xl shadow-blue-500/30">
+                              {/* Earth continents */}
+                              <div className="absolute inset-0 rounded-full overflow-hidden">
+                                <div className="absolute top-1/4 left-1/4 w-8 h-6 bg-green-600/60 rounded-full blur-sm"></div>
+                                <div className="absolute top-1/2 right-1/4 w-6 h-4 bg-green-500/50 rounded-full blur-sm"></div>
+                                <div className="absolute bottom-1/4 left-1/3 w-5 h-5 bg-green-600/60 rounded-full blur-sm"></div>
+                                {/* Cloud layer */}
+                                <div className="absolute top-1/3 right-1/3 w-6 h-3 bg-white/20 rounded-full blur-md"></div>
+                                <div className="absolute bottom-1/3 left-1/4 w-4 h-2 bg-white/15 rounded-full blur-md"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-4xl font-bold text-blue-400 mb-1 font-mono">
+                            <AnimatedNumber value={256} isVisible={isIntersecting} />
+                          </div>
+                          <div className="text-sm text-terminal-gray font-mono">Average Wallets</div>
+                        </div>
+
+                        {/* Pink Planet - New Wallets */}
+                        <div className="flex flex-col items-center">
+                          <div className="relative mb-4 flex items-center justify-center" style={{ height: '140px' }}>
+                            {/* Pink planet */}
+                            <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 shadow-2xl shadow-pink-400/30">
+                              {/* Subtle craters */}
+                              <div className="absolute inset-0 rounded-full overflow-hidden">
+                                <div className="absolute top-1/4 right-1/4 w-3 h-3 bg-pink-500/40 rounded-full blur-sm"></div>
+                                <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-pink-600/30 rounded-full blur-sm"></div>
+                                <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-pink-500/50 rounded-full blur-sm"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-4xl font-bold text-pink-400 mb-1 font-mono">
+                            <AnimatedNumber value={89} isVisible={isIntersecting} />
+                          </div>
+                          <div className="text-sm text-terminal-gray font-mono">New Wallets</div>
                         </div>
                       </div>
 
-                      {/* Earth - Average Wallets */}
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            {/* Earth */}
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-terminal-blue via-terminal-green to-terminal-blue opacity-90 shadow-lg shadow-terminal-blue/30"></div>
-                          </div>
-                          <div>
-                            <h5 className="text-terminal-blue font-mono font-bold">Average Wallets</h5>
-                            <p className="text-xs text-terminal-gray font-mono">Regular Holders</p>
-                          </div>
-                        </div>
-                        <div className="bg-black/40 border border-terminal-gray/20 rounded-lg p-3 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-terminal-blue/50 scrollbar-track-black/20">
-                          <div className="space-y-1.5">
-                            {['0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', '0x514910771AF9Ca656af840dff83E8264EcF986CA', '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', '0x6B175474E89094C44Da98b954EedeAC495271d0F', '0xdAC17F958D2ee523a2206206994597C13D831ec7', '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE'].map((address, idx) => (
-                              <div key={idx} className="text-xs font-mono text-terminal-blue/80 hover:text-terminal-blue hover:bg-terminal-blue/10 p-1.5 rounded transition-colors">
-                                {address}
+                      {/* Wallet Lists */}
+                      <div className="grid grid-cols-3 gap-4">
+                        {/* Old Wallets Column */}
+                        <div className="space-y-2">
+                          <h5 className="text-amber-500 font-mono font-bold mb-3">Old Wallets</h5>
+                          {[
+                            { address: '0x742d35Cc6634C...', days: 487 },
+                            { address: '0x1a2b3c4d5e6f7...', days: 523 },
+                            { address: '0xaB5801a7D3983...', days: 612 }
+                          ].map((wallet, idx) => (
+                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-amber-500/30 transition-colors group">
+                              <div>
+                                <div className="text-sm text-terminal-white font-mono">{wallet.address}</div>
+                                <div className="text-xs text-slate-500 font-mono mt-1">{wallet.days} days</div>
                               </div>
-                            ))}
-                          </div>
+                              <button className="text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                      </div>
 
-                      {/* Pluto - Small Wallets */}
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            {/* Pluto */}
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-terminal-gray via-gray-400 to-terminal-gray opacity-80 shadow-lg shadow-terminal-gray/20"></div>
-                          </div>
-                          <div>
-                            <h5 className="text-terminal-gray font-mono font-bold">Small Wallets</h5>
-                            <p className="text-xs text-terminal-gray/70 font-mono">Retail Investors</p>
-                          </div>
-                        </div>
-                        <div className="bg-black/40 border border-terminal-gray/20 rounded-lg p-3 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-terminal-gray/50 scrollbar-track-black/20">
-                          <div className="space-y-1.5">
-                            {['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', '0x4Fabb145d64652a948d72533023f6E7A623C7C53', '0x0000000000085d4780B73119b644AE5ecd22b376', '0x8E870D67F660D95d5be530380D0eC0bd388289E1', '0xBTC8c5e2e8c18BA3D68e9d9d7e9b4a1D5c4e5c6d', '0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490', '0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32', '0xD533a949740bb3306d119CC777fa900bA034cd52'].map((address, idx) => (
-                              <div key={idx} className="text-xs font-mono text-terminal-gray/70 hover:text-terminal-gray hover:bg-terminal-gray/10 p-1.5 rounded transition-colors">
-                                {address}
+                        {/* Average Wallets Column */}
+                        <div className="space-y-2">
+                          <h5 className="text-blue-400 font-mono font-bold mb-3">Average Wallets</h5>
+                          {[
+                            { address: '0x4Fabb145d6465...', days: 152 },
+                            { address: '0xdAC17F958D2ee...', days: 89 },
+                            { address: '0x95aD61b0a150d...', days: 203 }
+                          ].map((wallet, idx) => (
+                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-blue-400/30 transition-colors group">
+                              <div>
+                                <div className="text-sm text-terminal-white font-mono">{wallet.address}</div>
+                                <div className="text-xs text-slate-500 font-mono mt-1">{wallet.days} days</div>
                               </div>
-                            ))}
-                          </div>
+                              <button className="text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* New Wallets Column */}
+                        <div className="space-y-2">
+                          <h5 className="text-pink-400 font-mono font-bold mb-3">New Wallets</h5>
+                          {[
+                            { address: '0x514910771AF9C...', days: 12 },
+                            { address: '0x1f9840a85d5aF...', days: 7 },
+                            { address: '0x7Fc66500c84A7...', days: 23 }
+                          ].map((wallet, idx) => (
+                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-pink-400/30 transition-colors group">
+                              <div>
+                                <div className="text-sm text-terminal-white font-mono">{wallet.address}</div>
+                                <div className="text-xs text-slate-500 font-mono mt-1">{wallet.days} days</div>
+                              </div>
+                              <button className="text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
