@@ -42,7 +42,7 @@ export default function HeroSection() {
 
           {/* Main headline */}
           <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight">
               <span className="block text-foreground drop-shadow-2xl animate-fade-in">Trade what&apos;s</span>
               <span className="block relative mt-1">
                 <span className="relative inline-block">
@@ -65,7 +65,7 @@ export default function HeroSection() {
               <div className="w-8 h-8 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center backdrop-blur-xl">
                 <Zap className="w-4 h-4 text-neon-cyan" />
               </div>
-              <span className="font-medium">Instant Analysis</span>
+              <span className="font-medium">Social data</span>
             </div>
             <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/80">
               <div className="w-8 h-8 rounded-full bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center backdrop-blur-xl">
@@ -103,11 +103,6 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
-            
-            {/* Trust indicator */}
-            <p className="text-xs text-foreground/60 mt-3">
-              Join <span className="text-foreground font-semibold">10,000+ traders</span> finding gems daily
-            </p>
           </div>
 
           {/* Stats grid with enhanced design */}
