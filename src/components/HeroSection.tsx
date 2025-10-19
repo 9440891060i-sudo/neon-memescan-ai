@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, TrendingUp, Zap, Shield } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Sparkles, TrendingUp, Zap, Shield, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aurora from "./Aurora";
 
@@ -91,22 +92,22 @@ export default function HeroSection() {
             </Button>
           </div>
 
-          {/* Stats grid with enhanced design */}
-          <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-            <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
-              <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
-              <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
-            </div>
-            
-            <div className="animate-fade-in delay-350 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
-              <div className="text-3xl font-bold text-foreground/90 mb-1">65%</div>
-              <div className="text-xs text-foreground/50">Success Rate</div>
-            </div>
-            
-            <div className="animate-fade-in delay-400 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
-              <div className="text-3xl font-bold text-foreground/90 mb-1">&lt;4min</div>
-              <div className="text-xs text-foreground/50">Average Analysis</div>
-            </div>
+          {/* Video Section */}
+          <div className="pt-12 max-w-4xl mx-auto animate-fade-in delay-300">
+            <Card className="relative overflow-hidden bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 group cursor-pointer">
+              <div className="aspect-video bg-gradient-to-br from-black/80 to-black/60 flex items-center justify-center">
+                {/* Video Preview/Thumbnail Placeholder */}
+                <div className="text-center">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 rounded-full bg-neon-green/20 border-2 border-neon-green flex items-center justify-center group-hover:bg-neon-green/30 transition-all duration-300">
+                    <Play className="w-6 h-6 sm:w-8 sm:h-8 text-neon-green ml-1 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <p className="text-sm sm:text-base text-muted-foreground px-2">Click here to watch</p>
+                </div>
+                
+                {/* Glow effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-transparent to-neon-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </Card>
           </div>
         </div>
       </div>
