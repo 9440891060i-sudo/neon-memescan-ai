@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sparkles, TrendingUp, Zap, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aurora from "./Aurora";
+import ScrollingCoins from "./ScrollingCoins";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -90,6 +91,9 @@ export default function HeroSection() {
               Download Extension
             </Button>
           </div>
+
+          {/* Scrolling Meme Coins */}
+          <ScrollingCoins />
 
           {/* Stats grid with enhanced design */}
           <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
