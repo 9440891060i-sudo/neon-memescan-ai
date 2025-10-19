@@ -21,13 +21,13 @@ const socialData = [
 
 // Mock data for technical signals  
 const technicalData = [
-  { time: '9AM', holders: 142300, volume: 2.8, liquidity: 450000, txCount: 1250 },
-  { time: '10AM', holders: 143200, volume: 3.4, liquidity: 485000, txCount: 1380 },
-  { time: '11AM', holders: 144800, volume: 4.1, liquidity: 520000, txCount: 1650 },
-  { time: '12PM', holders: 146500, volume: 5.2, liquidity: 580000, txCount: 1850 },
-  { time: '1PM', holders: 148900, volume: 6.8, liquidity: 640000, txCount: 2100 },
-  { time: '2PM', holders: 150200, volume: 7.4, liquidity: 685000, txCount: 2280 },
-  { time: '3PM', holders: 152800, volume: 8.9, liquidity: 750000, txCount: 2650 },
+  { time: '9AM', holders: 0, volume: 2.8, liquidity: 450000, txCount: 1250 },
+  { time: '10AM', holders: 120, volume: 3.4, liquidity: 485000, txCount: 1380 },
+  { time: '11AM', holders: 280, volume: 4.1, liquidity: 520000, txCount: 1650 },
+  { time: '12PM', holders: 450, volume: 5.2, liquidity: 580000, txCount: 1850 },
+  { time: '1PM', holders: 620, volume: 6.8, liquidity: 640000, txCount: 2100 },
+  { time: '2PM', holders: 745, volume: 7.4, liquidity: 685000, txCount: 2280 },
+  { time: '3PM', holders: 845, volume: 8.9, liquidity: 750000, txCount: 2650 },
 ];
 
 // Mock data for market intelligence
