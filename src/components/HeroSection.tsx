@@ -41,74 +41,52 @@ export default function HeroSection() {
           </div>
 
           {/* Main headline */}
-          <div className="space-y-6">
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter leading-[1.1]">
-              <span className="block text-foreground/95 drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-fade-in" style={{ letterSpacing: '-0.02em' }}>
-                Trade what&apos;s
+          <div className="space-y-8">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.95] tracking-tight">
+              <span className="block text-foreground animate-fade-in" style={{ fontWeight: 900 }}>
+                Trade what's
               </span>
-              <span className="block relative mt-2">
-                <span className="relative inline-block">
-                  <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-[0_0_80px_rgba(0,255,255,0.4)] animate-fade-in delay-75" style={{ letterSpacing: '-0.03em' }}>
-                    under the smoke
-                  </span>
-                  <div className="absolute -inset-4 bg-gradient-to-r from-neon-purple/30 via-neon-cyan/30 to-neon-green/30 blur-[80px] opacity-50"></div>
-                </span>
+              <span className="block mt-2 bg-gradient-to-br from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent animate-fade-in delay-75" style={{ fontWeight: 900 }}>
+                under the smoke
               </span>
             </h1>
             
-            <p className="text-lg sm:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed animate-fade-in delay-150 font-light tracking-wide">
+            <p className="text-xl sm:text-2xl text-foreground/60 max-w-2xl mx-auto leading-relaxed animate-fade-in delay-150 font-light">
               Get the data which actually moves this market
             </p>
           </div>
 
           {/* Feature highlights */}
-          <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap animate-fade-in delay-200">
-            <div className="group flex items-center gap-3 text-sm sm:text-base">
-              <div className="relative">
-                <div className="absolute inset-0 bg-neon-cyan/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-                <div className="relative w-12 h-12 rounded-2xl bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center backdrop-blur-xl group-hover:border-neon-cyan/50 transition-all">
-                  <Zap className="w-5 h-5 text-neon-cyan drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
-                </div>
-              </div>
-              <span className="font-semibold text-foreground/90 tracking-tight">Social data</span>
+          <div className="flex items-center justify-center gap-8 sm:gap-12 flex-wrap animate-fade-in delay-200">
+            <div className="flex items-center gap-2.5 group cursor-default">
+              <div className="w-2 h-2 rounded-full bg-foreground/80 group-hover:bg-foreground transition-colors"></div>
+              <span className="text-base sm:text-lg text-foreground/70 group-hover:text-foreground transition-colors font-medium">Social data</span>
             </div>
-            <div className="group flex items-center gap-3 text-sm sm:text-base">
-              <div className="relative">
-                <div className="absolute inset-0 bg-neon-purple/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-                <div className="relative w-12 h-12 rounded-2xl bg-neon-purple/10 border border-neon-purple/30 flex items-center justify-center backdrop-blur-xl group-hover:border-neon-purple/50 transition-all">
-                  <Shield className="w-5 h-5 text-neon-purple drop-shadow-[0_0_8px_rgba(180,0,255,0.6)]" />
-                </div>
-              </div>
-              <span className="font-semibold text-foreground/90 tracking-tight">Risk Detection</span>
+            <div className="flex items-center gap-2.5 group cursor-default">
+              <div className="w-2 h-2 rounded-full bg-foreground/80 group-hover:bg-foreground transition-colors"></div>
+              <span className="text-base sm:text-lg text-foreground/70 group-hover:text-foreground transition-colors font-medium">Risk Detection</span>
             </div>
-            <div className="group flex items-center gap-3 text-sm sm:text-base">
-              <div className="relative">
-                <div className="absolute inset-0 bg-neon-green/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-                <div className="relative w-12 h-12 rounded-2xl bg-neon-green/10 border border-neon-green/30 flex items-center justify-center backdrop-blur-xl group-hover:border-neon-green/50 transition-all">
-                  <TrendingUp className="w-5 h-5 text-neon-green drop-shadow-[0_0_8px_rgba(0,255,150,0.6)]" />
-                </div>
-              </div>
-              <span className="font-semibold text-foreground/90 tracking-tight">Smart Alerts</span>
+            <div className="flex items-center gap-2.5 group cursor-default">
+              <div className="w-2 h-2 rounded-full bg-foreground/80 group-hover:bg-foreground transition-colors"></div>
+              <span className="text-base sm:text-lg text-foreground/70 group-hover:text-foreground transition-colors font-medium">Smart Alerts</span>
             </div>
           </div>
 
           {/* CA Input Section */}
-          <div className="max-w-2xl mx-auto animate-fade-in delay-300">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/30 via-neon-cyan/30 to-neon-green/30 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-60"></div>
-              <div className="relative backdrop-blur-2xl bg-background/40 border border-border/40 rounded-3xl p-3 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
-                <div className="flex flex-col sm:flex-row gap-3">
+          <div className="max-w-3xl mx-auto animate-fade-in delay-300">
+            <div className="relative">
+              <div className="bg-background/80 backdrop-blur-sm border border-border/50 rounded-xl p-1.5 shadow-2xl">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
                     placeholder="Paste contract address (CA)"
-                    className="flex-1 h-14 px-6 bg-background/60 border border-border/20 rounded-2xl text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-neon-cyan/40 focus:border-neon-cyan/40 transition-all backdrop-blur-xl"
+                    className="flex-1 h-16 px-6 bg-background/50 border-0 rounded-lg text-base text-foreground placeholder:text-foreground/40 focus:outline-none focus:bg-background/70 transition-all"
                   />
                   <Button 
                     size="lg" 
                     onClick={() => navigate('/auth')}
-                    className="h-14 px-8 text-base font-bold bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-green text-background hover:shadow-[0_0_30px_rgba(0,255,255,0.4)] shadow-lg transition-all duration-300 whitespace-nowrap hover:scale-[1.02] rounded-2xl"
+                    className="h-16 px-8 text-base font-bold bg-foreground text-background hover:bg-foreground/90 transition-all duration-200 whitespace-nowrap rounded-lg"
                   >
-                    <Sparkles className="w-5 h-5 mr-2" />
                     Analyze
                   </Button>
                 </div>
@@ -117,28 +95,31 @@ export default function HeroSection() {
           </div>
 
           {/* Stats grid with enhanced design */}
-          <div className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="relative group animate-fade-in delay-300">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-              <div className="relative bg-background/30 backdrop-blur-2xl border border-border/30 rounded-3xl p-8 hover:border-neon-cyan/40 hover:bg-background/40 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                <div className="text-5xl sm:text-6xl font-black mb-2 bg-gradient-to-br from-neon-cyan via-neon-purple to-neon-cyan bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,255,0.3)]" style={{ letterSpacing: '-0.02em' }}>5K+</div>
-                <div className="text-sm text-foreground/80 font-semibold tracking-wide">Coins Tracked Daily</div>
+          <div className="pt-20 grid grid-cols-1 sm:grid-cols-3 gap-1 max-w-4xl mx-auto">
+            <div className="group animate-fade-in delay-300 p-10 bg-background/60 backdrop-blur-sm border-r border-border/30 hover:bg-background/80 transition-all">
+              <div className="text-6xl sm:text-7xl font-black mb-3 text-foreground group-hover:scale-105 transition-transform" style={{ fontWeight: 900, letterSpacing: '-0.04em' }}>
+                5K+
+              </div>
+              <div className="text-sm text-foreground/50 uppercase tracking-widest font-semibold">
+                Coins Tracked Daily
               </div>
             </div>
             
-            <div className="relative group animate-fade-in delay-350">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-neon-green/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-              <div className="relative bg-background/30 backdrop-blur-2xl border border-border/30 rounded-3xl p-8 hover:border-neon-green/40 hover:bg-background/40 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                <div className="text-5xl sm:text-6xl font-black mb-2 bg-gradient-to-br from-neon-green via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,150,0.3)]" style={{ letterSpacing: '-0.02em' }}>65%</div>
-                <div className="text-sm text-foreground/80 font-semibold tracking-wide">Success Rate</div>
+            <div className="group animate-fade-in delay-350 p-10 bg-background/60 backdrop-blur-sm border-r border-border/30 hover:bg-background/80 transition-all">
+              <div className="text-6xl sm:text-7xl font-black mb-3 text-foreground group-hover:scale-105 transition-transform" style={{ fontWeight: 900, letterSpacing: '-0.04em' }}>
+                65%
+              </div>
+              <div className="text-sm text-foreground/50 uppercase tracking-widest font-semibold">
+                Success Rate
               </div>
             </div>
             
-            <div className="relative group animate-fade-in delay-400">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-neon-purple/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-              <div className="relative bg-background/30 backdrop-blur-2xl border border-border/30 rounded-3xl p-8 hover:border-neon-purple/40 hover:bg-background/40 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                <div className="text-5xl sm:text-6xl font-black mb-2 bg-gradient-to-br from-neon-purple via-neon-green to-neon-purple bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(180,0,255,0.3)]" style={{ letterSpacing: '-0.02em' }}>&lt;4min</div>
-                <div className="text-sm text-foreground/80 font-semibold tracking-wide">Average Analysis</div>
+            <div className="group animate-fade-in delay-400 p-10 bg-background/60 backdrop-blur-sm hover:bg-background/80 transition-all">
+              <div className="text-6xl sm:text-7xl font-black mb-3 text-foreground group-hover:scale-105 transition-transform" style={{ fontWeight: 900, letterSpacing: '-0.04em' }}>
+                &lt;4min
+              </div>
+              <div className="text-sm text-foreground/50 uppercase tracking-widest font-semibold">
+                Average Analysis
               </div>
             </div>
           </div>
