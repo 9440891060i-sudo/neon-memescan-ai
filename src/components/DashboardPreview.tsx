@@ -243,7 +243,7 @@ export default function DashboardPreview() {
                       </div>
                     </Card>
 
-                    {/* Technical Analysis */}
+                    {/* Holders */}
                     <Card className="p-4 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
@@ -251,7 +251,7 @@ export default function DashboardPreview() {
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
-                            TECHNICAL ANALYSIS
+                            HOLDERS
                           </h4>
                           <div className="text-xs text-terminal-gray">
                             On-Chain Metrics
@@ -259,39 +259,22 @@ export default function DashboardPreview() {
                         </div>
                       </div>
                       
-                      <div className="h-32">
+                      <div className="h-48">
                         <AnimatedChart
                           data={technicalData}
                           isVisible={isIntersecting}
                           gridColor="rgba(100, 116, 139, 0.1)"
                           lines={[
-                            { dataKey: 'volume', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
-                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
+                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
                           ]}
                           tooltipFormatter={(value, name) => {
                             const formatValue = (val) => {
-                              if (name === 'holders' && val >= 1000) return `${(val / 1000).toFixed(1)}K`;
-                              if (name === 'volume') return `$${val}M`;
+                              if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;
                               return val.toString();
                             };
-                            const labels = {
-                              volume: 'Volume',
-                              holders: 'Holders'
-                            };
-                            return [formatValue(value), labels[name] || name];
+                            return [formatValue(value), 'Holders'];
                           }}
                         />
-                      </div>
-                      
-                      <div className="flex gap-3 mt-2">
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-green"></div>
-                          <span className="text-terminal-gray">Volume</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-blue"></div>
-                          <span className="text-terminal-gray">Holders</span>
-                        </div>
                       </div>
                     </Card>
                   </div>
