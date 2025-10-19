@@ -236,8 +236,7 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
                 <span className="text-neon-green">Let Klux Show You the Rest</span>
               </h1>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Our AI analyzes social sentiment, technical indicators, and market dynamics 
-                to predict meme coin potential in minutes.
+                Analysis gets better with this data
               </p>
             </div>
 
