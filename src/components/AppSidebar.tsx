@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap, Coins, Crown, HelpCircle, Gift } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, HelpCircle, Gift } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -72,10 +72,6 @@ export function AppSidebar() {
               <p className="font-semibold text-white truncate group-hover:text-gray-300 transition-colors">
                 {user?.username || "User"}
               </p>
-              <div className="flex items-center gap-1 text-xs text-gray-400">
-                <Coins className="w-3 h-3 text-neon-green" />
-                <span>1,250 credits</span>
-              </div>
             </div>
           )}
         </Link>
