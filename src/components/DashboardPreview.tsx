@@ -225,8 +225,8 @@ export default function DashboardPreview() {
                           isVisible={isIntersecting}
                           gridColor="rgba(100, 116, 139, 0.1)"
                           lines={[
-                            { dataKey: 'views', stroke: 'hsl(var(--terminal-white))', strokeWidth: 2 },
-                            { dataKey: 'likes', stroke: 'hsl(var(--terminal-gray))', strokeWidth: 2 },
+                            { dataKey: 'views', stroke: 'hsl(var(--terminal-white))', strokeWidth: 1 },
+                            { dataKey: 'likes', stroke: 'hsl(var(--terminal-gray))', strokeWidth: 1 },
                           ]}
                           tooltipFormatter={(value, name) => {
                             const formatValue = (val) => {
@@ -265,7 +265,7 @@ export default function DashboardPreview() {
                           isVisible={isIntersecting}
                           gridColor="rgba(100, 116, 139, 0.1)"
                           lines={[
-                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-white))', strokeWidth: 2 },
+                            { dataKey: 'holders', stroke: 'hsl(var(--terminal-white))', strokeWidth: 1 },
                           ]}
                           tooltipFormatter={(value, name) => {
                             const formatValue = (val) => {
