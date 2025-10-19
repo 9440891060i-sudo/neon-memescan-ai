@@ -95,12 +95,12 @@ export default function HeroSection() {
       </div>
 
       {/* Full-width Scrolling Meme Coins */}
-      <div className="relative z-10 w-full mt-4">
+      <div className="relative z-10 w-full mt-1">
         <ScrollingCoins />
       </div>
 
       {/* Stats grid */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 mt-4">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 mt-2">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
           <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
             <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
