@@ -174,7 +174,7 @@ export default function DashboardPreview() {
                   </div>
                 </div>
                 <div className="text-xs text-terminal-gray font-mono">
-                  <Clock className="w-4 h-4 inline mr-1" />
+                  <Clock className="w-4 h-4 inline mr-1 text-terminal-gray" />
                   {new Date().toLocaleTimeString()}
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function DashboardPreview() {
                     <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-blue/20 rounded">
-                          <Activity className="w-3 h-3 text-terminal-blue" />
+                          <Activity className="w-3 h-3 text-terminal-gray" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
@@ -247,7 +247,7 @@ export default function DashboardPreview() {
                     <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
-                          <BarChart3 className="w-3 h-3 text-terminal-green" />
+                          <BarChart3 className="w-3 h-3 text-terminal-gray" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
@@ -442,7 +442,7 @@ export default function DashboardPreview() {
                     <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-amber/20 rounded">
-                          <TrendingUp className="w-3 h-3 text-terminal-amber" />
+                          <TrendingUp className="w-3 h-3 text-terminal-gray" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
@@ -478,7 +478,7 @@ export default function DashboardPreview() {
                     <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
-                          <Brain className="w-3 h-3 text-terminal-green" />
+                          <Brain className="w-3 h-3 text-terminal-gray" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">

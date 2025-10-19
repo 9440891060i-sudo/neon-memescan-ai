@@ -138,7 +138,7 @@ export default function CommunitySignals() {
     <Card className="p-6 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
       <div className="flex items-center gap-3 mb-6">
         <div className="flex items-center justify-center w-8 h-8 bg-terminal-blue/20 rounded-lg">
-          <MessageSquare className="w-4 h-4 text-terminal-blue" />
+          <MessageSquare className="w-4 h-4 text-terminal-gray" />
         </div>
         <div className="flex-1">
           <h4 className="text-lg font-semibold text-terminal-white font-mono">
@@ -159,7 +159,7 @@ export default function CommunitySignals() {
         <div className="p-3 bg-terminal-blue/5">
           <div className="flex items-center justify-between text-xs text-terminal-gray uppercase tracking-wider mb-2">
             <span>Latest Signal</span>
-            <Clock className="w-3 h-3" />
+            <Clock className="w-3 h-3 text-terminal-gray" />
           </div>
           <div className="space-y-2">
             {currentSignals[tickerIndex] && (
@@ -181,7 +181,7 @@ export default function CommunitySignals() {
                 <div className="flex items-center justify-between text-xs text-terminal-gray/70 mt-1">
                   <span>{currentSignals[tickerIndex].timestamp}</span>
                   <div className="flex items-center gap-1">
-                    <Users className="w-3 h-3" />
+                    <Users className="w-3 h-3 text-terminal-gray" />
                     <span>{currentSignals[tickerIndex].members.toLocaleString()}</span>
                   </div>
                 </div>
