@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   CreditCard, 
   Wallet, 
@@ -68,7 +69,8 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
           {/* Main Content */}
           <div className="flex-1 flex flex-col min-h-0">
-            <div className="p-8 flex-1 flex flex-col gap-8 min-h-0 overflow-x-hidden overflow-y-auto">
+            <ScrollArea className="flex-1">
+              <div className="p-8 flex flex-col gap-8 min-h-full">
               {/* Header */}
               <div className="mb-0">
                 <h2 className="text-3xl font-bold text-white mb-2">Plans & Kludd</h2>
@@ -339,7 +341,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
               <button className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
                 <span className="text-white text-xl">?</span>
               </button>
-            </div>
+            </div></ScrollArea>
           </div>
         </div>
       </DialogContent>
