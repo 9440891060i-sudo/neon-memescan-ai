@@ -91,24 +91,26 @@ export default function HeroSection() {
               Download Extension
             </Button>
           </div>
+        </div>
+      </div>
 
-          {/* Video Section */}
-          <div className="pt-12 w-full animate-fade-in delay-300">
-            <Card className="relative overflow-hidden bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 group cursor-pointer">
-              <div className="aspect-video bg-gradient-to-br from-black/80 to-black/60 flex items-center justify-center">
-                {/* Video Preview/Thumbnail Placeholder */}
-                <div className="text-center">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 rounded-full bg-neon-green/20 border-2 border-neon-green flex items-center justify-center group-hover:bg-neon-green/30 transition-all duration-300">
-                    <Play className="w-6 h-6 sm:w-8 sm:h-8 text-neon-green ml-1 group-hover:scale-110 transition-transform" />
-                  </div>
-                  <p className="text-sm sm:text-base text-muted-foreground px-2">Click here to watch</p>
+      {/* Video Section - Full Width */}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="animate-fade-in delay-300">
+          <Card className="relative overflow-hidden bg-gradient-card border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 group cursor-pointer">
+            <div className="aspect-video bg-gradient-to-br from-black/80 to-black/60 flex items-center justify-center">
+              {/* Video Preview/Thumbnail Placeholder */}
+              <div className="text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 rounded-full bg-neon-green/20 border-2 border-neon-green flex items-center justify-center group-hover:bg-neon-green/30 transition-all duration-300">
+                  <Play className="w-6 h-6 sm:w-8 sm:h-8 text-neon-green ml-1 group-hover:scale-110 transition-transform" />
                 </div>
-                
-                {/* Glow effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-transparent to-neon-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <p className="text-sm sm:text-base text-muted-foreground px-2">Click here to watch</p>
               </div>
-            </Card>
-          </div>
+              
+              {/* Glow effect overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-transparent to-neon-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          </Card>
         </div>
       </div>
     </section>
