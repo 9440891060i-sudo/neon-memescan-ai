@@ -9,7 +9,7 @@ interface CommunitySignal {
   coin: string;
   message: string;
   timestamp: string;
-  sentiment: "bullish" | "bearish" | "neutral";
+  marketCap: string;
   members: number;
 }
 
@@ -30,7 +30,7 @@ const mockSignals: CommunitySignal[] = [
     coin: "PEPE",
     message: "Major whale accumulation detected",
     timestamp: "2m ago",
-    sentiment: "bullish",
+    marketCap: "420k",
     members: 45200
   },
   {
@@ -39,7 +39,7 @@ const mockSignals: CommunitySignal[] = [
     coin: "PEPE",
     message: "Strong buy signal confirmed",
     timestamp: "3m ago",
-    sentiment: "bullish",
+    marketCap: "850k",
     members: 38500
   },
   {
@@ -48,7 +48,7 @@ const mockSignals: CommunitySignal[] = [
     coin: "BONK",
     message: "Dev team announcing new partnerships",
     timestamp: "5m ago",
-    sentiment: "bullish",
+    marketCap: "1.2M",
     members: 32800
   },
   {
@@ -57,7 +57,7 @@ const mockSignals: CommunitySignal[] = [
     coin: "BONK",
     message: "Volume increasing rapidly",
     timestamp: "6m ago",
-    sentiment: "bullish",
+    marketCap: "1.5M",
     members: 42100
   },
   {
@@ -66,7 +66,7 @@ const mockSignals: CommunitySignal[] = [
     coin: "DOGE",
     message: "Technical breakout pattern forming",
     timestamp: "8m ago",
-    sentiment: "bullish", 
+    marketCap: "650k", 
     members: 28500
   },
   {
@@ -75,7 +75,7 @@ const mockSignals: CommunitySignal[] = [
     coin: "SHIB",
     message: "Volume spike in pre-market",
     timestamp: "12m ago",
-    sentiment: "neutral",
+    marketCap: "2.8M",
     members: 67300
   }
 ];
@@ -134,9 +134,8 @@ export default function CommunitySignals() {
 
   const coinAlerts = Object.entries(groupedSignals).map(([coin, signals]) => ({
     coin,
-    communities: signals.map(s => s.community),
-    timestamp: signals[0].timestamp,
-    sentiment: signals[0].sentiment
+    communitiesWithMC: signals.map(s => ({ community: s.community, marketCap: s.marketCap })),
+    timestamp: signals[0].timestamp
   }));
 
   useEffect(() => {
@@ -150,23 +149,6 @@ export default function CommunitySignals() {
     return () => clearInterval(interval);
   }, []);
 
-  const getSentimentColor = (sentiment: string) => {
-    switch (sentiment) {
-      case 'bullish': return 'text-terminal-green';
-      case 'bearish': return 'text-terminal-red'; 
-      case 'neutral': return 'text-terminal-amber';
-      default: return 'text-terminal-gray';
-    }
-  };
-
-  const getSentimentBg = (sentiment: string) => {
-    switch (sentiment) {
-      case 'bullish': return 'bg-terminal-green/10 border-terminal-green/30';
-      case 'bearish': return 'bg-terminal-red/10 border-terminal-red/30';
-      case 'neutral': return 'bg-terminal-amber/10 border-terminal-amber/30';
-      default: return 'bg-terminal-gray/10 border-terminal-gray/30';
-    }
-  };
 
   return (
     <Card className="p-6 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
@@ -202,18 +184,15 @@ export default function CommunitySignals() {
                   <span className="text-terminal-white font-mono text-lg font-bold">
                     ${coinAlerts[tickerIndex].coin}
                   </span>
-                  <span className={`text-xs ${getSentimentColor(coinAlerts[tickerIndex].sentiment)} font-mono uppercase`}>
-                    {coinAlerts[tickerIndex].sentiment}
-                  </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2">
-                  {coinAlerts[tickerIndex].communities.map((community, idx) => (
+                  {coinAlerts[tickerIndex].communitiesWithMC.map((item, idx) => (
                     <Badge 
                       key={idx}
                       variant="outline" 
                       className="text-xs bg-terminal-blue/20 border-terminal-blue/40 text-terminal-blue"
                     >
-                      {community}
+                      {item.community} @ {item.marketCap}
                     </Badge>
                   ))}
                 </div>
