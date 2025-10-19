@@ -43,10 +43,10 @@ export default function HeroSection() {
           {/* Main headline */}
           <div className="space-y-4">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight">
-              <span className="block text-foreground drop-shadow-2xl animate-fade-in">Trade what&apos;s</span>
+              <span className="block text-foreground/80 backdrop-blur-sm drop-shadow-2xl animate-fade-in">Trade what&apos;s</span>
               <span className="block relative mt-1">
                 <span className="relative inline-block">
-                  <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-2xl animate-fade-in delay-75">
+                  <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent opacity-90 backdrop-blur-sm drop-shadow-2xl animate-fade-in delay-75">
                     under the smoke
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/20 via-neon-cyan/20 to-neon-green/20 blur-3xl"></div>
