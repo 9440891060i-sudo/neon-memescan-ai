@@ -18,7 +18,7 @@ import {
   Delete
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import PricingModal from "@/components/PricingModal";
+import KluxPricingModal from "@/components/KluxPricingModal";
 
 interface CoinAnalysis {
   id: string;
@@ -236,7 +236,7 @@ export default function Kluxify() {
         </div>
 
         {/* Pricing Modal */}
-        <PricingModal 
+        <KluxPricingModal 
           open={showPricingModal} 
           onOpenChange={setShowPricingModal}
         />

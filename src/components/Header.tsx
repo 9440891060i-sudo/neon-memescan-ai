@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
-import PricingModal from "@/components/PricingModal";
+import KluxPricingModal from "@/components/KluxPricingModal";
 import kluxLogo from "@/assets/klux-logo.png";
 
 const Header = () => {
@@ -35,7 +35,7 @@ const Header = () => {
 
   return (
     <>
-      <PricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
+      <KluxPricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16">
