@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { TrendingUp, BarChart3, Shield, Activity, Target, Clock, Database, Brain, Wallet, Users } from "lucide-react";
+import { TrendingUp, BarChart3, Shield, Activity, Target, Clock, Database, Brain, Wallet, Users, User, UserPlus, Crown } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { AnimatedChart } from "@/components/AnimatedChart";
@@ -581,58 +581,145 @@ export default function DashboardPreview() {
                   {/* Community Signals */}
                   <CommunitySignals />
                   
-                  {/* Risk Assessment */}
-                  <Card className="p-6 bg-black/40 border border-terminal-amber/20 backdrop-blur-sm">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="flex items-center justify-center w-8 h-8 bg-terminal-amber/20 rounded-lg">
-                        <Shield className="w-4 h-4 text-terminal-amber" />
-                      </div>
+                  {/* KOL Concentration */}
+                  <Card className="p-6 bg-black/40 border border-terminal-purple/20 backdrop-blur-sm">
+                    <div className="flex items-center justify-between mb-4">
                       <div>
                         <h4 className="text-lg font-semibold text-terminal-white font-mono">
-                          RISK ASSESSMENT
+                          KOL Concentration
                         </h4>
-                        <div className="text-xs text-terminal-gray uppercase tracking-wider">
-                          Security & Compliance Metrics
+                        <div className="text-xs text-terminal-gray">
+                          Author distribution by follower count
+                        </div>
+                      </div>
+                      <div className="text-xs text-terminal-gray font-mono">5m</div>
+                    </div>
+                    
+                    {/* Scatter Plot Chart */}
+                    <div className="relative h-48 mb-6">
+                      {/* Y-axis labels */}
+                      <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-terminal-gray font-mono pr-2">
+                        <span>50k</span>
+                        <span>30k</span>
+                        <span>15k</span>
+                        <span>0</span>
+                      </div>
+                      
+                      {/* Chart area */}
+                      <div className="ml-8 h-full border-l border-b border-terminal-gray/20 relative">
+                        {/* Horizontal grid lines */}
+                        <div className="absolute inset-0">
+                          <div className="absolute top-0 left-0 right-0 border-t border-terminal-gray/10"></div>
+                          <div className="absolute top-1/3 left-0 right-0 border-t border-terminal-gray/10"></div>
+                          <div className="absolute top-2/3 left-0 right-0 border-t border-terminal-gray/10"></div>
+                        </div>
+                        
+                        {/* Data points - purple dots at various positions */}
+                        {/* Column 1 - 10:45 */}
+                        <div className="absolute left-[5%] bottom-[8%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[5%] bottom-[20%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[5%] bottom-[28%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[5%] bottom-[52%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[5%] bottom-[68%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[5%] bottom-[78%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 2 - 9:30 */}
+                        <div className="absolute left-[20%] bottom-[42%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[20%] bottom-[50%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[20%] bottom-[58%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[20%] bottom-[70%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[20%] bottom-[85%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 3 - 9:45 */}
+                        <div className="absolute left-[35%] bottom-[5%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[35%] bottom-[25%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[35%] bottom-[62%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[35%] bottom-[72%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[35%] bottom-[88%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 4 - 10:15 */}
+                        <div className="absolute left-[50%] bottom-[10%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[50%] bottom-[30%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[50%] bottom-[45%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[50%] bottom-[55%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[50%] bottom-[68%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 5 - 9:00 */}
+                        <div className="absolute left-[65%] bottom-[48%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[65%] bottom-[58%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[65%] bottom-[65%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 6 - 10:30 */}
+                        <div className="absolute left-[75%] bottom-[8%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[75%] bottom-[50%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 7 - 9:15 */}
+                        <div className="absolute left-[85%] bottom-[22%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[85%] bottom-[60%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[85%] bottom-[68%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* Column 8 - 10:00 */}
+                        <div className="absolute left-[95%] bottom-[38%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[95%] bottom-[75%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <div className="absolute left-[95%] bottom-[82%] w-2 h-2 bg-purple-500 rounded-full"></div>
+                        
+                        {/* X-axis labels */}
+                        <div className="absolute -bottom-6 left-0 right-0 flex justify-between text-xs text-terminal-gray font-mono px-1">
+                          <span>10:45</span>
+                          <span>9:30</span>
+                          <span>9:45</span>
+                          <span>10:15</span>
+                          <span>9:00</span>
+                          <span>10:30</span>
+                          <span>9:15</span>
+                          <span>10:00</span>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-terminal-green/5 border border-terminal-green/20 rounded p-3">
-                          <div className="text-xs text-terminal-gray mb-1 font-mono">WALLET AGE</div>
-                          <div className="text-lg text-terminal-green font-mono">
-                            <AnimatedNumber 
-                              value={68} 
-                              isVisible={isIntersecting} 
-                              formatter={(val) => `${val}D`}
-                            />
+                    {/* KOL Categories */}
+                    <div className="grid grid-cols-4 gap-3 pt-4 border-t border-terminal-gray/20">
+                      {/* Mini */}
+                      <div className="flex items-center gap-2">
+                        <User className="w-4 h-4 text-terminal-gray" />
+                        <div>
+                          <div className="text-2xl font-bold text-terminal-white font-mono">
+                            <AnimatedNumber value={324} isVisible={isIntersecting} />
                           </div>
-                        </div>
-                        <div className="bg-terminal-blue/5 border border-terminal-blue/20 rounded p-3">
-                          <div className="text-xs text-terminal-gray mb-1 font-mono">CREDIBILITY</div>
-                          <div className="text-lg text-terminal-blue font-mono">
-                            <AnimatedNumber 
-                              value={94} 
-                              isVisible={isIntersecting} 
-                              formatter={(val) => `${val}%`}
-                            />
-                          </div>
+                          <div className="text-xs text-terminal-gray font-mono">Mini</div>
                         </div>
                       </div>
                       
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center p-2 bg-terminal-green/5 border border-terminal-green/20 rounded">
-                          <span className="text-sm text-terminal-gray font-mono">DEV VERIFICATION</span>
-                          <span className="text-terminal-green font-mono text-sm">✓ VERIFIED</span>
+                      {/* Micro */}
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-terminal-gray" />
+                        <div>
+                          <div className="text-2xl font-bold text-terminal-white font-mono">
+                            <AnimatedNumber value={127} isVisible={isIntersecting} />
+                          </div>
+                          <div className="text-xs text-terminal-gray font-mono">Micro</div>
                         </div>
-                        <div className="flex justify-between items-center p-2 bg-terminal-green/5 border border-terminal-green/20 rounded">
-                          <span className="text-sm text-terminal-gray font-mono">LIQUIDITY LOCKED</span>
-                          <span className="text-terminal-green font-mono text-sm">✓ SECURED</span>
+                      </div>
+                      
+                      {/* Macro */}
+                      <div className="flex items-center gap-2">
+                        <UserPlus className="w-4 h-4 text-terminal-gray" />
+                        <div>
+                          <div className="text-2xl font-bold text-terminal-white font-mono">
+                            <AnimatedNumber value={45} isVisible={isIntersecting} />
+                          </div>
+                          <div className="text-xs text-terminal-gray font-mono">Macro</div>
                         </div>
-                        <div className="flex justify-between items-center p-2 bg-terminal-amber/5 border border-terminal-amber/20 rounded">
-                          <span className="text-sm text-terminal-gray font-mono">CONTRACT AUDIT</span>
-                          <span className="text-terminal-amber font-mono text-sm">⚠ PENDING</span>
+                      </div>
+                      
+                      {/* Large */}
+                      <div className="flex items-center gap-2">
+                        <Crown className="w-4 h-4 text-terminal-gray" />
+                        <div>
+                          <div className="text-2xl font-bold text-terminal-white font-mono">
+                            <AnimatedNumber value={12} isVisible={isIntersecting} />
+                          </div>
+                          <div className="text-xs text-terminal-gray font-mono">Large</div>
                         </div>
                       </div>
                     </div>
