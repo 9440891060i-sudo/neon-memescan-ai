@@ -485,56 +485,32 @@ export default function DashboardPreview() {
                       </div>
                     </Card>
 
-                    {/* Liquidity Analysis */}
-                    <Card className="p-4 bg-black/40 border border-terminal-red/20 backdrop-blur-sm">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-red/20 rounded">
-                          <BarChart3 className="w-3 h-3 text-terminal-red" />
+                    {/* AI Call */}
+                    <Card className="p-4 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
+                          <Brain className="w-3 h-3 text-terminal-green" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
-                            LIQUIDITY ANALYSIS
+                            AI CALL
                           </h4>
                           <div className="text-xs text-terminal-gray">
-                            Order Book & Market Depth
+                            Entry & Exit Analysis
                           </div>
                         </div>
                       </div>
                       
-                      <div className="h-32">
-                        <AnimatedChart
-                          data={liquidityData}
-                          isVisible={isIntersecting}
-                          gridColor="rgba(100, 116, 139, 0.1)"
-                          lines={[
-                            { dataKey: 'depth', stroke: 'hsl(var(--terminal-red))', strokeWidth: 2 },
-                            { dataKey: 'orderBook', stroke: 'hsl(var(--terminal-green))', strokeWidth: 2 },
-                          ]}
-                          tooltipFormatter={(value, name) => {
-                            const formatValue = (val) => {
-                              if (name === 'depth' && val >= 1000) return `$${(val / 1000).toFixed(0)}K`;
-                              if (name === 'orderBook') return `${val}%`;
-                              if (name === 'spread') return `${val}%`;
-                              if (name === 'slippage') return `${val}%`;
-                              return val.toString();
-                            };
-                            const labels = {
-                              depth: 'Market Depth',
-                              orderBook: 'Order Book Health'
-                            };
-                            return [formatValue(value), labels[name] || name];
-                          }}
-                        />
-                      </div>
-                      
-                      <div className="flex gap-3 mt-2">
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-red"></div>
-                          <span className="text-terminal-gray">Market Depth</span>
+                      <div className="space-y-3">
+                        <div className="p-3 bg-terminal-green/10 rounded border border-terminal-green/30">
+                          <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">Entry Price</div>
+                          <div className="text-lg text-terminal-green font-mono font-bold">$0.0000087</div>
+                          <div className="text-xs text-terminal-gray font-mono mt-1">Buy Range: $0.0000085-90</div>
                         </div>
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-green"></div>
-                          <span className="text-terminal-gray">Order Book</span>
+                        <div className="p-3 bg-terminal-blue/10 rounded border border-terminal-blue/30">
+                          <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">Exit Price</div>
+                          <div className="text-lg text-terminal-blue font-mono font-bold">$0.0000125</div>
+                          <div className="text-xs text-terminal-gray font-mono mt-1">Target: +43.6% Profit</div>
                         </div>
                       </div>
                     </Card>
@@ -776,42 +752,6 @@ export default function DashboardPreview() {
                   </Card>
                 </div>
               </div>
-
-              {/* AI Analysis Summary */}
-              <Card className="p-6 bg-gradient-to-r from-terminal-green/5 to-terminal-blue/5 border border-terminal-green/30 mb-8">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded bg-terminal-green/20 flex items-center justify-center">
-                    <Target className="w-5 h-5 text-terminal-green" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-terminal-green mb-2 font-mono">AI ANALYSIS SUMMARY</h4>
-                    <p className="text-terminal-gray mb-4 font-mono text-sm">
-                      "Strong social momentum combined with healthy on-chain metrics. Community signals indicate sustained interest. Technical breakout pattern confirmed."
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                      <div className="bg-black/20 rounded p-3">
-                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">ENTRY RANGE</div>
-                        <div className="text-terminal-green font-mono text-sm">$0.0000087-92</div>
-                      </div>
-                      <div className="bg-black/20 rounded p-3">
-                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">TARGET</div>
-                        <div className="text-terminal-blue font-mono text-sm">$0.0000125</div>
-                      </div>
-                      <div className="bg-black/20 rounded p-3">
-                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">RISK LEVEL</div>
-                        <div className="text-terminal-green font-mono text-sm">LOW-MED</div>
-                      </div>
-                      <div className="bg-black/20 rounded p-3">
-                        <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">TIMEFRAME</div>
-                        <div className="text-terminal-amber font-mono text-sm">
-                          <AnimatedNumber value={24} isVisible={isIntersecting} />-
-                          <AnimatedNumber value={72} isVisible={isIntersecting} />H
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
 
               {/* Terminal Action */}
               <div className="text-center">
