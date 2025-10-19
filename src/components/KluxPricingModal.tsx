@@ -67,8 +67,8 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden">
-            <div className="p-8 min-h-full">
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="p-8 flex-1 overflow-y-auto overflow-x-hidden">
               {/* Header */}
               <div className="mb-8">
                 <h2 className="text-3xl font-bold text-white mb-2">Plans & Kludd</h2>
