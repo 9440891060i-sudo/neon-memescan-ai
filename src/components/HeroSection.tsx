@@ -42,49 +42,49 @@ export default function HeroSection() {
 
           {/* Main headline */}
           <div className="space-y-5">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
               <span className="block text-foreground/90 animate-fade-in">
                 Trade what's
               </span>
-              <span className="block mt-1 text-foreground/70 animate-fade-in delay-75">
+              <span className="block mt-1 text-foreground/60 animate-fade-in delay-75">
                 under the smoke
               </span>
             </h1>
             
-            <p className="text-lg sm:text-xl text-foreground/50 max-w-xl mx-auto leading-relaxed animate-fade-in delay-150">
+            <p className="text-base sm:text-lg text-foreground/50 max-w-lg mx-auto leading-relaxed animate-fade-in delay-150">
               Get the data which actually moves this market
             </p>
           </div>
 
           {/* Feature highlights */}
-          <div className="flex items-center justify-center gap-8 flex-wrap animate-fade-in delay-200">
-            <div className="flex items-center gap-2.5 text-sm text-foreground/60 hover:text-foreground/80 transition-colors">
-              <Zap className="w-4 h-4" />
-              <span className="font-medium">Social data</span>
+          <div className="flex items-center justify-center gap-6 flex-wrap animate-fade-in delay-200">
+            <div className="flex items-center gap-2 text-sm text-foreground/60">
+              <Zap className="w-3.5 h-3.5" />
+              <span>Social data</span>
             </div>
-            <div className="flex items-center gap-2.5 text-sm text-foreground/60 hover:text-foreground/80 transition-colors">
-              <Shield className="w-4 h-4" />
-              <span className="font-medium">Risk Detection</span>
+            <div className="flex items-center gap-2 text-sm text-foreground/60">
+              <Shield className="w-3.5 h-3.5" />
+              <span>Risk Detection</span>
             </div>
-            <div className="flex items-center gap-2.5 text-sm text-foreground/60 hover:text-foreground/80 transition-colors">
-              <TrendingUp className="w-4 h-4" />
-              <span className="font-medium">Smart Alerts</span>
+            <div className="flex items-center gap-2 text-sm text-foreground/60">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>Smart Alerts</span>
             </div>
           </div>
 
           {/* CA Input Section */}
-          <div className="max-w-2xl mx-auto animate-fade-in delay-300">
-            <div className="bg-background/60 backdrop-blur-lg border border-border/50 rounded-2xl p-2 shadow-xl">
-              <div className="flex flex-col sm:flex-row gap-2.5">
+          <div className="max-w-xl mx-auto animate-fade-in delay-300">
+            <div className="bg-background/70 backdrop-blur-md border border-border/40 rounded-xl p-1.5 shadow-lg">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   placeholder="Paste contract address (CA)"
-                  className="flex-1 h-12 px-5 bg-transparent border-0 rounded-xl text-sm text-foreground placeholder:text-foreground/40 focus:outline-none focus:bg-background/30 transition-all"
+                  className="flex-1 h-11 px-4 bg-transparent border-0 rounded-lg text-sm text-foreground placeholder:text-foreground/40 focus:outline-none"
                 />
                 <Button 
                   size="lg" 
                   onClick={() => navigate('/auth')}
-                  className="h-12 px-7 text-sm font-semibold bg-foreground text-background hover:bg-foreground/90 transition-all whitespace-nowrap rounded-xl"
+                  className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 transition-all whitespace-nowrap rounded-lg"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   Analyze
@@ -94,20 +94,20 @@ export default function HeroSection() {
           </div>
 
           {/* Stats grid with enhanced design */}
-          <div className="pt-14 grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
-            <div className="animate-fade-in delay-300 p-7 bg-background/50 backdrop-blur-sm border border-border/40 rounded-2xl hover:bg-background/70 hover:border-border/60 transition-all">
-              <div className="text-4xl font-bold text-foreground/90 mb-2">5K+</div>
-              <div className="text-xs text-foreground/50 font-medium">Coins Tracked Daily</div>
+          <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
+              <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
             </div>
             
-            <div className="animate-fade-in delay-350 p-7 bg-background/50 backdrop-blur-sm border border-border/40 rounded-2xl hover:bg-background/70 hover:border-border/60 transition-all">
-              <div className="text-4xl font-bold text-foreground/90 mb-2">65%</div>
-              <div className="text-xs text-foreground/50 font-medium">Success Rate</div>
+            <div className="animate-fade-in delay-350 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">65%</div>
+              <div className="text-xs text-foreground/50">Success Rate</div>
             </div>
             
-            <div className="animate-fade-in delay-400 p-7 bg-background/50 backdrop-blur-sm border border-border/40 rounded-2xl hover:bg-background/70 hover:border-border/60 transition-all">
-              <div className="text-4xl font-bold text-foreground/90 mb-2">&lt;4min</div>
-              <div className="text-xs text-foreground/50 font-medium">Average Analysis</div>
+            <div className="animate-fade-in delay-400 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">&lt;4min</div>
+              <div className="text-xs text-foreground/50">Average Analysis</div>
             </div>
           </div>
         </div>
