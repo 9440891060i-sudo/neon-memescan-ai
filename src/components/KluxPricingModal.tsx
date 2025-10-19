@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
@@ -36,6 +36,8 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[1200px] h-[90vh] p-0 bg-[#0F1113] border-white/5 overflow-hidden">
+        <DialogTitle className="sr-only">Pricing</DialogTitle>
+        <DialogDescription className="sr-only">Plans & Kludd pricing</DialogDescription>
         <div className="flex h-full">
           {/* Left Sidebar */}
           <div className="w-[200px] bg-[#0A0B0D] border-r border-white/5 p-6 flex flex-col">
@@ -69,7 +71,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
           {/* Main Content */}
           <div className="flex-1 flex flex-col min-h-0">
-            <div className="flex-1 overflow-y-auto min-h-0">
+            <div className="flex-1 overflow-y-auto min-h-0 custom-scrollbar spring-scroll">
               <div className="p-8 flex flex-col gap-8 min-h-full">
               {/* Header */}
               <div className="mb-0">
