@@ -30,7 +30,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 py-24 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 pt-24 pb-8 w-full">
         <div className="text-center space-y-8">
           
           {/* Top badge */}
@@ -95,13 +95,13 @@ export default function HeroSection() {
       </div>
 
       {/* Full-width Scrolling Meme Coins */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full mt-8">
         <ScrollingCoins />
       </div>
 
       {/* Stats grid */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
-        <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
           <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
             <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
             <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
