@@ -41,63 +41,74 @@ export default function HeroSection() {
           </div>
 
           {/* Main headline */}
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight">
-              <span className="block text-foreground drop-shadow-2xl animate-fade-in">Trade what&apos;s</span>
-              <span className="block relative mt-1">
+          <div className="space-y-6">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter leading-[1.1]">
+              <span className="block text-foreground/95 drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-fade-in" style={{ letterSpacing: '-0.02em' }}>
+                Trade what&apos;s
+              </span>
+              <span className="block relative mt-2">
                 <span className="relative inline-block">
-                  <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-2xl animate-fade-in delay-75">
+                  <span className="relative z-10 bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-[0_0_80px_rgba(0,255,255,0.4)] animate-fade-in delay-75" style={{ letterSpacing: '-0.03em' }}>
                     under the smoke
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/20 via-neon-cyan/20 to-neon-green/20 blur-3xl"></div>
+                  <div className="absolute -inset-4 bg-gradient-to-r from-neon-purple/30 via-neon-cyan/30 to-neon-green/30 blur-[80px] opacity-50"></div>
                 </span>
               </span>
             </h1>
             
-            <p className="text-base sm:text-lg text-foreground/70 max-w-xl mx-auto leading-relaxed animate-fade-in delay-150">
+            <p className="text-lg sm:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed animate-fade-in delay-150 font-light tracking-wide">
               Get the data which actually moves this market
             </p>
           </div>
 
           {/* Feature highlights */}
-          <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap animate-fade-in delay-200">
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/80">
-              <div className="w-8 h-8 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center backdrop-blur-xl">
-                <Zap className="w-4 h-4 text-neon-cyan" />
+          <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap animate-fade-in delay-200">
+            <div className="group flex items-center gap-3 text-sm sm:text-base">
+              <div className="relative">
+                <div className="absolute inset-0 bg-neon-cyan/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+                <div className="relative w-12 h-12 rounded-2xl bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center backdrop-blur-xl group-hover:border-neon-cyan/50 transition-all">
+                  <Zap className="w-5 h-5 text-neon-cyan drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
+                </div>
               </div>
-              <span className="font-medium">Social data</span>
+              <span className="font-semibold text-foreground/90 tracking-tight">Social data</span>
             </div>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/80">
-              <div className="w-8 h-8 rounded-full bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center backdrop-blur-xl">
-                <Shield className="w-4 h-4 text-neon-purple" />
+            <div className="group flex items-center gap-3 text-sm sm:text-base">
+              <div className="relative">
+                <div className="absolute inset-0 bg-neon-purple/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+                <div className="relative w-12 h-12 rounded-2xl bg-neon-purple/10 border border-neon-purple/30 flex items-center justify-center backdrop-blur-xl group-hover:border-neon-purple/50 transition-all">
+                  <Shield className="w-5 h-5 text-neon-purple drop-shadow-[0_0_8px_rgba(180,0,255,0.6)]" />
+                </div>
               </div>
-              <span className="font-medium">Risk Detection</span>
+              <span className="font-semibold text-foreground/90 tracking-tight">Risk Detection</span>
             </div>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/80">
-              <div className="w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green/20 flex items-center justify-center backdrop-blur-xl">
-                <TrendingUp className="w-4 h-4 text-neon-green" />
+            <div className="group flex items-center gap-3 text-sm sm:text-base">
+              <div className="relative">
+                <div className="absolute inset-0 bg-neon-green/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+                <div className="relative w-12 h-12 rounded-2xl bg-neon-green/10 border border-neon-green/30 flex items-center justify-center backdrop-blur-xl group-hover:border-neon-green/50 transition-all">
+                  <TrendingUp className="w-5 h-5 text-neon-green drop-shadow-[0_0_8px_rgba(0,255,150,0.6)]" />
+                </div>
               </div>
-              <span className="font-medium">Smart Alerts</span>
+              <span className="font-semibold text-foreground/90 tracking-tight">Smart Alerts</span>
             </div>
           </div>
 
           {/* CA Input Section */}
-          <div className="max-w-xl mx-auto animate-fade-in delay-300">
+          <div className="max-w-2xl mx-auto animate-fade-in delay-300">
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/20 via-neon-cyan/20 to-neon-green/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-              <div className="relative backdrop-blur-xl bg-background/60 border-2 border-border/50 rounded-2xl p-2 shadow-2xl">
-                <div className="flex flex-col sm:flex-row gap-2">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/30 via-neon-cyan/30 to-neon-green/30 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-60"></div>
+              <div className="relative backdrop-blur-2xl bg-background/40 border border-border/40 rounded-3xl p-3 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="text"
                     placeholder="Paste contract address (CA)"
-                    className="flex-1 h-12 px-4 bg-background/80 border border-border/30 rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 transition-all"
+                    className="flex-1 h-14 px-6 bg-background/60 border border-border/20 rounded-2xl text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-neon-cyan/40 focus:border-neon-cyan/40 transition-all backdrop-blur-xl"
                   />
                   <Button 
                     size="lg" 
                     onClick={() => navigate('/auth')}
-                    className="h-12 px-6 text-sm font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-lg transition-all duration-300 whitespace-nowrap hover:scale-105"
+                    className="h-14 px-8 text-base font-bold bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-green text-background hover:shadow-[0_0_30px_rgba(0,255,255,0.4)] shadow-lg transition-all duration-300 whitespace-nowrap hover:scale-[1.02] rounded-2xl"
                   >
-                    <Sparkles className="w-4 h-4 mr-2" />
+                    <Sparkles className="w-5 h-5 mr-2" />
                     Analyze
                   </Button>
                 </div>
@@ -106,28 +117,28 @@ export default function HeroSection() {
           </div>
 
           {/* Stats grid with enhanced design */}
-          <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <div className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="relative group animate-fade-in delay-300">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-              <div className="relative bg-background/60 backdrop-blur-xl border border-border/40 rounded-2xl p-5 hover:border-neon-cyan/50 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-foreground mb-1 bg-gradient-to-br from-neon-cyan to-neon-purple bg-clip-text text-transparent">5K+</div>
-                <div className="text-xs text-foreground/70 font-medium">Coins Tracked Daily</div>
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
+              <div className="relative bg-background/30 backdrop-blur-2xl border border-border/30 rounded-3xl p-8 hover:border-neon-cyan/40 hover:bg-background/40 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                <div className="text-5xl sm:text-6xl font-black mb-2 bg-gradient-to-br from-neon-cyan via-neon-purple to-neon-cyan bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,255,0.3)]" style={{ letterSpacing: '-0.02em' }}>5K+</div>
+                <div className="text-sm text-foreground/80 font-semibold tracking-wide">Coins Tracked Daily</div>
               </div>
             </div>
             
             <div className="relative group animate-fade-in delay-350">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan/10 to-neon-green/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-              <div className="relative bg-background/60 backdrop-blur-xl border border-border/40 rounded-2xl p-5 hover:border-neon-green/50 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-foreground mb-1 bg-gradient-to-br from-neon-green to-neon-cyan bg-clip-text text-transparent">65%</div>
-                <div className="text-xs text-foreground/70 font-medium">Success Rate</div>
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-neon-green/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
+              <div className="relative bg-background/30 backdrop-blur-2xl border border-border/30 rounded-3xl p-8 hover:border-neon-green/40 hover:bg-background/40 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                <div className="text-5xl sm:text-6xl font-black mb-2 bg-gradient-to-br from-neon-green via-neon-cyan to-neon-green bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,150,0.3)]" style={{ letterSpacing: '-0.02em' }}>65%</div>
+                <div className="text-sm text-foreground/80 font-semibold tracking-wide">Success Rate</div>
               </div>
             </div>
             
             <div className="relative group animate-fade-in delay-400">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-purple/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-              <div className="relative bg-background/60 backdrop-blur-xl border border-border/40 rounded-2xl p-5 hover:border-neon-purple/50 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-foreground mb-1 bg-gradient-to-br from-neon-purple to-neon-green bg-clip-text text-transparent">&lt;4min</div>
-                <div className="text-xs text-foreground/70 font-medium">Average Analysis</div>
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-neon-purple/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
+              <div className="relative bg-background/30 backdrop-blur-2xl border border-border/30 rounded-3xl p-8 hover:border-neon-purple/40 hover:bg-background/40 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                <div className="text-5xl sm:text-6xl font-black mb-2 bg-gradient-to-br from-neon-purple via-neon-green to-neon-purple bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(180,0,255,0.3)]" style={{ letterSpacing: '-0.02em' }}>&lt;4min</div>
+                <div className="text-sm text-foreground/80 font-semibold tracking-wide">Average Analysis</div>
               </div>
             </div>
           </div>
