@@ -32,20 +32,11 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-24">
         <div className="text-center space-y-8">
           
-          {/* Top badges */}
-          <div className="flex items-center justify-center gap-2 flex-wrap animate-fade-in">
-            <Badge variant="secondary" className="px-3 py-1 text-xs font-medium backdrop-blur-xl bg-background/40 border border-neon-cyan/30 hover:border-neon-cyan/50 transition-all">
-              <Sparkles className="w-3 h-3 mr-1.5 text-neon-cyan" />
+          {/* Top badge */}
+          <div className="flex items-center justify-center animate-fade-in">
+            <div className="px-4 py-2 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 text-sm font-medium text-white">
               AI-Powered
-            </Badge>
-            <Badge variant="secondary" className="px-3 py-1 text-xs font-medium backdrop-blur-xl bg-background/40 border border-neon-green/30 hover:border-neon-green/50 transition-all">
-              <TrendingUp className="w-3 h-3 mr-1.5 text-neon-green" />
-              Real-time Data
-            </Badge>
-            <Badge variant="secondary" className="px-3 py-1 text-xs font-medium backdrop-blur-xl bg-background/40 border border-neon-purple/30 hover:border-neon-purple/50 transition-all">
-              <Shield className="w-3 h-3 mr-1.5 text-neon-purple" />
-              Risk Analysis
-            </Badge>
+            </div>
           </div>
 
           {/* Main headline */}
