@@ -9,7 +9,7 @@ export default function HeroSection() {
   const navigate = useNavigate();
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Aurora Background */}
       <Aurora 
         colorStops={['#FFFFFF', '#D4D4D4', '#A3A3A3']}
@@ -30,7 +30,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 py-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-24 w-full">
         <div className="text-center space-y-8">
           
           {/* Top badge */}
