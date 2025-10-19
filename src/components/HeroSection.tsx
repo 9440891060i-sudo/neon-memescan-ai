@@ -30,7 +30,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 pt-24 pb-8 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 pt-16 pb-8 w-full">
         <div className="text-center space-y-8">
           
           {/* Top badge */}
