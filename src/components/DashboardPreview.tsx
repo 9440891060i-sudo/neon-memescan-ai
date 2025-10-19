@@ -324,24 +324,30 @@ export default function DashboardPreview() {
                         {/* Jupiter - Old Wallets */}
                         <div className="flex flex-col items-center">
                           <div className="relative mb-4 flex items-center justify-center" style={{ height: '140px' }}>
-                            {/* Orbital rings */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 border border-dashed border-terminal-gray/20 rounded-full animate-[spin_40s_linear_infinite]"></div>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-terminal-gray/10 rounded-full animate-[spin_50s_linear_infinite_reverse]"></div>
-                            {/* Jupiter planet */}
-                            <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-amber-600 via-orange-500 to-amber-700 shadow-2xl shadow-amber-500/30">
-                              {/* Jupiter bands */}
-                              <div className="absolute inset-0 rounded-full overflow-hidden">
-                                <div className="absolute top-1/4 left-0 right-0 h-1 bg-amber-800/40"></div>
-                                <div className="absolute top-1/2 left-0 right-0 h-2 bg-amber-900/30"></div>
-                                <div className="absolute top-3/4 left-0 right-0 h-1 bg-amber-800/40"></div>
+                            {/* Orbital rings - spinning slowly */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] border border-dashed border-gray-600/30 rounded-full animate-[spin_60s_linear_infinite]"></div>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160px] h-[160px] border border-dashed border-gray-600/20 rounded-full animate-[spin_80s_linear_infinite_reverse]"></div>
+                            
+                            {/* Jupiter planet with hover animation */}
+                            <div className="relative w-[120px] h-[120px] animate-[float_6s_ease-in-out_infinite]">
+                              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-[#C8956C] via-[#B8824A] to-[#9F6D3B] shadow-2xl shadow-orange-600/40">
+                                {/* Jupiter bands - horizontal stripes */}
+                                <div className="absolute inset-0 rounded-full overflow-hidden">
+                                  <div className="absolute top-[20%] left-0 right-0 h-[3px] bg-[#A87040]/60 rounded-full"></div>
+                                  <div className="absolute top-[35%] left-0 right-0 h-[4px] bg-[#8B5A2B]/50 rounded-full"></div>
+                                  <div className="absolute top-[50%] left-0 right-0 h-[5px] bg-[#6F4520]/40 rounded-full"></div>
+                                  <div className="absolute top-[65%] left-0 right-0 h-[3px] bg-[#A87040]/50 rounded-full"></div>
+                                  <div className="absolute top-[80%] left-0 right-0 h-[2px] bg-[#8B5A2B]/40 rounded-full"></div>
+                                </div>
+                                {/* Asteroid particles floating around */}
+                                <div className="absolute -top-10 -right-10 w-1.5 h-1.5 bg-gray-400 rounded-full animate-[float_4s_ease-in-out_infinite]"></div>
+                                <div className="absolute -bottom-8 -left-8 w-1 h-1 bg-gray-500 rounded-full animate-[float_5s_ease-in-out_infinite_0.5s]"></div>
+                                <div className="absolute top-2 -right-14 w-1 h-1 bg-gray-400/80 rounded-full animate-[float_4.5s_ease-in-out_infinite_1s]"></div>
+                                <div className="absolute -bottom-12 right-4 w-0.5 h-0.5 bg-gray-500/60 rounded-full animate-[float_5.5s_ease-in-out_infinite_1.5s]"></div>
                               </div>
-                              {/* Asteroid particles */}
-                              <div className="absolute -top-8 -right-8 w-1 h-1 bg-terminal-gray rounded-full"></div>
-                              <div className="absolute -bottom-6 -left-6 w-0.5 h-0.5 bg-terminal-gray rounded-full"></div>
-                              <div className="absolute top-0 -right-12 w-1 h-1 bg-terminal-gray/70 rounded-full"></div>
                             </div>
                           </div>
-                          <div className="text-4xl font-bold text-amber-500 mb-1 font-mono">
+                          <div className="text-4xl font-bold text-[#C8956C] mb-1 font-mono">
                             <AnimatedNumber value={112} isVisible={isIntersecting} />
                           </div>
                           <div className="text-sm text-terminal-gray font-mono">Old Wallets</div>
@@ -350,20 +356,22 @@ export default function DashboardPreview() {
                         {/* Earth - Average Wallets */}
                         <div className="flex flex-col items-center">
                           <div className="relative mb-4 flex items-center justify-center" style={{ height: '140px' }}>
-                            {/* Earth planet */}
-                            <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 shadow-2xl shadow-blue-500/30">
-                              {/* Earth continents */}
-                              <div className="absolute inset-0 rounded-full overflow-hidden">
-                                <div className="absolute top-1/4 left-1/4 w-8 h-6 bg-green-600/60 rounded-full blur-sm"></div>
-                                <div className="absolute top-1/2 right-1/4 w-6 h-4 bg-green-500/50 rounded-full blur-sm"></div>
-                                <div className="absolute bottom-1/4 left-1/3 w-5 h-5 bg-green-600/60 rounded-full blur-sm"></div>
-                                {/* Cloud layer */}
-                                <div className="absolute top-1/3 right-1/3 w-6 h-3 bg-white/20 rounded-full blur-md"></div>
-                                <div className="absolute bottom-1/3 left-1/4 w-4 h-2 bg-white/15 rounded-full blur-md"></div>
+                            {/* Earth planet with hover animation */}
+                            <div className="relative w-[100px] h-[100px] animate-[float_5s_ease-in-out_infinite_0.5s]">
+                              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-[#4A90E2] via-[#357ABD] to-[#2E6BA8] shadow-2xl shadow-blue-500/40">
+                                {/* Earth continents - green landmasses */}
+                                <div className="absolute inset-0 rounded-full overflow-hidden">
+                                  <div className="absolute top-[20%] left-[25%] w-10 h-8 bg-[#5FB878]/70 rounded-full blur-[2px]"></div>
+                                  <div className="absolute top-[50%] right-[20%] w-8 h-6 bg-[#6FC97D]/60 rounded-full blur-[2px]"></div>
+                                  <div className="absolute bottom-[20%] left-[30%] w-7 h-6 bg-[#5FB878]/65 rounded-full blur-[2px]"></div>
+                                  {/* Cloud layer - white wisps */}
+                                  <div className="absolute top-[30%] right-[30%] w-8 h-4 bg-white/25 rounded-full blur-[3px]"></div>
+                                  <div className="absolute bottom-[30%] left-[25%] w-6 h-3 bg-white/20 rounded-full blur-[3px]"></div>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="text-4xl font-bold text-blue-400 mb-1 font-mono">
+                          <div className="text-4xl font-bold text-[#4A90E2] mb-1 font-mono">
                             <AnimatedNumber value={256} isVisible={isIntersecting} />
                           </div>
                           <div className="text-sm text-terminal-gray font-mono">Average Wallets</div>
@@ -372,17 +380,20 @@ export default function DashboardPreview() {
                         {/* Pink Planet - New Wallets */}
                         <div className="flex flex-col items-center">
                           <div className="relative mb-4 flex items-center justify-center" style={{ height: '140px' }}>
-                            {/* Pink planet */}
-                            <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 shadow-2xl shadow-pink-400/30">
-                              {/* Subtle craters */}
-                              <div className="absolute inset-0 rounded-full overflow-hidden">
-                                <div className="absolute top-1/4 right-1/4 w-3 h-3 bg-pink-500/40 rounded-full blur-sm"></div>
-                                <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-pink-600/30 rounded-full blur-sm"></div>
-                                <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-pink-500/50 rounded-full blur-sm"></div>
+                            {/* Pink planet with hover animation */}
+                            <div className="relative w-[85px] h-[85px] animate-[float_5.5s_ease-in-out_infinite_1s]">
+                              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-[#F5A9C1] via-[#E89BB3] to-[#D88BA3] shadow-2xl shadow-pink-400/40">
+                                {/* Subtle craters and surface features */}
+                                <div className="absolute inset-0 rounded-full overflow-hidden">
+                                  <div className="absolute top-[25%] right-[25%] w-4 h-4 bg-[#D88BA3]/50 rounded-full blur-[2px]"></div>
+                                  <div className="absolute bottom-[30%] left-[30%] w-5 h-5 bg-[#C97A93]/40 rounded-full blur-[2px]"></div>
+                                  <div className="absolute top-[50%] left-[20%] w-3 h-3 bg-[#D88BA3]/60 rounded-full blur-[2px]"></div>
+                                  <div className="absolute bottom-[50%] right-[30%] w-4 h-4 bg-[#E89BB3]/30 rounded-full blur-[2px]"></div>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="text-4xl font-bold text-pink-400 mb-1 font-mono">
+                          <div className="text-4xl font-bold text-[#F5A9C1] mb-1 font-mono">
                             <AnimatedNumber value={89} isVisible={isIntersecting} />
                           </div>
                           <div className="text-sm text-terminal-gray font-mono">New Wallets</div>
@@ -393,13 +404,13 @@ export default function DashboardPreview() {
                       <div className="grid grid-cols-3 gap-4">
                         {/* Old Wallets Column */}
                         <div className="space-y-2">
-                          <h5 className="text-amber-500 font-mono font-bold mb-3">Old Wallets</h5>
+                          <h5 className="text-[#C8956C] font-mono font-bold mb-3">Old Wallets</h5>
                           {[
                             { address: '0x742d35Cc6634C...', days: 487 },
                             { address: '0x1a2b3c4d5e6f7...', days: 523 },
                             { address: '0xaB5801a7D3983...', days: 612 }
                           ].map((wallet, idx) => (
-                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-amber-500/30 transition-colors group">
+                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-[#C8956C]/30 transition-colors group">
                               <div>
                                 <div className="text-sm text-terminal-white font-mono">{wallet.address}</div>
                                 <div className="text-xs text-slate-500 font-mono mt-1">{wallet.days} days</div>
@@ -415,13 +426,13 @@ export default function DashboardPreview() {
 
                         {/* Average Wallets Column */}
                         <div className="space-y-2">
-                          <h5 className="text-blue-400 font-mono font-bold mb-3">Average Wallets</h5>
+                          <h5 className="text-[#4A90E2] font-mono font-bold mb-3">Average Wallets</h5>
                           {[
                             { address: '0x4Fabb145d6465...', days: 152 },
                             { address: '0xdAC17F958D2ee...', days: 89 },
                             { address: '0x95aD61b0a150d...', days: 203 }
                           ].map((wallet, idx) => (
-                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-blue-400/30 transition-colors group">
+                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-[#4A90E2]/30 transition-colors group">
                               <div>
                                 <div className="text-sm text-terminal-white font-mono">{wallet.address}</div>
                                 <div className="text-xs text-slate-500 font-mono mt-1">{wallet.days} days</div>
@@ -437,13 +448,13 @@ export default function DashboardPreview() {
 
                         {/* New Wallets Column */}
                         <div className="space-y-2">
-                          <h5 className="text-pink-400 font-mono font-bold mb-3">New Wallets</h5>
+                          <h5 className="text-[#F5A9C1] font-mono font-bold mb-3">New Wallets</h5>
                           {[
                             { address: '0x514910771AF9C...', days: 12 },
                             { address: '0x1f9840a85d5aF...', days: 7 },
                             { address: '0x7Fc66500c84A7...', days: 23 }
                           ].map((wallet, idx) => (
-                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-pink-400/30 transition-colors group">
+                            <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex items-center justify-between hover:border-[#F5A9C1]/30 transition-colors group">
                               <div>
                                 <div className="text-sm text-terminal-white font-mono">{wallet.address}</div>
                                 <div className="text-xs text-slate-500 font-mono mt-1">{wallet.days} days</div>
