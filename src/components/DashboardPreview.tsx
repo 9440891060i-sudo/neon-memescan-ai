@@ -438,55 +438,38 @@ export default function DashboardPreview() {
 
                   {/* Additional Analysis Charts */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    {/* Market Intelligence */}
+                    {/* On Chain Metrics */}
                     <Card className="p-4 bg-black/40 border border-terminal-amber/20 backdrop-blur-sm">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-4">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-amber/20 rounded">
                           <TrendingUp className="w-3 h-3 text-terminal-amber" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
-                            MARKET INTELLIGENCE
+                            ON CHAIN METRICS
                           </h4>
                           <div className="text-xs text-terminal-gray">
-                            Whale & Institution Activity
+                            Token Security Analysis
                           </div>
                         </div>
                       </div>
                       
-                      <div className="h-32">
-                        <AnimatedChart
-                          data={marketData}
-                          isVisible={isIntersecting}
-                          gridColor="rgba(100, 116, 139, 0.1)"
-                          lines={[
-                            { dataKey: 'whaleActivity', stroke: 'hsl(var(--terminal-amber))', strokeWidth: 2 },
-                            { dataKey: 'institutionalFlow', stroke: 'hsl(var(--terminal-blue))', strokeWidth: 2 },
-                          ]}
-                          tooltipFormatter={(value, name) => {
-                            const formatValue = (val) => {
-                              if (name === 'marketCap') return `$${val.toFixed(1)}B`;
-                              if (name === 'whaleActivity') return `${val.toFixed(1)}M`;
-                              if (name === 'institutionalFlow') return `$${val.toFixed(1)}M`;
-                              return val.toString();
-                            };
-                            const labels = {
-                              whaleActivity: 'Whale Activity',
-                              institutionalFlow: 'Institutional Flow'
-                            };
-                            return [formatValue(value), labels[name] || name];
-                          }}
-                        />
-                      </div>
-                      
-                      <div className="flex gap-3 mt-2">
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-amber"></div>
-                          <span className="text-terminal-gray">Whale Activity</span>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center p-2 bg-black/20 rounded border border-terminal-gray/10">
+                          <span className="text-xs text-terminal-gray font-mono">Bundle %</span>
+                          <span className="text-sm text-terminal-white font-mono font-semibold">23</span>
                         </div>
-                        <div className="flex items-center gap-1 text-xs">
-                          <div className="w-2 h-1 bg-terminal-blue"></div>
-                          <span className="text-terminal-gray">Institution Flow</span>
+                        <div className="flex justify-between items-center p-2 bg-black/20 rounded border border-terminal-gray/10">
+                          <span className="text-xs text-terminal-gray font-mono">Sniper %</span>
+                          <span className="text-sm text-terminal-white font-mono font-semibold">3.2</span>
+                        </div>
+                        <div className="flex justify-between items-center p-2 bg-black/20 rounded border border-terminal-gray/10">
+                          <span className="text-xs text-terminal-gray font-mono">Top 10%</span>
+                          <span className="text-sm text-terminal-white font-mono font-semibold">20</span>
+                        </div>
+                        <div className="flex justify-between items-center p-2 bg-black/20 rounded border border-terminal-gray/10">
+                          <span className="text-xs text-terminal-gray font-mono">DEX</span>
+                          <span className="text-sm text-terminal-green font-mono font-semibold">Paid</span>
                         </div>
                       </div>
                     </Card>
