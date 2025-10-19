@@ -3,20 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  User, 
-  Mail, 
-  Lock, 
-  CreditCard, 
-  Crown, 
-  Activity,
-  Calendar,
-  Shield,
-  Zap
-} from "lucide-react";
+import { User, Lock } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
 
@@ -29,31 +17,6 @@ export default function ProfileSettings() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  // Mock subscription data
-  const subscriptionData = {
-    plan: "Pro",
-    status: "Active",
-    nextBilling: "January 15, 2025",
-    creditsRemaining: 1250,
-    creditsUsed: 750
-  };
-
-  // Mock payment method
-  const paymentMethod = {
-    type: "Visa",
-    last4: "4242",
-    expiry: "12/27"
-  };
-
-  // Mock activity logs
-  const activityLogs = [
-    { date: "Dec 15, 2024", action: "Token Analysis", details: "PEPE analyzed - AI Score: 87", type: "analysis" },
-    { date: "Dec 14, 2024", action: "Credit Purchase", details: "Purchased 500 credits", type: "purchase" },
-    { date: "Dec 13, 2024", action: "Login", details: "Logged in from Chrome", type: "auth" },
-    { date: "Dec 12, 2024", action: "Token Analysis", details: "DOGE analyzed - AI Score: 74", type: "analysis" },
-    { date: "Dec 11, 2024", action: "Profile Update", details: "Updated username", type: "profile" },
-  ];
 
   const getUserInitials = () => {
     if (!user?.username) return "U";
@@ -87,35 +50,18 @@ export default function ProfileSettings() {
     setConfirmPassword("");
   };
 
-  const handleUpgradePlan = () => {
+  const handleForgotPassword = () => {
     toast({
-      title: "Upgrade Plan",
-      description: "Redirecting to premium subscription...",
+      title: "Password Reset",
+      description: "A password reset link has been sent to your email.",
     });
-  };
-
-  const handleUpdatePayment = () => {
-    toast({
-      title: "Payment Method",
-      description: "Redirecting to payment settings...",
-    });
-  };
-
-  const getActivityIcon = (type: string) => {
-    switch (type) {
-      case 'analysis': return <Zap className="w-4 h-4 text-neon-green" />;
-      case 'purchase': return <CreditCard className="w-4 h-4 text-neon-cyan" />;
-      case 'auth': return <Shield className="w-4 h-4 text-neon-purple" />;
-      case 'profile': return <User className="w-4 h-4 text-yellow-400" />;
-      default: return <Activity className="w-4 h-4 text-muted-foreground" />;
-    }
   };
 
   return (
     <div className="p-6 space-y-6 max-w-4xl mx-auto bg-black min-h-screen">
       <div>
         <h1 className="text-3xl font-bold text-white mb-2">Profile Settings</h1>
-        <p className="text-gray-400">Manage your account, subscription, and preferences</p>
+        <p className="text-gray-400">Manage your account and preferences</p>
       </div>
 
       {/* Profile Information */}
@@ -214,121 +160,17 @@ export default function ProfileSettings() {
               className="bg-gray-950 border-gray-800 text-white"
             />
           </div>
-          <Button onClick={handleUpdatePassword} className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-800">
-            Update Password
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Subscription Management */}
-      <Card className="bg-black border-gray-800">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-white">
-            <Crown className="w-5 h-5 text-gray-400" />
-            Subscription Plan
-          </CardTitle>
-          <CardDescription>Manage your subscription and billing</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-900">
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-white">{subscriptionData.plan} Plan</h3>
-                <Badge className="bg-gray-900 text-white border-gray-800">
-                  {subscriptionData.status}
-                </Badge>
-              </div>
-              <p className="text-sm text-gray-400">
-                Next billing: {subscriptionData.nextBilling}
-              </p>
-            </div>
-            <Button onClick={handleUpgradePlan} variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-900">
-              Manage Plan
+          <div className="flex items-center justify-between">
+            <Button onClick={handleUpdatePassword} className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-800">
+              Update Password
             </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 bg-gray-950 rounded-lg border border-gray-900">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Credits Remaining</span>
-                <span className="text-lg font-bold text-neon-green">{subscriptionData.creditsRemaining}</span>
-              </div>
-              <div className="w-full bg-gray-900 rounded-full h-2">
-                <div 
-                  className="bg-neon-green h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(subscriptionData.creditsRemaining / (subscriptionData.creditsRemaining + subscriptionData.creditsUsed)) * 100}%` }}
-                />
-              </div>
-            </div>
-
-            <div className="p-4 bg-gray-950 rounded-lg border border-gray-900">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Credits Used</span>
-                <span className="text-lg font-bold text-white">{subscriptionData.creditsUsed}</span>
-              </div>
-              <Button variant="outline" size="sm" className="w-full border-gray-700 text-gray-300 hover:bg-gray-900">
-                Buy More Credits
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Payment Method */}
-      <Card className="bg-black border-gray-800">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-white">
-            <CreditCard className="w-5 h-5 text-gray-400" />
-            Payment Method
-          </CardTitle>
-          <CardDescription>Manage your billing information</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-900">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded flex items-center justify-center text-white text-xs font-bold">
-                VISA
-              </div>
-              <div>
-                <p className="font-medium text-white">•••• •••• •••• {paymentMethod.last4}</p>
-                <p className="text-sm text-gray-400">Expires {paymentMethod.expiry}</p>
-              </div>
-            </div>
-            <Button onClick={handleUpdatePayment} variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-900">
-              Update Payment
+            <Button 
+              variant="link" 
+              onClick={handleForgotPassword}
+              className="text-neon-cyan hover:text-neon-cyan/80"
+            >
+              Forgot Password?
             </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Activity Logs */}
-      <Card className="bg-black border-gray-800">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg text-white">
-            <Activity className="w-5 h-5 text-gray-400" />
-            Account Activity
-          </CardTitle>
-          <CardDescription>Recent account activities and logs</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {activityLogs.map((log, index) => (
-              <div key={index} className="flex items-start gap-3 p-3 bg-gray-950 rounded-lg border border-gray-900">
-                <div className="mt-0.5">
-                  {getActivityIcon(log.type)}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <p className="font-medium truncate text-white">{log.action}</p>
-                    <div className="flex items-center gap-2 text-xs text-gray-400">
-                      <Calendar className="w-3 h-3" />
-                      {log.date}
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-400 truncate">{log.details}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </CardContent>
       </Card>
