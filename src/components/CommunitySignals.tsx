@@ -135,7 +135,7 @@ export default function CommunitySignals() {
   };
 
   return (
-    <Card className="p-6 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
+    <Card className="p-6 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
       <div className="flex items-center gap-3 mb-6">
         <div className="flex items-center justify-center w-8 h-8 bg-terminal-blue/20 rounded-lg">
           <MessageSquare className="w-4 h-4 text-terminal-gray" />
