@@ -6,8 +6,7 @@ import {
   CreditCard, 
   Wallet, 
   Check, 
-  Info, 
-  X,
+  Info,
   Users,
   Settings,
   BarChart3,
@@ -68,20 +67,12 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="p-8">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden">
+            <div className="p-8 min-h-full">
               {/* Header */}
-              <div className="flex items-start justify-between mb-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-white mb-2">Plans & Kludd</h2>
-                  <p className="text-white/60">Fuel your Klux engine. Buy Kludd liters or unlock Klux AI.</p>
-                </div>
-                <button 
-                  onClick={() => onOpenChange(false)}
-                  className="p-2 hover:bg-white/5 rounded-lg transition-colors"
-                >
-                  <X className="w-5 h-5 text-white/60" />
-                </button>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-white mb-2">Plans & Kludd</h2>
+                <p className="text-white/60">Fuel your Klux engine. Buy Kludd liters or unlock Klux AI.</p>
               </div>
 
               {/* Current Status */}
