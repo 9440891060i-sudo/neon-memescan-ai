@@ -3,13 +3,12 @@ import { Badge } from "@/components/ui/badge";
 import { Sparkles, TrendingUp, Zap, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aurora from "./Aurora";
-import ScrollingCoins from "./ScrollingCoins";
 
 export default function HeroSection() {
   const navigate = useNavigate();
   
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Aurora Background */}
       <Aurora 
         colorStops={['#FFFFFF', '#D4D4D4', '#A3A3A3']}
@@ -30,7 +29,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 pt-16 pb-8 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-24">
         <div className="text-center space-y-8">
           
           {/* Top badge */}
@@ -91,30 +90,23 @@ export default function HeroSection() {
               Download Extension
             </Button>
           </div>
-        </div>
-      </div>
 
-      {/* Full-width Scrolling Meme Coins */}
-      <div className="relative z-10 w-full -mt-2">
-        <ScrollingCoins />
-      </div>
-
-      {/* Stats grid */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 mt-3">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-          <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
-            <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
-            <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
-          </div>
-          
-          <div className="animate-fade-in delay-350 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
-            <div className="text-3xl font-bold text-foreground/90 mb-1">65%</div>
-            <div className="text-xs text-foreground/50">Success Rate</div>
-          </div>
-          
-          <div className="animate-fade-in delay-400 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
-            <div className="text-3xl font-bold text-foreground/90 mb-1">&lt;4min</div>
-            <div className="text-xs text-foreground/50">Average Analysis</div>
+          {/* Stats grid with enhanced design */}
+          <div className="pt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div className="animate-fade-in delay-300 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">5K+</div>
+              <div className="text-xs text-foreground/50">Coins Tracked Daily</div>
+            </div>
+            
+            <div className="animate-fade-in delay-350 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">65%</div>
+              <div className="text-xs text-foreground/50">Success Rate</div>
+            </div>
+            
+            <div className="animate-fade-in delay-400 p-6 bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl hover:bg-background/60 transition-all">
+              <div className="text-3xl font-bold text-foreground/90 mb-1">&lt;4min</div>
+              <div className="text-xs text-foreground/50">Average Analysis</div>
+            </div>
           </div>
         </div>
       </div>
