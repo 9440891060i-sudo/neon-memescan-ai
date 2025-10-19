@@ -13,6 +13,16 @@ interface CommunitySignal {
   members: number;
 }
 
+interface WalletAlert {
+  id: string;
+  wallet: string;
+  action: "bought" | "sold";
+  amount: string;
+  coin: string;
+  marketCap: string;
+  timestamp: string;
+}
+
 const mockSignals: CommunitySignal[] = [
   {
     id: "1",
@@ -49,6 +59,45 @@ const mockSignals: CommunitySignal[] = [
     timestamp: "12m ago",
     sentiment: "neutral",
     members: 67300
+  }
+];
+
+const walletAlerts: WalletAlert[] = [
+  {
+    id: "1",
+    wallet: "Cupsey",
+    action: "bought",
+    amount: "3 SOL",
+    coin: "$PEPE",
+    marketCap: "420k MC",
+    timestamp: "1m ago"
+  },
+  {
+    id: "2",
+    wallet: "SolanaWhale",
+    action: "bought",
+    amount: "12 SOL",
+    coin: "$BONK",
+    marketCap: "850k MC",
+    timestamp: "3m ago"
+  },
+  {
+    id: "3",
+    wallet: "DegenTrader",
+    action: "sold",
+    amount: "5 SOL",
+    coin: "$DOGE",
+    marketCap: "1.2M MC",
+    timestamp: "5m ago"
+  },
+  {
+    id: "4",
+    wallet: "MoonBoi",
+    action: "bought",
+    amount: "8 SOL",
+    coin: "$SHIB",
+    marketCap: "650k MC",
+    timestamp: "8m ago"
   }
 ];
 
@@ -142,42 +191,33 @@ export default function CommunitySignals() {
         </div>
       </div>
 
-      {/* Signal History */}
+      {/* Wallet Alerts */}
       <div className="space-y-3">
         <div className="text-xs text-terminal-gray uppercase tracking-wider">
-          Recent Signals
+          Wallet Alerts
         </div>
         <div className="space-y-2 max-h-48 overflow-y-auto">
-          {currentSignals.slice(0, 4).map((signal) => (
+          {walletAlerts.map((alert) => (
             <div 
-              key={signal.id}
-              className={`p-3 rounded border ${getSentimentBg(signal.sentiment)} transition-all hover:bg-opacity-20`}
+              key={alert.id}
+              className={`p-3 rounded border ${alert.action === "bought" ? "bg-terminal-green/10 border-terminal-green/30" : "bg-terminal-red/10 border-terminal-red/30"} transition-all hover:bg-opacity-20`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-terminal-gray font-mono">
-                    {signal.community}
+                  <span className="text-xs text-terminal-white font-mono font-semibold">
+                    {alert.wallet}
                   </span>
-                  <span className="text-sm text-terminal-white font-mono">
-                    ${signal.coin}
+                  <span className={`text-xs font-mono uppercase ${alert.action === "bought" ? "text-terminal-green" : "text-terminal-red"}`}>
+                    {alert.action}
                   </span>
                 </div>
                 <span className="text-xs text-terminal-gray">
-                  {signal.timestamp}
+                  {alert.timestamp}
                 </span>
               </div>
-              <p className="text-sm text-terminal-gray mb-1">
-                {signal.message}
+              <p className="text-sm text-terminal-gray">
+                {alert.amount} worth of {alert.coin} at {alert.marketCap}
               </p>
-              <div className="flex items-center justify-between">
-                <span className={`text-xs ${getSentimentColor(signal.sentiment)} font-mono uppercase`}>
-                  {signal.sentiment}
-                </span>
-                <div className="flex items-center gap-1 text-xs text-terminal-gray/70">
-                  <Users className="w-3 h-3" />
-                  <span>{signal.members.toLocaleString()}</span>
-                </div>
-              </div>
             </div>
           ))}
         </div>
