@@ -286,7 +286,7 @@ export default function DashboardPreview() {
                     <div className="px-6 py-4 border-b border-terminal-gray/20 bg-black/60">
                       <h4 className="text-lg font-bold text-terminal-white font-mono">Wallet Age Distribution</h4>
                       <p className="text-xs text-terminal-gray font-mono mt-1">
-                        Based on wallet creation date · Detailed planetary visualization with orbit animations
+                        Based on wallet creation date
                       </p>
                     </div>
 
