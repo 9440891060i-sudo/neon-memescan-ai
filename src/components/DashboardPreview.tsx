@@ -204,7 +204,7 @@ export default function DashboardPreview() {
                   {/* Combined Analytics Chart */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {/* Social Intelligence */}
-                    <Card className="p-4 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
+                    <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-blue/20 rounded">
                           <Activity className="w-3 h-3 text-terminal-blue" />
@@ -244,7 +244,7 @@ export default function DashboardPreview() {
                     </Card>
 
                     {/* Holders */}
-                    <Card className="p-4 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
+                    <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
                           <BarChart3 className="w-3 h-3 text-terminal-green" />
@@ -439,7 +439,7 @@ export default function DashboardPreview() {
                   {/* Additional Analysis Charts */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {/* On Chain Metrics */}
-                    <Card className="p-4 bg-black/40 border border-terminal-amber/20 backdrop-blur-sm">
+                    <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-amber/20 rounded">
                           <TrendingUp className="w-3 h-3 text-terminal-amber" />
@@ -475,7 +475,7 @@ export default function DashboardPreview() {
                     </Card>
 
                     {/* AI Call */}
-                    <Card className="p-4 bg-black/40 border border-terminal-green/20 backdrop-blur-sm">
+                    <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
                           <Brain className="w-3 h-3 text-terminal-green" />
@@ -491,12 +491,12 @@ export default function DashboardPreview() {
                       </div>
                       
                       <div className="space-y-3">
-                        <div className="p-3 bg-terminal-green/10 rounded border border-terminal-green/30">
+                        <div className="p-3 bg-terminal-green/10 rounded border border-terminal-gray/20">
                           <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">Entry Price</div>
                           <div className="text-lg text-terminal-green font-mono font-bold">$0.0000087</div>
                           <div className="text-xs text-terminal-gray font-mono mt-1">Buy Range: $0.0000085-90</div>
                         </div>
-                        <div className="p-3 bg-terminal-blue/10 rounded border border-terminal-blue/30">
+                        <div className="p-3 bg-terminal-blue/10 rounded border border-terminal-gray/20">
                           <div className="text-xs text-terminal-gray mb-1 font-mono uppercase">Exit Price</div>
                           <div className="text-lg text-terminal-blue font-mono font-bold">$0.0000125</div>
                           <div className="text-xs text-terminal-gray font-mono mt-1">Target: +43.6% Profit</div>
@@ -513,7 +513,7 @@ export default function DashboardPreview() {
                   <CommunitySignals />
                   
                   {/* KOL Concentration */}
-                  <Card className="p-6 bg-black/40 border border-terminal-purple/20 backdrop-blur-sm">
+                  <Card className="p-6 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <h4 className="text-lg font-semibold text-terminal-white font-mono">
@@ -657,7 +657,7 @@ export default function DashboardPreview() {
                   </Card>
 
                   {/* Members vs Unique Authors */}
-                  <Card className="p-4 bg-black/40 border border-terminal-blue/20 backdrop-blur-sm">
+                  <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-1">
                         <h4 className="text-base font-semibold text-terminal-white font-mono">
@@ -747,7 +747,7 @@ export default function DashboardPreview() {
                 <Button 
                   variant="analyze" 
                   size="lg" 
-                  className="px-12 font-mono bg-terminal-blue/20 border border-terminal-blue/40 text-terminal-blue hover:bg-terminal-blue/30"
+                  className="px-12 font-mono bg-terminal-blue/20 border border-terminal-gray/20 text-terminal-blue hover:bg-terminal-blue/30"
                 >
                   INITIALIZE ANALYSIS (<AnimatedNumber 
                     value={25} 
@@ -782,7 +782,7 @@ export default function DashboardPreview() {
                         <div className="p-4">
                           {/* Header */}
                           <div className="flex items-center gap-3 mb-3">
-                            <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-terminal-blue/30 to-terminal-blue/10 border border-terminal-blue/30 flex items-center justify-center">
+                            <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-terminal-blue/30 to-terminal-blue/10 border border-terminal-gray/20 flex items-center justify-center">
                               <Icon className="w-3.5 h-3.5 text-terminal-blue" strokeWidth={1.5} />
                             </div>
                             <h4 className="text-xs font-semibold text-terminal-white font-mono uppercase tracking-wider">
@@ -830,7 +830,7 @@ export default function DashboardPreview() {
                         
                         {/* Subtle Glow Effect */}
                         {isExpanded && (
-                          <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-terminal-blue/10 via-transparent to-terminal-blue/5 pointer-events-none border border-terminal-blue/20"></div>
+                          <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-terminal-blue/10 via-transparent to-terminal-blue/5 pointer-events-none border border-terminal-gray/20"></div>
                         )}
                       </div>
                     );
