@@ -138,9 +138,9 @@ export function AppSidebar() {
         <Button
           onClick={handleLogout}
           variant="outline"
-          className={`w-full ${open ? "justify-start px-4" : "justify-center px-0"} border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group`}
+          className={`w-full ${open ? "justify-start px-4 h-10" : "justify-center px-0 h-8 w-8 mx-auto"} border-gray-800 text-gray-400 hover:bg-gray-950 hover:text-red-400 hover:border-gray-700 transition-all duration-300 group`}
         >
-          <LogOut className={`w-4 h-4 ${open ? "mr-3" : ""} relative z-10 transition-transform duration-300 group-hover:scale-110`} />
+          <LogOut className={`${open ? "w-4 h-4 mr-3" : "w-3.5 h-3.5"} relative z-10 transition-transform duration-300 group-hover:scale-110`} />
           {open && <span className="relative z-10">Logout</span>}
         </Button>
       </SidebarFooter>
