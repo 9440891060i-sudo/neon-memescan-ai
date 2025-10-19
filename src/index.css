@@ -42,6 +42,7 @@ All colors MUST be HSL.
     --terminal-amber: 45 100% 60%;
     --terminal-blue: 210 100% 60%;
     --terminal-red: 0 100% 60%;
+    --terminal-purple: 270 100% 70%;
     --terminal-gray: 210 15% 75%;
     --terminal-white: 0 0% 95%;
     
@@ -192,6 +193,10 @@ All colors MUST be HSL.
     color: hsl(var(--terminal-red));
   }
   
+  .text-terminal-purple {
+    color: hsl(var(--terminal-purple));
+  }
+  
   .text-terminal-gray {
     color: hsl(var(--terminal-gray));
   }
@@ -215,6 +220,10 @@ All colors MUST be HSL.
   
   .bg-terminal-red {
     background-color: hsl(var(--terminal-red));
+  }
+  
+  .bg-terminal-purple {
+    background-color: hsl(var(--terminal-purple));
   }
   
   .bg-terminal-gray {
@@ -370,5 +379,26 @@ All colors MUST be HSL.
   .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) hsl(var(--muted));
+  }
+
+  /* Scrollbar thin utility */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thumb-terminal-amber\/50::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--terminal-amber) / 0.5);
+  }
+
+  .scrollbar-thumb-terminal-blue\/50::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--terminal-blue) / 0.5);
+  }
+
+  .scrollbar-thumb-terminal-gray\/50::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--terminal-gray) / 0.5);
+  }
+
+  .scrollbar-track-black\/20::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }

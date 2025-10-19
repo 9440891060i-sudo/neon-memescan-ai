@@ -166,15 +166,10 @@ export default function DashboardPreview() {
                   <div className="text-right">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></div>
-                      <span className="text-lg font-bold text-terminal-green font-mono">LONG SIGNAL</span>
+                      <span className="text-lg font-bold text-terminal-green font-mono">Buys suggested</span>
                     </div>
                     <div className="text-sm text-terminal-gray font-mono">
-                      Confidence: <AnimatedNumber 
-                        value={87.4} 
-                        isVisible={isIntersecting} 
-                        formatter={(val) => `${val.toFixed(1)}%`}
-                        className="text-terminal-green font-semibold"
-                      />
+                      Entry range: <span className="text-terminal-green font-semibold">120,000$-122,000$ MC</span>
                     </div>
                   </div>
                   <div className="text-xs text-terminal-gray font-mono">
@@ -312,206 +307,95 @@ export default function DashboardPreview() {
                     </Card>
                   </div>
 
-                  {/* TradingView Chart - Expanded to Fill Space */}
-                  <Card className="p-0 bg-black/90 border border-terminal-green/30 backdrop-blur-sm overflow-hidden">
+                  {/* Wallet Age Distribution */}
+                  <Card className="p-0 bg-black/90 border border-terminal-purple/30 backdrop-blur-sm overflow-hidden">
                     
-                    {/* Trading Header */}
+                    {/* Header */}
                     <div className="px-4 py-3 border-b border-terminal-gray/20 bg-black/60">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-6 h-6 rounded-full bg-terminal-green/20 flex items-center justify-center">
-                            <span className="text-terminal-green font-bold text-xs">P</span>
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-bold text-terminal-white font-mono">PEPE/USDT CHART</h4>
-                            <div className="flex items-center gap-2 text-xs">
-                              <span className="text-terminal-red font-mono">0.0000054</span>
-                              <span className="text-terminal-red font-mono">-40.2%</span>
-                            </div>
-                          </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 rounded-full bg-terminal-purple/20 flex items-center justify-center">
+                          <Wallet className="w-3 h-3 text-terminal-purple" />
                         </div>
-                        
-                        {/* Chart Timeframe */}
-                        <div className="flex items-center gap-2">
-                          <span className="text-terminal-green font-mono text-xs">4H</span>
-                          <div className="flex gap-1">
-                            <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1D</span>
-                            <span className="text-xs px-2 py-1 bg-terminal-gray/20 text-terminal-gray rounded font-mono">1W</span>
+                        <div>
+                          <h4 className="text-sm font-bold text-terminal-white font-mono">WALLET AGE DISTRIBUTION</h4>
+                          <div className="flex items-center gap-2 text-xs">
+                            <span className="text-terminal-gray font-mono">Holder Classification</span>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Chart Container - Compact */}
-                    <div className="relative">
-                      {/* Price Levels (Right Side) */}
-                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-black/40 border-l border-terminal-gray/20 z-10">
-                        <div className="h-full flex flex-col justify-between py-2 px-1">
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000100</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000090</div>
-                          <div className="text-xs text-terminal-amber font-mono text-right font-semibold">0.0000080</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000070</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000060</div>
-                          <div className="text-xs text-terminal-red font-mono text-right">0.0000050</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000040</div>
-                          <div className="text-xs text-terminal-gray font-mono text-right">0.0000030</div>
+                    {/* Distribution Container */}
+                    <div className="p-6 space-y-6">
+                      {/* Jupiter - Large Wallets */}
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            {/* Jupiter with asteroid belt */}
+                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-terminal-amber via-orange-400 to-terminal-amber opacity-90 shadow-lg shadow-terminal-amber/30"></div>
+                            {/* Asteroid belt */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-terminal-gray/30 rounded-full border-dashed"></div>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 border border-terminal-gray/20 rounded-full border-dashed"></div>
+                          </div>
+                          <div>
+                            <h5 className="text-terminal-amber font-mono font-bold">Large Wallets</h5>
+                            <p className="text-xs text-terminal-gray font-mono">Whales & Major Holders</p>
+                          </div>
                         </div>
-                      </div>
-
-                      {/* Main Chart Area - Reduced Height */}
-                      <div className="pr-16 bg-black/60" style={{ height: '280px' }}>
-                        <div className="relative h-full">
-                          
-                          {/* Moving Average Lines */}
-                          <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                            <defs>
-                              <linearGradient id="ma20Gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="hsl(var(--terminal-blue))" stopOpacity="0.7"/>
-                                <stop offset="100%" stopColor="hsl(var(--terminal-blue))" stopOpacity="0.9"/>
-                              </linearGradient>
-                              <linearGradient id="ma50Gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="hsl(var(--terminal-amber))" stopOpacity="0.7"/>
-                                <stop offset="100%" stopColor="hsl(var(--terminal-amber))" stopOpacity="0.9"/>
-                              </linearGradient>
-                            </defs>
-                            
-                            {/* MA20 Line (Blue) */}
-                            <path
-                              d={`M ${tradingData.map((candle, index) => {
-                                const x = (index / (tradingData.length - 1)) * 100;
-                                const y = 100 - (((candle.ma20 - 0.0000030) / 0.0000070) * 100);
-                                return `${index === 0 ? 'M' : 'L'} ${x}% ${y}%`;
-                              }).join(' ')}`}
-                              stroke="url(#ma20Gradient)"
-                              strokeWidth="2"
-                              fill="none"
-                            />
-                            
-                            {/* MA50 Line (Orange) */}
-                            <path
-                              d={`M ${tradingData.map((candle, index) => {
-                                const x = (index / (tradingData.length - 1)) * 100;
-                                const y = 100 - (((candle.ma50 - 0.0000030) / 0.0000070) * 100);
-                                return `${index === 0 ? 'M' : 'L'} ${x}% ${y}%`;
-                              }).join(' ')}`}
-                              stroke="url(#ma50Gradient)"
-                              strokeWidth="2"
-                              fill="none"
-                            />
-                          </svg>
-                          
-                          {/* Candlestick Chart */}
-                          <div className="absolute inset-0 flex items-end px-2 py-2" style={{ paddingRight: '66px' }}>
-                            {tradingData.map((candle, index) => {
-                              const isGreen = candle.close > candle.open;
-                              const priceRange = 0.0000070; // Max price range for scaling
-                              const minPrice = 0.0000030;
-                              const chartHeight = 260; // Available chart height
-                              
-                              // Calculate positions (inverted because chart goes from bottom to top)
-                              const openPos = ((candle.open - minPrice) / priceRange) * chartHeight;
-                              const closePos = ((candle.close - minPrice) / priceRange) * chartHeight;
-                              const highPos = ((candle.high - minPrice) / priceRange) * chartHeight;
-                              const lowPos = ((candle.low - minPrice) / priceRange) * chartHeight;
-                              
-                              const bodyHeight = Math.abs(closePos - openPos);
-                              const bodyBottom = Math.min(openPos, closePos);
-                              
-                              return (
-                                <div key={index} className="flex flex-col items-center relative" style={{ width: `${100 / tradingData.length}%` }}>
-                                  {/* Container for entire candle */}
-                                  <div className="relative" style={{ height: `${chartHeight}px`, width: '3px' }}>
-                                    {/* Top Wick */}
-                                    <div 
-                                      className={`absolute left-1/2 transform -translate-x-1/2 w-px ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
-                                      style={{ 
-                                        bottom: `${Math.max(openPos, closePos)}px`,
-                                        height: `${Math.max(highPos - Math.max(openPos, closePos), 0)}px`
-                                      }}
-                                    />
-                                    
-                                    {/* Body */}
-                                    <div 
-                                      className={`absolute left-1/2 transform -translate-x-1/2 w-full ${
-                                        isGreen ? 'bg-terminal-green' : 'bg-terminal-red'
-                                      } ${bodyHeight < 2 ? 'border-t' : ''} ${
-                                        !isGreen && bodyHeight < 2 ? 'border-terminal-red' : ''
-                                      } ${
-                                        isGreen && bodyHeight < 2 ? 'border-terminal-green' : ''
-                                      }`}
-                                      style={{ 
-                                        bottom: `${bodyBottom}px`,
-                                        height: `${Math.max(bodyHeight, 1)}px`
-                                      }}
-                                    />
-                                    
-                                    {/* Bottom Wick */}
-                                    <div 
-                                      className={`absolute left-1/2 transform -translate-x-1/2 w-px ${isGreen ? 'bg-terminal-green' : 'bg-terminal-red'}`}
-                                      style={{ 
-                                        bottom: `${lowPos}px`,
-                                        height: `${Math.max(Math.min(openPos, closePos) - lowPos, 0)}px`
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-
-                          {/* Suggested Entry Line */}
-                          <div className="absolute inset-0 flex items-center" style={{ top: '25%' }}>
-                            <div className="w-full relative">
-                              <div className="absolute w-full border-t border-terminal-amber border-dashed opacity-70" />
-                              <div className="absolute left-2 bg-terminal-amber/20 text-terminal-amber px-2 py-1 text-xs font-mono border border-terminal-amber/40 rounded">
-                                Entry: $0.0000078
+                        <div className="bg-black/40 border border-terminal-gray/20 rounded-lg p-3 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-terminal-amber/50 scrollbar-track-black/20">
+                          <div className="space-y-1.5">
+                            {['0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45', '0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD', '0xEf1c6E67703c7BD7107eed8303Fbe6EC2554BF6B', '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'].map((address, idx) => (
+                              <div key={idx} className="text-xs font-mono text-terminal-amber/80 hover:text-terminal-amber hover:bg-terminal-amber/10 p-1.5 rounded transition-colors">
+                                {address}
                               </div>
-                            </div>
-                          </div>
-
-                          {/* Grid Lines */}
-                          <div className="absolute inset-0 pointer-events-none">
-                            {[...Array(6)].map((_, i) => (
-                              <div 
-                                key={i}
-                                className="absolute w-full border-t border-terminal-gray/5"
-                                style={{ top: `${(i + 1) * 16.66}%` }}
-                              />
                             ))}
                           </div>
                         </div>
                       </div>
 
-                      {/* Current Price Indicator */}
-                      <div className="absolute right-16 bottom-1/4 transform translate-y-1/2">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-terminal-red rounded-full animate-pulse"></div>
-                          <div className="ml-2 bg-terminal-red text-white px-2 py-1 text-xs font-mono font-semibold rounded">
-                            0.0000054
+                      {/* Earth - Average Wallets */}
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            {/* Earth */}
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-terminal-blue via-terminal-green to-terminal-blue opacity-90 shadow-lg shadow-terminal-blue/30"></div>
+                          </div>
+                          <div>
+                            <h5 className="text-terminal-blue font-mono font-bold">Average Wallets</h5>
+                            <p className="text-xs text-terminal-gray font-mono">Regular Holders</p>
+                          </div>
+                        </div>
+                        <div className="bg-black/40 border border-terminal-gray/20 rounded-lg p-3 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-terminal-blue/50 scrollbar-track-black/20">
+                          <div className="space-y-1.5">
+                            {['0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', '0x514910771AF9Ca656af840dff83E8264EcF986CA', '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', '0x6B175474E89094C44Da98b954EedeAC495271d0F', '0xdAC17F958D2ee523a2206206994597C13D831ec7', '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE'].map((address, idx) => (
+                              <div key={idx} className="text-xs font-mono text-terminal-blue/80 hover:text-terminal-blue hover:bg-terminal-blue/10 p-1.5 rounded transition-colors">
+                                {address}
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Chart Legend */}
-                    <div className="px-4 py-2 bg-black/40 border-t border-terminal-gray/20">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1 text-xs">
-                            <div className="w-3 h-0.5 bg-terminal-blue"></div>
-                            <span className="text-terminal-gray font-mono">MA20</span>
+                      {/* Pluto - Small Wallets */}
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            {/* Pluto */}
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-terminal-gray via-gray-400 to-terminal-gray opacity-80 shadow-lg shadow-terminal-gray/20"></div>
                           </div>
-                          <div className="flex items-center gap-1 text-xs">
-                            <div className="w-3 h-0.5 bg-terminal-amber"></div>
-                            <span className="text-terminal-gray font-mono">MA50</span>
-                          </div>
-                          <div className="flex items-center gap-1 text-xs">
-                            <div className="w-3 h-0.5 bg-terminal-amber border-dashed border-b"></div>
-                            <span className="text-terminal-gray font-mono">Entry</span>
+                          <div>
+                            <h5 className="text-terminal-gray font-mono font-bold">Small Wallets</h5>
+                            <p className="text-xs text-terminal-gray/70 font-mono">Retail Investors</p>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-xs text-terminal-gray font-mono">Vol: $24.8M</div>
+                        <div className="bg-black/40 border border-terminal-gray/20 rounded-lg p-3 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-terminal-gray/50 scrollbar-track-black/20">
+                          <div className="space-y-1.5">
+                            {['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', '0x4Fabb145d64652a948d72533023f6E7A623C7C53', '0x0000000000085d4780B73119b644AE5ecd22b376', '0x8E870D67F660D95d5be530380D0eC0bd388289E1', '0xBTC8c5e2e8c18BA3D68e9d9d7e9b4a1D5c4e5c6d', '0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490', '0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32', '0xD533a949740bb3306d119CC777fa900bA034cd52'].map((address, idx) => (
+                              <div key={idx} className="text-xs font-mono text-terminal-gray/70 hover:text-terminal-gray hover:bg-terminal-gray/10 p-1.5 rounded transition-colors">
+                                {address}
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
