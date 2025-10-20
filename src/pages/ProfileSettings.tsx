@@ -247,7 +247,7 @@ export default function ProfileSettings() {
               />
             </div>
           </div>
-          <Button onClick={handleUpdatePayment} className="bg-neon-green text-black hover:bg-neon-green/90">
+          <Button onClick={handleUpdatePayment} className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-800">
             Update Payment Method
           </Button>
         </CardContent>
