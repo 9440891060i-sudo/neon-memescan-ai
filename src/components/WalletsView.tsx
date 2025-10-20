@@ -162,6 +162,48 @@ const generatePnLData = (isPositive: boolean, timeframe: string) => {
   return data;
 };
 
+const generateMultiWalletPnLData = (wallets: typeof trackedWallets, timeframe: string) => {
+  const data = [];
+  let labels = [];
+  let periods = 0;
+  
+  switch(timeframe) {
+    case '1d':
+      labels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'];
+      periods = 7;
+      break;
+    case '7d':
+      labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      periods = 7;
+      break;
+    case '1M':
+      labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      periods = 4;
+      break;
+    case 'all':
+    default:
+      labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      periods = 12;
+  }
+  
+  // Generate combined data for all selected wallets
+  for (let i = 0; i < periods; i++) {
+    let combinedValue = 0;
+    wallets.forEach(wallet => {
+      const change = wallet.isPositive 
+        ? Math.random() * 50000 - 10000 
+        : Math.random() * 30000 - 40000;
+      combinedValue += change;
+    });
+    data.push({
+      month: labels[i],
+      pnl: Math.round(combinedValue)
+    });
+  }
+  
+  return data;
+};
+
 const recentTrades = [
   {
     id: 1,
@@ -378,13 +420,31 @@ export function WalletsView() {
   const [viewAlertsOpen, setViewAlertsOpen] = useState(false);
   const [timeframe, setTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
   const [tradesTimeframe, setTradesTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
-  const [selectedWalletForGraph, setSelectedWalletForGraph] = useState<number | null>(null);
   const { toast } = useToast();
 
-  const selectedWalletData = selectedWalletForGraph 
-    ? trackedWallets.find(w => w.id === selectedWalletForGraph) 
-    : null;
-  const pnlData = selectedWalletData ? generatePnLData(selectedWalletData.isPositive, tradesTimeframe) : [];
+  const selectedWalletsData = trackedWallets.filter(w => selectedWallets.includes(w.id));
+  const pnlData = selectedWalletsData.length > 0 
+    ? (selectedWalletsData.length === 1 
+      ? generatePnLData(selectedWalletsData[0].isPositive, tradesTimeframe)
+      : generateMultiWalletPnLData(selectedWalletsData, tradesTimeframe))
+    : [];
+  
+  // Calculate best and worst trades across all selected wallets
+  const allTrades = selectedWalletsData.flatMap(wallet => [
+    { ...wallet.bestTrade, type: 'best', walletLabel: wallet.label },
+    { ...wallet.worstTrade, type: 'worst', walletLabel: wallet.label }
+  ]);
+  
+  const bestTrade = allTrades
+    .filter(t => t.type === 'best')
+    .sort((a, b) => parseFloat(b.amount.replace(/[+$K]/g, '')) - parseFloat(a.amount.replace(/[+$K]/g, '')))[0];
+  
+  const worstTrade = allTrades
+    .filter(t => t.type === 'worst')
+    .sort((a, b) => parseFloat(a.amount.replace(/[-$K]/g, '')) - parseFloat(b.amount.replace(/[-$K]/g, '')))[0];
+  
+  const isOverallPositive = selectedWalletsData.reduce((sum, w) => 
+    sum + parseFloat(w.pnl.replace(/[+$K]/g, '')), 0) > 0;
 
   const getTotalTrades = () => {
     switch(timeframe) {
@@ -402,8 +462,6 @@ export function WalletsView() {
         ? prev.filter(id => id !== walletId)
         : [...prev, walletId]
     );
-    // Set the clicked wallet for the graph
-    setSelectedWalletForGraph(walletId);
   };
   
   const copyToClipboard = (text: string) => {
@@ -719,13 +777,16 @@ export function WalletsView() {
           </Card>
 
           {/* Wallet Performance Graph */}
-          {selectedWalletData && (
+          {selectedWalletsData.length > 0 && (
             <Card className="bg-black border-gray-800">
               <CardHeader className="border-b border-gray-800">
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 text-white">
                     <TrendingUp className="w-5 h-5 text-gray-400" />
-                    {selectedWalletData.label} Performance
+                    {selectedWalletsData.length === 1 
+                      ? `${selectedWalletsData[0].label} Performance`
+                      : `Multi-Wallet Performance (${selectedWalletsData.length} Wallets)`
+                    }
                   </CardTitle>
                 </div>
               </CardHeader>
@@ -735,8 +796,8 @@ export function WalletsView() {
                     <AreaChart data={pnlData}>
                       <defs>
                         <linearGradient id="pnlGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor={selectedWalletData.isPositive ? "#10b981" : "#ef4444"} stopOpacity={0.3}/>
-                          <stop offset="95%" stopColor={selectedWalletData.isPositive ? "#10b981" : "#ef4444"} stopOpacity={0}/>
+                          <stop offset="5%" stopColor={isOverallPositive ? "#10b981" : "#ef4444"} stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor={isOverallPositive ? "#10b981" : "#ef4444"} stopOpacity={0}/>
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -753,7 +814,7 @@ export function WalletsView() {
                       <Area 
                         type="monotone" 
                         dataKey="pnl" 
-                        stroke={selectedWalletData.isPositive ? "#10b981" : "#ef4444"} 
+                        stroke={isOverallPositive ? "#10b981" : "#ef4444"} 
                         fill="url(#pnlGradient)"
                         strokeWidth={2}
                       />
@@ -762,51 +823,59 @@ export function WalletsView() {
                 </div>
                 
                 {/* Best and Worst Trades */}
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <img src={selectedWalletData.bestTrade.logo} alt={selectedWalletData.bestTrade.coin} className="w-8 h-8 rounded-full" />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <p className="text-xs text-gray-400">Best Trade</p>
-                          <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
-                            {selectedWalletData.bestTrade.coin}
-                          </Badge>
+                {bestTrade && worstTrade && (
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <img src={bestTrade.logo} alt={bestTrade.coin} className="w-8 h-8 rounded-full" />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="text-xs text-gray-400">Best Trade</p>
+                            <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
+                              {bestTrade.coin}
+                            </Badge>
+                          </div>
+                          <p className="text-lg font-bold text-green-400 mt-1">{bestTrade.amount}</p>
+                          {selectedWalletsData.length > 1 && (
+                            <p className="text-xs text-gray-500 mt-1">{bestTrade.walletLabel}</p>
+                          )}
+                          <button
+                            onClick={() => copyToClipboard(bestTrade.ca)}
+                            className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
+                          >
+                            <span className="font-mono truncate max-w-[120px]">{bestTrade.ca}</span>
+                            <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </button>
                         </div>
-                        <p className="text-lg font-bold text-green-400 mt-1">{selectedWalletData.bestTrade.amount}</p>
-                        <button
-                          onClick={() => copyToClipboard(selectedWalletData.bestTrade.ca)}
-                          className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
-                        >
-                          <span className="font-mono truncate max-w-[120px]">{selectedWalletData.bestTrade.ca}</span>
-                          <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
+                      </div>
+                    </div>
+                    
+                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <img src={worstTrade.logo} alt={worstTrade.coin} className="w-8 h-8 rounded-full" />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="text-xs text-gray-400">Worst Trade</p>
+                            <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/20 text-xs">
+                              {worstTrade.coin}
+                            </Badge>
+                          </div>
+                          <p className="text-lg font-bold text-red-400 mt-1">{worstTrade.amount}</p>
+                          {selectedWalletsData.length > 1 && (
+                            <p className="text-xs text-gray-500 mt-1">{worstTrade.walletLabel}</p>
+                          )}
+                          <button
+                            onClick={() => copyToClipboard(worstTrade.ca)}
+                            className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
+                          >
+                            <span className="font-mono truncate max-w-[120px]">{worstTrade.ca}</span>
+                            <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <img src={selectedWalletData.worstTrade.logo} alt={selectedWalletData.worstTrade.coin} className="w-8 h-8 rounded-full" />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <p className="text-xs text-gray-400">Worst Trade</p>
-                          <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/20 text-xs">
-                            {selectedWalletData.worstTrade.coin}
-                          </Badge>
-                        </div>
-                        <p className="text-lg font-bold text-red-400 mt-1">{selectedWalletData.worstTrade.amount}</p>
-                        <button
-                          onClick={() => copyToClipboard(selectedWalletData.worstTrade.ca)}
-                          className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
-                        >
-                          <span className="font-mono truncate max-w-[120px]">{selectedWalletData.worstTrade.ca}</span>
-                          <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                )}
               </CardContent>
             </Card>
           )}
