@@ -183,7 +183,7 @@ export default function ProfileSettings() {
             <Button 
               variant="link" 
               onClick={handleForgotPassword}
-              className="text-neon-cyan hover:text-neon-cyan/80"
+              className="text-gray-400 hover:text-gray-300"
             >
               Forgot Password?
             </Button>
