@@ -229,10 +229,9 @@ export default function Kluxify() {
                 <div className="flex justify-center">
                   <button
                     onClick={() => setShowInfoDialog(true)}
-                    className="group relative p-3 rounded-full transition-all hover:scale-110"
+                    className="transition-all hover:text-gray-300"
                   >
-                    <HelpCircle className="w-8 h-8 text-neon-cyan animate-pulse" />
-                    <div className="absolute inset-0 rounded-full bg-neon-cyan/20 blur-xl animate-pulse" />
+                    <HelpCircle className="w-5 h-5 text-gray-500" />
                   </button>
                 </div>
               </CardContent>
@@ -242,67 +241,61 @@ export default function Kluxify() {
 
         {/* Info Dialog */}
         <Dialog open={showInfoDialog} onOpenChange={setShowInfoDialog}>
-          <DialogContent className="bg-gradient-card border border-border max-w-lg">
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-neon-cyan flex items-center gap-2">
-                <Crown className="w-6 h-6" />
-                What is Klux AI?
+          <DialogContent className="bg-black/95 backdrop-blur-xl border-2 border-gray-800 max-w-4xl shadow-[0_0_50px_rgba(0,255,136,0.3)]">
+            <DialogHeader className="border-b border-gray-800 pb-4">
+              <DialogTitle className="text-2xl font-light tracking-wide text-white flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center shadow-[0_0_20px_rgba(0,255,255,0.5)]">
+                  <Crown className="w-4 h-4 text-black" />
+                </div>
+                KLUX AI INTELLIGENCE SYSTEM
               </DialogTitle>
-              <DialogDescription className="text-base text-muted-foreground">
-                Your AI-powered trading assistant
-              </DialogDescription>
             </DialogHeader>
             
-            <div className="space-y-6 py-4">
-              {/* Main Description */}
-              <div className="space-y-3">
-                <p className="text-foreground leading-relaxed">
-                  Klux AI is an advanced artificial intelligence system that analyzes cryptocurrency markets in real-time, providing you with precise entry and exit signals to maximize your trading success.
-                </p>
-              </div>
-
-              {/* Entry & Exit Signals */}
-              <div className="space-y-2">
-                <h3 className="font-semibold text-neon-green flex items-center gap-2">
-                  <Target className="w-4 h-4" />
-                  Entry & Exit Signals
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Get AI-calculated entry prices for optimal buy-in points and exit prices to secure your profits at the right time.
-                </p>
-              </div>
-
-              {/* Credits System */}
-              <div className="space-y-3 p-4 bg-black/30 rounded-lg border border-border">
-                <h3 className="font-semibold text-yellow-400 flex items-center gap-2">
-                  <Star className="w-4 h-4" />
-                  Klud Credits System
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <TrendingUp className="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0" />
-                    <p className="text-muted-foreground">
-                      <span className="text-neon-green font-medium">Winning trades:</span> Credits are deducted from your account
-                    </p>
+            <div className="py-4">
+              <div className="grid grid-cols-3 gap-4">
+                {/* Entry & Exit Signals */}
+                <div className="space-y-2 p-4 bg-gradient-to-br from-neon-green/10 to-transparent rounded-lg border border-neon-green/20 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
+                  <div className="w-10 h-10 rounded-lg bg-neon-green/20 flex items-center justify-center mb-3">
+                    <Target className="w-5 h-5 text-neon-green" />
                   </div>
-                  <div className="flex items-start gap-2">
-                    <TrendingDown className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
-                    <p className="text-muted-foreground">
-                      <span className="text-red-400 font-medium">Losing trades:</span> Credits are fully reimbursed back to you
-                    </p>
+                  <h3 className="font-semibold text-white text-sm">Entry & Exit Signals</h3>
+                  <p className="text-xs text-gray-400 leading-relaxed">
+                    AI-calculated entry prices for optimal buy-in points and exit prices to secure profits at the right time.
+                  </p>
+                </div>
+
+                {/* Credits System */}
+                <div className="space-y-2 p-4 bg-gradient-to-br from-yellow-400/10 to-transparent rounded-lg border border-yellow-400/20 shadow-[0_0_15px_rgba(234,179,8,0.1)]">
+                  <div className="w-10 h-10 rounded-lg bg-yellow-400/20 flex items-center justify-center mb-3">
+                    <Star className="w-5 h-5 text-yellow-400" />
+                  </div>
+                  <h3 className="font-semibold text-white text-sm">Klud Credits</h3>
+                  <div className="space-y-1.5 text-xs">
+                    <div className="flex items-center gap-1.5">
+                      <TrendingUp className="w-3 h-3 text-neon-green flex-shrink-0" />
+                      <p className="text-gray-400">
+                        <span className="text-neon-green">Wins:</span> Credits deducted
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <TrendingDown className="w-3 h-3 text-red-400 flex-shrink-0" />
+                      <p className="text-gray-400">
+                        <span className="text-red-400">Losses:</span> Credits reimbursed
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Access Instructions */}
-              <div className="space-y-3 p-4 bg-neon-cyan/10 rounded-lg border border-neon-cyan/30">
-                <h3 className="font-semibold text-neon-cyan flex items-center gap-2">
-                  <Unlock className="w-4 h-4" />
-                  How to Access
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Your unique access code will be sent to your registered email address. Simply enter the 6-digit code in the PIN machine above to unlock Klux AI and start receiving premium trading signals.
-                </p>
+                {/* Access Instructions */}
+                <div className="space-y-2 p-4 bg-gradient-to-br from-neon-cyan/10 to-transparent rounded-lg border border-neon-cyan/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                  <div className="w-10 h-10 rounded-lg bg-neon-cyan/20 flex items-center justify-center mb-3">
+                    <Unlock className="w-5 h-5 text-neon-cyan" />
+                  </div>
+                  <h3 className="font-semibold text-white text-sm">Access Code</h3>
+                  <p className="text-xs text-gray-400 leading-relaxed">
+                    Your unique 6-digit code will be sent to your email. Enter it in the PIN machine to unlock premium signals.
+                  </p>
+                </div>
               </div>
 
               {/* CTA Button */}
@@ -311,10 +304,10 @@ export default function Kluxify() {
                   setShowInfoDialog(false);
                   setShowPricingModal(true);
                 }}
-                className="w-full bg-neon-cyan hover:bg-neon-cyan/90 text-black font-bold h-12"
+                className="w-full bg-gradient-to-r from-neon-cyan to-neon-purple hover:from-neon-cyan/90 hover:to-neon-purple/90 text-black font-semibold h-11 mt-6 shadow-[0_0_30px_rgba(0,255,255,0.4)] transition-all hover:shadow-[0_0_40px_rgba(0,255,255,0.6)]"
               >
-                <Crown className="w-5 h-5 mr-2" />
-                Unlock Klux AI
+                <Unlock className="w-4 h-4 mr-2" />
+                UNLOCK KLUX AI
               </Button>
             </div>
           </DialogContent>
