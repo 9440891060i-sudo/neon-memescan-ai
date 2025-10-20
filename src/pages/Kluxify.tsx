@@ -241,11 +241,11 @@ export default function Kluxify() {
 
         {/* Info Dialog */}
         <Dialog open={showInfoDialog} onOpenChange={setShowInfoDialog}>
-          <DialogContent className="bg-black/95 backdrop-blur-xl border-2 border-gray-800 max-w-4xl shadow-[0_0_50px_rgba(0,255,136,0.3)]">
+          <DialogContent className="bg-gray-950 border border-gray-800 max-w-4xl">
             <DialogHeader className="border-b border-gray-800 pb-4">
               <DialogTitle className="text-2xl font-light tracking-wide text-white flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center shadow-[0_0_20px_rgba(0,255,255,0.5)]">
-                  <Crown className="w-4 h-4 text-black" />
+                <div className="w-8 h-8 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center">
+                  <Crown className="w-4 h-4 text-gray-400" />
                 </div>
                 KLUX AI INTELLIGENCE SYSTEM
               </DialogTitle>
@@ -254,9 +254,9 @@ export default function Kluxify() {
             <div className="py-4">
               <div className="grid grid-cols-3 gap-4">
                 {/* Entry & Exit Signals */}
-                <div className="space-y-2 p-4 bg-gradient-to-br from-neon-green/10 to-transparent rounded-lg border border-neon-green/20 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
-                  <div className="w-10 h-10 rounded-lg bg-neon-green/20 flex items-center justify-center mb-3">
-                    <Target className="w-5 h-5 text-neon-green" />
+                <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
+                    <Target className="w-5 h-5 text-gray-400" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Entry & Exit Signals</h3>
                   <p className="text-xs text-gray-400 leading-relaxed">
@@ -265,31 +265,31 @@ export default function Kluxify() {
                 </div>
 
                 {/* Credits System */}
-                <div className="space-y-2 p-4 bg-gradient-to-br from-yellow-400/10 to-transparent rounded-lg border border-yellow-400/20 shadow-[0_0_15px_rgba(234,179,8,0.1)]">
-                  <div className="w-10 h-10 rounded-lg bg-yellow-400/20 flex items-center justify-center mb-3">
-                    <Star className="w-5 h-5 text-yellow-400" />
+                <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
+                    <Star className="w-5 h-5 text-gray-400" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Klud Credits</h3>
                   <div className="space-y-1.5 text-xs">
                     <div className="flex items-center gap-1.5">
-                      <TrendingUp className="w-3 h-3 text-neon-green flex-shrink-0" />
+                      <TrendingUp className="w-3 h-3 text-gray-400 flex-shrink-0" />
                       <p className="text-gray-400">
-                        <span className="text-neon-green">Wins:</span> Credits deducted
+                        <span className="text-white">Wins:</span> Credits deducted
                       </p>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <TrendingDown className="w-3 h-3 text-red-400 flex-shrink-0" />
+                      <TrendingDown className="w-3 h-3 text-gray-400 flex-shrink-0" />
                       <p className="text-gray-400">
-                        <span className="text-red-400">Losses:</span> Credits reimbursed
+                        <span className="text-white">Losses:</span> Credits reimbursed
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Access Instructions */}
-                <div className="space-y-2 p-4 bg-gradient-to-br from-neon-cyan/10 to-transparent rounded-lg border border-neon-cyan/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                  <div className="w-10 h-10 rounded-lg bg-neon-cyan/20 flex items-center justify-center mb-3">
-                    <Unlock className="w-5 h-5 text-neon-cyan" />
+                <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
+                    <Unlock className="w-5 h-5 text-gray-400" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Access Code</h3>
                   <p className="text-xs text-gray-400 leading-relaxed">
@@ -304,7 +304,7 @@ export default function Kluxify() {
                   setShowInfoDialog(false);
                   setShowPricingModal(true);
                 }}
-                className="w-full bg-gradient-to-r from-neon-cyan to-neon-purple hover:from-neon-cyan/90 hover:to-neon-purple/90 text-black font-semibold h-11 mt-6 shadow-[0_0_30px_rgba(0,255,255,0.4)] transition-all hover:shadow-[0_0_40px_rgba(0,255,255,0.6)]"
+                className="w-full bg-white hover:bg-gray-200 text-black font-semibold h-11 mt-6 transition-colors"
               >
                 <Unlock className="w-4 h-4 mr-2" />
                 UNLOCK KLUX AI
