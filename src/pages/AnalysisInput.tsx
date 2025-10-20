@@ -327,13 +327,11 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
 
             {/* Pulse Section */}
             <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-5xl md:text-6xl font-bold mb-4">
-                  <span className="text-white">
-                    Edged
-                  </span>
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold mb-2 text-white">
+                  Edged
                 </h2>
-                <p className="text-lg text-gray-400">Coins that fought through our filters</p>
+                <p className="text-sm text-gray-500">Coins that fought through our filters</p>
               </div>
               
               <Card className="p-6 bg-black border-gray-800">
