@@ -245,7 +245,7 @@ export default function Kluxify() {
           <DialogContent className="bg-gray-950 border border-gray-800 max-w-4xl">
             <DialogHeader className="border-b border-gray-800 pb-4">
               <DialogTitle className="flex items-center justify-center">
-                <img src={kluxLogo} alt="Klux Logo" className="h-24" />
+                <img src={kluxLogo} alt="Klux Logo" className="h-20 w-auto" />
               </DialogTitle>
             </DialogHeader>
             
