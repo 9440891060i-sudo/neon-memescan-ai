@@ -21,6 +21,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import KluxPricingModal from "@/components/KluxPricingModal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import kluxLogo from "@/assets/klux-logo.png";
 
 interface CoinAnalysis {
   id: string;
@@ -243,11 +244,8 @@ export default function Kluxify() {
         <Dialog open={showInfoDialog} onOpenChange={setShowInfoDialog}>
           <DialogContent className="bg-gray-950 border border-gray-800 max-w-4xl">
             <DialogHeader className="border-b border-gray-800 pb-4">
-              <DialogTitle className="text-2xl font-light tracking-wide text-white flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center">
-                  <Crown className="w-4 h-4 text-gray-400" />
-                </div>
-                KLUX AI INTELLIGENCE SYSTEM
+              <DialogTitle className="flex items-center justify-center">
+                <img src={kluxLogo} alt="Klux Logo" className="h-12" />
               </DialogTitle>
             </DialogHeader>
             
