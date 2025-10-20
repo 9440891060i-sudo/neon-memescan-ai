@@ -15,10 +15,12 @@ import {
   BarChart3,
   Target,
   Star,
-  Delete
+  Delete,
+  HelpCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import KluxPricingModal from "@/components/KluxPricingModal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 interface CoinAnalysis {
   id: string;
@@ -44,6 +46,7 @@ export default function Kluxify() {
   const [selectedCoin, setSelectedCoin] = useState<CoinAnalysis | null>(null);
   const [pinCode, setPinCode] = useState("");
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
   const { toast } = useToast();
 
@@ -222,18 +225,100 @@ export default function Kluxify() {
                   </Button>
                 </div>
 
-                {/* Generate Code Button */}
-                <Button
-                  onClick={() => setShowPricingModal(true)}
-                  variant="ghost"
-                  className="w-full text-sm text-muted-foreground hover:text-neon-cyan transition-all"
-                >
-                  Generate Code
-                </Button>
+                {/* Info Button */}
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => setShowInfoDialog(true)}
+                    className="group relative p-3 rounded-full transition-all hover:scale-110"
+                  >
+                    <HelpCircle className="w-8 h-8 text-neon-cyan animate-pulse" />
+                    <div className="absolute inset-0 rounded-full bg-neon-cyan/20 blur-xl animate-pulse" />
+                  </button>
+                </div>
               </CardContent>
             </Card>
           </div>
         </div>
+
+        {/* Info Dialog */}
+        <Dialog open={showInfoDialog} onOpenChange={setShowInfoDialog}>
+          <DialogContent className="bg-gradient-card border border-border max-w-lg">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-neon-cyan flex items-center gap-2">
+                <Crown className="w-6 h-6" />
+                What is Klux AI?
+              </DialogTitle>
+              <DialogDescription className="text-base text-muted-foreground">
+                Your AI-powered trading assistant
+              </DialogDescription>
+            </DialogHeader>
+            
+            <div className="space-y-6 py-4">
+              {/* Main Description */}
+              <div className="space-y-3">
+                <p className="text-foreground leading-relaxed">
+                  Klux AI is an advanced artificial intelligence system that analyzes cryptocurrency markets in real-time, providing you with precise entry and exit signals to maximize your trading success.
+                </p>
+              </div>
+
+              {/* Entry & Exit Signals */}
+              <div className="space-y-2">
+                <h3 className="font-semibold text-neon-green flex items-center gap-2">
+                  <Target className="w-4 h-4" />
+                  Entry & Exit Signals
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Get AI-calculated entry prices for optimal buy-in points and exit prices to secure your profits at the right time.
+                </p>
+              </div>
+
+              {/* Credits System */}
+              <div className="space-y-3 p-4 bg-black/30 rounded-lg border border-border">
+                <h3 className="font-semibold text-yellow-400 flex items-center gap-2">
+                  <Star className="w-4 h-4" />
+                  Klud Credits System
+                </h3>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-start gap-2">
+                    <TrendingUp className="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0" />
+                    <p className="text-muted-foreground">
+                      <span className="text-neon-green font-medium">Winning trades:</span> Credits are deducted from your account
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <TrendingDown className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                    <p className="text-muted-foreground">
+                      <span className="text-red-400 font-medium">Losing trades:</span> Credits are fully reimbursed back to you
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Access Instructions */}
+              <div className="space-y-3 p-4 bg-neon-cyan/10 rounded-lg border border-neon-cyan/30">
+                <h3 className="font-semibold text-neon-cyan flex items-center gap-2">
+                  <Unlock className="w-4 h-4" />
+                  How to Access
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Your unique access code will be sent to your registered email address. Simply enter the 6-digit code in the PIN machine above to unlock Klux AI and start receiving premium trading signals.
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              <Button
+                onClick={() => {
+                  setShowInfoDialog(false);
+                  setShowPricingModal(true);
+                }}
+                className="w-full bg-neon-cyan hover:bg-neon-cyan/90 text-black font-bold h-12"
+              >
+                <Crown className="w-5 h-5 mr-2" />
+                Unlock Klux AI
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Pricing Modal */}
         <KluxPricingModal 
