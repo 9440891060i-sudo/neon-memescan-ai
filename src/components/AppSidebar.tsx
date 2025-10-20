@@ -61,7 +61,7 @@ export function AppSidebar() {
           to="/profile-settings" 
           className={`flex items-center ${open ? "gap-3 p-3 bg-gray-950 border border-gray-900" : "p-0 justify-center w-full bg-transparent border-0"} rounded-lg hover:border-gray-800 transition-all duration-300 group`}
         >
-          <Avatar className="h-8 w-8 border-2 border-gray-800 group-hover:border-gray-700 transition-all shrink-0">
+          <Avatar className={`h-8 w-8 border-2 ${isActive("/profile-settings") ? "border-neon-green" : "border-gray-800 group-hover:border-gray-700"} transition-all shrink-0`}>
             <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
             <AvatarFallback className="bg-gray-900 text-white font-bold">
               {getUserInitials()}
