@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Lock } from "lucide-react";
+import { User, Lock, CreditCard } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
 
@@ -17,6 +17,10 @@ export default function ProfileSettings() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [cardholderName, setCardholderName] = useState("");
 
   const getUserInitials = () => {
     if (!user?.username) return "U";
@@ -55,6 +59,18 @@ export default function ProfileSettings() {
       title: "Password Reset",
       description: "A password reset link has been sent to your email.",
     });
+  };
+
+  const handleUpdatePayment = () => {
+    toast({
+      title: "Payment Updated",
+      description: "Your payment information has been successfully updated.",
+    });
+    
+    setCardNumber("");
+    setExpiryDate("");
+    setCvv("");
+    setCardholderName("");
   };
 
   return (
@@ -172,6 +188,68 @@ export default function ProfileSettings() {
               Forgot Password?
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Payment Section */}
+      <Card className="bg-black border-gray-800">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <CreditCard className="w-5 h-5 text-gray-400" />
+            Payment Method
+          </CardTitle>
+          <CardDescription>Update your payment information</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="cardholder-name" className="text-gray-400">Cardholder Name</Label>
+            <Input
+              id="cardholder-name"
+              value={cardholderName}
+              onChange={(e) => setCardholderName(e.target.value)}
+              placeholder="John Doe"
+              className="bg-gray-950 border-gray-800 text-white"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="card-number" className="text-gray-400">Card Number</Label>
+            <Input
+              id="card-number"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              placeholder="1234 5678 9012 3456"
+              maxLength={19}
+              className="bg-gray-950 border-gray-800 text-white"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="expiry-date" className="text-gray-400">Expiry Date</Label>
+              <Input
+                id="expiry-date"
+                value={expiryDate}
+                onChange={(e) => setExpiryDate(e.target.value)}
+                placeholder="MM/YY"
+                maxLength={5}
+                className="bg-gray-950 border-gray-800 text-white"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="cvv" className="text-gray-400">CVV</Label>
+              <Input
+                id="cvv"
+                type="password"
+                value={cvv}
+                onChange={(e) => setCvv(e.target.value)}
+                placeholder="123"
+                maxLength={4}
+                className="bg-gray-950 border-gray-800 text-white"
+              />
+            </div>
+          </div>
+          <Button onClick={handleUpdatePayment} className="bg-neon-green text-black hover:bg-neon-green/90">
+            Update Payment Method
+          </Button>
         </CardContent>
       </Card>
     </div>
