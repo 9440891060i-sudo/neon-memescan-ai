@@ -330,10 +330,10 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
               <div className="text-center mb-12">
                 <h2 className="text-5xl md:text-6xl font-bold mb-4">
                   <span className="text-white">
-                    Pulse
+                    Edged
                   </span>
                 </h2>
-                <p className="text-lg text-gray-400">Live market sentiment & trending opportunities</p>
+                <p className="text-lg text-gray-400">Coins that fought through our filters</p>
               </div>
               
               <Card className="p-6 bg-black border-gray-800">
