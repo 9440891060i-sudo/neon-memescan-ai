@@ -8,6 +8,13 @@ import { Wallet, TrendingUp, TrendingDown, Bell, Plus, Copy, ExternalLink, Searc
 import { useToast } from "@/hooks/use-toast";
 import { AlertPopup } from "@/components/AlertPopup";
 import { ViewAlertsDialog } from "@/components/ViewAlertsDialog";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+
+import pepeIcon from "@/assets/coins/pepe.png";
+import dogeIcon from "@/assets/coins/doge.png";
+import shibaIcon from "@/assets/coins/shiba.png";
+import flokiIcon from "@/assets/coins/floki.png";
+import bonkIcon from "@/assets/coins/bonk.png";
 
 const trackedWallets = [
   {
@@ -20,7 +27,10 @@ const trackedWallets = [
     isPositive: true,
     lastActive: "5m ago",
     totalTrades: 247,
-    winRate: "68%"
+    winRate: "68%",
+    avgTradeSize: "$15.2K",
+    bestTrade: { amount: "+$89K", coin: "PEPE", logo: pepeIcon, ca: "0x6982508145454Ce325dDbE47a25d4ec3d2311933" },
+    worstTrade: { amount: "-$12K", coin: "BONK", logo: bonkIcon, ca: "0xDEfac16715671B7B6aCd9442f3b5c06f0e50E6E5" }
   },
   {
     id: 2,
@@ -32,7 +42,10 @@ const trackedWallets = [
     isPositive: true,
     lastActive: "12m ago",
     totalTrades: 189,
-    winRate: "72%"
+    winRate: "72%",
+    avgTradeSize: "$12.8K",
+    bestTrade: { amount: "+$67K", coin: "DOGE", logo: dogeIcon, ca: "0xba2ae424d960c26247dd6c32edc70b295c744c43" },
+    worstTrade: { amount: "-$8K", coin: "FLOKI", logo: flokiIcon, ca: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E" }
   },
   {
     id: 3,
@@ -44,7 +57,10 @@ const trackedWallets = [
     isPositive: false,
     lastActive: "1h ago",
     totalTrades: 156,
-    winRate: "61%"
+    winRate: "61%",
+    avgTradeSize: "$9.5K",
+    bestTrade: { amount: "+$45K", coin: "SHIBA", logo: shibaIcon, ca: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE" },
+    worstTrade: { amount: "-$23K", coin: "PEPE", logo: pepeIcon, ca: "0x6982508145454Ce325dDbE47a25d4ec3d2311933" }
   },
   {
     id: 4,
@@ -56,7 +72,10 @@ const trackedWallets = [
     isPositive: true,
     lastActive: "22m ago",
     totalTrades: 342,
-    winRate: "65%"
+    winRate: "65%",
+    avgTradeSize: "$11.3K",
+    bestTrade: { amount: "+$102K", coin: "BONK", logo: bonkIcon, ca: "0xDEfac16715671B7B6aCd9442f3b5c06f0e50E6E5" },
+    worstTrade: { amount: "-$18K", coin: "DOGE", logo: dogeIcon, ca: "0xba2ae424d960c26247dd6c32edc70b295c744c43" }
   },
   {
     id: 5,
@@ -68,7 +87,10 @@ const trackedWallets = [
     isPositive: true,
     lastActive: "45m ago",
     totalTrades: 201,
-    winRate: "70%"
+    winRate: "70%",
+    avgTradeSize: "$8.7K",
+    bestTrade: { amount: "+$56K", coin: "FLOKI", logo: flokiIcon, ca: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E" },
+    worstTrade: { amount: "-$9K", coin: "SHIBA", logo: shibaIcon, ca: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE" }
   },
   {
     id: 6,
@@ -80,7 +102,10 @@ const trackedWallets = [
     isPositive: false,
     lastActive: "2h ago",
     totalTrades: 178,
-    winRate: "58%"
+    winRate: "58%",
+    avgTradeSize: "$10.2K",
+    bestTrade: { amount: "+$38K", coin: "PEPE", logo: pepeIcon, ca: "0x6982508145454Ce325dDbE47a25d4ec3d2311933" },
+    worstTrade: { amount: "-$31K", coin: "BONK", logo: bonkIcon, ca: "0xDEfac16715671B7B6aCd9442f3b5c06f0e50E6E5" }
   },
   {
     id: 7,
@@ -92,9 +117,50 @@ const trackedWallets = [
     isPositive: true,
     lastActive: "8m ago",
     totalTrades: 423,
-    winRate: "74%"
+    winRate: "74%",
+    avgTradeSize: "$18.9K",
+    bestTrade: { amount: "+$124K", coin: "DOGE", logo: dogeIcon, ca: "0xba2ae424d960c26247dd6c32edc70b295c744c43" },
+    worstTrade: { amount: "-$15K", coin: "FLOKI", logo: flokiIcon, ca: "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E" }
   }
 ];
+
+const generatePnLData = (isPositive: boolean, timeframe: string) => {
+  const data = [];
+  let value = 100000;
+  let labels = [];
+  let periods = 0;
+  
+  switch(timeframe) {
+    case '1d':
+      labels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'];
+      periods = 7;
+      break;
+    case '7d':
+      labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      periods = 7;
+      break;
+    case '1M':
+      labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      periods = 4;
+      break;
+    case 'all':
+    default:
+      labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      periods = 12;
+  }
+  
+  for (let i = 0; i < periods; i++) {
+    const change = isPositive 
+      ? Math.random() * 50000 - 10000 
+      : Math.random() * 30000 - 40000;
+    value += change;
+    data.push({
+      month: labels[i],
+      pnl: Math.round(value)
+    });
+  }
+  return data;
+};
 
 const recentTrades = [
   {
@@ -312,7 +378,13 @@ export function WalletsView() {
   const [viewAlertsOpen, setViewAlertsOpen] = useState(false);
   const [timeframe, setTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
   const [tradesTimeframe, setTradesTimeframe] = useState<'1d' | '7d' | '1M' | 'all'>('all');
+  const [selectedWalletForGraph, setSelectedWalletForGraph] = useState<number | null>(null);
   const { toast } = useToast();
+
+  const selectedWalletData = selectedWalletForGraph 
+    ? trackedWallets.find(w => w.id === selectedWalletForGraph) 
+    : null;
+  const pnlData = selectedWalletData ? generatePnLData(selectedWalletData.isPositive, tradesTimeframe) : [];
 
   const getTotalTrades = () => {
     switch(timeframe) {
@@ -330,6 +402,16 @@ export function WalletsView() {
         ? prev.filter(id => id !== walletId)
         : [...prev, walletId]
     );
+    // Set the clicked wallet for the graph
+    setSelectedWalletForGraph(walletId);
+  };
+  
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied!",
+      description: "Contract address copied to clipboard",
+    });
   };
 
   const selectAllWallets = () => {
@@ -635,6 +717,99 @@ export function WalletsView() {
               )}
             </CardContent>
           </Card>
+
+          {/* Wallet Performance Graph */}
+          {selectedWalletData && (
+            <Card className="bg-black border-gray-800">
+              <CardHeader className="border-b border-gray-800">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <TrendingUp className="w-5 h-5 text-gray-400" />
+                    {selectedWalletData.label} Performance
+                  </CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={pnlData}>
+                      <defs>
+                        <linearGradient id="pnlGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor={selectedWalletData.isPositive ? "#10b981" : "#ef4444"} stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor={selectedWalletData.isPositive ? "#10b981" : "#ef4444"} stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                      <XAxis dataKey="month" stroke="#9ca3af" />
+                      <YAxis stroke="#9ca3af" />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: '#000', 
+                          border: '1px solid #374151',
+                          borderRadius: '8px'
+                        }}
+                        labelStyle={{ color: '#fff' }}
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="pnl" 
+                        stroke={selectedWalletData.isPositive ? "#10b981" : "#ef4444"} 
+                        fill="url(#pnlGradient)"
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                
+                {/* Best and Worst Trades */}
+                <div className="grid grid-cols-2 gap-4 mt-6">
+                  <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <img src={selectedWalletData.bestTrade.logo} alt={selectedWalletData.bestTrade.coin} className="w-8 h-8 rounded-full" />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs text-gray-400">Best Trade</p>
+                          <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
+                            {selectedWalletData.bestTrade.coin}
+                          </Badge>
+                        </div>
+                        <p className="text-lg font-bold text-green-400 mt-1">{selectedWalletData.bestTrade.amount}</p>
+                        <button
+                          onClick={() => copyToClipboard(selectedWalletData.bestTrade.ca)}
+                          className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
+                        >
+                          <span className="font-mono truncate max-w-[120px]">{selectedWalletData.bestTrade.ca}</span>
+                          <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <img src={selectedWalletData.worstTrade.logo} alt={selectedWalletData.worstTrade.coin} className="w-8 h-8 rounded-full" />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs text-gray-400">Worst Trade</p>
+                          <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/20 text-xs">
+                            {selectedWalletData.worstTrade.coin}
+                          </Badge>
+                        </div>
+                        <p className="text-lg font-bold text-red-400 mt-1">{selectedWalletData.worstTrade.amount}</p>
+                        <button
+                          onClick={() => copyToClipboard(selectedWalletData.worstTrade.ca)}
+                          className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
+                        >
+                          <span className="font-mono truncate max-w-[120px]">{selectedWalletData.worstTrade.ca}</span>
+                          <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Sidebar - Alerts & Actions */}
@@ -714,14 +889,6 @@ export function WalletsView() {
               >
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 View All Alerts
-              </Button>
-              <Button 
-                onClick={() => navigate('/wallet-analytics')}
-                variant="outline" 
-                className="w-full border-gray-700 text-white hover:bg-gray-900"
-              >
-                <TrendingUp className="w-4 h-4 mr-2" />
-                Analytics Dashboard
               </Button>
             </CardContent>
           </Card>
