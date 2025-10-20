@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Lock, CreditCard } from "lucide-react";
+import { User, Lock, CreditCard, Monitor } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
 
@@ -72,6 +72,31 @@ export default function ProfileSettings() {
     setCvv("");
     setCardholderName("");
   };
+
+  const handleRevokeSession = (sessionId: string) => {
+    toast({
+      title: "Session Revoked",
+      description: "The selected session has been logged out.",
+    });
+  };
+
+  // Mock session data
+  const sessions = [
+    {
+      id: "1",
+      device: "Chrome on Windows",
+      location: "New York, USA",
+      lastActive: "Active now",
+      isCurrent: true,
+    },
+    {
+      id: "2",
+      device: "Safari on iPhone",
+      location: "Los Angeles, USA",
+      lastActive: "2 hours ago",
+      isCurrent: false,
+    },
+  ];
 
   return (
     <div className="p-6 space-y-6 max-w-4xl mx-auto bg-black min-h-screen">
@@ -250,6 +275,48 @@ export default function ProfileSettings() {
           <Button onClick={handleUpdatePayment} className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-800">
             Update Payment Method
           </Button>
+        </CardContent>
+      </Card>
+
+      {/* Active Sessions Section */}
+      <Card className="bg-black border-gray-800">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <Monitor className="w-5 h-5 text-gray-400" />
+            Active Sessions
+          </CardTitle>
+          <CardDescription>Manage where you're logged in</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {sessions.map((session) => (
+            <div
+              key={session.id}
+              className="flex items-center justify-between p-4 bg-gray-950 border border-gray-800 rounded-lg"
+            >
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <h4 className="text-white font-medium">{session.device}</h4>
+                  {session.isCurrent && (
+                    <span className="text-xs bg-neon-green/20 text-neon-green px-2 py-0.5 rounded-full">
+                      Current
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-gray-400 mt-1">{session.location}</p>
+                <p className="text-xs text-gray-500 mt-1">{session.lastActive}</p>
+              </div>
+              {!session.isCurrent && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleRevokeSession(session.id)}
+                  className="border-gray-700 text-gray-300 hover:bg-gray-900 hover:text-white"
+                >
+                  Revoke
+                </Button>
+              )}
+            </div>
+          ))}
         </CardContent>
       </Card>
     </div>
