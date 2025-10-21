@@ -94,72 +94,90 @@ export default function PerformancePreview() {
         </div>
 
         {/* Main Chart Section */}
-        <div className="rounded-2xl border border-border bg-card/60 backdrop-blur p-8 sm:p-10 shadow-2xl mb-8">
-          <div className="mb-6">
+        <div className="relative overflow-hidden rounded-3xl border border-neon-green/20 bg-gradient-to-br from-card via-background to-card/50 backdrop-blur-xl p-8 sm:p-10 shadow-2xl mb-8">
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 via-transparent to-primary/5 pointer-events-none" />
+          
+          <div className="relative mb-6">
             <h3 className="text-2xl font-bold text-foreground mb-2">Performance Over Time</h3>
             <p className="text-muted-foreground">Daily returns tracked throughout the week</p>
           </div>
           
-          <div className="relative h-80 p-6 rounded-xl bg-background/80 border border-border">
+          <div className="relative h-80 p-8 rounded-2xl bg-gradient-to-b from-background/95 to-muted/20 border border-neon-green/10 shadow-inner">
+            {/* Grid pattern overlay */}
+            <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, hsl(var(--neon-green)) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+            
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={weekData} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
+              <LineChart data={weekData} margin={{ top: 10, right: 25, bottom: 10, left: 10 }}>
                 <defs>
-                  <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(var(--neon-green))" stopOpacity="0.3"/>
-                    <stop offset="95%" stopColor="hsl(var(--neon-green))" stopOpacity="0"/>
+                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="hsl(var(--neon-green))" stopOpacity="0.4"/>
+                    <stop offset="50%" stopColor="hsl(var(--neon-green))" stopOpacity="0.1"/>
+                    <stop offset="100%" stopColor="hsl(var(--neon-green))" stopOpacity="0"/>
                   </linearGradient>
-                  <linearGradient id="strokeGradient" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="hsl(var(--neon-green))" stopOpacity="0.8" />
-                    <stop offset="50%" stopColor="hsl(var(--neon-green))" stopOpacity="1" />
-                    <stop offset="100%" stopColor="hsl(var(--neon-green))" stopOpacity="0.8" />
-                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity="0.3" />
+                <CartesianGrid 
+                  strokeDasharray="5 5" 
+                  stroke="hsl(var(--neon-green))" 
+                  opacity="0.1" 
+                  vertical={false}
+                />
                 <XAxis
                   dataKey="day"
-                  stroke="hsl(var(--muted-foreground))"
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12, fontWeight: 500 }}
-                  axisLine={{ stroke: 'hsl(var(--border))' }}
+                  stroke="hsl(var(--neon-green))"
+                  tick={{ fill: 'hsl(var(--foreground))', fontSize: 13, fontWeight: 600 }}
+                  axisLine={{ stroke: 'hsl(var(--neon-green))', strokeWidth: 2 }}
                   tickLine={false}
+                  dy={10}
                 />
                 <YAxis
-                  stroke="hsl(var(--muted-foreground))"
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12, fontWeight: 500 }}
+                  stroke="hsl(var(--neon-green))"
+                  tick={{ fill: 'hsl(var(--foreground))', fontSize: 13, fontWeight: 600 }}
                   tickFormatter={(value) => `${value}%`}
-                  axisLine={{ stroke: 'hsl(var(--border))' }}
+                  axisLine={{ stroke: 'hsl(var(--neon-green))', strokeWidth: 2 }}
                   tickLine={false}
-                  width={50}
+                  width={55}
+                  dx={-5}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'hsl(var(--popover))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '12px',
-                    boxShadow: '0 10px 40px hsl(var(--background) / 0.5)',
-                    padding: '12px 16px'
+                    backgroundColor: 'hsl(var(--background))',
+                    border: '2px solid hsl(var(--neon-green))',
+                    borderRadius: '16px',
+                    boxShadow: '0 0 30px hsl(var(--neon-green) / 0.3), 0 10px 50px hsl(var(--background) / 0.9)',
+                    padding: '16px 20px'
                   }}
-                  formatter={(value: number) => [`${value}%`, 'Daily Return']}
-                  labelStyle={{ color: 'hsl(var(--foreground))', fontWeight: '600', fontSize: '14px', marginBottom: '4px' }}
-                  itemStyle={{ color: 'hsl(var(--neon-green))', fontSize: '16px', fontWeight: '700' }}
+                  formatter={(value: number) => [`${value}%`, 'Return']}
+                  labelStyle={{ color: 'hsl(var(--neon-green))', fontWeight: '700', fontSize: '15px', marginBottom: '6px' }}
+                  itemStyle={{ color: 'hsl(var(--foreground))', fontSize: '18px', fontWeight: '800' }}
                 />
                 <Line
                   type="monotone"
                   dataKey="performance"
-                  stroke="url(#strokeGradient)"
-                  strokeWidth={3}
-                  fill="url(#colorGradient)"
+                  stroke="hsl(var(--neon-green))"
+                  strokeWidth={4}
+                  fill="url(#areaGradient)"
+                  filter="url(#glow)"
                   dot={{
-                    r: 5,
-                    fill: 'hsl(var(--neon-green))',
-                    stroke: 'hsl(var(--background))',
-                    strokeWidth: 2
-                  }}
-                  activeDot={{
-                    r: 7,
+                    r: 6,
                     fill: 'hsl(var(--neon-green))',
                     stroke: 'hsl(var(--background))',
                     strokeWidth: 3,
-                    style: { filter: 'drop-shadow(0 0 8px hsl(var(--neon-green)))' }
+                    filter: 'drop-shadow(0 0 6px hsl(var(--neon-green)))'
+                  }}
+                  activeDot={{
+                    r: 9,
+                    fill: 'hsl(var(--neon-green))',
+                    stroke: 'hsl(var(--background))',
+                    strokeWidth: 4,
+                    filter: 'drop-shadow(0 0 12px hsl(var(--neon-green)))'
                   }}
                 />
               </LineChart>
