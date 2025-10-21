@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, HelpCircle, Gift, Brain } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, HelpCircle, Gift } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -31,7 +31,6 @@ export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout, user } = useAuthStore();
-  const { isPremium } = useKluxStore();
   const { toast } = useToast();
   const { open } = useSidebar();
 
@@ -78,13 +77,6 @@ export function AppSidebar() {
               </div>
             )}
           </Link>
-          {open && (
-            <Brain 
-              className={`w-5 h-5 transition-colors duration-300 ${
-                isPremium ? "text-neon-green" : "text-gray-600"
-              }`}
-            />
-          )}
         </div>
       </SidebarHeader>
 
