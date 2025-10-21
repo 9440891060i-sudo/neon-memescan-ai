@@ -22,115 +22,163 @@ export default function PerformancePreview() {
   const avgDaily = (totalReturn / weekData.length).toFixed(2);
 
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-background">
-      <div className="container mx-auto max-w-6xl">
-        <Separator className="mb-12 bg-border/50" />
-        
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-neon-green" style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.5)' }}>
-            Performance
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="container mx-auto max-w-7xl">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-neon-green/10 border border-neon-green/20">
+            <span className="text-sm font-medium text-neon-green">Live Performance Metrics</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-neon-green to-foreground bg-clip-text text-transparent">
+            Real Performance Data
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground">
-            Yes, losses are included here
+          <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto">
+            Yes, losses are included here. No cherry-picking.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border bg-card/50 backdrop-blur p-8 shadow-xl">
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 gap-8 mb-12">
-            <div className="p-8 rounded-xl bg-muted/30 border border-border">
-              <div className="flex items-baseline justify-center gap-2 mb-2">
-                <TrendingUp className="w-4 h-4 text-foreground/60 mt-1" />
-                <span className="text-4xl font-light tracking-tight text-foreground">
-                  +{totalReturn.toFixed(1)}
-                </span>
-                <span className="text-2xl font-light text-muted-foreground">%</span>
-              </div>
-              <p className="text-xs text-muted-foreground text-center font-medium tracking-wider uppercase">Total 7-Day Return</p>
+        <div className="grid lg:grid-cols-3 gap-6 mb-8">
+          {/* Total Return Card */}
+          <div className="lg:col-span-1 p-8 rounded-2xl bg-gradient-to-br from-neon-green/5 via-background to-background border border-neon-green/20 backdrop-blur shadow-lg hover:shadow-neon-green/10 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-4">
+              <TrendingUp className="w-5 h-5 text-neon-green" />
+              <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">7-Day Total</span>
             </div>
-            <div className="p-8 rounded-xl bg-muted/30 border border-border">
-              <div className="flex items-baseline justify-center gap-2 mb-2">
-                <span className="text-4xl font-light tracking-tight text-foreground">
-                  +{avgDaily}
-                </span>
-                <span className="text-2xl font-light text-muted-foreground">%</span>
-              </div>
-              <p className="text-xs text-muted-foreground text-center font-medium tracking-wider uppercase">Avg Daily Return</p>
+            <div className="flex items-baseline gap-2">
+              <span className="text-5xl font-bold text-neon-green">
+                +{totalReturn.toFixed(1)}
+              </span>
+              <span className="text-3xl font-light text-neon-green/70">%</span>
             </div>
+            <p className="text-sm text-muted-foreground mt-2">Cumulative weekly return</p>
           </div>
 
-          {/* Chart */}
-          <div className="relative mb-12">
-            <div className="relative h-60 p-6 rounded-xl bg-background/60 border border-border overflow-hidden">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={weekData} margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
+          {/* Average Daily Card */}
+          <div className="lg:col-span-1 p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-background to-background border border-border backdrop-blur shadow-lg hover:shadow-primary/10 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-4">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Avg Daily</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-5xl font-bold text-foreground">
+                +{avgDaily}
+              </span>
+              <span className="text-3xl font-light text-muted-foreground">%</span>
+            </div>
+            <p className="text-sm text-muted-foreground mt-2">Average daily performance</p>
+          </div>
+
+          {/* Chart Card */}
+          <div className="lg:col-span-1 p-6 rounded-2xl bg-card/80 backdrop-blur border border-border shadow-lg">
+            <div className="h-full flex flex-col">
+              <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Weekly Trend</span>
+              <ResponsiveContainer width="100%" height={140}>
+                <LineChart data={weekData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
                   <defs>
-                    <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="hsl(var(--neon-green))" stopOpacity="0.85" />
-                      <stop offset="100%" stopColor="hsl(var(--neon-green))" stopOpacity="1" />
+                    <linearGradient id="miniLineGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="hsl(var(--neon-green))" stopOpacity="0.8" />
+                      <stop offset="95%" stopColor="hsl(var(--neon-green))" stopOpacity="0.1" />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="2 4" stroke="hsl(var(--border) / 0.2)" vertical={false} />
-                  <XAxis
-                    dataKey="day"
-                    stroke="hsl(var(--muted-foreground) / 0.5)"
-                    tick={{ fill: 'hsl(var(--muted-foreground) / 0.7)', fontSize: 11 }}
-                    axisLine={{ stroke: 'hsl(var(--border) / 0.4)' }}
-                    tickLine={false}
-                  />
-                  <YAxis
-                    stroke="hsl(var(--muted-foreground) / 0.5)"
-                    tick={{ fill: 'hsl(var(--muted-foreground) / 0.7)', fontSize: 11 }}
-                    tickFormatter={(value) => `${value}%`}
-                    axisLine={{ stroke: 'hsl(var(--border) / 0.4)' }}
-                    tickLine={false}
-                    width={45}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--background) / 0.95)',
-                      border: '1px solid hsl(var(--border) / 0.6)',
-                      borderRadius: '12px',
-                      boxShadow: '0 8px 32px hsl(var(--background) / 0.8), 0 0 0 1px hsl(var(--border) / 0.05)',
-                      backdropFilter: 'blur(12px)',
-                      padding: '12px 16px'
-                    }}
-                    formatter={(value: number) => [`${value}%`, 'Return']}
-                    labelStyle={{ color: 'hsl(var(--foreground))', fontWeight: '500', fontSize: '13px' }}
-                    itemStyle={{ color: 'hsl(var(--neon-green))', fontSize: '14px', fontWeight: '600' }}
-                  />
                   <Line
                     type="monotone"
                     dataKey="performance"
-                    stroke="url(#lineGradient)"
-                    strokeWidth={2}
+                    stroke="hsl(var(--neon-green))"
+                    strokeWidth={3}
                     dot={false}
-                    activeDot={{
-                      r: 4,
-                      fill: 'hsl(var(--neon-green))',
-                      stroke: 'hsl(var(--background) / 0.8)',
-                      strokeWidth: 3
-                    }}
+                    fill="url(#miniLineGradient)"
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
+        </div>
 
-          {/* CTA */}
-          <Separator className="mb-8 bg-border" />
-          <div className="text-center">
-            <p className="text-muted-foreground mb-6 text-base">
-              Want to see the full analysis history and detailed insights?
-            </p>
-            <Button 
-              size="lg"
-              onClick={() => navigate('/auth')}
-              className="bg-foreground text-background hover:bg-foreground/90 text-base px-8 font-semibold"
-            >
-              View Full History
-            </Button>
+        {/* Main Chart Section */}
+        <div className="rounded-2xl border border-border bg-card/60 backdrop-blur p-8 sm:p-10 shadow-2xl mb-8">
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold text-foreground mb-2">Performance Over Time</h3>
+            <p className="text-muted-foreground">Daily returns tracked throughout the week</p>
           </div>
+          
+          <div className="relative h-80 p-6 rounded-xl bg-background/80 border border-border">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={weekData} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
+                <defs>
+                  <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="hsl(var(--neon-green))" stopOpacity="0.3"/>
+                    <stop offset="95%" stopColor="hsl(var(--neon-green))" stopOpacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="strokeGradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="hsl(var(--neon-green))" stopOpacity="0.8" />
+                    <stop offset="50%" stopColor="hsl(var(--neon-green))" stopOpacity="1" />
+                    <stop offset="100%" stopColor="hsl(var(--neon-green))" stopOpacity="0.8" />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity="0.3" />
+                <XAxis
+                  dataKey="day"
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12, fontWeight: 500 }}
+                  axisLine={{ stroke: 'hsl(var(--border))' }}
+                  tickLine={false}
+                />
+                <YAxis
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12, fontWeight: 500 }}
+                  tickFormatter={(value) => `${value}%`}
+                  axisLine={{ stroke: 'hsl(var(--border))' }}
+                  tickLine={false}
+                  width={50}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'hsl(var(--popover))',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '12px',
+                    boxShadow: '0 10px 40px hsl(var(--background) / 0.5)',
+                    padding: '12px 16px'
+                  }}
+                  formatter={(value: number) => [`${value}%`, 'Daily Return']}
+                  labelStyle={{ color: 'hsl(var(--foreground))', fontWeight: '600', fontSize: '14px', marginBottom: '4px' }}
+                  itemStyle={{ color: 'hsl(var(--neon-green))', fontSize: '16px', fontWeight: '700' }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="performance"
+                  stroke="url(#strokeGradient)"
+                  strokeWidth={3}
+                  fill="url(#colorGradient)"
+                  dot={{
+                    r: 5,
+                    fill: 'hsl(var(--neon-green))',
+                    stroke: 'hsl(var(--background))',
+                    strokeWidth: 2
+                  }}
+                  activeDot={{
+                    r: 7,
+                    fill: 'hsl(var(--neon-green))',
+                    stroke: 'hsl(var(--background))',
+                    strokeWidth: 3,
+                    style: { filter: 'drop-shadow(0 0 8px hsl(var(--neon-green)))' }
+                  }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center p-8 rounded-2xl bg-gradient-to-r from-primary/5 via-neon-green/5 to-primary/5 border border-border/50">
+          <p className="text-lg text-muted-foreground mb-6">
+            Want to see the full analysis history and detailed insights?
+          </p>
+          <Button 
+            size="lg"
+            onClick={() => navigate('/auth')}
+            className="bg-neon-green text-background hover:bg-neon-green/90 text-base px-10 py-6 font-semibold shadow-lg hover:shadow-neon-green/20 transition-all"
+          >
+            View Full History
+          </Button>
         </div>
       </div>
     </section>
