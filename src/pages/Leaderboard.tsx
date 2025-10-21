@@ -185,9 +185,6 @@ export default function Performance() {
           {/* Header Section */}
           <div className="text-center mb-12" ref={metricsRef as any}>
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="p-3 rounded-full bg-neon-green/20 shadow-lg shadow-neon-green/20">
-                <Brain className="w-8 h-8 text-neon-green drop-shadow-sm" />
-              </div>
               <h1 className="text-5xl font-bold text-white">
                 Klux AI <span className="text-neon-green drop-shadow-md">Performance</span>
               </h1>
