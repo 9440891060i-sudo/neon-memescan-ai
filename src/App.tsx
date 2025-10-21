@@ -5,8 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Beaker } from "lucide-react";
+import { Beaker, Brain } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
+import { useKluxStore } from "@/store/kluxStore";
 import Index from "./pages/Index";
 import AnalysisInput from "./pages/AnalysisInput";
 import Dashboard from "./pages/Dashboard";
@@ -24,6 +25,7 @@ const queryClient = new QueryClient();
 
 const AppContent = () => {
   const { isAuthenticated } = useAuthStore();
+  const { isPremium } = useKluxStore();
 
   return (
     <div className="min-h-screen w-full">
@@ -35,9 +37,12 @@ const AppContent = () => {
               <header className="sticky top-0 z-50 flex h-14 items-center gap-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 border-b border-gray-900">
                 <SidebarTrigger className="-ml-1" />
                 <div className="flex-1" />
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border">
-                  <Beaker className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-semibold text-foreground">12.4L</span>
+                <div className="flex items-center gap-3">
+                  <Brain className={`w-5 h-5 transition-colors duration-300 ${isPremium ? "text-neon-green" : "text-gray-600"}`} />
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border">
+                    <Beaker className="w-5 h-5 text-green-500" />
+                    <span className="text-sm font-semibold text-foreground">12.4L</span>
+                  </div>
                 </div>
               </header>
               <div className="p-0">
