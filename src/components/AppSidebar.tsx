@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, HelpCircle, Gift } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, HelpCircle, Gift, Brain } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuthStore } from "@/store/authStore";
+import { useKluxStore } from "@/store/kluxStore";
 import { useToast } from "@/hooks/use-toast";
 
 const sidebarItems = [
@@ -30,6 +31,7 @@ export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout, user } = useAuthStore();
+  const { isPremium } = useKluxStore();
   const { toast } = useToast();
   const { open } = useSidebar();
 
@@ -57,24 +59,33 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className={`${open ? "w-64" : "w-16"} bg-black backdrop-blur-sm border-r border-gray-900 group-data-[side=left]:border-r group-data-[side=right]:border-l shadow-none transition-all duration-300`}>
       <SidebarHeader className={`py-4 ${open ? "px-4" : "px-0"} border-b border-gray-900`}>
         {/* User Profile Section */}
-        <Link 
-          to="/profile-settings" 
-          className={`flex items-center ${open ? "gap-3 p-3 bg-gray-950 border border-gray-900" : "p-0 justify-center w-full bg-transparent border-0"} rounded-lg hover:border-gray-800 transition-all duration-300 group`}
-        >
-          <Avatar className={`h-8 w-8 border-2 ${isActive("/profile-settings") ? "border-neon-green" : "border-gray-800 group-hover:border-gray-700"} transition-all shrink-0`}>
-            <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
-            <AvatarFallback className="bg-gray-900 text-white font-bold">
-              {getUserInitials()}
-            </AvatarFallback>
-          </Avatar>
+        <div className="flex items-center gap-2">
+          <Link 
+            to="/profile-settings" 
+            className={`flex items-center flex-1 ${open ? "gap-3 p-3 bg-gray-950 border border-gray-900" : "p-0 justify-center w-full bg-transparent border-0"} rounded-lg hover:border-gray-800 transition-all duration-300 group`}
+          >
+            <Avatar className={`h-8 w-8 border-2 ${isActive("/profile-settings") ? "border-neon-green" : "border-gray-800 group-hover:border-gray-700"} transition-all shrink-0`}>
+              <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
+              <AvatarFallback className="bg-gray-900 text-white font-bold">
+                {getUserInitials()}
+              </AvatarFallback>
+            </Avatar>
+            {open && (
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-white truncate group-hover:text-gray-300 transition-colors">
+                  {user?.username || "User"}
+                </p>
+              </div>
+            )}
+          </Link>
           {open && (
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-white truncate group-hover:text-gray-300 transition-colors">
-                {user?.username || "User"}
-              </p>
-            </div>
+            <Brain 
+              className={`w-5 h-5 transition-colors duration-300 ${
+                isPremium ? "text-neon-green" : "text-gray-600"
+              }`}
+            />
           )}
-        </Link>
+        </div>
       </SidebarHeader>
 
       <SidebarContent className={open ? "px-2" : "px-0"}>

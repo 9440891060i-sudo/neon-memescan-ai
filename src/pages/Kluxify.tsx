@@ -19,6 +19,7 @@ import {
   HelpCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useKluxStore } from "@/store/kluxStore";
 import KluxPricingModal from "@/components/KluxPricingModal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import kluxLogo from "@/assets/klux-logo.png";
@@ -42,7 +43,7 @@ interface CoinAnalysis {
 }
 
 export default function Kluxify() {
-  const [isPremium, setIsPremium] = useState(false);
+  const { isPremium, setIsPremium } = useKluxStore();
   const [analyses, setAnalyses] = useState<CoinAnalysis[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<CoinAnalysis | null>(null);
   const [pinCode, setPinCode] = useState("");
