@@ -477,8 +477,8 @@ export default function DashboardPreview() {
                     {/* AI Call */}
                     <Card className="p-4 bg-black/40 border border-terminal-gray/20 backdrop-blur-sm">
                       <div className="flex items-center gap-2 mb-4">
-                        <div className="flex items-center justify-center w-6 h-6 bg-neon-green/20 rounded">
-                          <Brain className="w-3 h-3 text-neon-green" />
+                        <div className="flex items-center justify-center w-6 h-6 bg-terminal-green/20 rounded">
+                          <Brain className="w-3 h-3 text-terminal-gray" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-terminal-white font-mono">
@@ -782,12 +782,8 @@ export default function DashboardPreview() {
                         <div className="p-4">
                           {/* Header */}
                           <div className="flex items-center gap-3 mb-3">
-                            <div className={`w-7 h-7 rounded-sm bg-gradient-to-br border border-terminal-gray/20 flex items-center justify-center ${
-                              feature.icon === Brain 
-                                ? 'from-neon-green/30 to-neon-green/10' 
-                                : 'from-terminal-blue/30 to-terminal-blue/10'
-                            }`}>
-                              <Icon className={`w-3.5 h-3.5 ${feature.icon === Brain ? 'text-neon-green' : 'text-terminal-blue'}`} strokeWidth={1.5} />
+                            <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-terminal-blue/30 to-terminal-blue/10 border border-terminal-gray/20 flex items-center justify-center">
+                              <Icon className="w-3.5 h-3.5 text-terminal-blue" strokeWidth={1.5} />
                             </div>
                             <h4 className="text-xs font-semibold text-terminal-white font-mono uppercase tracking-wider">
                               {feature.title}
