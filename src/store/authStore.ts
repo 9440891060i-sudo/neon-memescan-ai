@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useKluxStore } from './kluxStore';
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -30,6 +31,7 @@ export const useAuthStore = create<AuthState>()(
       },
       logout: () => {
         set({ isAuthenticated: false, user: null });
+        useKluxStore.getState().setIsPremium(false);
       },
     }),
     {
