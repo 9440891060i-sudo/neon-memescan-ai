@@ -25,7 +25,7 @@ export default function PerformancePreview() {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Real <span className="text-neon-green">Performance</span>
+            Real <span className="text-foreground">Performance</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Yes, losses are included here. No cherry-picking.
@@ -41,15 +41,15 @@ export default function PerformancePreview() {
                 <div>
                   <div className="text-sm text-muted-foreground uppercase tracking-wider mb-2">7-Day Total</div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-bold text-neon-green">+{totalReturn.toFixed(1)}</span>
-                    <span className="text-2xl font-light text-neon-green/70">%</span>
+                    <span className="text-4xl font-bold text-foreground">+{totalReturn.toFixed(1)}</span>
+                    <span className="text-2xl font-light text-muted-foreground">%</span>
                   </div>
                 </div>
                 <Separator />
                 <div>
-                  <div className="text-sm text-muted-foreground uppercase tracking-wider mb-2">Avg Daily</div>
+                  <div className="text-sm text-muted-foreground uppercase tracking-wider mb-2">Win Rate</div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-bold text-foreground">+{avgDaily}</span>
+                    <span className="text-4xl font-bold text-foreground">{Math.round((weekData.filter(d => d.performance > 0).length / weekData.length) * 100)}</span>
                     <span className="text-2xl font-light text-muted-foreground">%</span>
                   </div>
                 </div>
@@ -112,14 +112,14 @@ export default function PerformancePreview() {
         {/* CTA Section */}
         <div className="text-center p-8 rounded-2xl bg-gradient-to-r from-primary/5 via-neon-green/5 to-primary/5 border border-border/50">
           <p className="text-lg text-muted-foreground mb-6">
-            Want to see the full analysis history and detailed insights?
+            Check out all entries and exits in detail
           </p>
           <Button 
             size="lg"
             onClick={() => navigate('/auth')}
-            className="bg-neon-green text-background hover:bg-neon-green/90 text-base px-10 py-6 font-semibold shadow-lg hover:shadow-neon-green/20 transition-all"
+            className="bg-background/40 backdrop-blur-md border border-border/50 text-foreground hover:bg-background/60 text-base px-10 py-6 font-semibold transition-all"
           >
-            View Full History
+            History
           </Button>
         </div>
       </div>
