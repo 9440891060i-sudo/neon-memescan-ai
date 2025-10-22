@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { LineChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useNavigate } from "react-router-dom";
 
 const weekData = [
   { day: 'Mon', performance: 2.1 },
@@ -12,6 +14,7 @@ const weekData = [
 ];
 
 export default function PerformancePreview() {
+  const navigate = useNavigate();
   const totalReturn = weekData.reduce((sum, day) => sum + day.performance, 0);
 
   return (
@@ -107,7 +110,21 @@ export default function PerformancePreview() {
             </div>
           </div>
         </div>
-      </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-8">
+          <p className="text-lg text-muted-foreground mb-6">
+            Check out all entries and exits in detail
+          </p>
+          <Button 
+            size="lg"
+            onClick={() => navigate('/auth')}
+            className="bg-background/40 backdrop-blur-md border border-border/50 text-foreground hover:bg-background/60 text-base px-10 py-6 font-semibold transition-all"
+          >
+            History
+          </Button>
+        </div>
+        </div>
     </section>
   );
 }
