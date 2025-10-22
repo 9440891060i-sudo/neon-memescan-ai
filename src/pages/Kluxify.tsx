@@ -11,7 +11,12 @@ import {
   HelpCircle,
   ArrowRight,
   Activity,
-  DollarSign
+  DollarSign,
+  Copy,
+  Check,
+  Bell,
+  BellOff,
+  ExternalLink
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useKluxStore } from "@/store/kluxStore";
@@ -38,14 +43,32 @@ interface CoinAnalysis {
   confidence: number;
 }
 
+interface AICall {
+  id: string;
+  name: string;
+  symbol: string;
+  logo: string;
+  contractAddress: string;
+  entryPrice: number;
+  currentPrice: number;
+  growthPercent: number;
+  exitPrice?: number;
+  exitCalled: boolean;
+  calledAt: Date;
+  exitCalledAt?: Date;
+}
+
 export default function Kluxify() {
   const { isPremium, setIsPremium } = useKluxStore();
   const [analyses, setAnalyses] = useState<CoinAnalysis[]>([]);
+  const [aiCalls, setAiCalls] = useState<AICall[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<CoinAnalysis | null>(null);
   const [pinCode, setPinCode] = useState("");
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+  const [alertsEnabled, setAlertsEnabled] = useState(true);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -54,7 +77,7 @@ export default function Kluxify() {
     if (isPremium) {
       const interval = setInterval(() => {
         // Add new analysis or update existing ones
-        const shouldAddNew = Math.random() > 0.7 && analyses.length < 8;
+        const shouldAddNew = Math.random() > 0.7 && analyses.length < 12;
         
         if (shouldAddNew) {
           const newCoin: CoinAnalysis = {
@@ -75,7 +98,7 @@ export default function Kluxify() {
             confidence: Math.floor(Math.random() * 40) + 60,
           };
           
-          setAnalyses(prev => [newCoin, ...prev].slice(0, 8));
+          setAnalyses(prev => [newCoin, ...prev].slice(0, 12));
         }
         
         // Update progress of analyzing coins
@@ -83,12 +106,31 @@ export default function Kluxify() {
           if (coin.status === 'analyzing') {
             const newProgress = Math.min(coin.progress + Math.random() * 20, 100);
             if (newProgress >= 100) {
-              return {
+              const completed = {
                 ...coin,
-                status: 'completed',
+                status: 'completed' as const,
                 progress: 100,
                 aiScore: Math.floor(Math.random() * 40) + 60,
               };
+              
+              // Add to AI Calls if BULLISH
+              if (completed.verdict === 'BULLISH' && completed.confidence > 70) {
+                const newCall: AICall = {
+                  id: `call_${Date.now()}`,
+                  name: completed.name,
+                  symbol: completed.symbol,
+                  logo: completed.logo,
+                  contractAddress: `0x${Math.random().toString(16).substr(2, 40)}`,
+                  entryPrice: completed.entryPrice,
+                  currentPrice: completed.entryPrice,
+                  growthPercent: 0,
+                  exitCalled: false,
+                  calledAt: new Date(),
+                };
+                setAiCalls(prev => [newCall, ...prev]);
+              }
+              
+              return completed;
             }
             return { ...coin, progress: newProgress };
           }
@@ -99,6 +141,36 @@ export default function Kluxify() {
       return () => clearInterval(interval);
     }
   }, [isPremium, analyses.length]);
+
+  // Update AI Calls prices and growth
+  useEffect(() => {
+    if (isPremium && aiCalls.length > 0) {
+      const interval = setInterval(() => {
+        setAiCalls(prev => prev.map(call => {
+          if (!call.exitCalled) {
+            const priceChange = (Math.random() - 0.3) * 0.02; // Slight upward bias
+            const newPrice = Math.max(call.currentPrice + (call.currentPrice * priceChange), call.entryPrice * 0.5);
+            const growth = ((newPrice - call.entryPrice) / call.entryPrice) * 100;
+            
+            // Randomly call exit on profitable positions
+            const shouldExit = growth > 20 && Math.random() > 0.95;
+            
+            return {
+              ...call,
+              currentPrice: newPrice,
+              growthPercent: growth,
+              exitCalled: shouldExit,
+              exitPrice: shouldExit ? newPrice : call.exitPrice,
+              exitCalledAt: shouldExit ? new Date() : call.exitCalledAt,
+            };
+          }
+          return call;
+        }));
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isPremium, aiCalls.length]);
 
   const handleNumberClick = (num: string) => {
     if (pinCode.length < 6) {
@@ -155,9 +227,29 @@ export default function Kluxify() {
     }
   };
 
-  const handleViewInTerminal = (coin: CoinAnalysis) => {
+  const handleViewInTerminal = (coin: CoinAnalysis | AICall) => {
     // Navigate to analysis page with coin data
     navigate('/analysis-input', { state: { coinData: coin } });
+  };
+
+  const copyToClipboard = (address: string) => {
+    navigator.clipboard.writeText(address);
+    setCopiedAddress(address);
+    toast({
+      title: "Copied!",
+      description: "Contract address copied to clipboard",
+    });
+    setTimeout(() => setCopiedAddress(null), 2000);
+  };
+
+  const toggleAlerts = () => {
+    setAlertsEnabled(!alertsEnabled);
+    toast({
+      title: alertsEnabled ? "Alerts Disabled" : "Alerts Enabled",
+      description: alertsEnabled 
+        ? "You will no longer receive notifications" 
+        : "You will receive notifications for new signals",
+    });
   };
 
   const formatPrice = (price: number) => {
@@ -334,6 +426,18 @@ export default function Kluxify() {
               <p className="text-sm text-muted-foreground mt-0.5">Professional Trading Signals</p>
             </div>
             <div className="flex items-center gap-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={toggleAlerts}
+                className={alertsEnabled ? "border-emerald-500/20" : ""}
+              >
+                {alertsEnabled ? (
+                  <><Bell className="w-4 h-4 mr-2" /> Alerts On</>
+                ) : (
+                  <><BellOff className="w-4 h-4 mr-2" /> Alerts Off</>
+                )}
+              </Button>
               <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
                 Live
               </Badge>
@@ -347,9 +451,9 @@ export default function Kluxify() {
 
       <div className="max-w-7xl mx-auto px-6 py-6">
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Coins List */}
-          <div className="lg:col-span-2 space-y-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* AI Analysis Feed - Scrollable */}
+          <div className="space-y-3">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-medium text-foreground">AI Analysis Feed</h2>
               <div className="flex items-center gap-2">
@@ -358,9 +462,9 @@ export default function Kluxify() {
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="h-[calc(100vh-200px)] overflow-y-auto pr-2 space-y-3 scrollbar-thin">
               {analyses.map((coin) => (
-                <Card key={coin.id} className="bg-card border-border hover:border-muted-foreground/20 transition-colors">
+                <Card key={coin.id} className="bg-card border-border">
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3 flex-1">
@@ -399,46 +503,28 @@ export default function Kluxify() {
                     </div>
 
                     {coin.status === 'completed' && (
-                      <>
-                        <div className="mt-4 pt-4 border-t border-border">
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-xs text-muted-foreground mb-1">Entry Price</p>
-                              <p className="font-semibold text-emerald-400">${formatPrice(coin.entryPrice)}</p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-muted-foreground mb-1">Exit Target</p>
-                              <p className="font-semibold text-foreground">${formatPrice(coin.exitPrice)}</p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-muted-foreground mb-1">24h Change</p>
-                              <p className={`font-semibold ${coin.priceChange24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                                {coin.priceChange24h >= 0 ? '+' : ''}{coin.priceChange24h.toFixed(2)}%
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-muted-foreground mb-1">Confidence</p>
-                              <p className="font-semibold text-foreground">{coin.confidence}%</p>
-                            </div>
+                      <div className="mt-4 pt-4 border-t border-border">
+                        <div className="grid grid-cols-2 gap-4 text-xs">
+                          <div>
+                            <p className="text-muted-foreground mb-1">Entry</p>
+                            <p className="font-semibold text-emerald-400">${formatPrice(coin.entryPrice)}</p>
+                          </div>
+                          <div>
+                            <p className="text-muted-foreground mb-1">Target</p>
+                            <p className="font-semibold text-foreground">${formatPrice(coin.exitPrice)}</p>
+                          </div>
+                          <div>
+                            <p className="text-muted-foreground mb-1">24h</p>
+                            <p className={`font-semibold ${coin.priceChange24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                              {coin.priceChange24h >= 0 ? '+' : ''}{coin.priceChange24h.toFixed(2)}%
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-muted-foreground mb-1">Confidence</p>
+                            <p className="font-semibold text-foreground">{coin.confidence}%</p>
                           </div>
                         </div>
-
-                        <div className="mt-4 flex items-center justify-between">
-                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                            <span>{coin.holderCount.toLocaleString()} holders</span>
-                            <span>{formatMarketCap(coin.marketCap)} cap</span>
-                          </div>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleViewInTerminal(coin)}
-                            className="h-8"
-                          >
-                            View Analysis
-                            <ArrowRight className="w-3 h-3 ml-2" />
-                          </Button>
-                        </div>
-                      </>
+                      </div>
                     )}
                   </CardContent>
                 </Card>
@@ -457,76 +543,119 @@ export default function Kluxify() {
             </div>
           </div>
 
-          {/* Side Panel - Selected Coin Details */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-6">
-              <h2 className="text-lg font-medium text-foreground mb-4">Quick Stats</h2>
-              
-              <div className="space-y-3">
-                <Card className="bg-card border-border">
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-muted-foreground">Total Signals</span>
-                      <Activity className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                    <p className="text-2xl font-bold text-foreground">
-                      {analyses.filter(a => a.status === 'completed').length}
-                    </p>
-                  </CardContent>
-                </Card>
+          {/* AI Calls - Genuine Signals */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-medium text-foreground">AI Calls</h2>
+              <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                {aiCalls.length} Active
+              </Badge>
+            </div>
 
-                <Card className="bg-card border-border">
+            <div className="h-[calc(100vh-200px)] overflow-y-auto pr-2 space-y-3 scrollbar-thin">
+              {aiCalls.map((call) => (
+                <Card key={call.id} className="bg-card border-border">
                   <CardContent className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-muted-foreground">Bullish Signals</span>
-                      <TrendingUp className="w-4 h-4 text-emerald-400" />
-                    </div>
-                    <p className="text-2xl font-bold text-emerald-400">
-                      {analyses.filter(a => a.verdict === 'BULLISH').length}
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-card border-border">
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-muted-foreground">Avg Confidence</span>
-                      <DollarSign className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                    <p className="text-2xl font-bold text-foreground">
-                      {analyses.length > 0 
-                        ? Math.round(analyses.reduce((acc, a) => acc + a.confidence, 0) / analyses.length)
-                        : 0}%
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {selectedCoin && selectedCoin.status === 'completed' && (
-                  <Card className="bg-emerald-500/5 border-emerald-500/20">
-                    <CardContent className="p-4">
-                      <div className="text-center space-y-2">
-                        <div className="text-3xl">{selectedCoin.logo}</div>
-                        <h3 className="font-semibold text-foreground">{selectedCoin.symbol}</h3>
-                        <div className={`text-2xl font-bold ${getVerdictColor(selectedCoin.verdict)}`}>
-                          {selectedCoin.verdict}
+                    <div className="flex items-start gap-3">
+                      <div className="text-3xl">{call.logo}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-bold text-foreground">{call.symbol}</h3>
+                          {call.exitCalled && (
+                            <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/20">
+                              Exit Called
+                            </Badge>
+                          )}
                         </div>
-                        <div className="pt-2 space-y-1">
-                          <p className="text-xs text-muted-foreground">Entry at ${formatPrice(selectedCoin.entryPrice)}</p>
-                          <p className="text-xs text-muted-foreground">Target ${formatPrice(selectedCoin.exitPrice)}</p>
+                        
+                        {/* Contract Address */}
+                        <div className="mb-3 p-2 bg-muted/30 rounded border border-border">
+                          <p className="text-xs text-muted-foreground mb-1">Contract Address</p>
+                          <div className="flex items-center gap-2">
+                            <code className="text-xs text-foreground font-mono truncate flex-1">
+                              {call.contractAddress}
+                            </code>
+                            <button
+                              onClick={() => copyToClipboard(call.contractAddress)}
+                              className="shrink-0"
+                            >
+                              {copiedAddress === call.contractAddress ? (
+                                <Check className="w-3 h-3 text-emerald-400" />
+                              ) : (
+                                <Copy className="w-3 h-3 text-muted-foreground hover:text-foreground" />
+                              )}
+                            </button>
+                          </div>
                         </div>
+
+                        {/* Price Info */}
+                        <div className="grid grid-cols-2 gap-3 mb-3">
+                          <div>
+                            <p className="text-xs text-muted-foreground mb-1">Entry Price</p>
+                            <p className="text-sm font-semibold text-foreground">${formatPrice(call.entryPrice)}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-muted-foreground mb-1">Current Price</p>
+                            <p className="text-sm font-semibold text-foreground">${formatPrice(call.currentPrice)}</p>
+                          </div>
+                        </div>
+
+                        {/* Growth */}
+                        <div className="mb-3">
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="text-xs text-muted-foreground">Growth</p>
+                            <p className={`text-lg font-bold ${call.growthPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                              {call.growthPercent >= 0 ? '+' : ''}{call.growthPercent.toFixed(2)}%
+                            </p>
+                          </div>
+                          <Progress 
+                            value={Math.min(Math.abs(call.growthPercent), 100)} 
+                            className="h-2"
+                          />
+                        </div>
+
+                        {/* Exit Info */}
+                        {call.exitCalled && call.exitPrice && (
+                          <div className="mb-3 p-2 bg-amber-500/5 rounded border border-amber-500/20">
+                            <p className="text-xs text-muted-foreground mb-1">Exit Price</p>
+                            <p className="text-sm font-semibold text-amber-400">${formatPrice(call.exitPrice)}</p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              Called {call.exitCalledAt?.toLocaleTimeString()}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Actions */}
                         <Button
                           size="sm"
-                          className="w-full mt-3"
-                          onClick={() => handleViewInTerminal(selectedCoin)}
+                          variant="outline"
+                          onClick={() => handleViewInTerminal(call)}
+                          className="w-full"
                         >
-                          Full Analysis
-                          <ArrowRight className="w-3 h-3 ml-2" />
+                          <ExternalLink className="w-3 h-3 mr-2" />
+                          Open in Terminal
                         </Button>
+
+                        <p className="text-xs text-muted-foreground mt-2">
+                          Called at {call.calledAt.toLocaleTimeString()}
+                        </p>
                       </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {aiCalls.length === 0 && (
+                <Card className="bg-card border-border">
+                  <CardContent className="p-12">
+                    <div className="text-center text-muted-foreground">
+                      <DollarSign className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                      <p className="text-sm">No AI calls yet</p>
+                      <p className="text-xs mt-1">High-confidence signals will appear here</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
         </div>
