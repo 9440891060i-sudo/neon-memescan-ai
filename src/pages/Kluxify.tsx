@@ -4,24 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { 
-  Zap, 
   TrendingUp, 
   TrendingDown, 
-  Crown, 
   Unlock,
-  Eye,
-  Twitter,
-  Users,
-  BarChart3,
-  Target,
-  Star,
   Delete,
-  HelpCircle
+  HelpCircle,
+  ArrowRight,
+  Activity,
+  DollarSign
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useKluxStore } from "@/store/kluxStore";
 import KluxPricingModal from "@/components/KluxPricingModal";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
 import kluxLogo from "@/assets/klux-logo.png";
 
 interface CoinAnalysis {
@@ -51,6 +47,7 @@ export default function Kluxify() {
   const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Simulate real-time coin analysis
   useEffect(() => {
@@ -144,18 +141,23 @@ export default function Kluxify() {
 
   const getVerdictColor = (verdict: string) => {
     switch (verdict) {
-      case 'BULLISH': return 'text-neon-green';
-      case 'BEARISH': return 'text-red-400';
-      default: return 'text-yellow-400';
+      case 'BULLISH': return 'text-emerald-400';
+      case 'BEARISH': return 'text-rose-400';
+      default: return 'text-amber-400';
     }
   };
 
   const getVerdictBg = (verdict: string) => {
     switch (verdict) {
-      case 'BULLISH': return 'bg-neon-green/20 border-neon-green/50';
-      case 'BEARISH': return 'bg-red-400/20 border-red-400/50';
-      default: return 'bg-yellow-400/20 border-yellow-400/50';
+      case 'BULLISH': return 'bg-emerald-500/10 border-emerald-500/20';
+      case 'BEARISH': return 'bg-rose-500/10 border-rose-500/20';
+      default: return 'bg-amber-500/10 border-amber-500/20';
     }
+  };
+
+  const handleViewInTerminal = (coin: CoinAnalysis) => {
+    // Navigate to analysis page with coin data
+    navigate('/analysis-input', { state: { coinData: coin } });
   };
 
   const formatPrice = (price: number) => {
@@ -177,14 +179,14 @@ export default function Kluxify() {
             <Card className="bg-gradient-card border-border shadow-2xl">
               <CardContent className="p-8 space-y-8">
                 {/* Display Screen */}
-                <div className="bg-black/50 rounded-lg p-6 border border-neon-green/30 min-h-[100px] flex items-center justify-center">
+                <div className="bg-black/50 rounded-lg p-6 border border-border min-h-[100px] flex items-center justify-center">
                   <div className="flex gap-3">
                     {[...Array(6)].map((_, i) => (
                       <div
                         key={i}
                         className={`w-4 h-4 rounded-full border-2 transition-all ${
                           i < pinCode.length
-                            ? "bg-neon-green border-neon-green shadow-[0_0_10px_rgba(0,255,136,0.5)]"
+                            ? "bg-emerald-500 border-emerald-500"
                             : "border-muted-foreground/30"
                         }`}
                       />
@@ -198,7 +200,7 @@ export default function Kluxify() {
                     <Button
                       key={num}
                       onClick={() => handleNumberClick(num.toString())}
-                      className="h-16 text-2xl font-bold bg-card hover:bg-neon-green/10 border border-border hover:border-neon-green/50 transition-all"
+                      className="h-16 text-2xl font-bold bg-card hover:bg-muted border border-border transition-all"
                       variant="outline"
                     >
                       {num}
@@ -206,21 +208,21 @@ export default function Kluxify() {
                   ))}
                   <Button
                     onClick={handleClear}
-                    className="h-16 text-sm font-bold bg-card hover:bg-red-500/10 border border-border hover:border-red-500/50 transition-all"
+                    className="h-16 text-sm font-bold bg-card hover:bg-muted border border-border transition-all"
                     variant="outline"
                   >
                     Clear
                   </Button>
                   <Button
                     onClick={() => handleNumberClick("0")}
-                    className="h-16 text-2xl font-bold bg-card hover:bg-neon-green/10 border border-border hover:border-neon-green/50 transition-all"
+                    className="h-16 text-2xl font-bold bg-card hover:bg-muted border border-border transition-all"
                     variant="outline"
                   >
                     0
                   </Button>
                   <Button
                     onClick={handleDelete}
-                    className="h-16 font-bold bg-card hover:bg-yellow-500/10 border border-border hover:border-yellow-500/50 transition-all"
+                    className="h-16 font-bold bg-card hover:bg-muted border border-border transition-all"
                     variant="outline"
                   >
                     <Delete className="w-5 h-5" />
@@ -255,7 +257,7 @@ export default function Kluxify() {
                 {/* Entry & Exit Signals */}
                 <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
-                    <Target className="w-5 h-5 text-gray-400" />
+                    <DollarSign className="w-5 h-5 text-gray-400" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Entry & Exit Signals</h3>
                   <p className="text-xs text-gray-400 leading-relaxed">
@@ -266,7 +268,7 @@ export default function Kluxify() {
                 {/* Credits System */}
                 <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
-                    <Star className="w-5 h-5 text-gray-400" />
+                    <Activity className="w-5 h-5 text-gray-400" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Klud Credits</h3>
                   <div className="space-y-1.5 text-xs">
@@ -322,239 +324,212 @@ export default function Kluxify() {
   }
 
   return (
-    <div className="w-full p-6 space-y-6 min-h-screen bg-gradient-to-b from-background via-black/30 to-background">
+    <div className="w-full min-h-screen bg-background">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-neon-purple flex items-center gap-2">
-            <Crown className="w-8 h-8" />
-            KLUXIFY
-          </h1>
-          <p className="text-muted-foreground">Real-time AI-powered trading signals</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <Badge className="bg-neon-purple/20 text-neon-purple">
-            Premium Active
-          </Badge>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse" />
-            <span className="text-sm text-muted-foreground">Live Scanning</span>
+      <div className="border-b border-border bg-card">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">KLUXIFY AI</h1>
+              <p className="text-sm text-muted-foreground mt-0.5">Professional Trading Signals</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                Live
+              </Badge>
+              <div className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">{analyses.length}</span> Active Analyses
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-gradient-card border-neon-green/20">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4 text-neon-green" />
-              <span className="text-sm text-muted-foreground">Scanning</span>
+      <div className="max-w-7xl mx-auto px-6 py-6">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Coins List */}
+          <div className="lg:col-span-2 space-y-3">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-medium text-foreground">AI Analysis Feed</h2>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                <span className="text-xs text-muted-foreground">Scanning Markets</span>
+              </div>
             </div>
-            <div className="text-2xl font-bold text-neon-green">1,247</div>
-            <div className="text-xs text-muted-foreground">coins/minute</div>
-          </CardContent>
-        </Card>
 
-        <Card className="bg-gradient-card border-neon-cyan/20">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <Target className="w-4 h-4 text-neon-cyan" />
-              <span className="text-sm text-muted-foreground">Signals Today</span>
-            </div>
-            <div className="text-2xl font-bold text-neon-cyan">23</div>
-            <div className="text-xs text-muted-foreground">Entry opportunities</div>
-          </CardContent>
-        </Card>
+            <div className="space-y-3">
+              {analyses.map((coin) => (
+                <Card key={coin.id} className="bg-card border-border hover:border-muted-foreground/20 transition-colors">
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div className="text-2xl">{coin.logo}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-foreground">{coin.symbol}</h3>
+                            {coin.status === 'completed' && (
+                              <Badge variant="outline" className={getVerdictBg(coin.verdict)}>
+                                {coin.verdict}
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-xs text-muted-foreground">{coin.name}</p>
+                        </div>
+                      </div>
 
-        <Card className="bg-gradient-card border-neon-purple/20">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <Star className="w-4 h-4 text-neon-purple" />
-              <span className="text-sm text-muted-foreground">Success Rate</span>
-            </div>
-            <div className="text-2xl font-bold text-neon-purple">78%</div>
-            <div className="text-xs text-muted-foreground">Last 30 days</div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-card border-yellow-400/20">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-yellow-400" />
-              <span className="text-sm text-muted-foreground">Avg ROI</span>
-            </div>
-            <div className="text-2xl font-bold text-yellow-400">+24.7%</div>
-            <div className="text-xs text-muted-foreground">Per signal</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Live Analysis Feed */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Coins List */}
-        <Card className="bg-gradient-card border-border">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Zap className="w-5 h-5 text-neon-green" />
-              Live Analysis Feed
-            </CardTitle>
-            <CardDescription>Real-time coin analysis results</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3 max-h-96 overflow-y-auto">
-            {analyses.map((coin) => (
-              <div
-                key={coin.id}
-                onClick={() => setSelectedCoin(coin)}
-                className="p-4 bg-black/20 rounded-lg border border-transparent hover:border-neon-green/30 cursor-pointer transition-all group"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="text-xl">{coin.logo}</div>
-                    <div>
-                      <div className="font-semibold">{coin.symbol}</div>
-                      <div className="text-xs text-muted-foreground">{coin.name}</div>
+                      <div className="text-right">
+                        {coin.status === 'analyzing' ? (
+                          <div className="space-y-2">
+                            <div className="text-sm text-amber-400 flex items-center gap-2">
+                              <div className="animate-spin w-3 h-3 border border-amber-400 border-t-transparent rounded-full" />
+                              Analyzing
+                            </div>
+                            <Progress value={coin.progress} className="h-1 w-24" />
+                          </div>
+                        ) : (
+                          <div className="space-y-1">
+                            <div className={`text-2xl font-bold ${getVerdictColor(coin.verdict)}`}>
+                              {coin.aiScore}
+                            </div>
+                            <p className="text-xs text-muted-foreground">AI Score</p>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    {coin.status === 'analyzing' ? (
-                      <div className="space-y-1">
-                        <div className="text-sm text-yellow-400 flex items-center gap-1">
-                          <div className="animate-spin w-3 h-3 border border-yellow-400 border-t-transparent rounded-full" />
-                          Analyzing
+
+                    {coin.status === 'completed' && (
+                      <>
+                        <div className="mt-4 pt-4 border-t border-border">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">Entry Price</p>
+                              <p className="font-semibold text-emerald-400">${formatPrice(coin.entryPrice)}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">Exit Target</p>
+                              <p className="font-semibold text-foreground">${formatPrice(coin.exitPrice)}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">24h Change</p>
+                              <p className={`font-semibold ${coin.priceChange24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                {coin.priceChange24h >= 0 ? '+' : ''}{coin.priceChange24h.toFixed(2)}%
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">Confidence</p>
+                              <p className="font-semibold text-foreground">{coin.confidence}%</p>
+                            </div>
+                          </div>
                         </div>
-                        <Progress value={coin.progress} className="h-1 w-16" />
-                      </div>
-                    ) : (
-                      <div className="space-y-1">
-                        <div className={`text-lg font-bold ${getVerdictColor(coin.verdict)}`}>
-                          {coin.aiScore}
+
+                        <div className="mt-4 flex items-center justify-between">
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <span>{coin.holderCount.toLocaleString()} holders</span>
+                            <span>{formatMarketCap(coin.marketCap)} cap</span>
+                          </div>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleViewInTerminal(coin)}
+                            className="h-8"
+                          >
+                            View Analysis
+                            <ArrowRight className="w-3 h-3 ml-2" />
+                          </Button>
                         </div>
-                        <Badge className={getVerdictBg(coin.verdict)}>
-                          {coin.verdict}
-                        </Badge>
-                      </div>
+                      </>
                     )}
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
+              ))}
 
-                {coin.status === 'completed' && (
-                  <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Twitter className="w-3 h-3" />
-                      {coin.twitterMentions.toLocaleString()}
+              {analyses.length === 0 && (
+                <Card className="bg-card border-border">
+                  <CardContent className="p-12">
+                    <div className="text-center text-muted-foreground">
+                      <Activity className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                      <p className="text-sm">Scanning markets for opportunities...</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Users className="w-3 h-3" />
-                      {coin.holderCount.toLocaleString()}
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </div>
+
+          {/* Side Panel - Selected Coin Details */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-6">
+              <h2 className="text-lg font-medium text-foreground mb-4">Quick Stats</h2>
+              
+              <div className="space-y-3">
+                <Card className="bg-card border-border">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Total Signals</span>
+                      <Activity className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className={`flex items-center gap-1 ${coin.priceChange24h >= 0 ? 'text-neon-green' : 'text-red-400'}`}>
-                      {coin.priceChange24h >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                      {coin.priceChange24h >= 0 ? '+' : ''}{coin.priceChange24h.toFixed(1)}%
+                    <p className="text-2xl font-bold text-foreground">
+                      {analyses.filter(a => a.status === 'completed').length}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card border-border">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Bullish Signals</span>
+                      <TrendingUp className="w-4 h-4 text-emerald-400" />
                     </div>
-                  </div>
+                    <p className="text-2xl font-bold text-emerald-400">
+                      {analyses.filter(a => a.verdict === 'BULLISH').length}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card border-border">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Avg Confidence</span>
+                      <DollarSign className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <p className="text-2xl font-bold text-foreground">
+                      {analyses.length > 0 
+                        ? Math.round(analyses.reduce((acc, a) => acc + a.confidence, 0) / analyses.length)
+                        : 0}%
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {selectedCoin && selectedCoin.status === 'completed' && (
+                  <Card className="bg-emerald-500/5 border-emerald-500/20">
+                    <CardContent className="p-4">
+                      <div className="text-center space-y-2">
+                        <div className="text-3xl">{selectedCoin.logo}</div>
+                        <h3 className="font-semibold text-foreground">{selectedCoin.symbol}</h3>
+                        <div className={`text-2xl font-bold ${getVerdictColor(selectedCoin.verdict)}`}>
+                          {selectedCoin.verdict}
+                        </div>
+                        <div className="pt-2 space-y-1">
+                          <p className="text-xs text-muted-foreground">Entry at ${formatPrice(selectedCoin.entryPrice)}</p>
+                          <p className="text-xs text-muted-foreground">Target ${formatPrice(selectedCoin.exitPrice)}</p>
+                        </div>
+                        <Button
+                          size="sm"
+                          className="w-full mt-3"
+                          onClick={() => handleViewInTerminal(selectedCoin)}
+                        >
+                          Full Analysis
+                          <ArrowRight className="w-3 h-3 ml-2" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
                 )}
               </div>
-            ))}
-
-            {analyses.length === 0 && (
-              <div className="text-center py-8 text-muted-foreground">
-                <Zap className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p>Scanning for opportunities...</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Detailed Analysis */}
-        <Card className="bg-gradient-card border-border">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <BarChart3 className="w-5 h-5 text-neon-cyan" />
-              Detailed Analysis
-            </CardTitle>
-            <CardDescription>
-              {selectedCoin ? `Analysis for ${selectedCoin.symbol}` : 'Select a coin to view detailed analysis'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {selectedCoin ? (
-              <div className="space-y-4">
-                {/* Header */}
-                <div className="flex items-center justify-between p-4 bg-black/30 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="text-3xl">{selectedCoin.logo}</div>
-                    <div>
-                      <h3 className="text-xl font-bold">{selectedCoin.symbol}</h3>
-                      <p className="text-sm text-muted-foreground">{selectedCoin.name}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className={`text-3xl font-bold ${getVerdictColor(selectedCoin.verdict)}`}>
-                      {selectedCoin.aiScore}
-                    </div>
-                    <Badge className={getVerdictBg(selectedCoin.verdict)}>
-                      {selectedCoin.verdict}
-                    </Badge>
-                  </div>
-                </div>
-
-                {/* Metrics */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-3 bg-black/20 rounded-lg">
-                    <div className="text-sm text-muted-foreground">Market Cap</div>
-                    <div className="font-bold">{formatMarketCap(selectedCoin.marketCap)}</div>
-                  </div>
-                  <div className="p-3 bg-black/20 rounded-lg">
-                    <div className="text-sm text-muted-foreground">24h Change</div>
-                    <div className={`font-bold ${selectedCoin.priceChange24h >= 0 ? 'text-neon-green' : 'text-red-400'}`}>
-                      {selectedCoin.priceChange24h >= 0 ? '+' : ''}{selectedCoin.priceChange24h.toFixed(2)}%
-                    </div>
-                  </div>
-                  <div className="p-3 bg-black/20 rounded-lg">
-                    <div className="text-sm text-muted-foreground">Twitter Mentions</div>
-                    <div className="font-bold">{selectedCoin.twitterMentions.toLocaleString()}</div>
-                  </div>
-                  <div className="p-3 bg-black/20 rounded-lg">
-                    <div className="text-sm text-muted-foreground">Holders</div>
-                    <div className="font-bold">{selectedCoin.holderCount.toLocaleString()}</div>
-                  </div>
-                </div>
-
-                {/* AI Signals */}
-                {selectedCoin.status === 'completed' && (
-                  <div className="p-4 bg-gradient-to-r from-neon-green/10 to-neon-cyan/10 rounded-lg border border-neon-green/30">
-                    <h4 className="font-semibold mb-3 text-neon-green">AI Trading Signals</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <div className="text-sm text-muted-foreground">Entry Price</div>
-                        <div className="font-bold text-neon-green">${formatPrice(selectedCoin.entryPrice)}</div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-muted-foreground">Exit Target</div>
-                        <div className="font-bold text-neon-cyan">${formatPrice(selectedCoin.exitPrice)}</div>
-                      </div>
-                    </div>
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Confidence</span>
-                      <div className="flex items-center gap-2">
-                        <Progress value={selectedCoin.confidence} className="w-20 h-2" />
-                        <span className="text-sm font-medium">{selectedCoin.confidence}%</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-64 text-muted-foreground">
-                <div className="text-center">
-                  <Eye className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                  <p>Select a coin from the feed to view detailed analysis</p>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
