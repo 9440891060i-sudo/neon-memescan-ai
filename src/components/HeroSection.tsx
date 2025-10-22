@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Sparkles, TrendingUp, Zap, Shield, Play } from "lucide-react";
+import { Sparkles, TrendingUp, Eye, Shield, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aurora from "./Aurora";
 
@@ -62,7 +62,7 @@ export default function HeroSection() {
             {/* Feature highlights */}
             <div className="flex items-center justify-center gap-6 flex-wrap animate-fade-in delay-200">
               <div className="flex items-center gap-2 text-sm text-foreground/60">
-                <Zap className="w-3.5 h-3.5 text-neon-green" />
+                <Eye className="w-3.5 h-3.5 text-neon-green" />
                 <span>Social data</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-foreground/60">

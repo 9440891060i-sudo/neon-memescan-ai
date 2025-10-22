@@ -51,7 +51,7 @@ export default function MemeCoinDisplay() {
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Top <span className="text-neon-cyan">AI Picks</span> This Week
+            Top AI Picks This Week
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Yes, This model uses the same data you can see, and still makes more money than you
