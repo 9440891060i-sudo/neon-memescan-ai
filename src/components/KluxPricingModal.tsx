@@ -70,9 +70,9 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 flex flex-col min-h-0">
-            <div className="flex-1 overflow-y-auto min-h-0 custom-scrollbar spring-scroll">
-              <div className="p-8 flex flex-col gap-8 min-h-full">
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-8 flex flex-col gap-8">
               {/* Header */}
               <div className="mb-0">
                 <h2 className="text-3xl font-bold text-white mb-2">Plans & Kludd</h2>
@@ -338,12 +338,13 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                   </div>
                 </div>
               </div>
-
-              {/* Help Button */}
-              <button className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                <span className="text-white text-xl">?</span>
-              </button>
-            </div></div>
+              </div>
+            </div>
+            
+            {/* Help Button */}
+            <button className="absolute bottom-6 right-6 w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10">
+              <span className="text-white text-xl">?</span>
+            </button>
           </div>
         </div>
       </DialogContent>
