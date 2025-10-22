@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 
 import { Separator } from "@/components/ui/separator";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useNavigate } from "react-router-dom";
 
 const weekData = [
@@ -25,7 +25,7 @@ export default function PerformancePreview() {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Real <span className="text-foreground">Performance</span>
+            Real <span className="text-neon-green">Performance</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Yes, losses are included here. No cherry-picking.
@@ -93,12 +93,17 @@ export default function PerformancePreview() {
                         labelStyle={{ color: 'hsl(var(--foreground))', fontWeight: '600', fontSize: '13px' }}
                         itemStyle={{ color: 'hsl(var(--neon-green))', fontSize: '14px', fontWeight: '700' }}
                       />
+                      <Area
+                        type="monotone"
+                        dataKey="performance"
+                        fill="url(#performanceGradient)"
+                        stroke="none"
+                      />
                       <Line
                         type="monotone"
                         dataKey="performance"
                         stroke="hsl(var(--neon-green))"
                         strokeWidth={2}
-                        fill="url(#performanceGradient)"
                         dot={false}
                       />
                     </LineChart>
