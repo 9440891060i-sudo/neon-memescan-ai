@@ -78,11 +78,11 @@ const SupportWidget = () => {
         <PopoverContent
           align="end"
           side="top"
-          className="w-80 h-96 p-0 bg-background/95 backdrop-blur-sm border-border"
+          className="w-80 h-96 p-0 bg-background/20 backdrop-blur-xl border-border/30"
         >
           <Tabs defaultValue="chat" className="h-full flex flex-col">
-            <div className="flex items-center justify-between p-3 border-b border-border">
-              <TabsList className="h-8 bg-muted/30">
+            <div className="flex items-center justify-between p-3 border-b border-border/30 bg-background/10">
+              <TabsList className="h-8 bg-muted/20 backdrop-blur-sm">
                 <TabsTrigger value="chat" className="text-xs h-7">
                   <MessageCircle className="h-3 w-3 mr-1" />
                   Chat
