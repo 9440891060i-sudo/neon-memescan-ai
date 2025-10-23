@@ -18,7 +18,7 @@ export default function PerformancePreview() {
   const totalReturn = weekData.reduce((sum, day) => sum + day.performance, 0);
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">

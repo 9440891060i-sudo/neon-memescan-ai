@@ -47,7 +47,7 @@ export default function MemeCoinDisplay() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
   
   return (
-    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black/50 to-background">
+    <section ref={ref} className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
