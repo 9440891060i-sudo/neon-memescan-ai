@@ -74,13 +74,6 @@ const Rewards = () => {
     <div className="min-h-screen bg-black p-6">
       <div className="w-full space-y-8">
         
-        {/* Header Section */}
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-white">Rewards</h1>
-          <p className="text-gray-400">
-            Track your referral earnings, payouts, and performance.
-          </p>
-        </div>
 
         {/* Tabs */}
         <Tabs defaultValue="my-rewards" className="space-y-6">
