@@ -59,11 +59,10 @@ export function AppSidebar() {
       <SidebarHeader className={`py-4 ${open ? "px-4" : "px-0"} border-b border-gray-900`}>
         {/* User Profile Section */}
         <div className="flex items-center gap-2">
-          <Link 
-            to="/profile-settings" 
-            className={`flex items-center flex-1 ${open ? "gap-3 p-3 bg-gray-950 border border-gray-900" : "p-0 justify-center w-full bg-transparent border-0"} rounded-lg hover:border-gray-800 transition-all duration-300 group`}
+          <div 
+            className={`flex items-center flex-1 ${open ? "gap-3 p-3 bg-gray-950 border border-gray-900" : "p-0 justify-center w-full bg-transparent border-0"} rounded-lg`}
           >
-            <Avatar className={`h-8 w-8 border-2 ${isActive("/profile-settings") ? "border-neon-green" : "border-gray-800 group-hover:border-gray-700"} transition-all shrink-0`}>
+            <Avatar className="h-8 w-8 border-2 border-gray-800 shrink-0">
               <AvatarImage src="/placeholder-avatar.jpg" alt={user?.username || "User"} />
               <AvatarFallback className="bg-gray-900 text-white font-bold">
                 {getUserInitials()}
@@ -71,12 +70,12 @@ export function AppSidebar() {
             </Avatar>
             {open && (
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-white truncate group-hover:text-gray-300 transition-colors">
+                <p className="font-semibold text-white truncate">
                   {user?.username || "User"}
                 </p>
               </div>
             )}
-          </Link>
+          </div>
         </div>
       </SidebarHeader>
 
