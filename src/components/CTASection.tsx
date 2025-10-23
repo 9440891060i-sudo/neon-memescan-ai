@@ -16,7 +16,7 @@ export default function CTASection() {
           {/* Main heading */}
           <div className="mb-12">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Join the <span className="text-neon-green">Klux</span> Community
+              Join the <span className="text-neon-green">Community</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Get early insights, vote on features, and ride the next meme coin wave together.
