@@ -8,6 +8,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { Beaker, Brain } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useKluxStore } from "@/store/kluxStore";
+import SupportWidget from "@/components/SupportWidget";
 import Index from "./pages/Index";
 import AnalysisInput from "./pages/AnalysisInput";
 import Dashboard from "./pages/Dashboard";
@@ -93,6 +94,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AppContent />
+        <SupportWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
