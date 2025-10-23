@@ -19,8 +19,8 @@ const Header = () => {
 
   const navItems = [
     { href: "/", label: "Home", icon: Zap },
-    { href: "#pricing", label: "Pricing", icon: DollarSign, isModal: true },
     { href: "/faq", label: "FAQs", icon: HelpCircle },
+    { href: "#pricing", label: "Pricing", icon: DollarSign, isModal: true },
     { href: "/kluxify", label: "Community", icon: Users },
   ];
 
