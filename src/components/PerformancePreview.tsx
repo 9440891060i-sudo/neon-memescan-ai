@@ -22,7 +22,7 @@ export default function PerformancePreview() {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-            Real <span className="text-neon-green">Performance</span>
+            Real <span className="text-green-500">Performance</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Yes, losses are included here. No cherry-picking.
