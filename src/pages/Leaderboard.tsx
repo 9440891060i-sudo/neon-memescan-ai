@@ -195,7 +195,7 @@ export default function Performance() {
           
 
           {/* Timeframe Selector */}
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-12 -mt-4">
             <div className="flex gap-1 bg-black/60 rounded-xl p-1 border border-gray-800/60 shadow-xl">
               {timeframes.map((timeframe) => {
                 return (
