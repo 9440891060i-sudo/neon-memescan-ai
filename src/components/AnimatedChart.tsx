@@ -52,8 +52,9 @@ export const AnimatedChart = ({
             strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
             dot={dot !== false ? (dot || ((props) => {
+              const isFirst = props.index === 0;
               const isLast = props.index === data.length - 1;
-              return isLast ? (
+              return isFirst || isLast ? (
                 <circle 
                   cx={props.cx} 
                   cy={props.cy} 
