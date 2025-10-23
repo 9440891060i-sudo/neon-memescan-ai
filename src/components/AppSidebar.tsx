@@ -20,10 +20,10 @@ import { useKluxStore } from "@/store/kluxStore";
 import { useToast } from "@/hooks/use-toast";
 
 const sidebarItems = [
-  { title: "Dashboard", url: "/user-dashboard", icon: BarChart3 },
+  { title: "Dashboard", url: "/user-dashboard", icon: User },
   { title: "Terminal", url: "/analyze", icon: Search },
   { title: "KLUXIFY", url: "/kluxify", icon: Crown },
-  { title: "Performance", url: "/leaderboard", icon: Trophy },
+  { title: "Performance", url: "/leaderboard", icon: BarChart3 },
   { title: "Rewards", url: "/rewards", icon: Gift },
 ];
 
