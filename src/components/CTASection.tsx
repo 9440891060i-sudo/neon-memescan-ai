@@ -3,7 +3,7 @@ import { Send, ArrowRight } from "lucide-react";
 
 export default function CTASection() {
   return (
-    <section className="py-20 px-6 relative">
+    <section className="py-20 px-6 relative bg-black">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-32 h-32 bg-neon-green/10 rounded-full blur-3xl"></div>
