@@ -10,8 +10,6 @@ import {
   BarChart3,
   Zap,
   CheckCircle,
-  Clock,
-  Calendar,
   Sparkles
 } from "lucide-react";
 import Header from "@/components/Header";
@@ -69,6 +67,18 @@ const performanceData = {
       { coin: "PEPE", return: 634, logo: "🐸", timestamp: "21 days ago" },
       { coin: "SHIB", return: 456, logo: "🐕", timestamp: "25 days ago" }
     ]
+  },
+  max: {
+    coinsAnalyzed: 8942,
+    worthyPicks: 2134,
+    accuracyRate: 90.2,
+    averageReturn: 243.8,
+    successfulPicks: [
+      { coin: "DOGE", return: 4567, logo: "🐕", timestamp: "3 months ago" },
+      { coin: "SHIB", return: 3421, logo: "🐕", timestamp: "4 months ago" },
+      { coin: "PEPE", return: 2891, logo: "🐸", timestamp: "5 months ago" },
+      { coin: "FLOKI", return: 1987, logo: "🐕", timestamp: "6 months ago" }
+    ]
   }
 };
 
@@ -80,9 +90,10 @@ const chartData = [
 ];
 
 const timeframes = [
-  { label: "Today", value: "today", icon: Clock },
-  { label: "This Week", value: "week", icon: Calendar },
-  { label: "This Month", value: "month", icon: BarChart3 }
+  { label: "Today", value: "today" },
+  { label: "7 days", value: "week" },
+  { label: "30 days", value: "month" },
+  { label: "Max", value: "max" }
 ];
 
 export default function Performance() {
@@ -184,21 +195,19 @@ export default function Performance() {
           
 
           {/* Timeframe Selector */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-4">
             <div className="flex gap-1 bg-black/60 rounded-xl p-1 border border-gray-800/60 shadow-xl">
               {timeframes.map((timeframe) => {
-                const Icon = timeframe.icon;
                 return (
                   <button
                     key={timeframe.value}
                     onClick={() => setSelectedTimeframe(timeframe.value)}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 font-semibold ${
+                    className={`px-6 py-3 rounded-lg transition-all duration-200 font-semibold ${
                       selectedTimeframe === timeframe.value
                         ? 'bg-primary text-white shadow-lg shadow-primary/20'
                         : 'text-gray-400 hover:text-white hover:bg-gray-900/50'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
                     {timeframe.label}
                   </button>
                 );
