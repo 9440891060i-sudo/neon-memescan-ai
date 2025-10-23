@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, HelpCircle, Gift } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, Gift } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -39,11 +39,6 @@ export function AppSidebar() {
   const handleLogout = () => {
     logout();
     navigate("/");
-  };
-
-  const handleSupport = () => {
-    // Navigate to internal support page instead of external email
-    navigate("/support");
   };
 
   // Get user initials for avatar fallback
@@ -114,19 +109,6 @@ export function AppSidebar() {
                   </SidebarMenuItem>
                 );
               })}
-              
-              {/* Support Button */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <button
-                    onClick={handleSupport}
-                    className={`flex items-center ${open ? "space-x-3 px-4 mx-1 py-3" : "justify-center py-3"} rounded-lg transition-all duration-300 group relative overflow-hidden text-gray-400 hover:bg-gray-950 hover:text-white hover:border-gray-800 border border-transparent text-left w-full`}
-                  >
-                    <HelpCircle className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
-                    {open && <span className="font-medium relative z-10 transition-all duration-300">Support</span>}
-                  </button>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

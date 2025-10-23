@@ -19,7 +19,6 @@ import ProfileSettings from "./pages/ProfileSettings";
 import Kluxify from "./pages/Kluxify";
 import Rewards from "./pages/Rewards";
 import FAQ from "./pages/FAQ";
-import Support from "./pages/Support";
 import WalletAnalytics from "./pages/WalletAnalytics";
 
 const queryClient = new QueryClient();
@@ -54,7 +53,6 @@ const AppContent = () => {
                 <Route path="/rewards" element={<Rewards />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile-settings" element={<ProfileSettings />} />
-                <Route path="/support" element={<Support />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/wallet-analytics" element={<WalletAnalytics />} />
                 {/* Redirect to dashboard if authenticated and on public routes */}
