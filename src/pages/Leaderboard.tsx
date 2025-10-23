@@ -182,18 +182,6 @@ export default function Performance() {
       <div className={isAuthenticated ? "pt-8" : "pt-32"}>
         <div className="w-full px-6 py-8 max-w-7xl mx-auto">
           
-          {/* Header Section */}
-          <div className="text-center mb-12" ref={metricsRef as any}>
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <h1 className="text-5xl font-bold text-white">
-                Klux AI <span className="text-neon-green drop-shadow-md">Performance</span>
-              </h1>
-            </div>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Real-time performance metrics showcasing our AI's scanning reliability, 
-              filtering accuracy, and consistent market outperformance
-            </p>
-          </div>
 
           {/* Timeframe Selector */}
           <div className="flex justify-center mb-8">

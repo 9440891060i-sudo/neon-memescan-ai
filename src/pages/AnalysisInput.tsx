@@ -229,16 +229,6 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
         <div className="w-full px-6 pt-20 pb-12">
           {/* Analyse Tab Content */}
           <TabsContent value="analyse" className="mt-0">
-            <div className="text-center mb-16">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-                Paste Contract Address.
-                <br />
-                <span className="text-neon-green">Let Klux Show You the Rest</span>
-              </h1>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Your analysis just got better with this terminal
-              </p>
-            </div>
 
             {/* Main Input Section */}
             <div className="max-w-4xl mx-auto mb-16">
