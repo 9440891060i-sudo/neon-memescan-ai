@@ -195,59 +195,59 @@ export default function WalletAnalytics() {
   };
 
   return (
-    <div className="min-h-screen bg-black p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-black p-4">
+      <div className="max-w-7xl mx-auto space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               onClick={() => navigate('/analyze', { state: { tab: 'wallets' } })}
-              className="text-gray-400 hover:text-white"
+              className="text-gray-400 hover:text-white h-9"
             >
-              <ArrowLeft className="w-5 h-5 mr-2" />
+              <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-white">Wallet Analytics</h1>
-              <p className="text-gray-400 mt-1">Professional performance tracking</p>
+              <h1 className="text-2xl font-bold text-white">Wallet Analytics</h1>
+              <p className="text-gray-400 text-sm mt-0.5">Professional performance tracking</p>
             </div>
           </div>
         </div>
 
         {/* Wallet Selection */}
         <Card className="bg-black border-gray-800">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Wallet className="w-5 h-5 text-gray-400" />
+          <CardHeader className="p-4">
+            <CardTitle className="flex items-center gap-2 text-white text-base">
+              <Wallet className="w-4 h-4 text-gray-400" />
               Select Wallet
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3 p-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <Input
                 placeholder="Search by name or contract address..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-gray-950 border-gray-800 text-white"
+                className="pl-10 bg-gray-950 border-gray-800 text-white h-10"
               />
             </div>
             <div className="overflow-x-auto">
-              <div className="flex gap-3 pb-2">
+              <div className="flex gap-2 pb-2">
                 {filteredWallets.map((wallet) => (
                   <button
                     key={wallet.id}
                     onClick={() => setSelectedWallet(wallet)}
-                    className={`p-4 rounded-lg border transition-colors flex-shrink-0 bg-gray-950 ${
+                    className={`p-3 rounded-lg border transition-colors flex-shrink-0 bg-gray-950 ${
                       selectedWallet.id === wallet.id
                         ? 'border-white'
                         : 'border-gray-800 hover:border-gray-700'
                     }`}
                   >
-                    <div className="text-center space-y-2">
-                      <Wallet className="w-5 h-5 mx-auto text-gray-400" />
-                      <p className="text-sm font-semibold text-white">
+                    <div className="text-center space-y-1">
+                      <Wallet className="w-4 h-4 mx-auto text-gray-400" />
+                      <p className="text-xs font-semibold text-white">
                         {wallet.label}
                       </p>
                       <p className={`text-xs ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
@@ -262,63 +262,63 @@ export default function WalletAnalytics() {
         </Card>
 
         {/* Performance Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <Card className="bg-gray-950 border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400">Total P&L</p>
-                  <p className={`text-2xl font-bold mt-1 ${selectedWallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                  <p className="text-xs text-gray-400">Total P&L</p>
+                  <p className={`text-xl font-bold mt-1 ${selectedWallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                     {selectedWallet.pnl}
                   </p>
-                  <p className={`text-sm mt-1 ${selectedWallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                  <p className={`text-xs mt-1 ${selectedWallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                     {selectedWallet.pnlPercent}
                   </p>
                 </div>
                 {selectedWallet.isPositive ? (
-                  <TrendingUp className="w-8 h-8 text-green-400" />
+                  <TrendingUp className="w-6 h-6 text-green-400" />
                 ) : (
-                  <TrendingDown className="w-8 h-8 text-red-400" />
+                  <TrendingDown className="w-6 h-6 text-red-400" />
                 )}
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gray-950 border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400">Win Rate</p>
-                  <p className="text-2xl font-bold text-white mt-1">{selectedWallet.winRate}</p>
-                  <p className="text-sm text-gray-400 mt-1">{selectedWallet.totalTrades} trades</p>
+                  <p className="text-xs text-gray-400">Win Rate</p>
+                  <p className="text-xl font-bold text-white mt-1">{selectedWallet.winRate}</p>
+                  <p className="text-xs text-gray-400 mt-1">{selectedWallet.totalTrades} trades</p>
                 </div>
-                <Percent className="w-8 h-8 text-primary" />
+                <Percent className="w-6 h-6 text-primary" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gray-950 border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400">Avg Trade Size</p>
-                  <p className="text-2xl font-bold text-white mt-1">{selectedWallet.avgTradeSize}</p>
-                  <p className="text-sm text-gray-400 mt-1">Per transaction</p>
+                  <p className="text-xs text-gray-400">Avg Trade Size</p>
+                  <p className="text-xl font-bold text-white mt-1">{selectedWallet.avgTradeSize}</p>
+                  <p className="text-xs text-gray-400 mt-1">Per transaction</p>
                 </div>
-                <DollarSign className="w-8 h-8 text-primary" />
+                <DollarSign className="w-6 h-6 text-primary" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gray-950 border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400">Balance</p>
-                  <p className="text-2xl font-bold text-white mt-1">{selectedWallet.balance}</p>
-                  <p className="text-sm text-gray-400 mt-1">Current value</p>
+                  <p className="text-xs text-gray-400">Balance</p>
+                  <p className="text-xl font-bold text-white mt-1">{selectedWallet.balance}</p>
+                  <p className="text-xs text-gray-400 mt-1">Current value</p>
                 </div>
-                <Activity className="w-8 h-8 text-primary" />
+                <Activity className="w-6 h-6 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -326,20 +326,20 @@ export default function WalletAnalytics() {
 
         {/* P&L Chart */}
         <Card className="bg-black border-gray-800">
-          <CardHeader>
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <CardTitle className="flex items-center gap-2 text-white">
-                <TrendingUp className="w-5 h-5 text-primary" />
+          <CardHeader className="p-4">
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <CardTitle className="flex items-center gap-2 text-white text-base">
+                <TrendingUp className="w-4 h-4 text-primary" />
                 P&L Performance
               </CardTitle>
-              <div className="flex gap-2">
+              <div className="flex gap-1">
                 {['7d', '1m', '3m', '6m', '1y'].map((tf) => (
                   <Button
                     key={tf}
                     variant={timeframe === tf ? "default" : "outline"}
                     size="sm"
                     onClick={() => setTimeframe(tf)}
-                    className={timeframe === tf ? "" : "bg-gray-950 border-gray-800 text-gray-400 hover:text-white"}
+                    className={`h-8 text-xs ${timeframe === tf ? "" : "bg-gray-950 border-gray-800 text-gray-400 hover:text-white"}`}
                   >
                     {tf === '7d' ? '7D' : tf === '1m' ? '1M' : tf === '3m' ? '3M' : tf === '6m' ? '6M' : '1Y'}
                   </Button>
@@ -347,8 +347,8 @@ export default function WalletAnalytics() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="p-6">
-            <div className="h-[400px]">
+          <CardContent className="p-4">
+            <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={pnlData}>
                   <defs>
@@ -482,27 +482,27 @@ export default function WalletAnalytics() {
 
         {/* Trades Section */}
         <Card className="bg-black border-gray-800">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Activity className="w-5 h-5 text-primary" />
+          <CardHeader className="p-4">
+            <CardTitle className="flex items-center gap-2 text-white text-base">
+              <Activity className="w-4 h-4 text-primary" />
               Trades
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+          <CardContent className="p-4">
+            <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2">
               {tradesData.map((trade) => (
                 <div
                   key={trade.id}
-                  className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
+                  className="p-3 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 flex-1">
-                      <img src={trade.logo} alt={trade.coin} className="w-10 h-10 rounded-full" />
-                      <div className="flex-1">
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <img src={trade.logo} alt={trade.coin} className="w-8 h-8 rounded-full" />
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <Badge 
                             variant="outline" 
-                            className={`${
+                            className={`text-xs ${
                               trade.type === 'buy' 
                                 ? 'bg-green-500/10 text-green-400 border-green-500/20' 
                                 : 'bg-red-500/10 text-red-400 border-red-500/20'
@@ -511,23 +511,23 @@ export default function WalletAnalytics() {
                             {trade.type === 'buy' ? <ArrowUpRight className="w-3 h-3 mr-1" /> : <ArrowDownRight className="w-3 h-3 mr-1" />}
                             {trade.type.toUpperCase()}
                           </Badge>
-                          <span className="text-white font-semibold">{trade.coin}</span>
+                          <span className="text-white font-semibold text-sm">{trade.coin}</span>
                         </div>
-                        <div className="flex items-center gap-4 mt-2 text-sm text-gray-400">
-                          <span>Amount: <span className="text-white">{trade.amount}</span></span>
+                        <div className="flex items-center gap-3 mt-1 text-xs text-gray-400">
+                          <span>Amt: <span className="text-white">{trade.amount}</span></span>
                           <span>Qty: <span className="text-white">{trade.quantity}</span></span>
                           <span>Price: <span className="text-white">{trade.price}</span></span>
                         </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className={`text-lg font-bold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                    <div className="text-right shrink-0">
+                      <p className={`text-base font-bold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                         {trade.profit}
                       </p>
-                      <p className={`text-sm ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                      <p className={`text-xs ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                         {trade.profitPercent}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">{trade.time}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{trade.time}</p>
                     </div>
                   </div>
                 </div>

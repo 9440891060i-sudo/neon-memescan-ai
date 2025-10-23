@@ -510,25 +510,25 @@ export function WalletsView() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       {/* Add Wallet Section */}
       <Card className="bg-black border-gray-800">
-        <CardContent className="p-8">
-          <div className="flex gap-4">
+        <CardContent className="p-4">
+          <div className="flex gap-3">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
               <Input
                 placeholder="Enter wallet address"
                 value={walletAddress}
                 onChange={(e) => setWalletAddress(e.target.value)}
-                className="pl-12 bg-gray-950 border-gray-800 text-white placeholder:text-gray-500 font-mono h-14 text-sm"
+                className="pl-10 bg-gray-950 border-gray-800 text-white placeholder:text-gray-500 font-mono h-10 text-sm"
               />
             </div>
             <Button
               onClick={handleAddWallet}
-              className="h-14 px-8 bg-neon-green hover:bg-neon-green/90 text-black font-semibold"
+              className="h-10 px-6 bg-neon-green hover:bg-neon-green/90 text-black font-semibold"
             >
-              <Plus className="w-5 h-5 mr-2" />
+              <Plus className="w-4 h-4 mr-2" />
               Track Wallet
             </Button>
           </div>
@@ -536,33 +536,33 @@ export function WalletsView() {
       </Card>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         <Card className="bg-gray-950 border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Tracked Wallets</p>
-                <p className="text-3xl font-bold text-white mt-1">12</p>
+                <p className="text-xs text-gray-500">Tracked Wallets</p>
+                <p className="text-2xl font-bold text-white mt-1">12</p>
               </div>
-              <Wallet className="w-8 h-8 text-gray-400" />
+              <Wallet className="w-6 h-6 text-gray-400" />
             </div>
             <p className="text-xs text-gray-500 mt-2">+3 this week</p>
           </CardContent>
         </Card>
 
         <Card className="bg-gray-950 border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Total Trades</p>
-                <p className="text-3xl font-bold text-white mt-1">{getTotalTrades()}</p>
+                <p className="text-xs text-gray-500">Total Trades</p>
+                <p className="text-2xl font-bold text-white mt-1">{getTotalTrades()}</p>
               </div>
-              <Activity className="w-8 h-8 text-gray-400" />
+              <Activity className="w-6 h-6 text-gray-400" />
             </div>
-            <div className="flex gap-1 mt-3">
+            <div className="flex gap-1 mt-2">
               <button
                 onClick={() => setTimeframe('1d')}
-                className={`px-2 py-1 text-xs rounded transition-colors ${
+                className={`px-2 py-0.5 text-xs rounded transition-colors ${
                   timeframe === '1d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                 }`}
               >
@@ -570,7 +570,7 @@ export function WalletsView() {
               </button>
               <button
                 onClick={() => setTimeframe('7d')}
-                className={`px-2 py-1 text-xs rounded transition-colors ${
+                className={`px-2 py-0.5 text-xs rounded transition-colors ${
                   timeframe === '7d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                 }`}
               >
@@ -578,7 +578,7 @@ export function WalletsView() {
               </button>
               <button
                 onClick={() => setTimeframe('1M')}
-                className={`px-2 py-1 text-xs rounded transition-colors ${
+                className={`px-2 py-0.5 text-xs rounded transition-colors ${
                   timeframe === '1M' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                 }`}
               >
@@ -586,7 +586,7 @@ export function WalletsView() {
               </button>
               <button
                 onClick={() => setTimeframe('all')}
-                className={`px-2 py-1 text-xs rounded transition-colors ${
+                className={`px-2 py-0.5 text-xs rounded transition-colors ${
                   timeframe === 'all' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                 }`}
               >
@@ -597,26 +597,26 @@ export function WalletsView() {
         </Card>
 
         <Card className="bg-gray-950 border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Active Alerts</p>
-                <p className="text-3xl font-bold text-white mt-1">8</p>
+                <p className="text-xs text-gray-500">Active Alerts</p>
+                <p className="text-2xl font-bold text-white mt-1">8</p>
               </div>
-              <Bell className="w-8 h-8 text-gray-400" />
+              <Bell className="w-6 h-6 text-gray-400" />
             </div>
             <p className="text-xs text-gray-500 mt-2">2 triggered today</p>
           </CardContent>
         </Card>
 
         <Card className="bg-gray-950 border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Avg Win Rate</p>
-                <p className="text-3xl font-bold text-white mt-1">67%</p>
+                <p className="text-xs text-gray-500">Avg Win Rate</p>
+                <p className="text-2xl font-bold text-white mt-1">67%</p>
               </div>
-              <Percent className="w-8 h-8 text-gray-400" />
+              <Percent className="w-6 h-6 text-gray-400" />
             </div>
             <p className="text-xs text-gray-500 mt-2">Across all wallets</p>
           </CardContent>
@@ -624,20 +624,20 @@ export function WalletsView() {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Tracked Wallets */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-4">
           <Card className="bg-black border-gray-800">
-            <CardHeader className="border-b border-gray-800">
+            <CardHeader className="border-b border-gray-800 p-4">
               <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <Wallet className="w-5 h-5 text-gray-400" />
+                <CardTitle className="flex items-center gap-2 text-white text-base">
+                  <Wallet className="w-4 h-4 text-gray-400" />
                   Tracked Wallets
                 </CardTitle>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={selectAllWallets}
-                    className={`px-3 py-1.5 text-xs rounded-md border transition-all ${
+                    className={`px-2 py-1 text-xs rounded-md border transition-all ${
                       selectedWallets.length === trackedWallets.length
                         ? 'border-white text-white'
                         : 'border-gray-700 text-gray-400 hover:border-gray-600'
@@ -645,31 +645,31 @@ export function WalletsView() {
                   >
                     Select All ({selectedWallets.length}/{trackedWallets.length})
                   </button>
-                  <Badge variant="outline" className="bg-neon-green/10 text-neon-green border-neon-green/20">
+                  <Badge variant="outline" className="bg-neon-green/10 text-neon-green border-neon-green/20 text-xs">
                     {trackedWallets.length} Active
                   </Badge>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="p-6">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <CardContent className="p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
                 {trackedWallets.map((wallet) => (
                   <button
                     key={wallet.id}
                     onClick={() => toggleWallet(wallet.id)}
-                    className={`p-4 rounded-lg border transition-all hover:scale-105 bg-gray-950 ${
+                    className={`p-3 rounded-lg border transition-all hover:scale-105 bg-gray-950 ${
                       selectedWallets.includes(wallet.id)
                         ? 'border-white'
                         : 'border-gray-800 hover:border-gray-700'
                     }`}
                   >
-                    <div className="flex flex-col items-center gap-2">
-                      <Wallet className="w-6 h-6 text-gray-400" />
+                    <div className="flex flex-col items-center gap-1.5">
+                      <Wallet className="w-5 h-5 text-gray-400" />
                       <div className="text-center">
-                        <p className="text-sm font-semibold text-white">
+                        <p className="text-xs font-semibold text-white">
                           {wallet.label}
                         </p>
-                        <p className={`text-xs mt-1 ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                        <p className={`text-xs mt-0.5 ${wallet.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                           {wallet.pnl}
                         </p>
                       </div>
@@ -682,16 +682,16 @@ export function WalletsView() {
 
           {/* Recent Trades */}
           <Card className="bg-black border-gray-800">
-            <CardHeader className="border-b border-gray-800">
+            <CardHeader className="border-b border-gray-800 p-4">
               <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <TrendingUp className="w-5 h-5 text-gray-400" />
+                <CardTitle className="flex items-center gap-2 text-white text-base">
+                  <TrendingUp className="w-4 h-4 text-gray-400" />
                   Trades
                 </CardTitle>
                 <div className="flex gap-1">
                   <button
                     onClick={() => setTradesTimeframe('1d')}
-                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                    className={`px-2 py-0.5 text-xs rounded transition-colors ${
                       tradesTimeframe === '1d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                     }`}
                   >
@@ -699,7 +699,7 @@ export function WalletsView() {
                   </button>
                   <button
                     onClick={() => setTradesTimeframe('7d')}
-                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                    className={`px-2 py-0.5 text-xs rounded transition-colors ${
                       tradesTimeframe === '7d' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                     }`}
                   >
@@ -707,7 +707,7 @@ export function WalletsView() {
                   </button>
                   <button
                     onClick={() => setTradesTimeframe('1M')}
-                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                    className={`px-2 py-0.5 text-xs rounded transition-colors ${
                       tradesTimeframe === '1M' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                     }`}
                   >
@@ -715,7 +715,7 @@ export function WalletsView() {
                   </button>
                   <button
                     onClick={() => setTradesTimeframe('all')}
-                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                    className={`px-2 py-0.5 text-xs rounded transition-colors ${
                       tradesTimeframe === 'all' ? 'bg-blue-400/20 text-blue-400' : 'text-gray-500 hover:text-gray-300'
                     }`}
                   >
@@ -724,40 +724,40 @@ export function WalletsView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               {filteredTrades.length === 0 ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-500">No trades found for selected wallets</p>
+                <div className="text-center py-6">
+                  <p className="text-gray-500 text-sm">No trades found for selected wallets</p>
                 </div>
               ) : (
                 <>
-                  <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                  <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                     {filteredTrades.map((trade) => (
                     <div 
                       key={trade.id}
-                      className="flex items-center justify-between p-4 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
+                      className="flex items-center justify-between p-3 bg-gray-950 rounded-lg border border-gray-800 hover:border-gray-700 transition-all"
                     >
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3">
                         <Badge 
                           variant="outline"
-                          className={trade.action === "BUY" 
+                          className={`text-xs ${trade.action === "BUY" 
                             ? "bg-green-500/10 text-green-400 border-green-500/20 font-semibold" 
                             : "bg-red-500/10 text-red-400 border-red-500/20 font-semibold"
-                          }
+                          }`}
                         >
                           {trade.action}
                         </Badge>
                         <div>
                           <div className="flex items-center gap-2">
-                            <p className="font-semibold text-white">{trade.coin}</p>
+                            <p className="text-sm font-semibold text-white">{trade.coin}</p>
                             <span className="text-gray-600">•</span>
-                            <p className="text-sm text-gray-500">{trade.wallet}</p>
+                            <p className="text-xs text-gray-500">{trade.wallet}</p>
                           </div>
                           <p className="text-xs text-gray-500">{trade.amount} at {trade.price}</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className={`font-semibold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                        <p className={`text-sm font-semibold ${trade.isPositive ? 'text-green-400' : 'text-red-400'}`}>
                           {trade.pnl}
                         </p>
                         <p className="text-xs text-gray-500">{trade.timestamp}</p>
@@ -765,10 +765,10 @@ export function WalletsView() {
                     </div>
                     ))}
                   </div>
-                  <div className="mt-4 pt-4 border-t border-gray-800">
+                  <div className="mt-3 pt-3 border-t border-gray-800">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-400">Total PnL</span>
-                      <span className="text-lg font-semibold text-green-400">635.87 SOL</span>
+                      <span className="text-base font-semibold text-green-400">635.87 SOL</span>
                     </div>
                   </div>
                 </>
@@ -779,10 +779,10 @@ export function WalletsView() {
           {/* Wallet Performance Graph */}
           {selectedWalletsData.length > 0 && (
             <Card className="bg-black border-gray-800">
-              <CardHeader className="border-b border-gray-800">
+              <CardHeader className="border-b border-gray-800 p-4">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2 text-white">
-                    <TrendingUp className="w-5 h-5 text-gray-400" />
+                  <CardTitle className="flex items-center gap-2 text-white text-base">
+                    <TrendingUp className="w-4 h-4 text-gray-400" />
                     {selectedWalletsData.length === 1 
                       ? `${selectedWalletsData[0].label} Performance`
                       : `Multi-Wallet Performance (${selectedWalletsData.length} Wallets)`
@@ -790,8 +790,8 @@ export function WalletsView() {
                   </CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="h-[300px]">
+              <CardContent className="p-4">
+                <div className="h-[250px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={pnlData}>
                       <defs>
@@ -824,51 +824,51 @@ export function WalletsView() {
                 
                 {/* Best and Worst Trades */}
                 {bestTrade && worstTrade && (
-                  <div className="grid grid-cols-2 gap-4 mt-6">
-                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <img src={bestTrade.logo} alt={bestTrade.coin} className="w-8 h-8 rounded-full" />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
+                  <div className="grid grid-cols-2 gap-3 mt-4">
+                    <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <img src={bestTrade.logo} alt={bestTrade.coin} className="w-6 h-6 rounded-full" />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1">
                             <p className="text-xs text-gray-400">Best Trade</p>
                             <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
                               {bestTrade.coin}
                             </Badge>
                           </div>
-                          <p className="text-lg font-bold text-green-400 mt-1">{bestTrade.amount}</p>
+                          <p className="text-base font-bold text-green-400 mt-0.5">{bestTrade.amount}</p>
                           {selectedWalletsData.length > 1 && (
-                            <p className="text-xs text-gray-500 mt-1">{bestTrade.walletLabel}</p>
+                            <p className="text-xs text-gray-500 mt-0.5">{bestTrade.walletLabel}</p>
                           )}
                           <button
                             onClick={() => copyToClipboard(bestTrade.ca)}
                             className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
                           >
-                            <span className="font-mono truncate max-w-[120px]">{bestTrade.ca}</span>
+                            <span className="font-mono truncate max-w-[100px]">{bestTrade.ca}</span>
                             <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                           </button>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <img src={worstTrade.logo} alt={worstTrade.coin} className="w-8 h-8 rounded-full" />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
+                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <img src={worstTrade.logo} alt={worstTrade.coin} className="w-6 h-6 rounded-full" />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1">
                             <p className="text-xs text-gray-400">Worst Trade</p>
                             <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/20 text-xs">
                               {worstTrade.coin}
                             </Badge>
                           </div>
-                          <p className="text-lg font-bold text-red-400 mt-1">{worstTrade.amount}</p>
+                          <p className="text-base font-bold text-red-400 mt-0.5">{worstTrade.amount}</p>
                           {selectedWalletsData.length > 1 && (
-                            <p className="text-xs text-gray-500 mt-1">{worstTrade.walletLabel}</p>
+                            <p className="text-xs text-gray-500 mt-0.5">{worstTrade.walletLabel}</p>
                           )}
                           <button
                             onClick={() => copyToClipboard(worstTrade.ca)}
                             className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1 group"
                           >
-                            <span className="font-mono truncate max-w-[120px]">{worstTrade.ca}</span>
+                            <span className="font-mono truncate max-w-[100px]">{worstTrade.ca}</span>
                             <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                           </button>
                         </div>
@@ -882,25 +882,25 @@ export function WalletsView() {
         </div>
 
         {/* Sidebar - Alerts & Actions */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Active Alerts */}
           <Card className="bg-black border-gray-800">
-            <CardHeader className="border-b border-gray-800">
-              <CardTitle className="flex items-center gap-2 text-white">
-                <Bell className="w-5 h-5 text-gray-400" />
+            <CardHeader className="border-b border-gray-800 p-4">
+              <CardTitle className="flex items-center gap-2 text-white text-base">
+                <Bell className="w-4 h-4 text-gray-400" />
                 Active Alerts
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
-              <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+            <CardContent className="p-4">
+              <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2">
                 {triggeredAlerts.map((alert) => (
                   <div
                     key={alert.id}
-                    className="p-4 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
+                    className="p-3 rounded-lg border border-gray-800 bg-gray-950 hover:border-gray-700 transition-colors"
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1.5">
                           <Badge 
                             variant="outline" 
                             className={`text-xs ${
@@ -918,13 +918,13 @@ export function WalletsView() {
                           <span className="text-white font-semibold text-sm">{alert.coin}</span>
                         </div>
                         <p className="text-xs text-gray-400 mb-1">{alert.wallet}</p>
-                        <p className="text-sm text-white mb-2">{alert.message}</p>
-                        <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <p className="text-xs text-white mb-1.5">{alert.message}</p>
+                        <div className="flex items-center gap-2 text-xs text-gray-500">
                           <span>Threshold: <span className="text-gray-400">{alert.threshold}</span></span>
                           <span>Current: <span className="text-gray-400">{alert.currentValue}</span></span>
                         </div>
                       </div>
-                      <div className="text-right ml-3">
+                      <div className="text-right ml-2 shrink-0">
                         <div className="flex items-center gap-1 text-gray-400 text-xs mb-1">
                           <Clock className="w-3 h-3" />
                           <span>{alert.triggeredAt}</span>
@@ -940,13 +940,13 @@ export function WalletsView() {
 
           {/* Quick Actions */}
           <Card className="bg-black border-gray-800">
-            <CardHeader className="border-b border-gray-800">
-              <CardTitle className="text-white">Quick Actions</CardTitle>
+            <CardHeader className="border-b border-gray-800 p-4">
+              <CardTitle className="text-white text-base">Quick Actions</CardTitle>
             </CardHeader>
-            <CardContent className="p-6 space-y-3">
+            <CardContent className="p-4 space-y-2">
               <Button 
                 onClick={() => setAlertPopupOpen(true)}
-                className="w-full bg-neon-green hover:bg-neon-green/90 text-black font-semibold"
+                className="w-full bg-neon-green hover:bg-neon-green/90 text-black font-semibold h-9"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Alert
@@ -954,7 +954,7 @@ export function WalletsView() {
               <Button 
                 onClick={() => setViewAlertsOpen(true)}
                 variant="outline" 
-                className="w-full border-gray-700 text-white hover:bg-gray-900"
+                className="w-full border-gray-700 text-white hover:bg-gray-900 h-9"
               >
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 View All Alerts
@@ -964,10 +964,10 @@ export function WalletsView() {
 
           {/* Performance Summary */}
           <Card className="bg-black border-gray-800">
-            <CardHeader className="border-b border-gray-800">
-              <CardTitle className="text-white text-sm">Performance Summary</CardTitle>
+            <CardHeader className="border-b border-gray-800 p-4">
+              <CardTitle className="text-white text-base">Performance Summary</CardTitle>
             </CardHeader>
-            <CardContent className="p-6 space-y-3">
+            <CardContent className="p-4 space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">Total Profit</span>
                 <span className="text-sm font-semibold text-green-400">+$498K</span>
