@@ -34,25 +34,25 @@ export default function HeroSection() {
 
       {/* Floating images behind aurora */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        {/* Left side - Frog character */}
+        {/* Left side top - Frog character */}
         <img 
           src={frogCharacter} 
           alt="" 
-          className="absolute left-[5%] top-[40%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 opacity-90 animate-[float_6s_ease-in-out_infinite]"
+          className="absolute left-[8%] top-[28%] w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 opacity-90 animate-[float_6s_ease-in-out_infinite]"
         />
         
-        {/* Right side - Pill icon */}
+        {/* Left side bottom - Pill icon */}
         <img 
           src={pillIcon} 
           alt="" 
-          className="absolute right-[8%] top-[38%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_5s_ease-in-out_infinite_0.5s]"
+          className="absolute left-[10%] top-[52%] w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 opacity-90 animate-[float_5s_ease-in-out_infinite_0.5s]"
         />
         
         {/* Right side - Pyramid icon */}
         <img 
           src={pyramidIcon} 
           alt="" 
-          className="absolute right-[5%] top-[50%] w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
+          className="absolute right-[10%] top-[38%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
         />
       </div>
 
