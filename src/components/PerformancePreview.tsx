@@ -101,7 +101,20 @@ export default function PerformancePreview() {
                         dataKey="performance"
                         stroke="hsl(var(--neon-green))"
                         strokeWidth={2}
-                        dot={false}
+                        dot={(props) => {
+                          const isFirst = props.index === 0;
+                          const isLast = props.index === weekData.length - 1;
+                          return isFirst || isLast ? (
+                            <circle 
+                              cx={props.cx} 
+                              cy={props.cy} 
+                              r={5} 
+                              fill="hsl(var(--neon-green))" 
+                              stroke="hsl(var(--neon-green))" 
+                              strokeWidth={2}
+                            />
+                          ) : null;
+                        }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
