@@ -38,21 +38,21 @@ export default function HeroSection() {
         <img 
           src={frogCharacter} 
           alt="" 
-          className="absolute left-[8%] top-[35%] w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 opacity-80 animate-[float_6s_ease-in-out_infinite]"
+          className="absolute left-[5%] top-[40%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 opacity-90 animate-[float_6s_ease-in-out_infinite]"
         />
         
         {/* Right side - Pill icon */}
         <img 
           src={pillIcon} 
           alt="" 
-          className="absolute right-[12%] top-[25%] w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 opacity-80 animate-[float_5s_ease-in-out_infinite_0.5s]"
+          className="absolute right-[8%] top-[38%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_5s_ease-in-out_infinite_0.5s]"
         />
         
         {/* Right side - Pyramid icon */}
         <img 
           src={pyramidIcon} 
           alt="" 
-          className="absolute right-[15%] top-[55%] w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 opacity-80 animate-[float_7s_ease-in-out_infinite_1s]"
+          className="absolute right-[5%] top-[50%] w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
         />
       </div>
 
