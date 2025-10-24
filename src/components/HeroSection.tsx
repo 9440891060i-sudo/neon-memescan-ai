@@ -34,25 +34,18 @@ export default function HeroSection() {
 
       {/* Floating images behind aurora */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        {/* Left side top - Frog character */}
+        {/* Left side - Frog character */}
         <img 
           src={frogCharacter} 
           alt="" 
-          className="absolute left-[8%] top-[28%] w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 opacity-90 animate-[float_6s_ease-in-out_infinite]"
-        />
-        
-        {/* Left side bottom - Pill icon */}
-        <img 
-          src={pillIcon} 
-          alt="" 
-          className="absolute left-[10%] top-[52%] w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 opacity-90 animate-[float_5s_ease-in-out_infinite_0.5s]"
+          className="absolute left-[8%] top-[35%] w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 opacity-90 animate-[float_6s_ease-in-out_infinite]"
         />
         
         {/* Right side - Pyramid icon */}
         <img 
           src={pyramidIcon} 
           alt="" 
-          className="absolute right-[10%] top-[38%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
+          className="absolute right-[8%] top-[35%] w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
         />
       </div>
 
