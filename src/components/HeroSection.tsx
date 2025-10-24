@@ -38,14 +38,14 @@ export default function HeroSection() {
         <img 
           src={frogCharacter} 
           alt="" 
-          className="absolute left-[13%] top-[61%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_6s_ease-in-out_infinite]"
+          className="absolute left-[13%] top-[54%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_6s_ease-in-out_infinite]"
         />
         
         {/* Right side - Pyramid icon (above video frame) */}
         <img 
           src={pyramidIcon} 
           alt="" 
-          className="absolute right-[13%] top-[61%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
+          className="absolute right-[13%] top-[54%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
         />
       </div>
 
