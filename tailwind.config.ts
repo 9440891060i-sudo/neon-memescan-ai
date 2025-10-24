@@ -136,6 +136,10 @@ export default {
           "10%, 30%, 50%, 70%, 90%": { transform: "translateX(-10px)" },
           "20%, 40%, 60%, 80%": { transform: "translateX(10px)" }
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
