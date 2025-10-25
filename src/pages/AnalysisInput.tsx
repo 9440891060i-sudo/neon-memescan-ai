@@ -231,60 +231,35 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
           <TabsContent value="analyse" className="mt-0">
 
             {/* Main Input Section */}
-            <div className="max-w-4xl mx-auto mb-16">
-          <Card className="p-8 bg-black border-gray-800">
-            <div className="space-y-6">
+            <div className="max-w-3xl mx-auto mb-12">
+          <Card className="p-4 bg-black border-gray-800">
               {/* Input Bar */}
-              <div className="relative">
-                <div className="relative bg-gray-950 rounded-lg p-6 border border-gray-800">
-                  <label className="block text-sm font-medium text-gray-400 mb-3">
-                    Contract Address (Solana / Ethereum)
-                  </label>
-                  <div className="flex gap-4">
-                    <Input
-                      ref={setInputRef}
-                      placeholder="0x1234567890abcdef... or 11111111111111111111111111111111"
-                      value={contractAddress}
-                      onChange={(e) => setContractAddress(e.target.value)}
-                      className="flex-1 bg-black border-gray-800 text-white placeholder:text-gray-500 font-mono text-lg h-14"
-                    />
-                    <Button
-                      onClick={handleAnalyze}
-                      disabled={isAnalyzing}
-                      className="h-14 px-8 bg-neon-green hover:bg-neon-green/90 text-black font-bold"
-                    >
-                      {isAnalyzing ? (
-                        <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-2 border-black border-t-transparent mr-2"></div>
-                          Analyzing...
-                        </>
-                      ) : (
-                        <>
-                          <Zap className="w-5 h-5 mr-2" />
-                          Analyze with AI (30 Credits)
-                        </>
-                      )}
-                    </Button>
-                  </div>
+              <div className="relative bg-gray-950 rounded-lg p-4 border border-gray-800">
+                <label className="block text-xs font-medium text-gray-400 mb-2">
+                  Contract Address
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    ref={setInputRef}
+                    placeholder="0x1234567890abcdef... or 11111111111111111111111111111111"
+                    value={contractAddress}
+                    onChange={(e) => setContractAddress(e.target.value)}
+                    className="flex-1 bg-black border-gray-800 text-white placeholder:text-gray-500 font-mono text-sm h-10"
+                  />
+                  <Button
+                    onClick={handleAnalyze}
+                    disabled={isAnalyzing}
+                    size="icon"
+                    className="h-10 w-10 bg-neon-green hover:bg-neon-green/90 text-black"
+                  >
+                    {isAnalyzing ? (
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></div>
+                    ) : (
+                      <Search className="w-4 h-4" />
+                    )}
+                  </Button>
                 </div>
               </div>
-
-              {/* Features */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-                  <Search className="w-4 h-4 text-gray-500" />
-                  <span>Social Sentiment Analysis</span>
-                </div>
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-                  <TrendingUp className="w-4 h-4 text-gray-500" />
-                  <span>Technical Indicators</span>
-                </div>
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-                  <Zap className="w-4 h-4 text-gray-500" />
-                  <span>AI Prediction Score</span>
-                </div>
-              </div>
-            </div>
               </Card>
             </div>
 
