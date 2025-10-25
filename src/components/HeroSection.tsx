@@ -4,9 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Sparkles, TrendingUp, Eye, Shield, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aurora from "./Aurora";
-import frogCharacter from "@/assets/frog-character.png";
-import pillIcon from "@/assets/pill-icon.png";
-import pyramidIcon from "@/assets/pyramid-icon.png";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -32,22 +29,6 @@ export default function HeroSection() {
         <div className="absolute bottom-20 right-[25%] w-44 h-44 bg-neon-cyan/5 rounded-full blur-3xl animate-pulse"></div>
       </div>
 
-      {/* Floating images behind aurora */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        {/* Left side - Frog character (above video frame) */}
-        <img 
-          src={frogCharacter} 
-          alt="" 
-          className="absolute left-[3%] top-[61%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_6s_ease-in-out_infinite]"
-        />
-        
-        {/* Right side - Pyramid icon (above video frame) */}
-        <img 
-          src={pyramidIcon} 
-          alt="" 
-          className="absolute right-[3%] top-[61%] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-90 animate-[float_7s_ease-in-out_infinite_1s]"
-        />
-      </div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full">

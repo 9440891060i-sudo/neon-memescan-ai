@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Beaker, Brain } from "lucide-react";
+import { Beaker, Brain, Bell, MessageCircle } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useKluxStore } from "@/store/kluxStore";
 import SupportWidget from "@/components/SupportWidget";
@@ -38,6 +38,8 @@ const AppContent = () => {
                 <SidebarTrigger className="-ml-1" />
                 <div className="flex-1" />
                 <div className="flex items-center gap-3">
+                  <Bell className="w-5 h-5 text-gray-400 hover:text-foreground cursor-pointer transition-colors" />
+                  <MessageCircle className="w-5 h-5 text-gray-400 hover:text-foreground cursor-pointer transition-colors" />
                   <Brain className={`w-5 h-5 transition-colors duration-300 ${isPremium ? "text-neon-green" : "text-gray-600"}`} />
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border">
                     <Beaker className="w-5 h-5 text-green-500" />

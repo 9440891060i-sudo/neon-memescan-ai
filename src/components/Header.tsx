@@ -83,6 +83,7 @@ const Header = () => {
                 className="hidden md:flex rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium hover:bg-white/20 transition-all duration-300 px-6"
               >
                 <Link to="/auth" className="flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4" />
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -134,6 +135,7 @@ const Header = () => {
                 <div className="pt-4 mt-2 border-t border-white/10">
                   <Button asChild className="w-full rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium hover:bg-white/20 transition-all duration-300">
                     <Link to="/auth" className="flex items-center justify-center gap-2">
+                      <MessageCircle className="w-4 h-4" />
                       <span>Get Started</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
