@@ -39,14 +39,15 @@ const AppContent = () => {
               <header className="sticky top-0 z-50 flex h-14 items-center gap-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 border-b border-gray-900">
                 <SidebarTrigger className="-ml-1" />
                 <div className="flex-1" />
-                <div className="flex items-center gap-3">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="icon" className="relative">
-                        <Bell className="w-5 h-5 text-gray-600 hover:text-gray-400 transition-colors" />
-                        <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                      </Button>
-                    </PopoverTrigger>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="ghost" size="icon" className="relative">
+                          <Bell className="w-5 h-5 text-gray-600 hover:text-gray-400 transition-colors" />
+                          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </Button>
+                      </PopoverTrigger>
                     <PopoverContent className="w-80 bg-black/90 backdrop-blur-xl border-gray-800 p-0 z-50">
                       <div className="p-4 border-b border-gray-800">
                         <h3 className="font-semibold text-white">Alerts</h3>
@@ -91,13 +92,13 @@ const AppContent = () => {
                       </div>
                     </PopoverContent>
                   </Popover>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="icon" className="relative">
-                        <Mail className="w-5 h-5 text-gray-600 hover:text-gray-400 transition-colors" />
-                        <span className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"></span>
-                      </Button>
-                    </PopoverTrigger>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="ghost" size="icon" className="relative">
+                          <Mail className="w-5 h-5 text-gray-600 hover:text-gray-400 transition-colors" />
+                          <span className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"></span>
+                        </Button>
+                      </PopoverTrigger>
                     <PopoverContent className="w-80 bg-black/90 backdrop-blur-xl border-gray-800 p-0 z-50">
                       <div className="p-4 border-b border-gray-800">
                         <h3 className="font-semibold text-white">Messages</h3>
@@ -141,7 +142,8 @@ const AppContent = () => {
                         </div>
                       </div>
                     </PopoverContent>
-                  </Popover>
+                    </Popover>
+                  </div>
                   <Brain className={`w-5 h-5 transition-colors duration-300 ${isPremium ? "text-neon-green" : "text-gray-600"}`} />
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border">
                     <Beaker className="w-5 h-5 text-green-500" />
