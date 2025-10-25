@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, Mail } from "lucide-react";
+import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, Mail, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useAuthStore } from "@/store/authStore";
 import KluxPricingModal from "@/components/KluxPricingModal";
 import kluxLogo from "@/assets/klux-logo.png";
@@ -78,16 +79,61 @@ const Header = () => {
 
             {/* Right: CTA Buttons */}
             <div className="flex items-center gap-4">
-              <Button
-                asChild
-                variant="ghost"
-                size="icon"
-                className="hidden md:flex text-white hover:bg-white/10"
-              >
-                <Link to="/auth">
-                  <Mail className="w-5 h-5" />
-                </Link>
-              </Button>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hidden md:flex text-white hover:bg-white/10 relative"
+                  >
+                    <Mail className="w-5 h-5" />
+                    <span className="absolute top-1 right-1 w-2 h-2 bg-neon-green rounded-full"></span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-80 bg-black/90 backdrop-blur-xl border-white/20 p-0 z-50">
+                  <div className="p-4 border-b border-white/10">
+                    <h3 className="font-semibold text-white">Messages</h3>
+                  </div>
+                  <div className="max-h-96 overflow-y-auto">
+                    <div className="p-4 border-b border-white/10 hover:bg-white/5 cursor-pointer transition-colors">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-neon-green/20 flex items-center justify-center flex-shrink-0">
+                          <Gift className="w-5 h-5 text-neon-green" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium text-white">Welcome Bonus!</p>
+                          <p className="text-sm text-gray-400 mt-1">Get 500 free credits when you sign up today</p>
+                          <p className="text-xs text-gray-500 mt-2">2 hours ago</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4 border-b border-white/10 hover:bg-white/5 cursor-pointer transition-colors">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                          <Zap className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium text-white">New Features Available</p>
+                          <p className="text-sm text-gray-400 mt-1">Check out our latest AI-powered wallet tracking</p>
+                          <p className="text-xs text-gray-500 mt-2">1 day ago</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4 hover:bg-white/5 cursor-pointer transition-colors">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                          <DollarSign className="w-5 h-5 text-purple-400" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium text-white">Special Offer</p>
+                          <p className="text-sm text-gray-400 mt-1">50% off on premium plans this week</p>
+                          <p className="text-xs text-gray-500 mt-2">3 days ago</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
               <Button
                 asChild 
                 className="hidden md:flex rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium hover:bg-white/20 transition-all duration-300 px-6"
