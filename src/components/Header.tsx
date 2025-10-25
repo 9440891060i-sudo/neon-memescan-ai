@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, MessageCircle, Send } from "lucide-react";
+import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
 import KluxPricingModal from "@/components/KluxPricingModal";
@@ -76,14 +76,23 @@ const Header = () => {
               })}
             </nav>
 
-            {/* Right: CTA Button */}
+            {/* Right: CTA Buttons */}
             <div className="flex items-center gap-4">
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className="hidden md:flex text-white hover:bg-white/10"
+              >
+                <Link to="/auth">
+                  <Mail className="w-5 h-5" />
+                </Link>
+              </Button>
               <Button
                 asChild 
                 className="hidden md:flex rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium hover:bg-white/20 transition-all duration-300 px-6"
               >
                 <Link to="/auth" className="flex items-center gap-2">
-                  <MessageCircle className="w-4 h-4" />
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -132,10 +141,15 @@ const Header = () => {
                     </Link>
                   );
                 })}
-                <div className="pt-4 mt-2 border-t border-white/10">
+                <div className="pt-4 mt-2 border-t border-white/10 space-y-2">
+                  <Button asChild variant="ghost" className="w-full text-white hover:bg-white/10">
+                    <Link to="/auth" className="flex items-center justify-center gap-2">
+                      <Mail className="w-5 h-5" />
+                      <span>Messages</span>
+                    </Link>
+                  </Button>
                   <Button asChild className="w-full rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium hover:bg-white/20 transition-all duration-300">
                     <Link to="/auth" className="flex items-center justify-center gap-2">
-                      <MessageCircle className="w-4 h-4" />
                       <span>Get Started</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>

@@ -92,21 +92,21 @@ const Rewards = () => {
                 {/* Your Stats */}
                 <Card className="bg-black border-gray-800">
                   <CardHeader>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap gap-3">
                       <CardTitle className="flex items-center gap-2 text-white">
                         Klux AI Performance
                       </CardTitle>
                       <div className="flex items-center gap-2">
-                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                        <Button variant="outline" size="sm" className="h-7 px-3 text-xs">
                           Today
                         </Button>
-                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                        <Button variant="outline" size="sm" className="h-7 px-3 text-xs">
                           7d
                         </Button>
-                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                        <Button variant="outline" size="sm" className="h-7 px-3 text-xs">
                           30d
                         </Button>
-                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                        <Button variant="outline" size="sm" className="h-7 px-3 text-xs">
                           Max
                         </Button>
                       </div>
