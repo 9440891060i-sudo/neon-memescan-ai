@@ -21,12 +21,15 @@ import {
   Clock,
   AlertCircle,
   Coins,
-  Sparkles
+  Sparkles,
+  Gift
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Rewards = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [referralCode] = useState("KLUX-REF-X7K9M2");
   const [selectedKludPack, setSelectedKludPack] = useState("500");
   const [redeemDialog, setRedeemDialog] = useState<"usdt" | "klud" | "klux" | null>(null);
@@ -113,10 +116,19 @@ const Rewards = () => {
 
         {/* Tabs */}
         <Tabs defaultValue="my-rewards" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
-            <TabsTrigger value="my-rewards">My Rewards</TabsTrigger>
-            <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
-          </TabsList>
+          <div className="flex items-center gap-3">
+            <TabsList className="grid w-full max-w-md grid-cols-2">
+              <TabsTrigger value="my-rewards">My Rewards</TabsTrigger>
+              <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+            </TabsList>
+            <button
+              onClick={() => navigate("/earn")}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-neon-green/20 to-blue-500/20 border border-neon-green/30 hover:border-neon-green/50 transition-all text-white"
+            >
+              <Gift className="w-5 h-5 text-neon-green" />
+              <span className="font-semibold">Earn</span>
+            </button>
+          </div>
 
           {/* My Rewards Tab */}
           <TabsContent value="my-rewards" className="space-y-6">

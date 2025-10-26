@@ -20,6 +20,7 @@ import Auth from "./pages/Auth";
 import ProfileSettings from "./pages/ProfileSettings";
 import Kluxify from "./pages/Kluxify";
 import Rewards from "./pages/Rewards";
+import Earn from "./pages/Earn";
 import FAQ from "./pages/FAQ";
 import WalletAnalytics from "./pages/WalletAnalytics";
 
@@ -157,6 +158,7 @@ const AppContent = () => {
                 <Route path="/analyze" element={<AnalysisInput />} />
                 <Route path="/kluxify" element={<Kluxify />} />
                 <Route path="/rewards" element={<Rewards />} />
+                <Route path="/earn" element={<Earn />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile-settings" element={<ProfileSettings />} />
                 <Route path="/faq" element={<FAQ />} />
@@ -181,6 +183,7 @@ const AppContent = () => {
             <Route path="/analyze" element={<Auth />} />
             <Route path="/kluxify" element={<Auth />} />
             <Route path="/rewards" element={<Auth />} />
+            <Route path="/earn" element={<Auth />} />
             <Route path="/user-dashboard" element={<Auth />} />
             <Route path="/profile-settings" element={<Auth />} />
             <Route path="*" element={<NotFound />} />
