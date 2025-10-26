@@ -13,15 +13,17 @@ import {
   Percent,
   Crown,
   CheckCircle,
-  Copy
+  Copy,
+  ArrowLeft
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const Earn = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [igClaimed, setIgClaimed] = useState(false);
   const [twitterClaimed, setTwitterClaimed] = useState(false);
-  const [customDiscount, setCustomDiscount] = useState("");
 
   const copyReferralCode = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -58,19 +60,29 @@ const Earn = () => {
     <div className="min-h-screen bg-black p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex items-center gap-3">
-          <Gift className="w-8 h-8 text-neon-green" />
-          <div>
-            <h1 className="text-3xl font-bold text-white">Earn Rewards</h1>
-            <p className="text-gray-400 mt-1">Complete tasks and partnerships to earn Klud and commissions</p>
+        <div className="space-y-4">
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/rewards")}
+            className="flex items-center gap-2 text-gray-400 hover:text-white"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Rewards
+          </Button>
+          <div className="flex items-center gap-3">
+            <Gift className="w-6 h-6 text-primary" />
+            <div>
+              <h1 className="text-2xl font-semibold text-white">Earn Rewards</h1>
+              <p className="text-gray-400 text-sm mt-1">Complete tasks and partnerships to earn Klud and commissions</p>
+            </div>
           </div>
         </div>
 
         {/* Free Klud Section */}
         <Card className="bg-black border-gray-800">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl text-white">
-              <Gift className="w-6 h-6 text-neon-green" />
+            <CardTitle className="flex items-center gap-2 text-lg text-white">
+              <Gift className="w-5 h-5 text-primary" />
               Earn Free Klud Daily
             </CardTitle>
             <CardDescription>Complete social tasks to earn 1L Klud each (once per day)</CardDescription>
@@ -84,11 +96,11 @@ const Earn = () => {
                     <Instagram className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-white text-lg">Instagram Story</h3>
+                    <h3 className="font-medium text-white">Instagram Story</h3>
                     <p className="text-sm text-gray-400 mt-1">
                       Post a story showing Klux extension or dashboard with your trade setup
                     </p>
-                    <Badge className="mt-3 bg-neon-green/20 text-neon-green border-neon-green/30">
+                    <Badge className="mt-3 bg-primary/20 text-primary border-primary/30">
                       +1L Klud
                     </Badge>
                   </div>
@@ -119,11 +131,11 @@ const Earn = () => {
                     <Twitter className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-white text-lg">Twitter Post</h3>
+                    <h3 className="font-medium text-white">Twitter Post</h3>
                     <p className="text-sm text-gray-400 mt-1">
                       Tweet mentioning Klux with a review, comment, suggestion, or trade
                     </p>
-                    <Badge className="mt-3 bg-neon-green/20 text-neon-green border-neon-green/30">
+                    <Badge className="mt-3 bg-primary/20 text-primary border-primary/30">
                       +1L Klud
                     </Badge>
                   </div>
@@ -151,8 +163,8 @@ const Earn = () => {
         {/* Partnership Programs */}
         <Card className="bg-black border-gray-800">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl text-white">
-              <TrendingUp className="w-6 h-6 text-neon-green" />
+            <CardTitle className="flex items-center gap-2 text-lg text-white">
+              <TrendingUp className="w-5 h-5 text-primary" />
               Become an Early Partner
             </CardTitle>
             <CardDescription>Choose the partnership program that suits you best</CardDescription>
@@ -166,38 +178,38 @@ const Earn = () => {
                   <Users className="w-6 h-6 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">Standard Partner</h3>
+                  <h3 className="text-lg font-semibold text-white">Standard Partner</h3>
                   <p className="text-sm text-gray-400 mt-1">Perfect for referring friends and family</p>
                 </div>
               </div>
 
               <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-neon-green/20 flex items-center justify-center">
-                    <Percent className="w-4 h-4 text-neon-green" />
+                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <Percent className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">10% Discount</p>
+                    <p className="text-white font-medium">10% Discount</p>
                     <p className="text-xs text-gray-400">For your referred friends</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-neon-green/20 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4 text-neon-green" />
+                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <TrendingUp className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">25% Commission</p>
+                    <p className="text-white font-medium">25% Commission</p>
                     <p className="text-xs text-gray-400">First month only</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4 text-blue-400" />
+                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <TrendingUp className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">10% Commission</p>
+                    <p className="text-white font-medium">10% Commission</p>
                     <p className="text-xs text-gray-400">All subsequent months</p>
                   </div>
                 </div>
@@ -214,7 +226,7 @@ const Earn = () => {
                     <Copy className="w-4 h-4" />
                   </Button>
                 </div>
-                <p className="font-mono text-neon-green font-semibold mt-1">KLUX-STANDARD-X7K9</p>
+                <p className="font-mono text-primary font-medium mt-1">KLUX-STANDARD-X7K9</p>
               </div>
 
               <Button 
@@ -225,7 +237,7 @@ const Earn = () => {
               </Button>
             </div>
 
-            {/* Influencer Partner (KOLs) */}
+            {/* KOL Partner */}
             <div className="p-6 rounded-lg bg-gradient-to-br from-purple-950/50 to-gray-900 border-2 border-purple-500/50 hover:border-purple-500 transition-all relative overflow-hidden">
               <div className="absolute top-4 right-4">
                 <Badge className="bg-purple-500 text-white border-0">
@@ -239,7 +251,7 @@ const Earn = () => {
                   <Crown className="w-6 h-6 text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">Influencer Partner</h3>
+                  <h3 className="text-lg font-semibold text-white">KOL Partner</h3>
                   <p className="text-sm text-gray-400 mt-1">Exclusive for content creators & KOLs</p>
                 </div>
               </div>
@@ -250,7 +262,7 @@ const Earn = () => {
                     <Percent className="w-4 h-4 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Custom Discount</p>
+                    <p className="text-white font-medium">Custom Discount</p>
                     <p className="text-xs text-gray-400">Up to 20% for your audience</p>
                   </div>
                 </div>
@@ -260,8 +272,8 @@ const Earn = () => {
                     <TrendingUp className="w-4 h-4 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Up to 40% Commission</p>
-                    <p className="text-xs text-gray-400">Forever, on all referrals</p>
+                    <p className="text-white font-medium">Tailored Commissions</p>
+                    <p className="text-xs text-gray-400">Customized rates for your audience</p>
                   </div>
                 </div>
 
@@ -270,32 +282,14 @@ const Earn = () => {
                     <Crown className="w-4 h-4 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Priority Support</p>
+                    <p className="text-white font-medium">Priority Support</p>
                     <p className="text-xs text-gray-400">Dedicated account manager</p>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-3 mb-4">
-                <div>
-                  <Label htmlFor="discount" className="text-white text-sm">
-                    Preferred Discount % (max 20%)
-                  </Label>
-                  <Input
-                    id="discount"
-                    type="number"
-                    placeholder="15"
-                    value={customDiscount}
-                    onChange={(e) => setCustomDiscount(e.target.value)}
-                    max={20}
-                    min={5}
-                    className="mt-1 bg-gray-900 border-gray-800"
-                  />
-                </div>
-              </div>
-
               <Button 
-                onClick={() => handleApplyPartnership("Influencer Partner")}
+                onClick={() => handleApplyPartnership("KOL Partner")}
                 className="w-full bg-purple-600 hover:bg-purple-700"
               >
                 Apply for Partnership
