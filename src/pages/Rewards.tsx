@@ -5,6 +5,10 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { 
   Trophy, 
   Users, 
@@ -15,13 +19,20 @@ import {
   TrendingUp,
   CheckCircle,
   Clock,
-  AlertCircle
+  AlertCircle,
+  Coins,
+  Sparkles
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Rewards = () => {
   const { toast } = useToast();
   const [referralCode] = useState("KLUX-REF-X7K9M2");
+  const [selectedKludPack, setSelectedKludPack] = useState("500");
+  const [redeemDialog, setRedeemDialog] = useState<"usdt" | "klud" | "klux" | null>(null);
+  const [walletAddress, setWalletAddress] = useState("");
+  
+  const userPoints = 2450;
   
   const leaderboard = [
     { username: "user#4721", points: 15420, referrals: 127, earnings: "$2,890", rank: 1 },
@@ -68,6 +79,31 @@ const Rewards = () => {
       case 'expired': return 'destructive';
       default: return 'secondary';
     }
+  };
+
+  const handleRedeemConfirm = () => {
+    if (redeemDialog === "usdt" && !walletAddress.trim()) {
+      toast({
+        title: "Wallet address required",
+        description: "Please enter your USDT wallet address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Redemption successful!",
+      description: `Your ${redeemDialog?.toUpperCase()} redemption has been processed.`,
+    });
+    
+    setRedeemDialog(null);
+    setWalletAddress("");
+  };
+
+  const kludPacks = {
+    "500": { points: 500, liters: "2.5L" },
+    "1000": { points: 1000, liters: "5.5L" },
+    "2000": { points: 2000, liters: "13L" },
   };
 
   return (
@@ -210,38 +246,63 @@ const Rewards = () => {
                   </CardContent>
                 </Card>
 
-                {/* Payouts */}
+                {/* Redeem Points */}
                 <Card className="bg-black border-gray-800">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-lg text-white">
-                      <Wallet className="w-5 h-5 text-gray-400" />
-                      Payouts
+                      <Sparkles className="w-5 h-5 text-gray-400" />
+                      Redeem Points
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-4">
-                      <div className="text-center p-4 rounded-lg bg-gray-950 border border-gray-900">
-                        <p className="text-xl font-bold text-neon-green">$186.00</p>
-                        <p className="text-sm text-gray-400">Total Earned</p>
-                      </div>
-                      
-                      <div className="text-center p-4 rounded-lg bg-gray-950 border border-gray-900">
-                        <p className="font-semibold text-white">Jan 15, 2025</p>
-                        <p className="text-sm text-gray-400">Next Payout Date</p>
-                      </div>
-                    </div>
-                    
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
+                  <CardContent className="space-y-3">
+                    {/* USDT Redemption */}
+                    <button
+                      onClick={() => setRedeemDialog("usdt")}
+                      className="w-full p-3 rounded-lg bg-gray-950 border border-gray-800 hover:border-gray-700 transition-colors text-left"
                     >
-                      <DollarSign className="w-4 h-4 mr-2" />
-                      Request Payout
-                    </Button>
-                    
-                    <p className="text-xs text-muted-foreground text-center">
-                      Minimum payout: $50. Next payout in 12 days.
-                    </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <DollarSign className="w-5 h-5 text-green-400" />
+                          <div>
+                            <p className="font-semibold text-white text-sm">Redeem for USDT</p>
+                            <p className="text-xs text-gray-400">Current value: ${(userPoints * 0.1).toFixed(2)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+
+                    {/* Klud Redemption */}
+                    <button
+                      onClick={() => setRedeemDialog("klud")}
+                      className="w-full p-3 rounded-lg bg-gray-950 border border-gray-800 hover:border-gray-700 transition-colors text-left"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Coins className="w-5 h-5 text-blue-400" />
+                          <div>
+                            <p className="font-semibold text-white text-sm">Redeem for Klud</p>
+                            <p className="text-xs text-gray-400">Starting from 500 points</p>
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+
+                    {/* Klux AI Redemption */}
+                    <button
+                      onClick={() => setRedeemDialog("klux")}
+                      disabled={userPoints < 4000}
+                      className="w-full p-3 rounded-lg bg-gray-950 border border-gray-800 hover:border-gray-700 transition-colors text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Sparkles className="w-5 h-5 text-purple-400" />
+                          <div>
+                            <p className="font-semibold text-white text-sm">Redeem for Klux AI</p>
+                            <p className="text-xs text-gray-400">4000 points required</p>
+                          </div>
+                        </div>
+                      </div>
+                    </button>
                   </CardContent>
                 </Card>
               </div>
@@ -297,6 +358,111 @@ const Rewards = () => {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* USDT Redemption Dialog */}
+      <Dialog open={redeemDialog === "usdt"} onOpenChange={(open) => !open && setRedeemDialog(null)}>
+        <DialogContent className="bg-black border-gray-800">
+          <DialogHeader>
+            <DialogTitle className="text-white">Redeem Points for USDT</DialogTitle>
+            <DialogDescription>
+              Convert your {userPoints} points to ${(userPoints * 0.1).toFixed(2)} USDT
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="wallet" className="text-white">Wallet Address</Label>
+              <Input
+                id="wallet"
+                placeholder="Enter your USDT wallet address"
+                value={walletAddress}
+                onChange={(e) => setWalletAddress(e.target.value)}
+                className="bg-gray-950 border-gray-800"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setRedeemDialog(null)}>
+              Cancel
+            </Button>
+            <Button onClick={handleRedeemConfirm}>
+              Confirm Redemption
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Klud Redemption Dialog */}
+      <Dialog open={redeemDialog === "klud"} onOpenChange={(open) => !open && setRedeemDialog(null)}>
+        <DialogContent className="bg-black border-gray-800">
+          <DialogHeader>
+            <DialogTitle className="text-white">Redeem Points for Klud</DialogTitle>
+            <DialogDescription>
+              Choose your Klud package
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="klud-pack" className="text-white">Select Package</Label>
+              <Select value={selectedKludPack} onValueChange={setSelectedKludPack}>
+                <SelectTrigger className="bg-gray-950 border-gray-800">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-950 border-gray-800">
+                  <SelectItem value="500">500 points → 2.5L Klud</SelectItem>
+                  <SelectItem value="1000">1000 points → 5.5L Klud</SelectItem>
+                  <SelectItem value="2000">2000 points → 13L Klud</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {userPoints < parseInt(selectedKludPack) && (
+              <p className="text-sm text-red-400">Insufficient points for this package</p>
+            )}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setRedeemDialog(null)}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleRedeemConfirm}
+              disabled={userPoints < parseInt(selectedKludPack)}
+            >
+              Confirm Redemption
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Klux AI Redemption Dialog */}
+      <Dialog open={redeemDialog === "klux"} onOpenChange={(open) => !open && setRedeemDialog(null)}>
+        <DialogContent className="bg-black border-gray-800">
+          <DialogHeader>
+            <DialogTitle className="text-white">Redeem Points for Klux AI</DialogTitle>
+            <DialogDescription>
+              Unlock Klux AI subscription with 4000 points
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="p-4 rounded-lg bg-gray-950 border border-gray-800">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-gray-400">Your Points:</span>
+                <span className="text-white font-semibold">{userPoints}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-400">Required:</span>
+                <span className="text-white font-semibold">4000</span>
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setRedeemDialog(null)}>
+              Cancel
+            </Button>
+            <Button onClick={handleRedeemConfirm}>
+              Confirm Redemption
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
