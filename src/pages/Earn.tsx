@@ -24,6 +24,7 @@ const Earn = () => {
   const navigate = useNavigate();
   const [igClaimed, setIgClaimed] = useState(false);
   const [twitterClaimed, setTwitterClaimed] = useState(false);
+  const [customReferralCode, setCustomReferralCode] = useState("");
 
   const copyReferralCode = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -215,18 +216,34 @@ const Earn = () => {
                 </div>
               </div>
 
+              <div className="space-y-3 mb-4">
+                <div>
+                  <Label htmlFor="referralCode" className="text-white text-sm">
+                    Your Custom Referral Code
+                  </Label>
+                  <Input
+                    id="referralCode"
+                    type="text"
+                    placeholder="Enter your custom code"
+                    value={customReferralCode}
+                    onChange={(e) => setCustomReferralCode(e.target.value.toUpperCase())}
+                    className="mt-1 bg-gray-900 border-gray-800 text-white"
+                  />
+                </div>
+              </div>
+
               <div className="p-4 rounded-lg bg-gray-900 border border-gray-800 mb-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-400">Your referral code</span>
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    onClick={() => copyReferralCode("KLUX-STANDARD-X7K9")}
+                    onClick={() => copyReferralCode(customReferralCode || "KLUX-STANDARD-X7K9")}
                   >
                     <Copy className="w-4 h-4" />
                   </Button>
                 </div>
-                <p className="font-mono text-primary font-medium mt-1">KLUX-STANDARD-X7K9</p>
+                <p className="font-mono text-white font-medium mt-1">{customReferralCode || "KLUX-STANDARD-X7K9"}</p>
               </div>
 
               <Button 
@@ -238,7 +255,7 @@ const Earn = () => {
             </div>
 
             {/* KOL Partner */}
-            <div className="p-6 rounded-lg bg-gradient-to-br from-purple-950/50 to-gray-900 border-2 border-purple-500/50 hover:border-purple-500 transition-all relative overflow-hidden">
+            <div className="p-6 rounded-lg bg-gradient-to-br from-purple-950/50 to-gray-900 border-2 border-purple-500/50 hover:border-purple-500 transition-all relative">
               <div className="absolute top-4 right-4">
                 <Badge className="bg-purple-500 text-white border-0">
                   <Crown className="w-3 h-3 mr-1" />
@@ -246,7 +263,7 @@ const Earn = () => {
                 </Badge>
               </div>
 
-              <div className="flex items-start gap-4 mb-6">
+              <div className="flex items-start gap-4 mb-4">
                 <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
                   <Crown className="w-6 h-6 text-purple-400" />
                 </div>
@@ -256,7 +273,7 @@ const Earn = () => {
                 </div>
               </div>
 
-              <div className="space-y-4 mb-6">
+              <div className="space-y-3 mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
                     <Percent className="w-4 h-4 text-purple-400" />
