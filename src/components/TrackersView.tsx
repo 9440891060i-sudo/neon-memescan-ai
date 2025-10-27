@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Twitter, Newspaper, Users, X, Plus, Trash2 } from "lucide-react";
+import { Twitter, Newspaper, Users, X, Plus, Trash2, Bell, BellOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -18,6 +18,12 @@ export function TrackersView() {
     news: true
   });
 
+  const [alarmStates, setAlarmStates] = useState({
+    twitter: false,
+    lc: false,
+    news: false
+  });
+
   const [openModal, setOpenModal] = useState<'twitter' | 'lc' | 'news' | null>(null);
   
   // Twitter state
@@ -33,6 +39,10 @@ export function TrackersView() {
 
   const toggleBox = (box: 'twitter' | 'lc' | 'news') => {
     setExpandedBoxes(prev => ({ ...prev, [box]: !prev[box] }));
+  };
+
+  const toggleAlarm = (box: 'twitter' | 'lc' | 'news') => {
+    setAlarmStates(prev => ({ ...prev, [box]: !prev[box] }));
   };
 
   const addTwitterAccount = () => {
@@ -74,34 +84,42 @@ export function TrackersView() {
     <div className="p-8 space-y-8">
       {/* Expanded Boxes */}
       <div className={`grid grid-cols-1 ${gridCols} gap-8`}>
-        {/* Twitter Tracking */}
+        {/* X Tracking */}
         {expandedBoxes.twitter && (
           <Card className="bg-card border-border min-h-[700px] flex flex-col relative group hover:border-foreground/20 transition-all animate-scale-in">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => toggleBox('twitter')}
-              className="absolute top-4 left-4 w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted z-10"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => toggleBox('twitter')}
+                className="w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted"
+              >
+                <X className="w-4 h-4" />
+              </Button>
 
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => setOpenModal('twitter')}
-              className="absolute top-4 right-4 w-8 h-8 text-neon-green hover:bg-neon-green/10 z-10"
-            >
-              <Plus className="w-5 h-5" />
-            </Button>
+              <h3 className="text-xl font-semibold text-foreground">X Tracking</h3>
+
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => toggleAlarm('twitter')}
+                  className="w-8 h-8 text-muted-foreground hover:bg-muted"
+                >
+                  {alarmStates.twitter ? <Bell className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setOpenModal('twitter')}
+                  className="w-8 h-8 text-primary hover:bg-primary/10"
+                >
+                  <Plus className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
             
             <div className="flex-1 p-8 pt-16">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 rounded-lg bg-muted/30">
-                  <Twitter className="w-6 h-6 text-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Twitter Tracking</h3>
-              </div>
 
               <div className="space-y-6">
                 <div className="p-6 bg-muted/20 rounded-lg border border-border">
@@ -121,34 +139,42 @@ export function TrackersView() {
           </Card>
         )}
 
-        {/* LC Tracking */}
+        {/* Alpha Tracking */}
         {expandedBoxes.lc && (
           <Card className="bg-card border-border min-h-[700px] flex flex-col relative group hover:border-foreground/20 transition-all animate-scale-in">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => toggleBox('lc')}
-              className="absolute top-4 left-4 w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted z-10"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => toggleBox('lc')}
+                className="w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted"
+              >
+                <X className="w-4 h-4" />
+              </Button>
 
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => setOpenModal('lc')}
-              className="absolute top-4 right-4 w-8 h-8 text-neon-green hover:bg-neon-green/10 z-10"
-            >
-              <Plus className="w-5 h-5" />
-            </Button>
+              <h3 className="text-xl font-semibold text-foreground">Alpha Tracking</h3>
+
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => toggleAlarm('lc')}
+                  className="w-8 h-8 text-muted-foreground hover:bg-muted"
+                >
+                  {alarmStates.lc ? <Bell className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setOpenModal('lc')}
+                  className="w-8 h-8 text-primary hover:bg-primary/10"
+                >
+                  <Plus className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
             
             <div className="flex-1 p-8 pt-16">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 rounded-lg bg-muted/30">
-                  <Users className="w-6 h-6 text-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">LC Tracking</h3>
-              </div>
 
               <div className="space-y-6">
                 <div className="p-6 bg-muted/20 rounded-lg border border-border">
@@ -171,31 +197,39 @@ export function TrackersView() {
         {/* News Tracking */}
         {expandedBoxes.news && (
           <Card className="bg-card border-border min-h-[700px] flex flex-col relative group hover:border-foreground/20 transition-all animate-scale-in">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => toggleBox('news')}
-              className="absolute top-4 left-4 w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted z-10"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => toggleBox('news')}
+                className="w-8 h-8 text-muted-foreground hover:text-destructive hover:bg-muted"
+              >
+                <X className="w-4 h-4" />
+              </Button>
 
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => setOpenModal('news')}
-              className="absolute top-4 right-4 w-8 h-8 text-neon-green hover:bg-neon-green/10 z-10"
-            >
-              <Plus className="w-5 h-5" />
-            </Button>
+              <h3 className="text-xl font-semibold text-foreground">News Tracking</h3>
+
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => toggleAlarm('news')}
+                  className="w-8 h-8 text-muted-foreground hover:bg-muted"
+                >
+                  {alarmStates.news ? <Bell className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setOpenModal('news')}
+                  className="w-8 h-8 text-primary hover:bg-primary/10"
+                >
+                  <Plus className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
             
             <div className="flex-1 p-8 pt-16">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 rounded-lg bg-muted/30">
-                  <Newspaper className="w-6 h-6 text-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">News Tracking</h3>
-              </div>
 
               <div className="space-y-6">
                 <div className="p-6 bg-muted/20 rounded-lg border border-border">
@@ -222,29 +256,26 @@ export function TrackersView() {
           {!expandedBoxes.twitter && (
             <Card 
               onClick={() => toggleBox('twitter')}
-              className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-neon-green transition-all animate-scale-in"
+              className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-primary transition-all animate-scale-in"
             >
-              <Twitter className="w-5 h-5 text-foreground" />
-              <span className="text-sm font-semibold text-foreground">Twitter Tracking</span>
+              <span className="text-sm font-semibold text-foreground">X Tracking</span>
             </Card>
           )}
 
           {!expandedBoxes.lc && (
             <Card 
               onClick={() => toggleBox('lc')}
-              className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-neon-green transition-all animate-scale-in"
+              className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-primary transition-all animate-scale-in"
             >
-              <Users className="w-5 h-5 text-foreground" />
-              <span className="text-sm font-semibold text-foreground">LC Tracking</span>
+              <span className="text-sm font-semibold text-foreground">Alpha Tracking</span>
             </Card>
           )}
 
           {!expandedBoxes.news && (
             <Card 
               onClick={() => toggleBox('news')}
-              className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-neon-green transition-all animate-scale-in"
+              className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-primary transition-all animate-scale-in"
             >
-              <Newspaper className="w-5 h-5 text-foreground" />
               <span className="text-sm font-semibold text-foreground">News Tracking</span>
             </Card>
           )}
