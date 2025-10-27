@@ -112,7 +112,7 @@ export function TrackersView() {
                   variant="ghost" 
                   size="icon"
                   onClick={() => setOpenModal('twitter')}
-                  className="w-8 h-8 text-primary hover:bg-primary/10"
+                  className="w-8 h-8 text-foreground hover:bg-muted"
                 >
                   <Plus className="w-5 h-5" />
                 </Button>
@@ -120,21 +120,6 @@ export function TrackersView() {
             </div>
             
             <div className="flex-1 p-8 pt-16">
-
-              <div className="space-y-6">
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Active Monitors</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Tracked Accounts</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Recent Alerts</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-              </div>
             </div>
           </Card>
         )}
@@ -152,7 +137,7 @@ export function TrackersView() {
                 <X className="w-4 h-4" />
               </Button>
 
-              <h3 className="text-xl font-semibold text-foreground">Alpha Tracking</h3>
+              <h3 className="text-xl font-semibold text-foreground">LC Tracking</h3>
 
               <div className="flex items-center gap-2">
                 <Button 
@@ -167,7 +152,7 @@ export function TrackersView() {
                   variant="ghost" 
                   size="icon"
                   onClick={() => setOpenModal('lc')}
-                  className="w-8 h-8 text-primary hover:bg-primary/10"
+                  className="w-8 h-8 text-foreground hover:bg-muted"
                 >
                   <Plus className="w-5 h-5" />
                 </Button>
@@ -175,21 +160,6 @@ export function TrackersView() {
             </div>
             
             <div className="flex-1 p-8 pt-16">
-
-              <div className="space-y-6">
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Community Signals</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Active Channels</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Recent Updates</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-              </div>
             </div>
           </Card>
         )}
@@ -222,7 +192,7 @@ export function TrackersView() {
                   variant="ghost" 
                   size="icon"
                   onClick={() => setOpenModal('news')}
-                  className="w-8 h-8 text-primary hover:bg-primary/10"
+                  className="w-8 h-8 text-foreground hover:bg-muted"
                 >
                   <Plus className="w-5 h-5" />
                 </Button>
@@ -230,21 +200,6 @@ export function TrackersView() {
             </div>
             
             <div className="flex-1 p-8 pt-16">
-
-              <div className="space-y-6">
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">News Sources</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Breaking News</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-                <div className="p-6 bg-muted/20 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-3">Daily Articles</p>
-                  <p className="text-3xl font-bold text-foreground">0</p>
-                </div>
-              </div>
             </div>
           </Card>
         )}
@@ -267,7 +222,7 @@ export function TrackersView() {
               onClick={() => toggleBox('lc')}
               className="bg-card border-border h-20 px-6 flex items-center gap-3 cursor-pointer hover:border-primary transition-all animate-scale-in"
             >
-              <span className="text-sm font-semibold text-foreground">Alpha Tracking</span>
+              <span className="text-sm font-semibold text-foreground">LC Tracking</span>
             </Card>
           )}
 
