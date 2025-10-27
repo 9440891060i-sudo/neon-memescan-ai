@@ -157,8 +157,8 @@ const AppContent = () => {
                 <Route path="/user-dashboard" element={<Dashboard />} />
                 <Route path="/analyze" element={<AnalysisInput />} />
                 <Route path="/kluxify" element={<Kluxify />} />
-                <Route path="/rewards" element={<Rewards />} />
-                <Route path="/earn" element={<Earn />} />
+                <Route path="/rewards" element={<Earn />} />
+                <Route path="/rewards-dashboard" element={<Rewards />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile-settings" element={<ProfileSettings />} />
                 <Route path="/faq" element={<FAQ />} />
@@ -183,7 +183,7 @@ const AppContent = () => {
             <Route path="/analyze" element={<Auth />} />
             <Route path="/kluxify" element={<Auth />} />
             <Route path="/rewards" element={<Auth />} />
-            <Route path="/earn" element={<Auth />} />
+            <Route path="/rewards-dashboard" element={<Auth />} />
             <Route path="/user-dashboard" element={<Auth />} />
             <Route path="/profile-settings" element={<Auth />} />
             <Route path="*" element={<NotFound />} />

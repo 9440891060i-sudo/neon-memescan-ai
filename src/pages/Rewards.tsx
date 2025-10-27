@@ -3,8 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -14,7 +12,6 @@ import {
   Users, 
   DollarSign, 
   Copy, 
-  Wallet, 
   Share,
   TrendingUp,
   CheckCircle,
@@ -36,19 +33,6 @@ const Rewards = () => {
   const [walletAddress, setWalletAddress] = useState("");
   
   const userPoints = 2450;
-  
-  const leaderboard = [
-    { username: "user#4721", points: 15420, referrals: 127, earnings: "$2,890", rank: 1 },
-    { username: "user#8392", points: 12890, referrals: 98, earnings: "$2,340", rank: 2 },
-    { username: "user#1256", points: 11340, referrals: 85, earnings: "$2,120", rank: 3 },
-    { username: "user#7653", points: 9875, referrals: 72, earnings: "$1,850", rank: 4 },
-    { username: "user#2489", points: 8650, referrals: 63, earnings: "$1,620", rank: 5 },
-    { username: "user#9127", points: 7420, referrals: 51, earnings: "$1,380", rank: 6 },
-    { username: "user#3564", points: 6890, referrals: 47, earnings: "$1,250", rank: 7 },
-    { username: "user#5832", points: 6234, referrals: 42, earnings: "$1,120", rank: 8 },
-    { username: "user#7419", points: 5675, referrals: 38, earnings: "$980", rank: 9 },
-    { username: "user#8901", points: 4987, referrals: 34, earnings: "$850", rank: 10 },
-  ];
 
   const userReferrals = [
     { username: "user#8392", plan: "$29", status: "active" },
@@ -114,24 +98,27 @@ const Rewards = () => {
       <div className="w-full space-y-8">
         
 
-        {/* Tabs */}
-        <Tabs defaultValue="my-rewards" className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <TabsList className="grid w-full max-w-md grid-cols-2">
-              <TabsTrigger value="my-rewards">My Rewards</TabsTrigger>
-              <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
-            </TabsList>
-            <button
-              onClick={() => navigate("/earn")}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-neon-green/20 to-blue-500/20 border border-neon-green/30 hover:border-neon-green/50 transition-all text-white"
-            >
-              <Gift className="w-5 h-5 text-neon-green" />
-              <span className="font-semibold">Earn</span>
-            </button>
+            <Trophy className="w-6 h-6 text-primary" />
+            <div>
+              <h1 className="text-2xl font-semibold text-white">Rewards Dashboard</h1>
+              <p className="text-gray-400 text-sm mt-1">Track your earnings and referrals</p>
+            </div>
           </div>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/rewards")}
+            className="flex items-center gap-2"
+          >
+            <Gift className="w-4 h-4" />
+            Earn More
+          </Button>
+        </div>
 
-          {/* My Rewards Tab */}
-          <TabsContent value="my-rewards" className="space-y-6">
+        {/* My Rewards Content */}
+        <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               
               {/* Main Content */}
@@ -319,56 +306,7 @@ const Rewards = () => {
                 </Card>
               </div>
             </div>
-          </TabsContent>
-
-          {/* Leaderboard Tab */}
-          <TabsContent value="leaderboard" className="space-y-6">
-            <Card className="bg-black border-gray-800">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6 text-gray-400" />
-                  <div>
-                    <CardTitle className="text-xl text-white">Top Performers</CardTitle>
-                    <CardDescription>Leading users by referrals and earnings</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-16">Rank</TableHead>
-                      <TableHead>User</TableHead>
-                      <TableHead className="text-right">Referrals</TableHead>
-                      <TableHead className="text-right">Earnings</TableHead>
-                      <TableHead className="text-right">Points</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {leaderboard.map((user) => (
-                      <TableRow key={user.username}>
-                        <TableCell className="font-medium">#{user.rank}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            {user.rank <= 3 && <Trophy className="w-4 h-4 text-neon-green" />}
-                            <span className="font-mono text-white">{user.username}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-right font-medium text-gray-300">{user.referrals}</TableCell>
-                        <TableCell className="text-right font-medium text-neon-green">{user.earnings}</TableCell>
-                        <TableCell className="text-right">
-                          <span className="font-bold text-white">
-                            {user.points.toLocaleString()}
-                          </span>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+        </div>
       </div>
 
       {/* USDT Redemption Dialog */}

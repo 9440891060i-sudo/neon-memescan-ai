@@ -62,20 +62,21 @@ const Earn = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="space-y-4">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/rewards")}
-            className="flex items-center gap-2 text-gray-400 hover:text-white"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Rewards
-          </Button>
-          <div className="flex items-center gap-3">
-            <Gift className="w-6 h-6 text-primary" />
-            <div>
-              <h1 className="text-2xl font-semibold text-white">Earn Rewards</h1>
-              <p className="text-gray-400 text-sm mt-1">Complete tasks and partnerships to earn Klud and commissions</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Gift className="w-6 h-6 text-primary" />
+              <div>
+                <h1 className="text-2xl font-semibold text-white">Earn Rewards</h1>
+                <p className="text-gray-400 text-sm mt-1">Complete tasks and partnerships to earn Klud and commissions</p>
+              </div>
             </div>
+            <Button
+              onClick={() => navigate("/rewards-dashboard")}
+              className="flex items-center gap-2"
+            >
+              <TrendingUp className="w-4 h-4" />
+              Rewards Dashboard
+            </Button>
           </div>
         </div>
 
