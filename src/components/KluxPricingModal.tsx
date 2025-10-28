@@ -70,7 +70,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
             {activeTab === "plan" && (
               <div className="space-y-6">
                 {/* Current Status */}
-                <div className="bg-[#151719] rounded-xl p-4 border border-white/5">
+                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
@@ -83,9 +83,9 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     </div>
                   </div>
                   
-                  <div className="relative h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
                     <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-500"
                       style={{ width: `${(currentCredits / totalCredits) * 100}%` }}
                     />
                   </div>
@@ -94,7 +94,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                 {/* Plans Grid */}
                 <div className="grid grid-cols-3 gap-4">
                   {/* Kludd Fuel Credits */}
-                  <div className="bg-[#151719] rounded-xl p-4 border border-white/5">
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
                     <div className="flex items-center gap-2 mb-3">
                       <Fuel className="w-5 h-5 text-purple-400" />
                       <h3 className="text-base font-bold text-white">Kludd Fuel</h3>
@@ -105,10 +105,10 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
                     {/* Dropdown Pack Selection */}
                     <Select value={selectedPack.toString()} onValueChange={(val) => setSelectedPack(parseInt(val))}>
-                      <SelectTrigger className="w-full mb-3 bg-white/5 border-white/10 text-white">
+                      <SelectTrigger className="w-full mb-3 bg-white/10 backdrop-blur-xl border-white/20 text-white">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#151719] border-white/10">
+                      <SelectContent className="bg-black/90 backdrop-blur-2xl border-white/20">
                         {kluddPacks.map((pack, idx) => (
                           <SelectItem key={idx} value={idx.toString()} className="text-white">
                             ${pack.price} — {pack.liters} L {pack.bestValue ? "⭐" : ""}
@@ -118,12 +118,12 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     </Select>
 
                     {/* Auto-refill */}
-                    <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg mb-3">
+                    <div className="flex items-center justify-between p-2 bg-white/5 backdrop-blur-sm rounded-lg mb-3 border border-white/10">
                       <span className="text-xs text-white">Auto-refill</span>
                       <Switch checked={autoRefill} onCheckedChange={setAutoRefill} />
                     </div>
 
-                    <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-sm">
+                    <Button className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-sm border border-white/20">
                       Buy Kludd
                     </Button>
 
@@ -140,7 +140,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                   </div>
 
                   {/* Klux AI Monthly */}
-                  <div className="bg-[#151719] rounded-xl p-4 border border-white/5">
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
                     <div className="flex items-center gap-2 mb-3">
                       <Brain className="w-5 h-5 text-cyan-400" />
                       <h3 className="text-base font-bold text-white">Klux AI</h3>
@@ -157,12 +157,12 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     </div>
 
                     {/* Billing Toggle */}
-                    <div className="flex gap-2 p-1 bg-white/5 rounded-lg mb-3">
+                    <div className="flex gap-2 p-1 bg-white/5 backdrop-blur-sm rounded-lg mb-3 border border-white/10">
                       <button
                         onClick={() => setBillingFrequency("monthly")}
                         className={`flex-1 py-1 px-2 rounded text-xs transition-all ${
                           billingFrequency === "monthly"
-                            ? "bg-purple-500 text-white"
+                            ? "bg-white/20 text-white backdrop-blur-sm"
                             : "text-white/60"
                         }`}
                       >
@@ -172,7 +172,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                         onClick={() => setBillingFrequency("annual")}
                         className={`flex-1 py-1 px-2 rounded text-xs transition-all ${
                           billingFrequency === "annual"
-                            ? "bg-purple-500 text-white"
+                            ? "bg-white/20 text-white backdrop-blur-sm"
                             : "text-white/60"
                         }`}
                       >
@@ -182,7 +182,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
                     <Button 
                       variant="outline" 
-                      className="w-full border-purple-500 text-purple-400 hover:bg-purple-500/10 text-sm mb-3"
+                      className="w-full border-white/20 text-white hover:bg-white/10 backdrop-blur-sm text-sm mb-3"
                     >
                       Subscribe
                     </Button>
@@ -200,7 +200,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                   </div>
 
                   {/* Enterprise */}
-                  <div className="bg-[#151719] rounded-xl p-4 border border-white/5">
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
                     <div className="flex items-center gap-2 mb-3">
                       <Zap className="w-5 h-5 text-yellow-400" />
                       <h3 className="text-base font-bold text-white">Enterprise</h3>
@@ -211,7 +211,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
                     <Button 
                       variant="outline" 
-                      className="w-full border-white/20 text-white hover:bg-white/10 text-sm mb-3"
+                      className="w-full border-white/20 text-white hover:bg-white/10 backdrop-blur-sm text-sm mb-3"
                     >
                       Book a demo
                     </Button>
@@ -238,7 +238,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
             {activeTab === "howItWorks" && (
               <div className="space-y-6">
-                <div className="bg-[#151719] rounded-xl p-6 border border-white/5">
+                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10">
                   <div className="flex items-center gap-3 mb-4">
                     <Fuel className="w-8 h-8 text-purple-400" />
                     <h3 className="text-2xl font-bold text-white">How Klud Works</h3>
@@ -281,7 +281,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                       </div>
                     </div>
 
-                    <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
+                    <div className="mt-6 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/20">
                       <h4 className="font-semibold text-white mb-2">💡 Pro Tip</h4>
                       <p className="text-sm">Enable auto-refill to never run out of Klud during critical market moments. Your purchased Klud never expires!</p>
                     </div>
@@ -292,62 +292,61 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
             {activeTab === "kluxAI" && (
               <div className="space-y-6">
-                <div className="bg-[#151719] rounded-xl p-6 border border-white/5">
+                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10">
                   <div className="flex items-center gap-3 mb-4">
-                    <Brain className="w-8 h-8 text-cyan-400" />
+                    <Brain className="w-8 h-8 text-white/80" />
                     <h3 className="text-2xl font-bold text-white">Klux AI</h3>
                   </div>
                   
                   <div className="space-y-4 text-white/80">
-                    <p>
-                      <span className="font-semibold text-white">Klux AI</span> is your intelligent meme coin companion that combines advanced analytics, machine learning, and real-time market data to give you an edge in the volatile crypto market.
+                    <p className="text-sm">
+                      <span className="font-semibold text-white">Klux AI</span> combines advanced analytics and real-time market data to give you an edge in crypto trading.
                     </p>
                     
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                          <Brain className="w-4 h-4 text-cyan-400" />
+                        <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                          <Brain className="w-3 h-3 text-white/60" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white mb-1">Smart Analysis</h4>
-                          <p className="text-sm">AI models trained on millions of data points analyze sentiment, trends, and market signals to identify potential opportunities.</p>
+                          <h4 className="font-semibold text-white text-sm mb-0.5">Smart Analysis</h4>
+                          <p className="text-xs">AI models analyze sentiment and market signals to identify opportunities.</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                          <Zap className="w-4 h-4 text-purple-400" />
+                        <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                          <Zap className="w-3 h-3 text-white/60" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white mb-1">Real-time Alerts</h4>
-                          <p className="text-sm">Get instant notifications when AI detects significant patterns, whale movements, or trending signals across social platforms.</p>
+                          <h4 className="font-semibold text-white text-sm mb-0.5">Real-time Alerts</h4>
+                          <p className="text-xs">Instant notifications for significant patterns and whale movements.</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center flex-shrink-0">
-                          <CreditCard className="w-4 h-4 text-pink-400" />
+                        <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                          <CreditCard className="w-3 h-3 text-white/60" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white mb-1">Priority Access</h4>
-                          <p className="text-sm">Subscribers get priority compute resources, faster analysis, and early access to new AI features and meme drops.</p>
+                          <h4 className="font-semibold text-white text-sm mb-0.5">Priority Access</h4>
+                          <p className="text-xs">Priority compute and early access to new features.</p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-6 p-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-lg border border-cyan-500/20">
-                      <h4 className="font-semibold text-white mb-2">🚀 What You Get</h4>
-                      <ul className="text-sm space-y-1">
-                        <li>• Unlimited AI-powered coin analysis</li>
+                    <div className="mt-4 p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/20">
+                      <h4 className="font-semibold text-white mb-1 text-sm">What's Included</h4>
+                      <ul className="text-xs space-y-0.5">
+                        <li>• Unlimited AI-powered analysis</li>
                         <li>• 24/7 automated trend detection</li>
                         <li>• Custom alert configurations</li>
-                        <li>• Priority processing during high-volume periods</li>
-                        <li>• Early access to airdrops and exclusive meme drops</li>
+                        <li>• Priority processing</li>
                       </ul>
                     </div>
 
                     <div className="mt-4 text-center">
-                      <Button className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white">
+                      <Button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white/20">
                         Start 1 Month Free Trial
                       </Button>
                       <p className="text-xs text-white/60 mt-2">Cancel anytime. No commitment.</p>
