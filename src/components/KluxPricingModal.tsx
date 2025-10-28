@@ -35,7 +35,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[900px] max-h-[85vh] p-0 bg-[#0F1113] border-white/5">
+      <DialogContent className="max-w-[1200px] h-[90vh] p-0 bg-[#0F1113] border-white/5">
         <DialogTitle className="sr-only">Pricing</DialogTitle>
         <DialogDescription className="sr-only">Plans & Kludd pricing</DialogDescription>
         
