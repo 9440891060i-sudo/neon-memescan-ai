@@ -6,8 +6,16 @@ import {
   CreditCard, 
   Wallet, 
   Check, 
-  Mail
+  Mail,
+  ChevronDown
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import kluxLogo from "@/assets/klux-logo.png";
 
 interface KluxPricingModalProps {
@@ -17,8 +25,8 @@ interface KluxPricingModalProps {
 
 export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModalProps) {
   const [activeTab, setActiveTab] = useState<"plans" | "what-is-klud" | "klux-ai" | "enterprise">("plans");
-  const [kluddBilling, setKluddBilling] = useState<"monthly" | "yearly">("monthly");
-  const [kluxAiBilling, setKluxAiBilling] = useState<"monthly" | "yearly">("monthly");
+  const [billingFrequency, setBillingFrequency] = useState<"monthly" | "yearly">("monthly");
+  const [selectedLiters, setSelectedLiters] = useState("10");
   const currentCredits = 71.3;
   const totalCredits = 105;
 
@@ -92,7 +100,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
               </div>
 
               {/* Current Status */}
-              <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 mb-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 mb-3 border border-white/10">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
@@ -139,20 +147,30 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                       </p>
                     </div>
 
-                    {/* Monthly Liters Display */}
+                    {/* Monthly Liters Dropdown */}
                     <div className="mb-4">
-                      <div className="p-4 rounded-lg border border-white/20 bg-white/5 text-center">
-                        <p className="text-3xl font-bold text-white mb-1">10L/month</p>
-                        <span className="text-xs text-white/60">Recurring credits</span>
-                      </div>
+                      <Select value={selectedLiters} onValueChange={setSelectedLiters}>
+                        <SelectTrigger className="w-full h-auto p-4 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 transition-colors">
+                          <div className="w-full text-center">
+                            <p className="text-3xl font-bold text-white mb-1">{selectedLiters}L/month</p>
+                            <span className="text-xs text-white/60">Recurring credits</span>
+                          </div>
+                        </SelectTrigger>
+                        <SelectContent className="bg-black/90 backdrop-blur-xl border-white/20">
+                          <SelectItem value="10" className="text-white hover:bg-white/10">10L/month</SelectItem>
+                          <SelectItem value="20" className="text-white hover:bg-white/10">20L/month</SelectItem>
+                          <SelectItem value="40" className="text-white hover:bg-white/10">40L/month</SelectItem>
+                          <SelectItem value="50" className="text-white hover:bg-white/10">50L/month</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     {/* Billing Toggle */}
                     <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg mb-4">
                       <button
-                        onClick={() => setKluddBilling("monthly")}
+                        onClick={() => setBillingFrequency("monthly")}
                         className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
-                          kluddBilling === "monthly"
+                          billingFrequency === "monthly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
                         }`}
@@ -160,9 +178,9 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                         Monthly
                       </button>
                       <button
-                        onClick={() => setKluddBilling("yearly")}
+                        onClick={() => setBillingFrequency("yearly")}
                         className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
-                          kluddBilling === "yearly"
+                          billingFrequency === "yearly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
                         }`}
@@ -173,7 +191,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
                     {/* Price CTA */}
                     <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold mb-3 h-10 text-base">
-                      ${kluddBilling === "monthly" ? "9.99" : "99"}/m
+                      ${billingFrequency === "monthly" ? "9.99" : "99"}/m
                     </Button>
 
                     <div className="flex items-center justify-center gap-3 mb-3">
@@ -219,9 +237,9 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     {/* Billing Toggle */}
                     <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg mb-4">
                       <button
-                        onClick={() => setKluxAiBilling("monthly")}
+                        onClick={() => setBillingFrequency("monthly")}
                         className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
-                          kluxAiBilling === "monthly"
+                          billingFrequency === "monthly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
                         }`}
@@ -229,9 +247,9 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                         Monthly
                       </button>
                       <button
-                        onClick={() => setKluxAiBilling("yearly")}
+                        onClick={() => setBillingFrequency("yearly")}
                         className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
-                          kluxAiBilling === "yearly"
+                          billingFrequency === "yearly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
                         }`}
@@ -244,7 +262,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     <Button 
                       className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 mb-2 h-10 text-sm"
                     >
-                      ${kluxAiBilling === "monthly" ? "49.99" : "479"} / {kluxAiBilling === "monthly" ? "mo" : "yr"}
+                      ${billingFrequency === "monthly" ? "49.99" : "479"} / {billingFrequency === "monthly" ? "mo" : "yr"}
                     </Button>
                     <p className="text-[10px] text-center text-white/60 mb-3">
                       Auto-renews. Cancel anytime.
@@ -277,13 +295,17 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                   <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all flex flex-col">
                     <h3 className="text-lg font-bold text-white mb-2">Enterprise</h3>
                     
-                    <p className="text-xs text-white/60 mb-4 flex-1">
+                    <p className="text-xs text-white/60 mb-4">
                       Flexible billing, custom bundles, dedicated support.
                     </p>
 
-                    <div className="space-y-3 mt-auto">
+                    {/* Spacer to match other cards height */}
+                    <div className="flex-1" />
+
+                    <div className="space-y-3">
+                      {/* This button aligns with the price buttons in other cards */}
                       <Button 
-                        className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 h-9 text-sm"
+                        className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 h-10 text-sm"
                       >
                         Book call
                       </Button>
