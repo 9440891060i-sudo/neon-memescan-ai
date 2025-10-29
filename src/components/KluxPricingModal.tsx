@@ -92,69 +92,66 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
               </div>
 
               {/* Current Status */}
-              <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 mb-8 border border-white/10">
-                <div className="flex items-center justify-between mb-4">
+              <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 mb-4 border border-white/10">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
-                      <CreditCard className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+                      <CreditCard className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold">Credits remaining</h3>
-                      <p className="text-sm text-white/60">{currentCredits} of {totalCredits} KLUD</p>
+                      <h3 className="text-white font-semibold text-sm">Credits remaining</h3>
+                      <p className="text-xs text-white/60">{currentCredits} of {totalCredits} KLUD</p>
                     </div>
                   </div>
-                  <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20">
+                  <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs h-8 px-3">
                     Manage
                   </Button>
                 </div>
                 
-                <div className="relative h-2 bg-white/5 rounded-full overflow-hidden">
+                <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden">
                   <div 
                     className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-500"
                     style={{ width: `${(currentCredits / totalCredits) * 100}%` }}
                   />
                 </div>
                 
-                <div className="flex items-center justify-between mt-3 text-xs text-white/60">
+                <div className="flex items-center justify-between mt-2 text-[10px] text-white/60">
                   <span className="flex items-center gap-1">
-                    <Check className="w-3 h-3" />
+                    <Check className="w-2.5 h-2.5" />
                     Up to 100 credits rollover
                   </span>
                   <span className="flex items-center gap-1">
-                    <div className="w-2 h-2 rounded-full bg-cyan-500" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
                     Daily credits used first
                   </span>
                 </div>
               </div>
 
-              {/* Scrollable Pricing Cards */}
+              {/* Pricing Cards */}
               <div className="pr-2">
-                <div className="grid grid-cols-[2fr_2fr_1fr] gap-6 pb-8">
+                <div className="grid grid-cols-[2fr_2fr_1fr] gap-4 pb-4">
                   {/* Card A - Kludd Fuel Credits */}
-                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all">
-                    <div className="mb-6">
-                      <h3 className="text-xl font-bold text-white mb-2">Kludd — Fuel Credits</h3>
-                      <p className="text-sm text-white/60">
-                        Buy Kludd by the litre. Use Kludd to run Klux features, AI calls and token-gated utilities.
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all">
+                    <div className="mb-4">
+                      <h3 className="text-lg font-bold text-white mb-1">Kludd — Fuel Credits</h3>
+                      <p className="text-xs text-white/60">
+                        Buy Kludd by the litre. Use for AI calls and utilities.
                       </p>
                     </div>
 
                     {/* Monthly Liters Display */}
-                    <div className="mb-6">
-                      <div className="p-6 rounded-lg border border-white/20 bg-white/5 text-center">
-                        <p className="text-4xl font-bold text-white mb-2">10L/month</p>
-                        <div className="flex items-center justify-center gap-2 mb-4">
-                          <Check className="w-4 h-4 text-green-400" />
-                          <span className="text-sm text-white/60">Recurring monthly credits</span>
-                        </div>
+                    <div className="mb-4">
+                      <div className="p-4 rounded-lg border border-white/20 bg-white/5 text-center">
+                        <p className="text-3xl font-bold text-white mb-1">10L/month</p>
+                        <span className="text-xs text-white/60">Recurring credits</span>
                       </div>
                     </div>
 
                     {/* Billing Toggle */}
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-6">
+                    <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg mb-4">
                       <button
                         onClick={() => setKluddBilling("monthly")}
-                        className={`flex-1 py-2 px-4 rounded-md transition-all ${
+                        className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
                           kluddBilling === "monthly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
@@ -164,7 +161,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                       </button>
                       <button
                         onClick={() => setKluddBilling("yearly")}
-                        className={`flex-1 py-2 px-4 rounded-md transition-all ${
+                        className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
                           kluddBilling === "yearly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
@@ -175,58 +172,55 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     </div>
 
                     {/* Price CTA */}
-                    <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold mb-4 h-12 text-lg">
+                    <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold mb-3 h-10 text-base">
                       ${kluddBilling === "monthly" ? "9.99" : "99"}/m
                     </Button>
 
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <span className="text-xs text-white/60">Pay with:</span>
-                      <CreditCard className="w-4 h-4 text-white/60" />
-                      <Wallet className="w-4 h-4 text-white/60" />
+                    <div className="flex items-center justify-center gap-3 mb-3">
+                      <span className="text-[10px] text-white/60">Pay with:</span>
+                      <CreditCard className="w-3 h-3 text-white/60" />
+                      <Wallet className="w-3 h-3 text-white/60" />
                     </div>
 
                     {/* Features */}
-                    <div className="space-y-2 pt-4 border-t border-white/5">
-                      <div className="flex items-start gap-2 text-xs text-white/80">
-                        <Check className="w-3 h-3 mt-0.5 text-green-400" />
-                        <span>Instant delivery to wallet</span>
+                    <div className="space-y-1.5 pt-3 border-t border-white/5">
+                      <div className="flex items-start gap-2 text-[10px] text-white/80">
+                        <Check className="w-2.5 h-2.5 mt-0.5 text-green-400" />
+                        <span>Instant delivery</span>
                       </div>
-                      <div className="flex items-start gap-2 text-xs text-white/80">
-                        <Check className="w-3 h-3 mt-0.5 text-green-400" />
-                        <span>Up to 100 credits rollover</span>
+                      <div className="flex items-start gap-2 text-[10px] text-white/80">
+                        <Check className="w-2.5 h-2.5 mt-0.5 text-green-400" />
+                        <span>100 credits rollover</span>
                       </div>
-                      <div className="flex items-start gap-2 text-xs text-white/80">
-                        <Check className="w-3 h-3 mt-0.5 text-green-400" />
+                      <div className="flex items-start gap-2 text-[10px] text-white/80">
+                        <Check className="w-2.5 h-2.5 mt-0.5 text-green-400" />
                         <span>Cancel anytime</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Card B - Klux AI Subscription */}
-                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all">
-                    <div className="mb-6">
-                      <h3 className="text-xl font-bold text-white mb-2">Klux AI — Monthly Access</h3>
-                      <p className="text-sm text-white/60">
-                        Unlock the Klux AI engine — analytics, trend-detection, meme-signal alerts and priority model access.
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all">
+                    <div className="mb-4">
+                      <h3 className="text-lg font-bold text-white mb-1">Klux AI — Monthly Access</h3>
+                      <p className="text-xs text-white/60">
+                        AI engine with analytics and priority access.
                       </p>
                     </div>
 
                     {/* Monthly Liters Display */}
-                    <div className="mb-6">
-                      <div className="p-6 rounded-lg border border-white/20 bg-white/5 text-center">
-                        <p className="text-4xl font-bold text-white mb-2">+20L/month</p>
-                        <div className="flex items-center justify-center gap-2 mb-4">
-                          <Check className="w-4 h-4 text-green-400" />
-                          <span className="text-sm text-white/60">Bonus credits included</span>
-                        </div>
+                    <div className="mb-4">
+                      <div className="p-4 rounded-lg border border-white/20 bg-white/5 text-center">
+                        <p className="text-3xl font-bold text-white mb-1">+20L/month</p>
+                        <span className="text-xs text-white/60">Bonus credits</span>
                       </div>
                     </div>
 
                     {/* Billing Toggle */}
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-6">
+                    <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg mb-4">
                       <button
                         onClick={() => setKluxAiBilling("monthly")}
-                        className={`flex-1 py-2 px-4 rounded-md transition-all ${
+                        className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
                           kluxAiBilling === "monthly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
@@ -236,7 +230,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                       </button>
                       <button
                         onClick={() => setKluxAiBilling("yearly")}
-                        className={`flex-1 py-2 px-4 rounded-md transition-all ${
+                        className={`flex-1 py-1.5 px-3 rounded-md transition-all text-xs ${
                           kluxAiBilling === "yearly"
                             ? "bg-white/20 text-white border border-white/20"
                             : "text-white/60 hover:text-white"
@@ -248,54 +242,54 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
                     {/* CTA */}
                     <Button 
-                      className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 mb-4"
+                      className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 mb-2 h-10 text-sm"
                     >
-                      Subscribe — ${kluxAiBilling === "monthly" ? "49.99" : "479"} / {kluxAiBilling === "monthly" ? "mo" : "yr"}
+                      ${kluxAiBilling === "monthly" ? "49.99" : "479"} / {kluxAiBilling === "monthly" ? "mo" : "yr"}
                     </Button>
-                    <p className="text-xs text-center text-white/60 mb-6">
+                    <p className="text-[10px] text-center text-white/60 mb-3">
                       Auto-renews. Cancel anytime.
                     </p>
 
                     {/* Payment Methods */}
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <CreditCard className="w-4 h-4 text-white/60" />
-                      <Wallet className="w-4 h-4 text-white/60" />
+                    <div className="flex items-center justify-center gap-3 mb-3">
+                      <CreditCard className="w-3 h-3 text-white/60" />
+                      <Wallet className="w-3 h-3 text-white/60" />
                     </div>
 
                     {/* Features */}
-                    <div className="space-y-2 pt-4 border-t border-white/5">
-                      <div className="flex items-start gap-2 text-xs text-white/80">
-                        <Check className="w-3 h-3 mt-0.5 text-green-400" />
+                    <div className="space-y-1.5 pt-3 border-t border-white/5">
+                      <div className="flex items-start gap-2 text-[10px] text-white/80">
+                        <Check className="w-2.5 h-2.5 mt-0.5 text-green-400" />
                         <span>Unlimited AI prompts</span>
                       </div>
-                      <div className="flex items-start gap-2 text-xs text-white/80">
-                        <Check className="w-3 h-3 mt-0.5 text-green-400" />
+                      <div className="flex items-start gap-2 text-[10px] text-white/80">
+                        <Check className="w-2.5 h-2.5 mt-0.5 text-green-400" />
                         <span>Priority compute</span>
                       </div>
-                      <div className="flex items-start gap-2 text-xs text-white/80">
-                        <Check className="w-3 h-3 mt-0.5 text-green-400" />
-                        <span>Early access to drops</span>
+                      <div className="flex items-start gap-2 text-[10px] text-white/80">
+                        <Check className="w-2.5 h-2.5 mt-0.5 text-green-400" />
+                        <span>Early access</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Card C - Enterprise */}
-                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all flex flex-col">
-                    <h3 className="text-xl font-bold text-white mb-4">Enterprise</h3>
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all flex flex-col">
+                    <h3 className="text-lg font-bold text-white mb-2">Enterprise</h3>
                     
-                    <p className="text-sm text-white/60 mb-6 flex-1">
-                      Flexible billing, custom Kludd bundles, dedicated onboarding.
+                    <p className="text-xs text-white/60 mb-4 flex-1">
+                      Flexible billing, custom bundles, dedicated support.
                     </p>
 
-                    <div className="space-y-4 mt-auto">
+                    <div className="space-y-3 mt-auto">
                       <Button 
-                        className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20"
+                        className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 h-9 text-sm"
                       >
                         Book call
                       </Button>
                       
-                      <div className="flex items-center justify-center gap-2 text-xs text-white/60">
-                        <Mail className="w-3 h-3" />
+                      <div className="flex items-center justify-center gap-2 text-[10px] text-white/60">
+                        <Mail className="w-2.5 h-2.5" />
                         <span>sales@klux.ai</span>
                       </div>
                     </div>
