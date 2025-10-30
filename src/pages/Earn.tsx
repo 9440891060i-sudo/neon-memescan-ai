@@ -62,21 +62,12 @@ const Earn = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Gift className="w-6 h-6 text-primary" />
-              <div>
-                <h1 className="text-2xl font-semibold text-white">Earn Rewards</h1>
-                <p className="text-gray-400 text-sm mt-1">Complete tasks and partnerships to earn Klud and commissions</p>
-              </div>
+          <div className="flex items-center gap-3">
+            <Gift className="w-6 h-6 text-primary" />
+            <div>
+              <h1 className="text-2xl font-semibold text-white">Earn Rewards</h1>
+              <p className="text-gray-400 text-sm mt-1">Complete tasks and partnerships to earn Klud and commissions</p>
             </div>
-            <Button
-              onClick={() => navigate("/rewards-dashboard")}
-              className="flex items-center gap-2"
-            >
-              <TrendingUp className="w-4 h-4" />
-              Rewards Dashboard
-            </Button>
           </div>
         </div>
 
@@ -174,144 +165,158 @@ const Earn = () => {
           <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
             {/* Standard Partner (Normal Users) */}
-            <div className="p-6 rounded-lg bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-neon-green/50 transition-all">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <Users className="w-6 h-6 text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">Standard Partner</h3>
-                  <p className="text-sm text-gray-400 mt-1">Perfect for referring friends and family</p>
-                </div>
-              </div>
-
-              <div className="space-y-4 mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Percent className="w-4 h-4 text-primary" />
+            <div className="relative">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 blur-sm pointer-events-none">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                    <Users className="w-6 h-6 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-white font-medium">10% Discount</p>
-                    <p className="text-xs text-gray-400">For your referred friends</p>
+                    <h3 className="text-lg font-semibold text-white">Standard Partner</h3>
+                    <p className="text-sm text-gray-400 mt-1">Perfect for referring friends and family</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4 text-primary" />
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                      <Percent className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">10% Discount</p>
+                      <p className="text-xs text-gray-400">For your referred friends</p>
+                    </div>
                   </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">25% Commission</p>
+                      <p className="text-xs text-gray-400">First month only</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">10% Commission</p>
+                      <p className="text-xs text-gray-400">All subsequent months</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mb-4">
                   <div>
-                    <p className="text-white font-medium">25% Commission</p>
-                    <p className="text-xs text-gray-400">First month only</p>
+                    <Label htmlFor="referralCode" className="text-white text-sm">
+                      Your Custom Referral Code
+                    </Label>
+                    <Input
+                      id="referralCode"
+                      type="text"
+                      placeholder="Enter your custom code"
+                      value={customReferralCode}
+                      onChange={(e) => setCustomReferralCode(e.target.value.toUpperCase())}
+                      className="mt-1 bg-gray-900 border-gray-800 text-white"
+                    />
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4 text-primary" />
+                <div className="p-4 rounded-lg bg-gray-900 border border-gray-800 mb-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">Your referral code</span>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => copyReferralCode(customReferralCode || "KLUX-STANDARD-X7K9")}
+                    >
+                      <Copy className="w-4 h-4" />
+                    </Button>
                   </div>
-                  <div>
-                    <p className="text-white font-medium">10% Commission</p>
-                    <p className="text-xs text-gray-400">All subsequent months</p>
-                  </div>
+                  <p className="font-mono text-white font-medium mt-1">{customReferralCode || "KLUX-STANDARD-X7K9"}</p>
+                </div>
+
+                <Button 
+                  onClick={() => handleApplyPartnership("Standard Partner")}
+                  className="w-full"
+                >
+                  Start Referring
+                </Button>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-black/80 backdrop-blur-sm px-8 py-4 rounded-lg border border-primary/50">
+                  <p className="text-2xl font-bold text-white">Coming Soon</p>
                 </div>
               </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <Label htmlFor="referralCode" className="text-white text-sm">
-                    Your Custom Referral Code
-                  </Label>
-                  <Input
-                    id="referralCode"
-                    type="text"
-                    placeholder="Enter your custom code"
-                    value={customReferralCode}
-                    onChange={(e) => setCustomReferralCode(e.target.value.toUpperCase())}
-                    className="mt-1 bg-gray-900 border-gray-800 text-white"
-                  />
-                </div>
-              </div>
-
-              <div className="p-4 rounded-lg bg-gray-900 border border-gray-800 mb-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-400">Your referral code</span>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => copyReferralCode(customReferralCode || "KLUX-STANDARD-X7K9")}
-                  >
-                    <Copy className="w-4 h-4" />
-                  </Button>
-                </div>
-                <p className="font-mono text-white font-medium mt-1">{customReferralCode || "KLUX-STANDARD-X7K9"}</p>
-              </div>
-
-              <Button 
-                onClick={() => handleApplyPartnership("Standard Partner")}
-                className="w-full"
-              >
-                Start Referring
-              </Button>
             </div>
 
             {/* KOL Partner */}
-            <div className="p-6 rounded-lg bg-gradient-to-br from-purple-950/50 to-gray-900 border-2 border-purple-500/50 hover:border-purple-500 transition-all relative">
-              <div className="absolute top-4 right-4">
-                <Badge className="bg-purple-500 text-white border-0">
-                  <Crown className="w-3 h-3 mr-1" />
-                  VIP
-                </Badge>
-              </div>
-
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                  <Crown className="w-6 h-6 text-purple-400" />
+            <div className="relative">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-purple-950/50 to-gray-900 border-2 border-purple-500/50 blur-sm pointer-events-none">
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-purple-500 text-white border-0">
+                    <Crown className="w-3 h-3 mr-1" />
+                    VIP
+                  </Badge>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">KOL Partner</h3>
-                  <p className="text-sm text-gray-400 mt-1">Exclusive for content creators & KOLs</p>
-                </div>
-              </div>
 
-              <div className="space-y-3 mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                    <Percent className="w-4 h-4 text-purple-400" />
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                    <Crown className="w-6 h-6 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-white font-medium">Custom Discount</p>
-                    <p className="text-xs text-gray-400">Up to 20% for your audience</p>
+                    <h3 className="text-lg font-semibold text-white">KOL Partner</h3>
+                    <p className="text-sm text-gray-400 mt-1">Exclusive for content creators & KOLs</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4 text-purple-400" />
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                      <Percent className="w-4 h-4 text-purple-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">Custom Discount</p>
+                      <p className="text-xs text-gray-400">Up to 20% for your audience</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-white font-medium">Tailored Commissions</p>
-                    <p className="text-xs text-gray-400">Customized rates for your audience</p>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                      <TrendingUp className="w-4 h-4 text-purple-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">Tailored Commissions</p>
+                      <p className="text-xs text-gray-400">Customized rates for your audience</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                      <Crown className="w-4 h-4 text-purple-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">Priority Support</p>
+                      <p className="text-xs text-gray-400">Dedicated account manager</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                    <Crown className="w-4 h-4 text-purple-400" />
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Priority Support</p>
-                    <p className="text-xs text-gray-400">Dedicated account manager</p>
-                  </div>
+                <Button 
+                  onClick={() => handleApplyPartnership("KOL Partner")}
+                  className="w-full bg-purple-600 hover:bg-purple-700"
+                >
+                  Apply for Partnership
+                </Button>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-black/80 backdrop-blur-sm px-8 py-4 rounded-lg border border-purple-500/50">
+                  <p className="text-2xl font-bold text-white">Coming Soon</p>
                 </div>
               </div>
-
-              <Button 
-                onClick={() => handleApplyPartnership("KOL Partner")}
-                className="w-full bg-purple-600 hover:bg-purple-700"
-              >
-                Apply for Partnership
-              </Button>
             </div>
 
           </CardContent>
