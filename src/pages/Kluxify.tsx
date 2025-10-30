@@ -338,13 +338,7 @@ export default function Kluxify() {
         {/* Info Dialog */}
         <Dialog open={showInfoDialog} onOpenChange={setShowInfoDialog}>
           <DialogContent className="bg-gray-950 border border-gray-800 max-w-4xl">
-            <DialogHeader className="border-b border-gray-800 pb-4">
-              <DialogTitle className="flex items-center justify-center">
-                <img src={kluxLogo} alt="Klux Logo" className="h-12" />
-              </DialogTitle>
-            </DialogHeader>
-            
-            <div className="py-4">
+            <div className="py-6">
               <div className="grid grid-cols-3 gap-4">
                 {/* Entry & Exit Signals */}
                 <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
