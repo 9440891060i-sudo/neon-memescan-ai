@@ -7,8 +7,18 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useState } from "react";
 
 const LC_OPTIONS = [
-  "LC 1", "LC 2", "LC 3", "LC 4", "LC 5", "LC 6",
-  "LC 7", "LC 8", "LC 9", "LC 10", "LC 11", "LC 12"
+  "LC 1", "LC 2", "LC 3", "LC 4", "LC 5", 
+  "LC 6", "LC 7", "LC 8", "LC 9", "LC 10"
+];
+
+const NEWS_OPTIONS = [
+  "Bloomberg",
+  "Reuters", 
+  "CNBC",
+  "Financial Times",
+  "Wall Street Journal",
+  "CoinDesk",
+  "CoinTelegraph"
 ];
 
 export function TrackersView() {
@@ -34,8 +44,7 @@ export function TrackersView() {
   const [selectedLCs, setSelectedLCs] = useState<string[]>([]);
 
   // News state
-  const [newsChannels, setNewsChannels] = useState<string[]>([]);
-  const [newsInput, setNewsInput] = useState("");
+  const [selectedNews, setSelectedNews] = useState<string[]>([]);
 
   const toggleBox = (box: 'twitter' | 'lc' | 'news') => {
     setExpandedBoxes(prev => ({ ...prev, [box]: !prev[box] }));
@@ -66,15 +75,10 @@ export function TrackersView() {
     );
   };
 
-  const addNewsChannel = () => {
-    if (newsInput.trim()) {
-      setNewsChannels(prev => [...prev, newsInput.trim()]);
-      setNewsInput("");
-    }
-  };
-
-  const removeNewsChannel = (channel: string) => {
-    setNewsChannels(prev => prev.filter(c => c !== channel));
+  const toggleNews = (news: string) => {
+    setSelectedNews(prev => 
+      prev.includes(news) ? prev.filter(n => n !== news) : [...prev, news]
+    );
   };
 
   const expandedCount = Object.values(expandedBoxes).filter(Boolean).length;
@@ -339,42 +343,34 @@ export function TrackersView() {
           <DialogHeader>
             <DialogTitle className="text-foreground flex items-center gap-2">
               <Newspaper className="w-5 h-5" />
-              News Channels
+              Select News Sources
             </DialogTitle>
           </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="flex gap-2">
-              <Input
-                placeholder="Paste news channel link..."
-                value={newsInput}
-                onChange={(e) => setNewsInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && addNewsChannel()}
-                className="flex-1"
-              />
-              <Button onClick={addNewsChannel} className="bg-neon-green text-background hover:bg-neon-green/90">
-                Add
-              </Button>
-            </div>
-            
-            {newsChannels.length > 0 && (
-              <>
-                <p className="text-sm text-muted-foreground">Saved Channels ({newsChannels.length})</p>
-                <div className="space-y-2 max-h-[300px] overflow-y-auto">
-                  {newsChannels.map((channel, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-muted/20 rounded-lg border border-border">
-                      <span className="text-foreground text-sm truncate flex-1">{channel}</span>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => removeNewsChannel(channel)}
-                        className="h-8 w-8 text-muted-foreground hover:text-destructive flex-shrink-0 ml-2"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  ))}
+          <div className="py-4">
+            <p className="text-sm text-muted-foreground mb-4">
+              Select which news sources you want to receive alerts from
+            </p>
+            <div className="space-y-3 max-h-[400px] overflow-y-auto">
+              {NEWS_OPTIONS.map((news) => (
+                <div key={news} className="flex items-center space-x-2 p-3 bg-muted/20 rounded-lg border border-border">
+                  <Checkbox
+                    id={news}
+                    checked={selectedNews.includes(news)}
+                    onCheckedChange={() => toggleNews(news)}
+                  />
+                  <label
+                    htmlFor={news}
+                    className="text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  >
+                    {news}
+                  </label>
                 </div>
-              </>
+              ))}
+            </div>
+            {selectedNews.length > 0 && (
+              <p className="text-sm text-muted-foreground mt-4">
+                Selected: {selectedNews.length} source{selectedNews.length !== 1 ? 's' : ''}
+              </p>
             )}
           </div>
         </DialogContent>
