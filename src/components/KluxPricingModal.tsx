@@ -150,7 +150,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     {/* Monthly Liters Dropdown */}
                     <div className="mb-4">
                       <Select value={selectedLiters} onValueChange={setSelectedLiters}>
-                        <SelectTrigger className="w-full h-auto p-4 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 transition-colors">
+                        <SelectTrigger className="w-full min-h-[88px] p-4 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 transition-colors">
                           <div className="w-full text-center">
                             <p className="text-3xl font-bold text-white mb-1">{selectedLiters}L/month</p>
                             <span className="text-xs text-white/60">Recurring credits</span>
@@ -228,7 +228,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
 
                     {/* Monthly Liters Display */}
                     <div className="mb-4">
-                      <div className="p-4 rounded-lg border border-white/20 bg-white/5 text-center">
+                      <div className="min-h-[88px] p-4 rounded-lg border border-white/20 bg-white/5 text-center flex flex-col justify-center">
                         <p className="text-3xl font-bold text-white mb-1">+20L/month</p>
                         <span className="text-xs text-white/60">Bonus credits</span>
                       </div>
@@ -299,8 +299,11 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                       Flexible billing, custom bundles, dedicated support.
                     </p>
 
-                    {/* Spacer to match other cards height */}
-                    <div className="flex-1" />
+                    {/* Empty box matching other cards */}
+                    <div className="min-h-[88px] mb-4" />
+
+                    {/* Billing toggle spacer */}
+                    <div className="h-[52px] mb-4" />
 
                     <div className="space-y-3">
                       {/* This button aligns with the price buttons in other cards */}
@@ -310,7 +313,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                         Book call
                       </Button>
                       
-                      <div className="flex items-center justify-center gap-2 text-[10px] text-white/60">
+                      <div className="flex items-center justify-center gap-2 text-[10px] text-white/60 mb-3">
                         <Mail className="w-2.5 h-2.5" />
                         <span>sales@klux.ai</span>
                       </div>
