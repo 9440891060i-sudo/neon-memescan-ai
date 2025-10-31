@@ -7,7 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Beaker, Brain, Bell, Mail, AlertTriangle, TrendingUp, Megaphone, Sparkles, Info } from "lucide-react";
+import { Beaker, Brain, Bell, Mail, AlertTriangle, TrendingUp, Megaphone, Sparkles, Info, MessageCircle, ExternalLink } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useKluxStore } from "@/store/kluxStore";
 import SupportWidget from "@/components/SupportWidget";
@@ -54,28 +54,37 @@ const AppContent = () => {
                   </PopoverTrigger>
                   <PopoverContent 
                     align="start"
-                    className="w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                    className="w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl p-6"
                   >
                     <div className="space-y-4">
-                      <h3 className="text-lg font-bold text-white text-center">
-                        Early Access Program
-                      </h3>
-                      <p className="text-sm text-gray-300 leading-relaxed text-center">
-                        You're using an early access version of Klux. If you encounter any glitches or issues, 
-                        please let us know through our support system or Discord community - we'll resolve them immediately.
-                      </p>
-                      <div className="flex gap-2 pt-2">
+                      <div className="text-center">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 mb-3">
+                          <Info className="w-6 h-6 text-emerald-400" />
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-2">
+                          Early Access Program
+                        </h3>
+                        <p className="text-sm text-gray-400 leading-relaxed">
+                          You're experiencing Klux in early access. Report any issues and we'll resolve them immediately.
+                        </p>
+                      </div>
+                      <div className="flex gap-3 pt-2">
                         <Button 
-                          className="flex-1 bg-primary hover:bg-primary/90 text-white text-sm h-9"
+                          variant="outline"
+                          size="icon"
+                          className="flex-1 border-white/20 text-white hover:bg-white/10 h-12"
+                          title="Contact Support"
                         >
-                          Contact Support
+                          <MessageCircle className="w-5 h-5" />
                         </Button>
                         <Button 
                           onClick={() => window.open('https://discord.gg/klux', '_blank')}
                           variant="outline"
-                          className="flex-1 border-white/20 text-white hover:bg-white/10 text-sm h-9"
+                          size="icon"
+                          className="flex-1 border-white/20 text-white hover:bg-white/10 h-12"
+                          title="Join Discord"
                         >
-                          Join Discord
+                          <ExternalLink className="w-5 h-5" />
                         </Button>
                       </div>
                     </div>

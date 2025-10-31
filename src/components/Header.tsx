@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, Mail, Gift } from "lucide-react";
+import { Menu, X, Zap, DollarSign, HelpCircle, Users, ArrowRight, Mail, Gift, Info, MessageCircle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useAuthStore } from "@/store/authStore";
@@ -40,14 +40,66 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left: Logo */}
-            <Link to="/" className="flex items-center">
-              <img 
-                src={kluxLogo} 
-                alt="Klux" 
-                className="h-24 w-auto object-contain"
-              />
-            </Link>
+            {/* Left: Logo + Early Access Badge */}
+            <div className="flex items-center gap-3">
+              <Link to="/" className="flex items-center">
+                <img 
+                  src={kluxLogo} 
+                  alt="Klux" 
+                  className="h-24 w-auto object-contain"
+                />
+              </Link>
+              
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/50 px-3 py-1 h-7 rounded-full text-xs font-semibold gap-1.5"
+                  >
+                    <Info className="w-3 h-3" />
+                    Early Access
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent 
+                  align="start"
+                  className="w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl p-6"
+                >
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 mb-3">
+                        <Info className="w-6 h-6 text-emerald-400" />
+                      </div>
+                      <h3 className="text-lg font-bold text-white mb-2">
+                        Early Access Program
+                      </h3>
+                      <p className="text-sm text-gray-400 leading-relaxed">
+                        You're experiencing Klux in early access. Report any issues and we'll resolve them immediately.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 pt-2">
+                      <Button 
+                        variant="outline"
+                        size="icon"
+                        className="flex-1 border-white/20 text-white hover:bg-white/10 h-12"
+                        title="Contact Support"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                      </Button>
+                      <Button 
+                        onClick={() => window.open('https://discord.gg/klux', '_blank')}
+                        variant="outline"
+                        size="icon"
+                        className="flex-1 border-white/20 text-white hover:bg-white/10 h-12"
+                        title="Join Discord"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
 
             {/* Center: Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
