@@ -46,7 +46,7 @@ const AppContent = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="bg-neon-green/20 hover:bg-neon-green/30 text-neon-green border-2 border-neon-green px-3 py-1 h-7 rounded-full text-xs font-bold gap-1.5"
+                      className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/50 px-3 py-1 h-7 rounded-full text-xs font-semibold gap-1.5"
                     >
                       <Info className="w-3 h-3" />
                       Early Access
