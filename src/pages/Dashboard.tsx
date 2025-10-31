@@ -6,13 +6,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TrendingUp, TrendingDown, Zap, Target, Award, Calendar, Users, CreditCard, Activity, DollarSign, User, Lock, Monitor } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { TrendingUp, TrendingDown, Zap, Target, Award, Calendar, Users, CreditCard, Activity, DollarSign, User, Lock, Monitor, Info } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Dashboard() {
   const { user } = useAuthStore();
   const { toast } = useToast();
+  const [earlyAccessOpen, setEarlyAccessOpen] = useState(false);
   
   // Profile settings state
   const [username, setUsername] = useState(user?.username || "");
@@ -138,7 +140,49 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-black p-6">
       <div className="w-full space-y-8">
-        
+        {/* Early Access Badge */}
+        <div className="flex justify-start mb-4">
+          <Badge 
+            onClick={() => setEarlyAccessOpen(true)}
+            className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 cursor-pointer px-4 py-1.5 rounded-full transition-all"
+          >
+            <Info className="w-3 h-3 mr-1.5" />
+            Early Access
+          </Badge>
+        </div>
+
+        {/* Early Access Dialog */}
+        <Dialog open={earlyAccessOpen} onOpenChange={setEarlyAccessOpen}>
+          <DialogContent className="bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl max-w-md">
+            <div className="space-y-4 py-4">
+              <DialogTitle className="text-xl font-bold text-white text-center">
+                Early Access Program
+              </DialogTitle>
+              <DialogDescription className="text-center text-gray-300 leading-relaxed">
+                You're using an early access version of Klux. If you encounter any glitches or issues, 
+                please let us know through our support system or Discord community - we'll resolve them immediately.
+              </DialogDescription>
+              <div className="flex gap-3 mt-6">
+                <Button 
+                  onClick={() => setEarlyAccessOpen(false)}
+                  className="flex-1 bg-primary hover:bg-primary/90 text-white"
+                >
+                  Contact Support
+                </Button>
+                <Button 
+                  onClick={() => {
+                    window.open('https://discord.gg/klux', '_blank');
+                    setEarlyAccessOpen(false);
+                  }}
+                  variant="outline"
+                  className="flex-1 border-white/20 text-white hover:bg-white/10"
+                >
+                  Join Discord
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* User Profile Section */}
         <Card className="bg-black border-gray-800">
