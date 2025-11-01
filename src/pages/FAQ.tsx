@@ -135,30 +135,26 @@ export default function FAQ() {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="relative bg-gradient-to-br from-neon-green/5 to-neon-cyan/5 rounded-3xl p-8 md:p-12 border border-neon-green/20 overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-neon-green/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-cyan/10 rounded-full blur-3xl" />
-                
-                <div className="relative">
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <MessageCircle className="w-6 h-6 text-neon-green" />
-                    <span className="text-sm font-medium text-neon-green uppercase tracking-wider">Need More Help?</span>
+              <div className="relative bg-card rounded-2xl p-8 md:p-12 border border-border shadow-lg">
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
+                    <MessageCircle className="w-8 h-8 text-primary" />
                   </div>
                   
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-center text-foreground">
-                    Can't find what you're looking for?
+                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+                    Still have questions?
                   </h3>
                   
-                  <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
+                  <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
                     Our dedicated support team is available 24/7 to assist you with any questions or concerns.
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className="group px-8 py-4 bg-gradient-neon text-black font-semibold rounded-xl hover:scale-105 transition-all duration-300 neon-glow-green flex items-center justify-center gap-2">
+                    <button className="group px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
                       <MessageCircle className="w-5 h-5" />
                       Contact Support
                     </button>
-                    <button className="px-8 py-4 bg-background border border-neon-green/30 text-neon-green rounded-xl hover:bg-neon-green/10 hover:border-neon-green/50 transition-all duration-300 flex items-center justify-center gap-2">
+                    <button className="px-8 py-4 bg-secondary text-secondary-foreground font-semibold rounded-lg hover:bg-secondary/80 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
                       <Users className="w-5 h-5" />
                       Join Community
                     </button>
