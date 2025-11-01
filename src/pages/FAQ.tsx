@@ -134,29 +134,46 @@ export default function FAQ() {
         {/* Contact Support Section */}
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="relative bg-card rounded-2xl p-8 md:p-12 border border-border shadow-lg">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
-                    <MessageCircle className="w-8 h-8 text-primary" />
-                  </div>
-                  
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                    Still have questions?
-                  </h3>
-                  
-                  <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-                    Our dedicated support team is available 24/7 to assist you with any questions or concerns.
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className="group px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
-                      <MessageCircle className="w-5 h-5" />
-                      Contact Support
+            <div className="max-w-5xl mx-auto">
+              <div className="relative grid md:grid-cols-2 gap-6">
+                {/* Left Card - Contact Support */}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-neon-cyan/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                  <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 h-full">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-neon-green to-neon-cyan rounded-xl flex items-center justify-center flex-shrink-0">
+                        <MessageCircle className="w-6 h-6 text-black" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-foreground mb-2">24/7 Support</h3>
+                        <p className="text-muted-foreground">
+                          Get instant help from our expert support team anytime, anywhere.
+                        </p>
+                      </div>
+                    </div>
+                    <button className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-neon-green to-neon-cyan text-black font-semibold rounded-lg hover:opacity-90 transition-opacity duration-200">
+                      Start Chat Now
                     </button>
-                    <button className="px-8 py-4 bg-secondary text-secondary-foreground font-semibold rounded-lg hover:bg-secondary/80 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
-                      <Users className="w-5 h-5" />
-                      Join Community
+                  </div>
+                </div>
+
+                {/* Right Card - Community */}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-neon-green/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                  <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-neon-cyan/30 hover:border-neon-cyan/50 transition-all duration-300 h-full">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-neon-cyan to-neon-green rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Users className="w-6 h-6 text-black" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-foreground mb-2">Join Community</h3>
+                        <p className="text-muted-foreground">
+                          Connect with traders, share strategies, and learn from the best.
+                        </p>
+                      </div>
+                    </div>
+                    <button className="w-full mt-6 px-6 py-3 bg-card border border-neon-cyan/50 text-foreground font-semibold rounded-lg hover:bg-neon-cyan/10 transition-all duration-200">
+                      Join Discord
                     </button>
                   </div>
                 </div>
