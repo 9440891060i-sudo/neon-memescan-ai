@@ -132,49 +132,43 @@ export default function FAQ() {
         </section>
 
         {/* Contact Support Section */}
-        <section className="py-20">
+        <section className="py-24 border-t border-border/50">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="relative grid md:grid-cols-2 gap-6">
-                {/* Left Card - Contact Support */}
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-neon-cyan/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                  <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-neon-green/30 hover:border-neon-green/50 transition-all duration-300 h-full">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-neon-green to-neon-cyan rounded-xl flex items-center justify-center flex-shrink-0">
-                        <MessageCircle className="w-6 h-6 text-black" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-foreground mb-2">24/7 Support</h3>
-                        <p className="text-muted-foreground">
-                          Get instant help from our expert support team anytime, anywhere.
-                        </p>
-                      </div>
-                    </div>
-                    <button className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-neon-green to-neon-cyan text-black font-semibold rounded-lg hover:opacity-90 transition-opacity duration-200">
-                      Start Chat Now
-                    </button>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-3 gap-12 items-center">
+                {/* Left - Main CTA */}
+                <div className="lg:col-span-2">
+                  <div className="space-y-6">
+                    <h2 className="text-5xl md:text-6xl font-bold leading-tight">
+                      <span className="text-foreground">Need help?</span>
+                      <br />
+                      <span className="text-muted-foreground">We're here.</span>
+                    </h2>
+                    <p className="text-xl text-muted-foreground max-w-2xl">
+                      Our team responds in minutes, not hours. Get the support you deserve.
+                    </p>
                   </div>
                 </div>
 
-                {/* Right Card - Community */}
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-neon-green/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                  <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-neon-cyan/30 hover:border-neon-cyan/50 transition-all duration-300 h-full">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-neon-cyan to-neon-green rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Users className="w-6 h-6 text-black" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-foreground mb-2">Join Community</h3>
-                        <p className="text-muted-foreground">
-                          Connect with traders, share strategies, and learn from the best.
-                        </p>
-                      </div>
+                {/* Right - Action Buttons */}
+                <div className="space-y-4">
+                  <button className="w-full group relative overflow-hidden px-8 py-6 bg-foreground text-background font-bold text-lg rounded-xl transition-all duration-300 hover:scale-[1.02]">
+                    <div className="flex items-center justify-between">
+                      <span>Contact Us</span>
+                      <MessageCircle className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </div>
-                    <button className="w-full mt-6 px-6 py-3 bg-card border border-neon-cyan/50 text-foreground font-semibold rounded-lg hover:bg-neon-cyan/10 transition-all duration-200">
-                      Join Discord
-                    </button>
+                  </button>
+                  
+                  <button className="w-full group px-8 py-6 border-2 border-border text-foreground font-bold text-lg rounded-xl transition-all duration-300 hover:border-foreground hover:scale-[1.02]">
+                    <div className="flex items-center justify-between">
+                      <span>Community</span>
+                      <Users className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </button>
+                  
+                  <div className="pt-4 flex items-center gap-3 text-sm text-muted-foreground">
+                    <div className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
+                    <span>Average response time: 3 minutes</span>
                   </div>
                 </div>
               </div>
