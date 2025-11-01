@@ -64,21 +64,28 @@ export default function FAQ() {
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-cyan/5" />
-          <div className="relative container mx-auto px-4 py-16">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-3 border border-neon-green/20 rounded-full px-6 py-3 mb-8 bg-background/50 backdrop-blur-sm">
-                <HelpCircle className="w-5 h-5 text-neon-green" />
-                <span className="text-sm font-medium text-neon-green">Frequently Asked Questions</span>
+        <section className="relative overflow-hidden py-20 md:py-32">
+          <div className="absolute inset-0 bg-gradient-to-b from-neon-green/10 via-background to-background" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-neon-green/50 to-transparent" />
+          
+          <div className="relative container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent to-neon-green/30" />
+                <HelpCircle className="w-6 h-6 text-neon-green" />
+                <div className="h-px flex-1 bg-gradient-to-l from-transparent to-neon-green/30" />
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-8 py-6 inline-block text-white">
-                Get Your Answers
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-center">
+                <span className="bg-gradient-to-r from-white via-neon-green to-white bg-clip-text text-transparent">
+                  Frequently Asked
+                </span>
+                <br />
+                <span className="text-neon-green">Questions</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Everything you need to know about Klux
+              <p className="text-lg md:text-xl text-center text-muted-foreground max-w-2xl mx-auto">
+                Find answers to common questions about Klux AI-powered trading platform
               </p>
             </div>
           </div>
