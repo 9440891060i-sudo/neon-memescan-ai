@@ -1,20 +1,21 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { TrendingUp, TrendingDown, ExternalLink } from "lucide-react";
+import { TrendingUp, TrendingDown } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import pepeImg from "@/assets/coins/pepe.png";
 import dogeImg from "@/assets/coins/doge.png";
 import shibaImg from "@/assets/coins/shiba.png";
+import callIndicator from "@/assets/call-indicator.png";
 
 const topMemeCoins = [
   {
     name: "PEPE",
     symbol: "PEPE",
     image: pepeImg,
-    marketCap: "$3.2B",
-    entryPrice: "$0.0000082",
-    exitPrice: "$0.0000311",
+    callDate: "Oct 25, 2024",
+    callTime: "14:32 UTC",
+    entryMarketCap: "$3.2B",
+    exitMarketCap: "$12.2B",
     gain: "280%",
     change: "+15.4%",
     trend: "up"
@@ -23,9 +24,10 @@ const topMemeCoins = [
     name: "Dogecoin",
     symbol: "DOGE",
     image: dogeImg,
-    marketCap: "$10.8B", 
-    entryPrice: "$0.068",
-    exitPrice: "$0.299",
+    callDate: "Oct 28, 2024",
+    callTime: "09:15 UTC",
+    entryMarketCap: "$10.8B", 
+    exitMarketCap: "$47.5B",
     gain: "340%",
     change: "+8.2%",
     trend: "up"
@@ -34,9 +36,10 @@ const topMemeCoins = [
     name: "Shiba Inu",
     symbol: "SHIB",
     image: shibaImg,
-    marketCap: "$4.9B",
-    entryPrice: "$0.0000071",
-    exitPrice: "$0.0000426",
+    callDate: "Oct 30, 2024",
+    callTime: "18:45 UTC",
+    entryMarketCap: "$4.9B",
+    exitMarketCap: "$29.4B",
     gain: "500%",
     change: "-2.1%",
     trend: "up"
@@ -92,39 +95,29 @@ export default function MemeCoinDisplay() {
                     </div>
                   </div>
 
-                  {/* Market cap */}
+                  {/* Call Date & Time */}
                   <div className="mb-3 sm:mb-4">
-                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Market Cap</div>
-                    <div className="text-lg sm:text-xl font-bold text-foreground">
-                      <AnimatedNumber 
-                        value={parseFloat(coin.marketCap.replace(/[$BM]/g, ''))} 
-                        isVisible={isIntersecting}
-                        formatter={(val) => coin.marketCap.includes('B') ? `$${val.toFixed(1)}B` : `$${val}M`}
-                      />
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Call Date & Time</div>
+                    <div className="text-sm sm:text-base font-semibold text-foreground">
+                      {coin.callDate} • {coin.callTime}
                     </div>
                   </div>
 
-                  {/* Entry and Exit Prices */}
+                  {/* Entry and Exit Market Cap */}
                   <div className="mb-3 sm:mb-4 grid grid-cols-2 gap-3">
                     <div>
-                      <div className="text-xs text-muted-foreground mb-1">Entry Price</div>
-                      <div className="text-sm font-semibold text-foreground">{coin.entryPrice}</div>
+                      <div className="text-xs text-muted-foreground mb-1">Entry Market Cap</div>
+                      <div className="text-sm font-semibold text-foreground">{coin.entryMarketCap}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground mb-1">Exit Price</div>
-                      <div className="text-sm font-semibold text-foreground">{coin.exitPrice}</div>
+                      <div className="text-xs text-muted-foreground mb-1">Exit Market Cap</div>
+                      <div className="text-sm font-semibold text-foreground">{coin.exitMarketCap}</div>
                     </div>
                   </div>
 
-                  {/* Open Trade Button */}
+                  {/* Call Indicator Logo */}
                   <div className="flex items-center justify-center">
-                    <Button 
-                      size="sm" 
-                      className="bg-white/5 hover:bg-white/10 text-foreground border border-white/10 backdrop-blur-md hover:backdrop-blur-lg text-xs font-medium gap-1.5 transition-all"
-                    >
-                      Open this trade
-                      <ExternalLink className="w-3 h-3" />
-                    </Button>
+                    <img src={callIndicator} alt="Call indicator" className="w-12 h-12" />
                   </div>
                 </div>
               </Card>
