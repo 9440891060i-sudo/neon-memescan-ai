@@ -13,7 +13,6 @@ const topMemeCoins = [
     symbol: "PEPE",
     image: pepeImg,
     callDate: "Oct 25, 2024",
-    callTime: "14:32 UTC",
     entryMarketCap: "$3.2B",
     exitMarketCap: "$12.2B",
     gain: "280%",
@@ -25,7 +24,6 @@ const topMemeCoins = [
     symbol: "DOGE",
     image: dogeImg,
     callDate: "Oct 28, 2024",
-    callTime: "09:15 UTC",
     entryMarketCap: "$10.8B", 
     exitMarketCap: "$47.5B",
     gain: "340%",
@@ -37,7 +35,6 @@ const topMemeCoins = [
     symbol: "SHIB",
     image: shibaImg,
     callDate: "Oct 30, 2024",
-    callTime: "18:45 UTC",
     entryMarketCap: "$4.9B",
     exitMarketCap: "$29.4B",
     gain: "500%",
@@ -95,11 +92,11 @@ export default function MemeCoinDisplay() {
                     </div>
                   </div>
 
-                  {/* Call Date & Time */}
+                  {/* Call Date */}
                   <div className="mb-3 sm:mb-4">
-                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Call Date & Time</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Call Date</div>
                     <div className="text-sm sm:text-base font-semibold text-foreground">
-                      {coin.callDate} • {coin.callTime}
+                      {coin.callDate}
                     </div>
                   </div>
 
@@ -117,7 +114,7 @@ export default function MemeCoinDisplay() {
 
                   {/* Call Indicator Logo */}
                   <div className="flex items-center justify-center">
-                    <img src={callIndicator} alt="Call indicator" className="w-12 h-12" />
+                    <img src={callIndicator} alt="Call indicator" className="w-8 h-8" />
                   </div>
                 </div>
               </Card>
