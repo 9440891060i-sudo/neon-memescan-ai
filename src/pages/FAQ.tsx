@@ -132,20 +132,38 @@ export default function FAQ() {
         </section>
 
         {/* Contact Support Section */}
-        <section className="py-16 border-t border-neon-green/10">
+        <section className="py-20">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4 text-foreground">Still have questions?</h3>
-              <p className="text-muted-foreground mb-8">
-                Our support team is here to help you get the most out of our platform.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-6 py-3 bg-gradient-neon text-black font-semibold rounded-lg hover:scale-105 transition-all duration-300 neon-glow-green">
-                  Contact Support
-                </button>
-                <button className="px-6 py-3 border border-neon-green/20 text-neon-green rounded-lg hover:bg-neon-green/10 transition-all duration-300">
-                  Join Community
-                </button>
+            <div className="max-w-4xl mx-auto">
+              <div className="relative bg-gradient-to-br from-neon-green/5 to-neon-cyan/5 rounded-3xl p-8 md:p-12 border border-neon-green/20 overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-neon-green/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-cyan/10 rounded-full blur-3xl" />
+                
+                <div className="relative">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <MessageCircle className="w-6 h-6 text-neon-green" />
+                    <span className="text-sm font-medium text-neon-green uppercase tracking-wider">Need More Help?</span>
+                  </div>
+                  
+                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-center text-foreground">
+                    Can't find what you're looking for?
+                  </h3>
+                  
+                  <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
+                    Our dedicated support team is available 24/7 to assist you with any questions or concerns.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button className="group px-8 py-4 bg-gradient-neon text-black font-semibold rounded-xl hover:scale-105 transition-all duration-300 neon-glow-green flex items-center justify-center gap-2">
+                      <MessageCircle className="w-5 h-5" />
+                      Contact Support
+                    </button>
+                    <button className="px-8 py-4 bg-background border border-neon-green/30 text-neon-green rounded-xl hover:bg-neon-green/10 hover:border-neon-green/50 transition-all duration-300 flex items-center justify-center gap-2">
+                      <Users className="w-5 h-5" />
+                      Join Community
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
