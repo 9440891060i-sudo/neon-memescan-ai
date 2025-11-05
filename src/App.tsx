@@ -23,12 +23,15 @@ import Rewards from "./pages/Rewards";
 import Earn from "./pages/Earn";
 import FAQ from "./pages/FAQ";
 import WalletAnalytics from "./pages/WalletAnalytics";
+import KluxPricingModal from "@/components/KluxPricingModal";
+import { useState } from "react";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
   const { isAuthenticated } = useAuthStore();
   const { isPremium } = useKluxStore();
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen w-full">
@@ -198,12 +201,16 @@ const AppContent = () => {
                     </Popover>
                   </div>
                   <Brain className={`w-5 h-5 transition-colors duration-300 ${isPremium ? "text-neon-green" : "text-gray-600"}`} />
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border">
+                  <div 
+                    onClick={() => setIsPricingModalOpen(true)}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border cursor-pointer hover:bg-muted/50 transition-colors"
+                  >
                     <Beaker className="w-5 h-5 text-green-500" />
                     <span className="text-sm font-semibold text-foreground">12.4L</span>
                   </div>
                 </div>
               </header>
+              <KluxPricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
               <div className="p-0">
                 <Routes>
                 <Route path="/user-dashboard" element={<Dashboard />} />
