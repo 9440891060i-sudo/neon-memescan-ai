@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Search, Zap, TrendingUp, Copy } from "lucide-react";
+import { Search, Zap, TrendingUp, Copy, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import { AnalysisQueue } from "@/components/AnalysisQueue";
@@ -98,11 +98,19 @@ export default function AnalysisInput() {
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
   const [queuedCoins, setQueuedCoins] = useState<QueuedCoin[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('analyse');
 const { toast } = useToast();
 const { state, isMobile } = useSidebar();
   
   // Get default tab from navigation state
   const defaultTab = (location.state as any)?.tab || 'analyse';
+
+  const handleLockedTabClick = (tabName: string) => {
+    toast({
+      title: "Early Access",
+      description: "This feature is in early access. Full features will be available soon.",
+    });
+  };
 const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
 
   const handleAnalyze = () => {
@@ -198,7 +206,7 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
 
   return (
     <div className="min-h-screen bg-black">
-      <Tabs defaultValue={defaultTab} className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         {/* Professional Tab Navigation */}
         <div className="fixed top-0 right-0 h-14 z-50 pointer-events-none" style={{ left: sidebarLeft }}>
           <div className="h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
@@ -209,18 +217,20 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
               >
                 Analyse
               </TabsTrigger>
-              <TabsTrigger 
-                value="socials" 
-                className="text-sm font-medium text-gray-400 data-[state=active]:text-neon-green data-[state=active]:bg-transparent px-6 py-2 border-b-2 border-transparent data-[state=active]:border-neon-green rounded-none transition-all"
+              <button
+                onClick={() => handleLockedTabClick('socials')}
+                className="text-sm font-medium text-gray-400 px-6 py-2 border-b-2 border-transparent rounded-none transition-all flex items-center gap-2 hover:text-gray-300"
               >
                 Socials
-              </TabsTrigger>
-              <TabsTrigger 
-                value="wallets" 
-                className="text-sm font-medium text-gray-400 data-[state=active]:text-neon-green data-[state=active]:bg-transparent px-6 py-2 border-b-2 border-transparent data-[state=active]:border-neon-green rounded-none transition-all"
+                <Lock className="w-3 h-3" />
+              </button>
+              <button
+                onClick={() => handleLockedTabClick('wallets')}
+                className="text-sm font-medium text-gray-400 px-6 py-2 border-b-2 border-transparent rounded-none transition-all flex items-center gap-2 hover:text-gray-300"
               >
                 Wallets
-              </TabsTrigger>
+                <Lock className="w-3 h-3" />
+              </button>
             </TabsList>
           </div>
         </div>
