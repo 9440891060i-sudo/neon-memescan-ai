@@ -310,9 +310,9 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
             <div className="max-w-7xl mx-auto">
               <div className="mb-8">
                 <h2 className="text-2xl font-semibold mb-2 text-white">
-                  Most Watched Coins on Klux
+                  Edged
                 </h2>
-                <p className="text-sm text-gray-500">Real-time view counts from the Klux community</p>
+                <p className="text-sm text-gray-500">Hottest coins on Klux right now</p>
               </div>
               
               <Card className="p-6 bg-black border-gray-800">
