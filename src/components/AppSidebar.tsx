@@ -1,4 +1,4 @@
-import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, Gift } from "lucide-react";
+import { BarChart3, Search, Trophy, User, LogOut, Zap, Crown, Gift, Brain } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -22,7 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 const sidebarItems = [
   { title: "Dashboard", url: "/user-dashboard", icon: User },
   { title: "Terminal", url: "/analyze", icon: Search },
-  { title: "KLUXIFY", url: "/kluxify", icon: Crown },
+  { title: "Klux AI", url: "/kluxify", icon: Brain },
   { title: "Performance", url: "/leaderboard", icon: BarChart3 },
   { title: "Rewards", url: "/rewards", icon: Gift },
 ];
