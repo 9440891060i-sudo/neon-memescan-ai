@@ -14,7 +14,8 @@ interface BloombergTerminalProps {
     marketCap: string;
     age: string;
     holders: string;
-    devScore: string;
+    liquidity?: string;
+    views?: number;
     change: string;
     changePositive: boolean;
   };
@@ -250,13 +251,9 @@ export const BloombergTerminal = ({ coin, isExpanded }: BloombergTerminalProps) 
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Dev Credibility</span>
+                <span className="text-sm text-muted-foreground">Liquidity Pool</span>
                 <span className="text-neon-green font-bold">
-                  <AnimatedNumber 
-                    value={parseInt(coin.devScore)}
-                    isVisible={isIntersecting}
-                    formatter={(val) => `${val}%`}
-                  />
+                  {coin.liquidity || 'N/A'}
                 </span>
               </div>
               <div className="flex items-center justify-between">

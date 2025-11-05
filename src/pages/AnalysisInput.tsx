@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Search, Zap, TrendingUp, Copy, Lock } from "lucide-react";
+import { Search, Zap, TrendingUp, Copy, Lock, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import { AnalysisQueue } from "@/components/AnalysisQueue";
@@ -22,7 +22,8 @@ const trendingCoins = [
     marketCap: "$16.2B",
     age: "4m",
     holders: "65",
-    devScore: "85%",
+    liquidity: "$2.1M",
+    views: 1847,
     change: "+27%",
     changePositive: true
   },
@@ -33,7 +34,8 @@ const trendingCoins = [
     marketCap: "$5.8B",
     age: "6m",
     holders: "58",
-    devScore: "72%",
+    liquidity: "$1.8M",
+    views: 1523,
     change: "+23%",
     changePositive: true
   },
@@ -44,7 +46,8 @@ const trendingCoins = [
     marketCap: "$3.1B",
     age: "17m",
     holders: "72",
-    devScore: "91%",
+    liquidity: "$3.2M",
+    views: 2104,
     change: "+24%",
     changePositive: true
   },
@@ -55,7 +58,8 @@ const trendingCoins = [
     marketCap: "$1.4B",
     age: "30m",
     holders: "73",
-    devScore: "78%",
+    liquidity: "$987K",
+    views: 892,
     change: "+22%",
     changePositive: true
   },
@@ -66,7 +70,8 @@ const trendingCoins = [
     marketCap: "$780M",
     age: "32m",
     holders: "191",
-    devScore: "88%",
+    liquidity: "$654K",
+    views: 743,
     change: "+20%",
     changePositive: true
   },
@@ -77,7 +82,8 @@ const trendingCoins = [
     marketCap: "$650M",
     age: "12m",
     holders: "134",
-    devScore: "69%",
+    liquidity: "$421K",
+    views: 567,
     change: "-15%",
     changePositive: false
   }
@@ -304,9 +310,9 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
             <div className="max-w-7xl mx-auto">
               <div className="mb-8">
                 <h2 className="text-2xl font-semibold mb-2 text-white">
-                  Edged
+                  Most Watched Coins on Klux
                 </h2>
-                <p className="text-sm text-gray-500">Coins that fought through our filters</p>
+                <p className="text-sm text-gray-500">Real-time view counts from the Klux community</p>
               </div>
               
               <Card className="p-6 bg-black border-gray-800">
@@ -328,8 +334,10 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
                                 <h3 className="font-bold text-white group-hover:text-gray-300 transition-colors">
                                   {coin.name}
                                 </h3>
-                                <div className="text-xs text-gray-500">
-                                  {coin.age}
+                                <div className="flex items-center gap-2 text-xs">
+                                  <Eye className="w-3 h-3 text-neon-green" />
+                                  <span className="text-neon-green font-medium">{coin.views.toLocaleString()}</span>
+                                  <span className="text-gray-500">watching</span>
                                 </div>
                               </div>
                             </div>
@@ -345,8 +353,8 @@ const sidebarLeft = isMobile ? 0 : state === "collapsed" ? 48 : 256;
                               <div className="text-white font-medium">{coin.holders}</div>
                             </div>
                             <div className="text-center">
-                              <div className="text-gray-500 mb-1">Dev Score</div>
-                              <div className="text-gray-300 font-medium">{coin.devScore}</div>
+                              <div className="text-gray-500 mb-1">Liquidity</div>
+                              <div className="text-gray-300 font-medium">{coin.liquidity}</div>
                             </div>
                             <div className="text-center">
                               <div className="text-gray-500 mb-1">24h</div>
