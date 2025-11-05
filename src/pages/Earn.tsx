@@ -14,7 +14,8 @@ import {
   Crown,
   CheckCircle,
   Copy,
-  ArrowLeft
+  ArrowLeft,
+  Upload
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -25,6 +26,8 @@ const Earn = () => {
   const [igClaimed, setIgClaimed] = useState(false);
   const [twitterClaimed, setTwitterClaimed] = useState(false);
   const [customReferralCode, setCustomReferralCode] = useState("");
+  const [igImage, setIgImage] = useState<File | null>(null);
+  const [twitterImage, setTwitterImage] = useState<File | null>(null);
 
   const copyReferralCode = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -55,6 +58,28 @@ const Earn = () => {
       title: "Application submitted!",
       description: `Your ${type} partnership application is being reviewed.`,
     });
+  };
+
+  const handleIgImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setIgImage(file);
+      toast({
+        title: "Image uploaded!",
+        description: file.name,
+      });
+    }
+  };
+
+  const handleTwitterImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setTwitterImage(file);
+      toast({
+        title: "Image uploaded!",
+        description: file.name,
+      });
+    }
   };
 
   return (
@@ -96,23 +121,45 @@ const Earn = () => {
                     <Badge className="mt-3 bg-primary/20 text-primary border-primary/30">
                       +1L Klud
                     </Badge>
+                    {igImage && (
+                      <p className="text-xs text-gray-500 mt-2">✓ {igImage.name}</p>
+                    )}
                   </div>
                 </div>
-                <Button 
-                  onClick={handleClaimIg}
-                  disabled={igClaimed}
-                  className="flex-shrink-0"
-                  variant={igClaimed ? "outline" : "default"}
-                >
-                  {igClaimed ? (
-                    <>
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Claimed
-                    </>
-                  ) : (
-                    "Claim Reward"
-                  )}
-                </Button>
+                <div className="flex flex-col gap-2 flex-shrink-0">
+                  <label htmlFor="ig-upload">
+                    <Button 
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => document.getElementById('ig-upload')?.click()}
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Screenshot
+                    </Button>
+                  </label>
+                  <input
+                    id="ig-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleIgImageUpload}
+                    className="hidden"
+                  />
+                  <Button 
+                    onClick={handleClaimIg}
+                    disabled={igClaimed}
+                    variant={igClaimed ? "outline" : "default"}
+                  >
+                    {igClaimed ? (
+                      <>
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        Claimed
+                      </>
+                    ) : (
+                      "Claim Reward"
+                    )}
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -131,23 +178,45 @@ const Earn = () => {
                     <Badge className="mt-3 bg-primary/20 text-primary border-primary/30">
                       +1L Klud
                     </Badge>
+                    {twitterImage && (
+                      <p className="text-xs text-gray-500 mt-2">✓ {twitterImage.name}</p>
+                    )}
                   </div>
                 </div>
-                <Button 
-                  onClick={handleClaimTwitter}
-                  disabled={twitterClaimed}
-                  className="flex-shrink-0"
-                  variant={twitterClaimed ? "outline" : "default"}
-                >
-                  {twitterClaimed ? (
-                    <>
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Claimed
-                    </>
-                  ) : (
-                    "Claim Reward"
-                  )}
-                </Button>
+                <div className="flex flex-col gap-2 flex-shrink-0">
+                  <label htmlFor="twitter-upload">
+                    <Button 
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => document.getElementById('twitter-upload')?.click()}
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Screenshot
+                    </Button>
+                  </label>
+                  <input
+                    id="twitter-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleTwitterImageUpload}
+                    className="hidden"
+                  />
+                  <Button 
+                    onClick={handleClaimTwitter}
+                    disabled={twitterClaimed}
+                    variant={twitterClaimed ? "outline" : "default"}
+                  >
+                    {twitterClaimed ? (
+                      <>
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        Claimed
+                      </>
+                    ) : (
+                      "Claim Reward"
+                    )}
+                  </Button>
+                </div>
               </div>
             </div>
           </CardContent>
