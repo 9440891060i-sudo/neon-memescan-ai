@@ -7,7 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Beaker, Brain, Bell, Mail, AlertTriangle, TrendingUp, Megaphone, Sparkles, Info, MessageCircle, ExternalLink } from "lucide-react";
+import { Beaker, Brain, Bell, Mail, AlertTriangle, TrendingUp, Megaphone, Sparkles, Info, MessageCircle, ExternalLink, Check } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useKluxStore } from "@/store/kluxStore";
 import SupportWidget from "@/components/SupportWidget";
@@ -201,13 +201,74 @@ const AppContent = () => {
                     </Popover>
                   </div>
                   <Brain className={`w-5 h-5 transition-colors duration-300 ${isPremium ? "text-neon-green" : "text-gray-600"}`} />
-                  <div 
-                    onClick={() => setIsPricingModalOpen(true)}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border cursor-pointer hover:bg-muted/50 transition-colors"
-                  >
-                    <Beaker className="w-5 h-5 text-green-500" />
-                    <span className="text-sm font-semibold text-foreground">12.4L</span>
-                  </div>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <div 
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border cursor-pointer hover:bg-muted/50 transition-colors"
+                      >
+                        <Beaker className="w-5 h-5 text-green-500" />
+                        <span className="text-sm font-semibold text-foreground">12.4L</span>
+                      </div>
+                    </PopoverTrigger>
+                    <PopoverContent 
+                      align="end"
+                      className="w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl p-0"
+                    >
+                      <div className="p-5">
+                        <div className="mb-4">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+                              <Beaker className="w-5 h-5 text-green-500" />
+                            </div>
+                            <div>
+                              <h3 className="text-white font-semibold text-sm">Credits Remaining</h3>
+                              <p className="text-xs text-white/60">71.3 of 105 KLUD</p>
+                            </div>
+                          </div>
+                          
+                          <div className="relative h-2 bg-white/5 rounded-full overflow-hidden mb-3">
+                            <div 
+                              className="absolute inset-y-0 left-0 bg-green-500 rounded-full transition-all duration-500"
+                              style={{ width: `${(71.3 / 105) * 100}%` }}
+                            />
+                          </div>
+
+                          <div className="space-y-2 mb-4">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-white/60">Daily allowance</span>
+                              <span className="text-white font-medium">10 KLUD</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-white/60">Rollover credits</span>
+                              <span className="text-white font-medium">61.3 KLUD</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-white/60">Used today</span>
+                              <span className="text-white font-medium">3.7 KLUD</span>
+                            </div>
+                          </div>
+
+                          <div className="space-y-1.5 pt-3 border-t border-white/10">
+                            <div className="flex items-start gap-2 text-[10px] text-white/60">
+                              <Check className="w-3 h-3 mt-0.5 text-green-400" />
+                              <span>Up to 100 credits rollover</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-[10px] text-white/60">
+                              <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1" />
+                              <span>Daily credits used first</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <Button 
+                          onClick={() => setIsPricingModalOpen(true)}
+                          className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold"
+                        >
+                          Manage Credits
+                        </Button>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </header>
               <KluxPricingModal open={isPricingModalOpen} onOpenChange={setIsPricingModalOpen} />
