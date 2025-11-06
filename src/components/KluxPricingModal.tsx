@@ -118,7 +118,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                 
                 <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden">
                   <div 
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-500"
+                    className="absolute inset-y-0 left-0 bg-green-500 rounded-full transition-all duration-500"
                     style={{ width: `${(currentCredits / totalCredits) * 100}%` }}
                   />
                 </div>
