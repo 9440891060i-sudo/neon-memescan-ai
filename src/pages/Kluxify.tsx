@@ -16,7 +16,9 @@ import {
   Check,
   Bell,
   BellOff,
-  ExternalLink
+  ExternalLink,
+  Beaker,
+  ArrowRightLeft
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useKluxStore } from "@/store/kluxStore";
@@ -343,7 +345,7 @@ export default function Kluxify() {
                 {/* Entry & Exit Signals */}
                 <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
-                    <DollarSign className="w-5 h-5 text-gray-400" />
+                    <ArrowRightLeft className="w-5 h-5 text-green-500" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Entry & Exit Signals</h3>
                   <p className="text-xs text-gray-400 leading-relaxed">
@@ -354,7 +356,7 @@ export default function Kluxify() {
                 {/* Credits System */}
                 <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
-                    <Activity className="w-5 h-5 text-gray-400" />
+                    <Beaker className="w-5 h-5 text-green-500" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Klud Credits</h3>
                   <div className="space-y-1.5 text-xs">
@@ -376,7 +378,7 @@ export default function Kluxify() {
                 {/* Access Instructions */}
                 <div className="space-y-2 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center mb-3">
-                    <Unlock className="w-5 h-5 text-gray-400" />
+                    <Unlock className="w-5 h-5 text-green-500" />
                   </div>
                   <h3 className="font-semibold text-white text-sm">Access Code</h3>
                   <p className="text-xs text-gray-400 leading-relaxed">
