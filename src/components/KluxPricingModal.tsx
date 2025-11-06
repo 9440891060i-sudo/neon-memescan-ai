@@ -104,8 +104,8 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
               <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 mb-3 border border-white/10">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                      <Beaker className="w-5 h-5 text-white" />
+                    <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+                      <Beaker className="w-5 h-5 text-green-500" />
                     </div>
                     <div>
                       <h3 className="text-white font-semibold text-sm">Credits remaining</h3>
