@@ -235,14 +235,6 @@ const AppContent = () => {
 
                           <div className="space-y-2 mb-4">
                             <div className="flex items-center justify-between text-xs">
-                              <span className="text-white/60">Daily allowance</span>
-                              <span className="text-white font-medium">10 KLUD</span>
-                            </div>
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-white/60">Rollover credits</span>
-                              <span className="text-white font-medium">61.3 KLUD</span>
-                            </div>
-                            <div className="flex items-center justify-between text-xs">
                               <span className="text-white/60">Used today</span>
                               <span className="text-white font-medium">3.7 KLUD</span>
                             </div>
