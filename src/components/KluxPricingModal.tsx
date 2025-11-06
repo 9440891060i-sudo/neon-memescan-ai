@@ -130,7 +130,7 @@ export default function KluxPricingModal({ open, onOpenChange }: KluxPricingModa
                     Up to 100 credits rollover
                   </span>
                   <span className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
                     Daily credits used first
                   </span>
                 </div>
